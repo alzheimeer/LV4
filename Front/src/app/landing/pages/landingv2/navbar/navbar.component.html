@@ -1,0 +1,127 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-red " [class]="claseTitular"  [ngClass]="{'top-nav-collapse': isScrolled}">
+    <div class="container">
+      <a class="navbar-logo" href="#">
+        <i class="fab fa-accusoft"></i>
+        <!-- <img src="../../../../../assets/images/logo-1.jpg" width="40" height="40" alt="logo"> -->
+      </a>
+      <h5> <a class="nav-link titlenav" href="index.html">LENDIUP</a></h5>
+        <button class="navbar-toggler collapsed " type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="icon-bar top-bar mt-0"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" id="navbarHome" data-toggle="dropdown" href="#!" aria-haspopup="true" aria-expanded="false">
+                        Inicio
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="navbarHome">
+                        <div class="row no-gutters">
+                            <div class="col-6 col-lg-6">
+                                <!-- Heading -->
+                                <h6 class="dropdown-header">
+                                    Pagina De Aterrizaje
+                                </h6>
+                                <!-- List -->
+                                <a class="dropdown-item" [routerLink]="['/landing/op1']">
+                                    Inicio Opcion 1
+                                </a>
+                                <a class="dropdown-item" [routerLink]="['/landing/op2']">
+                                    Inicio Opcion 2
+                                </a>
+                                <a class="dropdown-item " [routerLink]="['/landing/op3']">
+                                    Inicio Opcion 3
+                                </a>
+                               
+                            </div>
+                            
+                        </div>
+                    </div> <!-- / .row -->
+                </li>
+                <li class="nav-item dropdown ">
+                  <a class="nav-link dropdown-toggle" id="navbarProduct" data-toggle="dropdown" href="#!" aria-haspopup="true" aria-expanded="false">
+                      Productos
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarProduct">
+                      <!-- <li class="dropdown-item dropright">
+                          <a class="dropdown-link dropdown-toggle" data-toggle="dropdown" href="#!">
+                            Préstamos
+                          </a>
+                          
+                          <div class="dropdown-menu">
+                              <a class="dropdown-item" href="loan-listing-image.html">
+                                  Préstamos Usando Lista De Imagenes
+                              </a>
+                              <a class="dropdown-item" href="loan-listing-icon.html">
+                                Préstamos Usando Lista De Iconos
+                              </a>
+                      
+                          </div>
+                      </li> -->
+                      <li>
+                        <a class="dropdown-item" [routerLink]="['/landing/op2/personales']">
+                          Prestamo Personal Rapido
+                      </a>
+                    </li>
+                      <li>
+                        <a class="dropdown-item" [routerLink]="['/landing/op2/vehiculos']">
+                          Prestamo Sobre Vehiculo
+                      </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" [routerLink]="['/landing/op2/hipoteca']">
+                          Prestamo Sobre Hipoteca
+                      </a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" [routerLink]="['/landing/op2/construccion']">
+                          Prestamo Para Construcción
+                      </a>
+                      </li>
+                      
+                      <li>
+                      <a class="dropdown-item" [routerLink]="['/landing/op2/invierte']">
+                        INVIERTE
+                      </a>
+                      </li>
+                  </ul>
+              </li>
+              
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#!" id="navbarFeatures" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Sobre Nosotros
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarFeatures">
+                        <li><a class="dropdown-item" href="#!">Acerca de nosotros</a></li>
+                        <li> <a class="dropdown-item" href="#!">Equipo</a></li>
+                        <li> <a class="dropdown-item" href="#!">Preguntas Frecuentes</a></li>
+                        <li> <a class="dropdown-item" href="#!">Testimonios</a></li>
+                        <li> <a class="dropdown-item " href="contact-us.html">Contáctenos</a></li>
+                    </ul>
+                    
+                  
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#!" id="navbarFeatures" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Ingreso
+                  </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarFeatures">
+                    <li>
+                      <a class="dropdown-item " id="modal-btn" data-toggle="modal"
+                      data-target="#signmodal">INGRESAR1</a>
+                    </li>
+                    <li>
+                      <a class="dropdown-item" [routerLink]="['/auth/login']">INGRESAR2</a>
+                    </li>
+                  </ul>
+                  
+                
+              </li>
+               
+            </ul>
+        </div>
+    </div>
+</nav>
+<!-- </div> -->

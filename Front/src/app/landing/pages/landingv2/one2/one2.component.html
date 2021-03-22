@@ -1,0 +1,879 @@
+<div class="visiblex" style="background-color: #15549a">
+  <br>
+  <br>
+  <br>
+</div>
+
+   <nav class="navbar navbar-expand-lg navbar-dark bg-red " [class]="claseTitular"  [ngClass]="{'top-nav-collapse': isScrolled}">
+      <div class="container">
+        <a class="navbar-logo" href="#">
+          <i class="fab fa-accusoft"></i>
+          <!-- <img src="../../../../../assets/images/logo-1.jpg" width="40" height="40" alt="logo"> -->
+        </a>
+        <h5> <a class="nav-link titlenav" href="index.html">LENDIUP</a></h5>
+          <button class="navbar-toggler collapsed bg-dark text-white" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="icon-bar top-bar mt-0"></span>
+              <span class="icon-bar middle-bar"></span>
+              <span class="icon-bar bottom-bar"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav ml-auto">
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" id="navbarHome" data-toggle="dropdown" href="#!" aria-haspopup="true" aria-expanded="false">
+                          Inicio
+                      </a>
+                      <div class="dropdown-menu dropdown-menu-sm" aria-labelledby="navbarHome">
+                          <div class="row no-gutters">
+                              <div class="col-6 col-lg-6">
+                                  <!-- Heading -->
+                                  <h6 class="dropdown-header">
+                                      Pagina De Aterrizaje
+                                  </h6>
+                                  <!-- List -->
+                                  <a class="dropdown-item" [routerLink]="['/landing/op1']">
+                                      Inicio Opcion 1
+                                  </a>
+                                  <a class="dropdown-item" [routerLink]="['/landing/op2']">
+                                      Inicio Opcion 2
+                                  </a>
+                                  <a class="dropdown-item " [routerLink]="['/landing/op3']">
+                                      Inicio Opcion 3
+                                  </a>
+
+                              </div>
+
+                          </div>
+                      </div> <!-- / .row -->
+                  </li>
+                  <li class="nav-item dropdown ">
+                    <a class="nav-link dropdown-toggle" id="navbarProduct" data-toggle="dropdown" href="#!" aria-haspopup="true" aria-expanded="false">
+                        Productos
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarProduct">
+                        <!-- <li class="dropdown-item dropright">
+                            <a class="dropdown-link dropdown-toggle" data-toggle="dropdown" href="#!">
+                              Préstamos
+                            </a>
+
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="loan-listing-image.html">
+                                    Préstamos Usando Lista De Imagenes
+                                </a>
+                                <a class="dropdown-item" href="loan-listing-icon.html">
+                                  Préstamos Usando Lista De Iconos
+                                </a>
+
+                            </div>
+                        </li> -->
+                        <li>
+                          <a class="dropdown-item" [routerLink]="['/landing/op2/personales']">
+                            Prestamo Personal Rapido
+                        </a>
+                      </li>
+                        <li>
+                          <a class="dropdown-item" [routerLink]="['/landing/op2/vehiculos']">
+                            Prestamo Sobre Vehiculo
+                        </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" [routerLink]="['/landing/op2/hipoteca']">
+                            Prestamo Sobre Hipoteca
+                        </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" [routerLink]="['/landing/op2/construccion']">
+                            Prestamo Para Construcción
+                        </a>
+                        </li>
+
+                        <li>
+                        <a class="dropdown-item" [routerLink]="['/landing/op2/invierte']">
+                          INVIERTE
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+
+                  <li class="nav-item dropdown">
+                      <a class="nav-link dropdown-toggle" href="#!" id="navbarFeatures" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                          Sobre Nosotros
+                      </a>
+                      <ul class="dropdown-menu" aria-labelledby="navbarFeatures">
+                          <li><a class="dropdown-item" href="#!">Acerca de nosotros</a></li>
+                          <li> <a class="dropdown-item" href="#!">Equipo</a></li>
+                          <li> <a class="dropdown-item" href="#!">Preguntas Frecuentes</a></li>
+                          <li> <a class="dropdown-item" href="#!">Testimonios</a></li>
+                          <li> <a class="dropdown-item " href="contact-us.html">Contáctenos</a></li>
+                      </ul>
+
+
+                  </li>
+
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#!" id="navbarFeatures" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ingreso
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarFeatures">
+                      <li>
+                        <a class="dropdown-item " id="modal-btn" data-toggle="modal"
+                        data-target="#signmodal">INGRESAR1</a>
+                      </li>
+                      <li>
+                        <a class="dropdown-item" [routerLink]="['/auth/login']">INGRESAR2</a>
+                      </li>
+                    </ul>
+
+
+                </li>
+
+              </ul>
+          </div>
+      </div>
+  </nav>
+<!-- </div> -->
+
+
+
+<!-- <div class="visiblexx">
+<ngb-carousel class="slider" id="slider">
+  <ng-template ngbSlide>
+    <div class="slider-gradient-img">
+      <img [src]="images[0]" alt="Lendiup" class="">
+      <div class="container">
+        <div class="row mt-5">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+            <div class="slider-captions ">
+
+              <h1 class="slider-title">Tarifa simple, segura y asequible</h1>
+              <p class="slider-text d-none d-xl-block d-lg-block d-md-block">La tarifa baja que necesita para lo que necesita
+                ¡querer! Llamada
+                <br>
+                <strong class="text-highlight" id="weirdtext">(57) 3193779313</strong></p>
+              <a href="team.html" class="btn btn-secondary ">Productos de préstamo</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ng-template>
+
+  <ng-template ngbSlide>
+    <div class="slider-gradient-img">
+      <img [src]="images[1]" alt="Lendiup" class="">
+      <div class="container">
+        <div class="row mt-5">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+            <div class="slider-captions">
+
+              <h1 class="slider-title" >Préstamos para construcción </h1>
+
+              <p class="slider-text d-none d-xl-block d-lg-block d-md-block">Lo que siempre esperaste
+                <br>
+                <strong class="text-highlight">Brindamos un excelente servicio de Compañía de Préstamos.</strong></p>
+              <a href="team.html" class="btn btn-secondary ">Comprueba si eres apto para este prestamo</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ng-template>
+  <ng-template ngbSlide>
+    <div class="slider-gradient-img">
+      <img [src]="images[2]" alt="Borrow - Loan Company Website Template" class="">
+      <div class="container">
+        <div class="row mt-5">
+          <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 col-12">
+            <div class="slider-captions">
+
+              <h1 class="slider-title">Tasa más baja sobre vehiculos</h1>
+              <p class="slider-text d-none d-xl-block d-lg-block d-md-block">Quieres hablar con un asesor
+                <br>
+                <strong class="text-highlight" >(555) 123-4567</strong></p>
+              <a href="team.html" class="btn btn-secondary ">Aplica Ya</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </ng-template>
+</ngb-carousel>
+</div> -->
+<!-- FIN CARRUSEL -->
+
+
+
+
+
+
+
+
+<!-- <div class="section-space20 bg-white lender-logo-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6">
+        <div class="lender-box">
+          <img
+            src="../../../../../assets/images/lender-logo-1.png"
+            alt="Lendiup - Logo 1"
+          />
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6">
+        <div class="lender-box">
+          <img
+            src="../../../../../assets/images/lender-logo-2.png"
+            alt="Lendiup - Logo 2"
+          />
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6">
+        <div class="lender-box">
+          <img
+            src="../../../../../assets/images/lender-logo-3.png"
+            alt="Lendiup - Logo 3"
+          />
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6">
+        <div class="lender-box">
+          <img
+            src="../../../../../assets/images/lender-logo-4.png"
+            alt="Lendiup - Logo 4"
+          />
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6">
+        <div class="lender-box">
+          <img
+            src="../../../../../assets/images/lender-logo-5.png"
+            alt="Lendiup - Logo 5"
+          />
+        </div>
+      </div>
+      <div class="col-xl-2 col-lg-2 col-md-4 col-sm-6 col-6">
+        <div class="lender-box">
+          <img
+            src="../../../../../assets/images/lender-logo-6.png"
+            alt="Lendiup - Logo 6"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+<div class="section-space80">
+  <div class="container">
+    <div class="row">
+      <div
+        class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12"
+      >
+        <div class="mb60 text-center section-title">
+          <!-- section title start-->
+          <h1>Encuentra El Préstamo Que Buscas</h1>
+          <p>
+            Lo emparejaremos con un programa de préstamos que satisfaga sus necesidades financieras.
+            En liquidez a corto plazo, esforzándose por poner fondos a su disposición
+            <strong>dentro de las 24 horas posteriores a la aplicación.</strong>
+          </p>
+        </div>
+        <!-- /.section title start-->
+      </div>
+    </div>
+    <div class="" id="service">
+      <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-3 col-12">
+          <div class="service-block-v3">
+            <div class="icon mb30">
+              <a href="#!"
+                ><img
+                  src="../../../../../assets/images/loan.svg"
+                  alt="Lendiup - Logo 1"
+                  class="icon-svg-2x"
+              /></a>
+            </div>
+            <div class="service-content">
+              <h2 class="service-title">
+                <a [routerLink]="['/landing/op2/personales']" class="title">Préstamo personal</a>
+              </h2>
+            </div>
+            <div class="service-rate-block">
+              <h3 class="product-rate">8.35%</h3>
+              <p class="rate-text">Tipo de interés:</p>
+            </div>
+            <a [routerLink]="['/landing/op2/personales']" class="btn btn-secondary btn-block">Requisitos</a>
+          </div>
+        </div>
+
+
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-3 col-12">
+          <div class="service-block-v3">
+            <div class="icon mb30">
+              <a href="#!"
+                ><img
+                  src="../../../../../assets/images/mortgage.svg"
+                  alt="Lendiup - Logo 1"
+                  class="icon-svg-2x"
+              /></a>
+            </div>
+            <div class="service-content">
+              <h2 class="service-title">
+                <a [routerLink]="['/landing/op2/hipoteca']" class="title">Préstamo sobre hipoteca</a>
+              </h2>
+            </div>
+            <div class="service-rate-block">
+              <h3 class="product-rate">8.35%</h3>
+              <p class="rate-text">Tipo de interés:</p>
+            </div>
+            <a [routerLink]="['/landing/op2/hipoteca']" class="btn btn-secondary btn-block">Requisitos</a>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-3 col-12">
+          <div class="service-block-v3">
+            <div class="icon mb30">
+              <a href="#!"
+                ><img
+                  src="../../../../../assets/images/car.svg"
+                  alt="Lendiup - Logo 2"
+                  class="icon-svg-2x"
+              /></a>
+            </div>
+            <div class="service-content">
+              <h2 class="service-title">
+                <a [routerLink]="['/landing/op2/vehiculos']" class="title">Prestamo sobre vehiculo</a>
+              </h2>
+            </div>
+            <div class="service-rate-block">
+              <h3 class="product-rate">12.75%</h3>
+              <p class="rate-text">Tipo de interés:</p>
+            </div>
+            <a [routerLink]="['/landing/op2/vehiculos']" class="btn btn-secondary btn-block">Requisitos</a>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-3 col-12">
+          <div class="service-block-v3">
+            <div class="icon mb30">
+              <a href="#!">
+                <img
+                  src="../../../../../assets/images/loan.svg"
+                  alt="Lendiup - Logo 3"
+                  class="icon-svg-2x"
+              /></a>
+            </div>
+            <div class="service-content">
+              <h2 class="service-title">
+                <a [routerLink]="['/landing/op2/construccion']" class="title">Prestamo para construcción</a>
+              </h2>
+            </div>
+            <div class="service-rate-block">
+              <h3 class="product-rate">16.00</h3>
+              <p class="rate-text">Tipo de interés:</p>
+            </div>
+            <a [routerLink]="['/landing/op2/construccion']" class="btn btn-secondary btn-block">Requisitos</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section-space80 bg-white">
+  <div class="container">
+    <div class="row">
+      <div
+        class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-8 col-sm-12 col-12"
+      >
+        <div class="section-title mb60 text-center">
+          <!-- section title start-->
+          <h1>Razones para elegirnos</h1>
+          <p>
+            El fútbol ahora quiere una velocidad de fabricación o el fútbol estibentum
+            empleado.
+          </p>
+        </div>
+        <!-- /.section title start-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="feature feature-icon-style">
+          <div class="feature-icon"><i class="fa fa-calculator fa-2x"></i></div>
+          <div class="feature-content">
+            <h3 class="feature-title">EMI Calculator</h3>
+            <p>
+              Fusce sed erat libasellus desea continuar con esa orciquise, un simple enfermo,
+              miembros persuasivos del bote de fútbol.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="feature feature-icon-style">
+          <div class="feature-icon"><i class="fa fa-heart fa-2x"></i></div>
+          <div class="feature-content">
+            <h3 class="feature-title">¡Los clientes nos aman!</h3>
+            <p>
+              Felis ligula, tampoco es el precio de phareest todos pueden tener un mal sunec
+              atmetus weekend invel desarrollador inmobiliario.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="feature feature-icon-style">
+          <div class="feature-icon"><i class="fa fa-file-alt fa-2x"></i></div>
+          <div class="feature-content">
+            <h3 class="feature-title">Fácil documentación</h3>
+            <p>
+              Elemento esque pellent en Pakistán ittnunc mass variusare
+              propaganda de la ue.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+        <div class="feature feature-icon-style">
+          <div class="feature-icon"><i class="fa fa-bolt fa-2x"></i></div>
+          <div class="feature-content">
+            <h3 class="feature-title">Aprobación rápida</h3>
+            <p>
+              Pellent esque ittnunc proceso está destinado a arder en una masa vocābulum eleme ticam
+              propaganda varnare eu.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section-space80">
+  <div class="container">
+    <div class="row">
+      <div
+        class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12"
+      >
+        <div class="section-title mb60 text-center">
+          <!-- section title start-->
+          <h1>Aplicar en tres sencillos pasos</h1>
+          <p>No serás el único matiz de diámetro lorem mauris.</p>
+        </div>
+        <!-- /.section title start-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+        <div class="how-it-block">
+          <h3 class="how-it-no">1.</h3>
+          <div class="how-it-content">
+            <h2>Completa el formulario</h2>
+            <p>
+              Primero necesitamos saber un poco sobre usted y sus necesidades de préstamo..
+            </p>
+            <a href="#!" class="btn btn-secondary btn-sm">Aplica ya</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+        <div class="how-it-block">
+          <h3 class="how-it-no">2.</h3>
+          <div class="how-it-content">
+            <h2>Obtener aprobación</h2>
+            <p>
+              Dentro de las cinco horas hábiles posteriores a la presentación de su solicitud
+              y obtener la aprobación
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+        <div class="how-it-block">
+          <h3 class="how-it-no">3.</h3>
+          <div class="how-it-content">
+            <h2>Asegure sus fondos</h2>
+            <p>
+              Una vez aprobado, podremos trabajar con los detalles. Nosotros enviamos
+              dinero a las pocas horas de aprobado.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section-space80 bg-gradient call-to-action">
+  <div class="container">
+    <div class="row">
+      <div
+        class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12"
+      >
+        <div class="text-center">
+          <!-- section title start-->
+          <h1 class="text-white">Empiece de forma sencilla y segura</h1>
+          <p class="text-white">
+            Comprenda cuál es el monto del préstamo para el que es elegible y para qué
+            sería el EMI. Puede solicitar según su elegibilidad.
+          </p>
+          <a href="#!" class="btn btn-secondary">Verificar elegibilidad</a>
+        </div>
+        <!-- /.section title start-->
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section-space80">
+  <div class="container">
+    <div class="row">
+      <div
+        class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12"
+      >
+        <div class="section-title mb60 text-center">
+          <!-- section title start-->
+          <h1>¡Amado por más de 1000 personas en Colombia!</h1>
+          <p>No serás el único lorem mauris diámetro matices.</p>
+        </div>
+        <!-- /.section title start-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+        <div class="customer-block">
+          <div class="customer-quote-circle">
+            <i class="fa fa-quote-right"></i>
+          </div>
+          <div class="customer-img">
+            <img
+              src="../../../../../assets/images/customer-1.jpg"
+              alt="Lendiup - Logo 12"
+              class="img-circle"
+            />
+          </div>
+          <div class="customer-content">
+            <p class="customer-text">
+              “Ahora puedo aprender fácilmente, gracias. Mi estudio ahora quiere estar dirigido.
+              velocidad de fabricación Iestibulum laoreet."
+            </p>
+            <div class="customer-meta">
+              <span class="customer-name">Maria Alvarez</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+        <div class="customer-block">
+          <div class="customer-quote-circle">
+            <i class="fa fa-quote-right"></i>
+          </div>
+          <div class="customer-img">
+            <img
+              src="../../../../../assets/images/customer-2.jpg"
+              alt="Lendiup - Logo 12"
+              class="img-circle"
+            />
+          </div>
+          <div class="customer-content">
+            <p class="customer-text">
+              “Encontrar soluciones fáciles para hacer crecer mi negocio de una manera que se adapte a la ropa para exteriores
+              vocābulum speed Iestibulum Laoreet sí mismo. Gracias."
+            </p>
+            <div class="customer-meta">
+              <span class="customer-name">Pablo Solar</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+        <div class="customer-block">
+          <div class="customer-quote-circle">
+            <i class="fa fa-quote-right"></i>
+          </div>
+          <div class="customer-img">
+            <img
+              src="../../../../../assets/images/customer-3.jpg"
+              alt="Borrow - Loan Company Responsive Website Templates"
+              class="img-circle"
+            />
+          </div>
+          <div class="customer-content">
+            <p class="customer-text">
+              “¡Cada persona fue realmente fantástica! ahora quiere un objetivo
+              velocidad de fabricación Iestibulum laoreet."
+            </p>
+            <div class="customer-meta">
+              <span class="customer-name">Ana Cecilia Perez</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section-space80 bg-primary">
+  <div class="container">
+    <div class="row">
+      <div
+        class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12"
+      >
+        <div class="mb60 text-center section-title">
+          <!-- section title start-->
+          <h1 class="text-white">Preguntas frecuentes</h1>
+          <p class="text-white">
+            Nuestra misión es entregar las últimas noticias y opiniones confiables.
+          </p>
+        </div>
+        <!-- /.section title start-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+        <div class="accordion" id="faqExample">
+          <div class="card mb-1 border-0">
+            <div class="card-header" id="faqOne">
+              <h4 class="mb-0">
+                <a
+                  href="#!"
+                  class=""
+                  data-toggle="collapse"
+                  data-target="#faqcollapseOne"
+                  aria-expanded="true"
+                  aria-controls="faqcollapseOne"
+                >
+                  <i class="fa fa-plus-circle mr-2"></i>Cuanto puedo
+                  pedir prestado?</a
+                >
+              </h4>
+            </div>
+            <div
+              id="faqcollapseOne"
+              class="collapse show"
+              aria-labelledby="faqOne"
+              data-parent="#faqExample"
+            >
+              <div class="card-body">
+                DA cliché resultante criticado, por tan alta vida
+                Terry Richardson denuncia el calamar. 3 oficinas de wolf moon
+                cupidatat de la patineta no duele el brunch. Food Truck quinua
+                no trabaje de la siguiente manera. 3 hora del brunch de la luna del lobo, son algunos
+                Ponle un pájaro calamares café de origen único, sin compromiso
+                y Shoreditch. No hay nada de mi alma keffiyeh helvetica, el trabajo de la cerveza artesanal
+                Wes Anderson credo sabio a proident. para un vegano
+                carnicero excepteur vice lomo. Leggings cerveza artesanal negros
+                de la granja a la mesa, probablemente no sepa cómo el sintetizador estético
+                No he oído hablar de ellos para denunciar VHS laborales y sostenibles.
+              </div>
+            </div>
+          </div>
+          <div class="card mb-1 border-0">
+            <div class="card-header" id="faqTwo">
+              <h4 class="mb-0">
+                <a
+                  href="#!"
+                  class="collapsed"
+                  data-toggle="collapse"
+                  data-target="#faqcollapseTwo"
+                  aria-expanded="false"
+                  aria-controls="faqcollapseTwo"
+                >
+                  <i class="fa fa-plus-circle mr-2"></i>¿Puedo cancelar mi préstamo?
+                  temprano?</a
+                >
+              </h4>
+            </div>
+            <div
+              id="faqcollapseTwo"
+              class="collapse"
+              aria-labelledby="faqTwo"
+              data-parent="#faqExample"
+            >
+              <div class="card-body">
+                DA cliché resultante criticado, por tan alta vida
+                Terry Richardson denuncia el calamar. 3 oficinas de wolf moon
+                cupidatat de la patineta no duele el brunch. Food Truck quinua
+                no trabaje de la siguiente manera. 3 hora del brunch de la luna del lobo, son algunos
+                Ponle un pájaro calamares café de origen único, sin compromiso
+                y Shoreditch. No hay nada de mi alma keffiyeh helvetica, el trabajo de la cerveza artesanal
+                Wes Anderson credo sabio a proident. para un vegano
+                carnicero excepteur vice lomo. Leggings cerveza artesanal negros
+                de la granja a la mesa, probablemente no sepa cómo el sintetizador estético
+                No he oído hablar de ellos para denunciar VHS laborales y sostenibles.
+              </div>
+            </div>
+          </div>
+          <div class="card mb-1 border-0">
+            <div class="card-header" id="faqThree">
+              <h4 class="mb-0">
+                <a
+                  href="#!"
+                  class="collapsed"
+                  data-toggle="collapse"
+                  data-target="#faqcollapseThree"
+                  aria-expanded="false"
+                  aria-controls="faqcollapseThree"
+                >
+                  <i class="fa fa-plus-circle mr-2"></i>¿Estás ofreciendo
+                  refinanciación ?</a
+                >
+              </h4>
+            </div>
+            <div
+              id="faqcollapseThree"
+              class="collapse"
+              aria-labelledby="faqThree"
+              data-parent="#faqExample"
+            >
+              <div class="card-body">
+                DA cliché resultante criticado, por tan alta vida
+                Terry Richardson denuncia el calamar. 3 oficinas de wolf moon
+                cupidatat de la patineta no duele el brunch. Food Truck quinua
+                no trabaje de la siguiente manera. 3 hora del brunch de la luna del lobo, son algunos
+                Ponle un pájaro calamares café de origen único, sin compromiso
+                y Shoreditch. No hay nada de mi alma keffiyeh helvetica, el trabajo de la cerveza artesanal
+                Wes Anderson credo sabio a proident. para un vegano
+                carnicero excepteur vice lomo. Leggings cerveza artesanal negros
+                de la granja a la mesa, probablemente no sepa cómo el sintetizador estético
+                No he oído hablar de ellos para denunciar VHS laborales y sostenibles.
+              </div>
+            </div>
+          </div>
+          <div class="card mb-1 border-0">
+            <div class="card-header" id="faqfour">
+              <h4 class="mb-0">
+                <a
+                  href="#!"
+                  class="collapsed"
+                  data-toggle="collapse"
+                  data-target="#faqcollapsefour"
+                  aria-expanded="false"
+                  aria-controls="faqcollapsefour"
+                >
+                  <i class="fa fa-plus-circle mr-2"></i>Cuando debo aplicar?</a
+                >
+              </h4>
+            </div>
+            <div
+              id="faqcollapsefour"
+              class="collapse"
+              aria-labelledby="faqfour"
+              data-parent="#faqExample"
+            >
+              <div class="card-body">
+                Ad vegan excepcional carnicero vice lomo. Polainas Ocaecat Craft
+                cerveza de la granja a la mesa, sintetizador estético de mezclilla en bruto
+                Probablemente no he oído hablar de los VHS sostenibles accusamus labore.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section-space80">
+  <div class="container">
+    <div class="row">
+      <div
+        class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12"
+      >
+        <div class="mb60 text-center section-title">
+          <!-- section title start-->
+          <h1>Últimas noticias de la compañía de préstamos</h1>
+          <p>Nuestra misión es entregar las últimas noticias y opiniones confiables.</p>
+        </div>
+        <!-- /.section title start-->
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+        <div class="post-block mb30">
+          <div class="post-img">
+            <a href="blog-single.html" class="imghover"
+              ><img
+                src="../../../../../assets/images/blog-img.jpg"
+                alt="Lendiup - Logo 12"
+                class="img-fluid"
+            /></a>
+          </div>
+          <div class="bg-white pinside40 outline">
+            <h2>
+              <a href="blog-single.html" class="title"
+                >Parejas que compran un préstamo hipotecario nuevo</a
+              >
+            </h2>
+            <p class="meta">
+              <span class="meta-date">Aug 25, 2020</span
+              ><span class="meta-author">By<a href="#!"> Administración</a></span>
+            </p>
+            <p>
+              Pero estaba oscuro Libasellus Clinical Pret Give Graduado Política de EE. UU.
+              quiere una olla de Bollywood miembros del fútbol.
+            </p>
+            <a href="blog-single.html" class="btn-link">Leer Mas</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+        <div class="post-block mb30">
+          <div class="post-img">
+            <a href="blog-single.html" class="imghover"
+              ><img
+                src="../../../../../assets/images/blog-img-1.jpg"
+                alt="Borrow - Loan Company Website Template"
+                class="img-fluid"
+            /></a>
+          </div>
+          <div class="bg-white pinside40 outline">
+            <h2>
+              <a href="blog-single.html" class="title"
+                >Hombre de negocios pensando en préstamo</a
+              >
+            </h2>
+            <p class="meta">
+              <span class="meta-date">Aug 24, 2017</span
+              ><span class="meta-author">By<a href="#!"> Administración</a></span>
+            </p>
+            <p>
+              Sin vehículos ni proteína nibh maleuada, ahora puede ringilla
+              fbendum film sapierttitor nibh.
+            </p>
+            <a href="blog-single.html" class="btn-link">Leer mas</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+        <div class="post-block mb30">
+          <div class="post-img">
+            <a href="blog-single.html" class="imghover"
+              ><img
+                src="../../../../../assets/images/blog-img-2.jpg"
+                alt="Lendiup - Logo 12"
+                class="img-fluid"
+            /></a>
+          </div>
+          <div class="bg-white pinside40 outline">
+            <h2>
+              <a href="blog-single.html" class="title"
+                >¿Son estudiantes que buscan un préstamo? ?</a
+              >
+            </h2>
+            <p class="meta">
+              <span class="meta-date">Aug 23, 2017</span
+              ><span class="meta-author">Por<a href="#!"> Administración</a></span>
+            </p>
+            <p>
+              Los miembros de la urna euusce pero fue libasellus una semana
+              Precio reservado para continuar con el juego.
+            </p>
+            <a href="blog-single.html" class="btn-link">Leer más</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+

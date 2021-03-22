@@ -1,0 +1,374 @@
+
+
+<!-- CARRUSEL <img [src]="images[1]" alt="Random second slide"> -->
+<div style="background-color: #15549a">
+    <br>
+    <br>
+    <br>
+
+    
+    </div>
+    <div class="lead-hero-wrapper" style="background: url(../../../../../assets/images/slider9.jpg) no-repeat;">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
+                    <!-- hero-caption -->
+                    <div class="lead-hero-caption">
+                        <h1 class="lead-hero-title">Invierte Ya</h1>
+                        <p>Coloca tu dinero a trabajar por ti</p>
+                        <p> Ingresa a nuestra plataforma y conoce las
+                            ofertas de inversión que tenemos para ti</p>
+                        <p class="lead mb0 text-white">Te ayudamos<strong class="text-white">para que tengas libertad financiera</strong></p>
+                        <span>(Las mejores tasas de interes del mercado )</span>
+                        <div class="rating-list">
+                            <span><i class="fa fa-star"></i></span>
+                            <span><i class="fa fa-star"></i></span>
+                            <span><i class="fa fa-star"></i></span>
+                            <span><i class="fa fa-star"></i></span>
+                            <span><i class="fa fa-star"></i></span>
+                            
+                            <span class="text-white">5 / 5 (85 Opiniones)</span>
+                        </div>
+                    </div>
+                    <!-- /.hero-caption -->
+                </div>
+                <div class="offset-xl-1 col-xl-6 offset-lg-1 col-lg-6 col-md-12 col-sm-12 col-12">
+                    <div class="lead-calculator pinside40">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb10">
+                                <h2 class="text-white mb20">Simula Tu Inversión</h2>
+                               
+                                <div class="slider1">
+                                    <h4 class="text-white">Escoge El Valor Que deseas Invertir</h4>
+                                    
+                                    <div id="pricipal-slide1"></div>
+                                    <div>
+                                        <input  [(ngModel)]="valor" value=500000 onInput="$('#rangeval').html($(this).val())" type="range" class="form-range sliderx" min="500000" max="500000000" step="100000" id="sliderx1">
+                                        <p>${{valor | number: '1.0-0'}}</p>
+                                    </div>
+                                </div>
+                                <div class="slider">
+                                    <h4 class="text-white">A Que Plazo?</h4>
+                                    <div id="totalyear-slide"></div>
+                                    <div>
+                                        <input [(ngModel)]="meses" value=1 onInput="$('#rangeval2').html($(this).val())" type="range" class="form-range sliderx" min="1" max="5" step="1" id="sliderx2">
+                                        <p>{{meses}}<span *ngIf="meses<=1">  año</span><span *ngIf="meses>1">  años</span></p>
+                                    </div>
+                                </div>
+                                <!-- <div class="slider">
+                                    <h4 class="text-white">Tasa de interés</h4>
+                                    <div id="intrest-slide"></div>
+                                    <div>
+                                        <input [(ngModel)]="interes" value=1 onInput="$('#rangeval3').html($(this).val())" type="range" class="form-range sliderx" min="1" max="6" step="1" id="sliderx2">
+                                        <p>{{interes}}</p>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                <div class="single-total">
+                                    <h5 class="lead-cal-small-text">Interes</h5>
+                                    <h4 class="text-white emi-price" id="emi">{{interes}}</h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                                <div class="single-total">
+                                    <h5 class="lead-cal-small-text">Iva</h5>
+                                    <h4 class="text-white" id="tbl_emi">{{iva}}</h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12">
+                                <div class="single-total">
+                                    <h5 class="lead-cal-small-text">Total Del Credito</h5>
+                                    <h4  class="text-white" id="tbl_la">{{total  | number: '1.0-0'}}</h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12">
+                                <div class="single-total">
+                                    <h5 class="lead-cal-small-text">EMI - PAGO MENSUAL</h5>
+                                    <h4 class="text-white" id="tbl_la">{{emi}}</h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                                <button class="btn btn-secondary btn-sm">QUIERO QUE ME CONTACTEN</button>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                              <button class="btn btn-secondary btn-sm">INGRESA YA</button>
+                          </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="section-space80 bg-white">
+    <div class="container">
+      <div class="row">
+        <div
+          class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-8 col-sm-12 col-12"
+        >
+          <div class="section-title mb60 text-center">
+            <!-- section title start-->
+            <h1>VENTAJAS</h1>
+            <!-- <p>
+                Nuestros plazos varían entre 1 y 180 días y tasa de interés fija del 25% e.a.
+            </p> -->
+          </div>
+          <!-- /.section title start-->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+          <div class="feature feature-icon-style">
+            <div class="feature-icon"><i class="fas fa-dollar-sign fa-2x"></i></div>
+            <div class="feature-content">
+              <h3 class="feature-title">0 Costo</h3>
+              <p>
+                Nuestros servicios no tienen ningún costo para los inversionistas.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+          <div class="feature feature-icon-style">
+            <div class="feature-icon"><i class="fas fa-percent fa-2x"></i></div>
+            <div class="feature-content">
+              <h3 class="feature-title">Mejor rentabilidad</h3>
+              <p>
+                Asociada al menor riesgo con garantía hipotecaria.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+          <div class="feature feature-icon-style">
+            <div class="feature-icon"><i class="fas fa-piggy-bank fa-2x"></i></div>
+            <div class="feature-content">
+              <h3 class="feature-title">Garantías</h3>
+              <p>
+                Estudiamos clientes y garantías encontrando la mejor oportunidad.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+          <div class="feature feature-icon-style">
+            <div class="feature-icon"><i class="far fa-address-book fa-2x"></i></div>
+            <div class="feature-content">
+              <h3 class="feature-title">Informes</h3>
+              <p>
+                Detalle a detalle toda la informacion critica de tu inversión
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="section-space80">
+    <div class="container">
+      <div class="row">
+        <div
+          class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12"
+        >
+          <div class="section-title mb60 text-center">
+            <!-- section title start-->
+            <h1>Algunos Beneficios De Invertir Con Nosotros</h1>
+            <!-- <p>con nosotros</p> -->
+          </div>
+          <!-- /.section title start-->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+          <div class="how-it-block">
+            <h3 class="how-it-no">1.</h3>
+            <div class="how-it-content">
+              <h2>Completa el formulario</h2>
+              <p>
+                Inversión con garantía hipotecaria a nombre del inversor para adquisición, ampliación, refacción y financiación de otros destinos, sobre vivienda permanente y no permanente
+              </p>
+              <a href="#!" class="btn btn-secondary btn-sm">Aplica ya</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+          <div class="how-it-block">
+            <h3 class="how-it-no">2.</h3>
+            <div class="how-it-content">
+              <h2>Facilidades</h2>
+              <p>
+                Fácil: Cobro a través de depósito o transferencia electrónica
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+          <div class="how-it-block">
+            <h3 class="how-it-no">3.</h3>
+            <div class="how-it-content">
+              <h2>Trasparencia</h2>
+              <p>
+                Transparente: Nuestras transacciones son 100% transparentes al realizarse directamente entre personas
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    <div class="section-space80 bg-primary">
+      <div class="container">
+        <div class="row">
+          <div
+            class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12"
+          >
+            <div class="mb60 text-center section-title">
+              <!-- section title start-->
+              <h1 class="text-white">Preguntas frecuentes</h1>
+              <p class="text-white">
+                Nuestra misión es entregar las últimas noticias y opiniones confiables.
+              </p>
+            </div>
+            <!-- /.section title start-->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+            <div class="accordion" id="faq1">
+              <div class="card mb-1 border-0">
+                <div class="card-header" id="faqOne">
+                  <h4 class="mb-0">
+                    <a  class="" data-toggle="collapse" data-target="#faqcollapseOne" aria-expanded="true"
+                      aria-controls="faqcollapseOne">
+                      <i class="fa fa-plus-circle mr-2"></i>¿Cuánto tiempo dura la inversión?</a
+                    >
+                  </h4>
+                </div>
+                <div id="faqcollapseOne" class="collapse show" aria-labelledby="faqOne" data-parent="#faq1">
+                  <div class="card-body">
+                    Los contratos de préstamo se firman por un plazo de 12 meses, los cuales pueden ser renovados por 12 meses adicionales siempre que ninguna de las partes exprese su deseo de terminar el contrato.
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-1 border-0">
+                <div class="card-header" id="faq2">
+                  <h4 class="mb-0">
+                    <a  class="collapsed" data-toggle="collapse" data-target="#faqcollapseTwo" aria-expanded="false"
+                      aria-controls="faqcollapseTwo">
+                      <i class="fa fa-plus-circle mr-2"></i>¿Puedo retirar mi inversión en cualquier momento?</a
+                    >
+                  </h4>
+                </div>
+                <div id="faqcollapseTwo" class="collapse" aria-labelledby="faqTwo" data-parent="#faq1">
+                  <div class="card-body">
+                    El inversionista puede decidir terminar el contrato unilateralmente en cualquier momento, solamente debe pagar los costos operativos de conseguir un nuevo inversionista y del cambio del acreedor en el certificado de libertad y tradición.
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-1 border-0">
+                <div class="card-header" id="faq3">
+                  <h4 class="mb-0">
+                    <a  class="collapsed" data-toggle="collapse" data-target="#faqcollapseThree" aria-expanded="false"
+                      aria-controls="faqcollapseThree">
+                      <i class="fa fa-plus-circle mr-2"></i>¿Cuáles son los montos mínimos que puedo invertir?</a
+                    >
+                  </h4>
+                </div>
+                <div id="faqcollapseThree" class="collapse" aria-labelledby="faqThree" data-parent="#faq1">
+                  <div class="card-body">
+                    Las solicitudes de crédito varían desde los 20 millones hasta los 500 millones. El inversionista puede adaptar su presupuesto dentro de los montos solicitados.
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-1 border-0">
+                <div class="card-header" id="faq4">
+                  <h4 class="mb-0">
+                    <a  class="collapsed" data-toggle="collapse" data-target="#faqcollapsefour" aria-expanded="false"
+                      aria-controls="faqcollapsefour">
+                      <i class="fa fa-plus-circle mr-2"></i>¿A quién debo entregar mi dinero?</a
+                    >
+                  </h4>
+                </div>
+                <div id="faqcollapsefour" class="collapse" aria-labelledby="faqfour" data-parent="#faq1">
+                  <div class="card-body">
+                    La totalidad del préstamo se entrega directamente al deudor garante, bien sea por transferencia electrónica o por cheque de gerencia. En ningún momento el dinero prestado o los intereses pagados serán recolectados por ningún intermediario.
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="card mb-1 border-0">
+                <div class="card-header" id="faq5">
+                  <h4 class="mb-0">
+                    <a  class="collapsed" data-toggle="collapse" data-target="#faqcollapsefive" aria-expanded="false"
+                      aria-controls="faqcollapsefive">
+                      <i class="fa fa-plus-circle mr-2"></i> ¿Puedo hacer todo el trámite de manera virtual?</a
+                    >
+                  </h4>
+                </div>
+                <div id="faqcollapsefive" class="collapse" aria-labelledby="faqfive" data-parent="#faq1">
+                  <div class="card-body">
+                    Todos los trámites asociados con la inversión pueden realizarse virtualmente, con excepción de la formalización de la escritura de hipoteca y autenticación de documentos que soportan el crédito, los cuales se realizan en una cita dada por la Notaría pertinente.
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-1 border-0">
+                <div class="card-header" id="faq6">
+                  <h4 class="mb-0">
+                    <a  class="collapsed" data-toggle="collapse" data-target="#faqcollapseSix" aria-expanded="false"
+                      aria-controls="faqcollapseSix">
+                      <i class="fa fa-plus-circle mr-2"></i>¿Cuál es la rentabilidad que voy a recibir por mi inversión?</a
+                    >
+                  </h4>
+                </div>
+                <div id="faqcollapseSix" class="collapse" aria-labelledby="faqTwo" data-parent="#faq1">
+                  <div class="card-body">
+                    La rentabilidad mensual varía entre el 1.5% mensual (19.5% efectivo anual) y el 2% mensual (26.8% efectivo anual), dependiendo el perfil de riesgo que seleccione el inversionista.
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-1 border-0">
+                <div class="card-header" id="faq7">
+                  <h4 class="mb-0">
+                    <a class="collapsed" data-toggle="collapse" data-target="#faqcollapseSeven" aria-expanded="false"
+                      aria-controls="faqcollapseSeven">
+                      <i class="fa fa-plus-circle mr-2"></i>¿Qué debo pagar por comisiones y gastos administrativos?</a
+                    >
+                  </h4>
+                </div>
+                <div id="faqcollapseSeven" class="collapse" aria-labelledby="faqSeven" data-parent="#faq1">
+                  <div class="card-body">
+                    Durante el curso normal del préstamo, el inversionista NO paga por los servicios de contabilidad, gestión documental, cobro prejurídico y análisis de riesgo que brinda el intermediario.
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-1 border-0">
+                <div class="card-header" id="faq8">
+                  <h4 class="mb-0">
+                    <a  class="collapsed" data-toggle="collapse" data-target="#faqcollapseEight" aria-expanded="false"
+                      aria-controls="faqcollapseEight">
+                      <i class="fa fa-plus-circle mr-2"></i>¿Cuando se perfecciona la inversión?</a
+                    >
+                  </h4>
+                </div>
+                <div id="faqcollapseEight" class="collapse" aria-labelledby="faqEight" data-parent="#faq1">
+                  <div class="card-body">
+                    El inversionista solo transfiere la totalidad del dinero prestado al deudor garante una vez se publique la anotación de la hipoteca en el certificado de libertad y tradición del inmueble, lo cual garantiza que la garantía hipotecaria esté debidamente registrada.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

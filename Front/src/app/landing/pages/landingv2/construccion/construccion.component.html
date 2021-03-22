@@ -1,0 +1,232 @@
+
+
+<!-- CARRUSEL <img [src]="images[1]" alt="Random second slide"> -->
+<div style="background-color: #15549a">
+    <br>
+    <br>
+    <br>
+
+    
+    </div>
+    <div class="lead-hero-wrapper" style="background: url(../../../../../assets/images/slider-4.jpg) no-repeat;">
+        <div class="container">
+            <div class="row">
+                <div class="col-xl-5 col-lg-5 col-md-12 col-sm-12 col-12">
+                    <!-- hero-caption -->
+                    <div class="lead-hero-caption">
+                        <h1 class="lead-hero-title">Prestamos Para Construcción</h1>
+                        <p>Una prestamo para lograr el sueño de tu vida.</p>
+                        <p> Encontrarás respuesta a tu solicitud de
+                            crédito en línea en poco tiempo.</p>
+                        <p class="lead mb0 text-white">Solicite desde<strong class="text-white">$1.000.000 hasta $10.000.000</strong></p>
+                        <!-- <span>(Te prestamos hasta el 50% del avaluo de tu inmueble )</span> -->
+                        <div class="rating-list">
+                            <span><i class="fa fa-star"></i></span>
+                            <span><i class="fa fa-star"></i></span>
+                            <span><i class="fa fa-star"></i></span>
+                            <span><i class="fa fa-star"></i></span>
+                            <span><i class="fa fa-star"></i></span>
+                            
+                            <span class="text-white">5 / 5 (85 Opiniones)</span>
+                        </div>
+                    </div>
+                    <!-- /.hero-caption -->
+                </div>
+                <div class="offset-xl-1 col-xl-6 offset-lg-1 col-lg-6 col-md-12 col-sm-12 col-12">
+                    <div class="lead-calculator pinside40">
+                        <div class="row">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb10">
+                                <h2 class="text-white mb20">Obten Tu Prestamo Hoy</h2>
+                               
+                                <div class="slider1">
+                                    <h4 class="text-white">Escoge El Valor Del Prestamo Que Deseas</h4>
+                                    
+                                    <div id="pricipal-slide1"></div>
+                                    <div>
+                                        <input  [(ngModel)]="valor" value=50000 onInput="$('#rangeval').html($(this).val())" type="range" class="form-range sliderx" min="50000" max="500000" step="10000" id="sliderx1">
+                                        <p>${{valor | number: '1.0-0'}}</p>
+                                    </div>
+                                </div>
+                                <div class="slider">
+                                    <h4 class="text-white">Que Plazo Necesitas?</h4>
+                                    <div id="totalyear-slide"></div>
+                                    <div>
+                                        <input [(ngModel)]="meses" value=1 onInput="$('#rangeval2').html($(this).val())" type="range" class="form-range sliderx" min="1" max="6" step="1" id="sliderx2">
+                                        <p>{{meses}}<span *ngIf="meses<=1">  mes</span><span *ngIf="meses>1">  meses</span></p>
+                                    </div>
+                                </div>
+                                <!-- <div class="slider">
+                                    <h4 class="text-white">Tasa de interés</h4>
+                                    <div id="intrest-slide"></div>
+                                    <div>
+                                        <input [(ngModel)]="interes" value=1 onInput="$('#rangeval3').html($(this).val())" type="range" class="form-range sliderx" min="1" max="6" step="1" id="sliderx2">
+                                        <p>{{interes}}</p>
+                                    </div>
+                                </div> -->
+                            </div>
+                            <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+                                <div class="single-total">
+                                    <h5 class="lead-cal-small-text">Interes</h5>
+                                    <h4 class="text-white emi-price" id="emi">{{interes}}</h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-lg-4 col-md-6 col-sm-12 col-12">
+                                <div class="single-total">
+                                    <h5 class="lead-cal-small-text">Iva</h5>
+                                    <h4 class="text-white" id="tbl_emi">{{iva}}</h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12">
+                                <div class="single-total">
+                                    <h5 class="lead-cal-small-text">Total Del Credito</h5>
+                                    <h4  class="text-white" id="tbl_la">{{total  | number: '1.0-0'}}</h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-5 col-lg-5 col-md-6 col-sm-12 col-12">
+                                <div class="single-total">
+                                    <h5 class="lead-cal-small-text">EMI - PAGO MENSUAL</h5>
+                                    <h4 class="text-white" id="tbl_la">{{emi}}</h4>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
+                                <button class="btn btn-secondary btn-sm">APLICA YA</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="section-space80 bg-white">
+    <div class="container">
+      <div class="row">
+        <div
+          class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-8 col-sm-12 col-12"
+        >
+          <div class="section-title mb60 text-center">
+            <!-- section title start-->
+            <h1>REQUISITOS</h1>
+            <p>
+                Nuestros plazos varían entre 1 y 180 días y tasa de interés fija del 25% e.a.
+            </p>
+          </div>
+          <!-- /.section title start-->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+          <div class="feature feature-icon-style">
+            <div class="feature-icon"><i class="far fa-id-card fa-2x"></i></div>
+            <div class="feature-content">
+              <h3 class="feature-title">1</h3>
+              <p>
+                Ser mayor de 18 años
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+          <div class="feature feature-icon-style">
+            <div class="feature-icon"><i class="fas fa-at fa-2x"></i></div>
+            <div class="feature-content">
+              <h3 class="feature-title">2</h3>
+              <p>
+                Tener correo electrónico
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+          <div class="feature feature-icon-style">
+            <div class="feature-icon"><i class="fas fa-piggy-bank fa-2x"></i></div>
+            <div class="feature-content">
+              <h3 class="feature-title">3</h3>
+              <p>
+                Tener una cuenta bancaria a tu nombre
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12 col-12">
+          <div class="feature feature-icon-style">
+            <div class="feature-icon"><i class="fa fa-bolt fa-2x"></i></div>
+            <div class="feature-content">
+              <h3 class="feature-title">Aprobación</h3>
+              <p>
+                De 24 a 48 Horas
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    <div class="section-space80">
+    <div class="container">
+      <div class="row">
+        <div
+          class="offset-xl-2 col-xl-8 offset-lg-2 col-lg-8 col-md-12 col-sm-12 col-12"
+        >
+          <div class="section-title mb60 text-center">
+            <!-- section title start-->
+            <h1>Aplicar en tres sencillos pasos</h1>
+            <p>No serás el único matiz de diámetro lorem mauris.</p>
+          </div>
+          <!-- /.section title start-->
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+          <div class="how-it-block">
+            <h3 class="how-it-no">1.</h3>
+            <div class="how-it-content">
+              <h2>Completa el formulario</h2>
+              <p>
+                Primero necesitamos saber un poco sobre usted y sus necesidades de préstamo..
+              </p>
+              <a href="#!" class="btn btn-secondary btn-sm">Aplica ya</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+          <div class="how-it-block">
+            <h3 class="how-it-no">2.</h3>
+            <div class="how-it-content">
+              <h2>Obtener aprobación</h2>
+              <p>
+                Dentro de las 48 horas hábiles posteriores a la presentación de su solicitud
+                tendras respuesta.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-12">
+          <div class="how-it-block">
+            <h3 class="how-it-no">3.</h3>
+            <div class="how-it-content">
+              <h2>Asegure sus fondos</h2>
+              <p>
+                Una vez aprobado, podremos trabajar con los detalles. Nosotros consignamos
+                el dinero a tu cuenta bancaria.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    </div>
+    
+    
+    
+    
+    
+    
+    

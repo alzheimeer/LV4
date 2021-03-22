@@ -1,0 +1,270 @@
+<!-- Navbar -->
+<div class="container-fluid">
+    <!-- Primera FILA-->
+    <div class="row ">
+
+      <!-- Una columna de 12-->
+      <div class="col-md-12 py-3">
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top">
+          <div class="container">
+            <button data-toggle="collapse" class="navbar-toggler bg-secondary" type="button" data-target="#menu"><span
+                class="sr-only">Toggle
+                navigation</span><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse" id="menu">
+              <a class="navbar-logo" href="#">
+                <i class="fab fa-accusoft"></i>
+                <!-- <img src="../../../../../assets/images/logo-1.jpg" width="40" height="40" alt="logo"> -->
+              </a>
+              <h5> <a class="nav-link titlenav" href="index.html">LENDIUP</a></h5>
+              <ul class="nav navbar-nav alinpage align-self-end">
+
+
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle  text-white" href="#" id="navbarDropdown1" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Pagina De Aterrizaje
+                  </a>
+                  <div class="dropdown-menu aguamarina" aria-labelledby="navbarDropdown2">
+                    <a class="dropdown-item color-semiwhite " [routerLink]="['/landing/op1']">Inicio Opcion 1</a>
+                    <a class="dropdown-item color-semiwhite " [routerLink]="['/landing/op2']">Inicio Opcion 2</a>
+                    <a class="dropdown-item color-semiwhite " [routerLink]="['/landing/op3']">Inicio Opcion 3</a>
+
+                  </div>
+
+
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle  text-white" href="#" id="navbarDropdown2" role="button"
+                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    PRODUCTOS
+                  </a>
+                  <div class="dropdown-menu aguamarina" aria-labelledby="navbarDropdown2">
+                    <a class="dropdown-item color-semiwhite " href=""> Prestamo Personal Rapido</a>
+                    <a class="dropdown-item color-semiwhite " href="">Prestamo Sobre Vehiculo</a>
+                    <a class="dropdown-item color-semiwhite " href="">Prestamo Sobre Hipoteca</a>
+                    <a class="dropdown-item color-semiwhite " href="">Prestamo Para Construcción</a>
+                  </div>
+
+
+                </li>
+            
+
+                <li class="nav-item" role="presentation"><a class="nav-link"
+                    href="">CONTACTANOS</a>
+                </li>
+                <li class="nav-item" role="presentation"><a class="nav-link" href="./pages/about.html">ACERCA DE</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <!-- BOTON QUE LLAMA EL MODAL QUE ESTA AL FINAL DEL HTML -->
+                  <a class="nav-link titlenav" href="#" id="modal-btn" data-toggle="modal"
+                    data-target="#signmodal">INGRESAR</a>
+                </li>
+                <!-- ICONO BUSCAR-->
+                <li class="nav-item d-none d-xs-block d-md-block" role="presentation">
+                  <a class="nav-link" href="#"><i class="icon ion-ios-search-strong"></i></a>
+                </li>
+                <!-- ICONO COMPRAS-->
+                <li class="nav-item d-none d-xs-block d-md-block" role="presentation">
+                  <a class="nav-link" href="#"><i class="fa fa-shopping-bag"></i></a></li>
+
+                <li class="nav-item" role="presentation"><a class="nav-link" id="log" href="#"></a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </nav>
+      </div>
+    </div>
+
+</div>
+
+<!-- CODIGO PAGINA -->
+<div>
+  <!-- FILA 2-->
+  <div class="row">
+
+    <!-- Paralaxx 1-->
+    <!-- Una columna de 12-->
+    <div class="col-md-12 bg-primary" id="parallax">
+      <div class="row h-100">
+        <div class="col-md-12 align-self-center">
+
+          <p id="weirdtext" class="text-center titulo-parallax">LendiUp</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- FILA 3-->
+  <div class="row">
+    <!-- Una columna de 12-->
+    <div class="col-md-12 ">
+      <div class="newsletter-subscribe">
+        <div class="container">
+          <div class="intro">
+            <p class="text-center title-ph2">Obtenga actualizaciones de LendiUp</p>
+            <p class="text-center text-normal">Mantente informado con noticias, consejos y ofertas especiales. </p>
+          </div>
+          <form class="form-inline" method="post">
+            <div class="form-group">
+              <input class="form-control text-normal" pattern="\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b" type="email" name="email"
+                placeholder="Ingrese Su Email">
+            </div>
+
+            <div class="form-group">
+              <a class="btn-lg btnsuscribete" onclick="window.location.href='#'">Suscribete </a>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FILA 4-->
+  <div class="row">
+    <!-- Una columna de 12-->
+    <div class="col-md-12   v-erde">
+
+      <div class="newsletter-subscribe ">
+        <div class="container text-center">
+          <div class="intro">
+            <p class="text-center title-ph2">¿Qué es LendiUp?</p>
+            <p class="text-center text-normal ">Prestamos dinero de muchas formas, brindando muchas oportunidades
+                a todas las personas en territorio Colombiano.
+                Unimos inversores que quieren creer en tu idea de negocio.
+            </p>
+          </div>
+          <button type="button" onclick="window.location.href=''"
+            class="btn-lg btn-info">Leer
+            Mas</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- FILA 5-->
+  <div class="row">
+
+    <!-- Paralaxx 1-->
+    <!-- Una columna de 12-->
+    <div class="col-md-12 bg-primary" id="imgbanner">
+      <div class="row h-100">
+        <div class="col-md-12 align-self-center">
+
+          <p class="text-center titulo-parallax">LAS MEJORES TASAS DE INTERES DEL MERCADO</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- FILA 6-->
+  <div class="row">
+    <!-- Una columna de 6-->
+    <div class="col-md-6  p-urple">
+      <div class="newsletter-subscribe">
+        <div class="container text-center">
+          <div class="intro">
+            <p class="text-center title-ph2">Necesitas un prestamo urgente</p>
+            <p class="text-center text-normal">Solo con enviarnos unos pocos documentos, en menos de 48 horas
+                tendras tu dinero consignado en el banco.
+            </p>
+          </div>
+          <button type="button" onclick="window.location.href='https://es.wikipedia.org/wiki/Amigurumi'"
+            class="btn-lg  btn-secondary ">Leer Mas</button>
+        </div>
+      </div>
+    </div>
+    <!-- Una columna de 6-->
+    <div class="col-md-6  b-lue">
+      <div class="newsletter-subscribe">
+        <div class="container text-center">
+          <div class="intro">
+            <p class="text-center title-ph2">Estas reportado!!!</p>
+            <p class="text-center text-normal">Tienes vehiculo o casa? 
+                Si es asi no importa que estes reportado, sobre hipoteca o el vehiculo te prestamos
+
+            </p>
+          </div>
+          <button type="button"
+            onclick="window.location.href=''"
+            class="btn-lg btn-info">Leer Mas</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <!-- FILA 7-->
+  <div class="row">
+    <!-- Una columna de 6-->
+    <div class="col-md-6">
+      <div class="newsletter-subscribe">
+        <div class="container text-center">
+          <div class="intro">
+            <p class="text-center title-ph2">Lo que estas buscando es</p>
+            <p class="text-center title-ph2">Invertir?</p>
+
+            <p class="text-center text-normal">
+                Preguntanos lo que desees al whatapp 3193779313
+            </p>
+          </div>
+          <button type="button" onclick="window.location.href=''"
+            class="btn-lg  btn-secondary ">Leer Mas</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Una columna de 6-->
+    <div class="col-md-6 ">
+      <img class="img-fluid imgbanner" src="../../../../../assets/images/horizontal7unsplash.jpg" alt="">
+    </div>
+  </div>
+
+
+
+  <!-- FILA 8-->
+  <div class="container-fluid">
+    <div class="row">
+      <!-- Una columna de 12-->
+      <div class="col-md-12 footer-basic">
+        <!-- FOOTER -->
+        <footer>
+          <div class="social"><a href="#">
+              <i class="icon ion-social-instagram "></i></a><a href="#">
+              <i class="icon ion-social-snapchat "></i></a><a href="#">
+              <i class="icon ion-social-twitter "></i></a><a href="#">
+              <i class="icon ion-social-facebook "></i></a></div>
+          <!-- LISTA NO ORDENADA HORIZONTAL -->
+          <ul class="list-inline ">
+            <li class="list-inline-item "><a href="">Personales</a></li>
+            <li class="list-inline-item "><a href="">Hipoteca</a></li>
+            <li class="list-inline-item "><a href="">Vehiculo</a></li>
+            <li class="list-inline-item "><a href="">Construccion</a></li>
+          </ul>
+          <p class="copyright">LendiUp © 2021</p>
+        </footer>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FIN CODIGO PAGINA -->
+
+
+
+
+  
+
+
+
+
+
+
+
+

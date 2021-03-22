@@ -11,6 +11,15 @@ import { Page5Component } from './pages/page5/page5.component';
 
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
+import { ConstruccionComponent } from './pages/landingv2/construccion/construccion.component';
+import { HipotecaComponent } from './pages/landingv2/hipoteca/hipoteca.component';
+import { InvierteComponent } from './pages/landingv2/invierte/invierte.component';
+import { Main2Component } from './pages/landingv2/main2/main2.component';
+import { One2Component } from './pages/landingv2/one2/one2.component';
+import { PersonalesComponent } from './pages/landingv2/personales/personales.component';
+import { VehiculosComponent } from './pages/landingv2/vehiculos/vehiculos.component';
+import { Main3Component } from './pages/landingv3/main3/main3.component';
+import { One3Component } from './pages/landingv3/one3/one3.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +28,17 @@ import { SharedModule } from '../shared/shared.module';
     Page2Component,
     Page3Component,
     Page4Component,
-    Page5Component],
+    Page5Component,
+    ConstruccionComponent,
+    HipotecaComponent,
+    InvierteComponent,
+    Main2Component,
+    One2Component,
+    PersonalesComponent,
+    VehiculosComponent,
+    Main3Component,
+    One3Component,
+  ],
   imports: [
     CommonModule,
     LandingRoutingModule,
