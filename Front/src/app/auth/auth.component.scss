@@ -1,0 +1,11 @@
+.app-view {
+  height: 100vh;
+  max-height: 100vh;
+  width: 100vw;
+  max-width: 100vw;
+
+
+  display: flex;
+  place-content: stretch center;
+  align-items:  center;
+}

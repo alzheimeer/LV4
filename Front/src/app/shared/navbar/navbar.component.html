@@ -1,0 +1,67 @@
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+
+    <!-- Brand -->
+    <a class="navbar-brand" routerLink="/landing/personal" >
+      <i class="fab fa-accusoft"></i>
+      <strong>     LENDIUP</strong>
+      <p>     Prestamos</p>
+    </a>
+
+    <!-- Collapse -->
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Links -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <!-- Left -->
+      <ul class="navbar-nav mr-auto" >
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/landing/personal" >Personales
+          </a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/landing/hipoteca" >Sobre Hipoteca</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/landing/vehiculo" >Sobre Vehiculo</a>
+        </li>
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" routerLink="/landing/construccion" >Para Construccion</a>
+        </li>
+
+      </ul>
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/landing/invierte" ><strong>QUIERES INVIERTIR?</strong></a>
+        </li>
+      </ul>
+      <!-- Right -->
+      <ul class="navbar-nav nav-flex-icons">
+        <li class="nav-item">
+          <a href="https://www.facebook.com/lendiup/" class="nav-link" target="_blank">
+            <i class="fab fa-facebook-f"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="https://twitter.com/lendiup" class="nav-link" target="_blank">
+            <i class="fab fa-twitter"></i>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a (click)="calc(2)"
+            class="nav-link border border-light rounded" target="_blank">
+            <i class="fas fa-sign-in-alt"></i>INGRESAR
+          </a>
+        </li>
+      </ul>
+
+    </div>
+
+  </div>
+</nav>
+<!-- Navbar -->

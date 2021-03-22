@@ -1,0 +1,223 @@
+@font-face {
+
+        font-family: "Montserrat";
+        src: url("../fonts/Montserrat-Regular.ttf");
+}
+
+@font-face {
+        font-family: "IntroRust-BaseLine";
+        src: url("../fonts/IntroRust-BaseLine.otf");
+}
+
+.btnsuscribete {
+
+        background-color: #cab350;
+        color: black;
+        font-weight: 800;
+        font-variant: small-caps;
+}
+
+.title-ph2 {
+        font-family: "IntroRust-BaseLine";
+        font-style: italic;
+        font-size: 30px;
+        font-weight: 800;
+}
+
+.text-normal {
+        font-size: 20px;
+}
+
+.titulo-parallax {
+        font-family: "IntroRust-BaseLine";
+        font-style: italic;
+        color: white;
+        font-size: 20px;
+}
+
+.fontNombrePage {
+        font-family: "Montserrat";
+        font-weight: 800;
+        font-style: italic;
+        padding-left: 150px;
+}
+
+.fontNavbar {
+        font-family: "Montserrat";
+        font-weight: 800;
+        margin-right: 1.5em;
+}
+
+.g1 {
+        background-color: firebrick;
+}
+
+.g2 {
+        background-color: rgb(13, 112, 21);
+}
+
+#parallax {
+        background-image: url("../images/index-three-slider-1.jpg");
+        height: 50vw;
+        margin-bottom: 50px;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        display: inline-block;
+}
+
+
+#imgbanner {
+        background-image: url("../images/index-three-slider-2.jpg");
+        height: 50vw;
+        margin-bottom: 50px;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+}
+
+/* xX-Small devices (portrait phones, less than 576px) */
+@media (min-width: 280px) and (max-width: 399px) {
+        .title-ph2 {
+                font-size: 20px;
+        }
+
+        .text-normal {
+                font-size: 15px;
+        }
+
+        .titulo-parallax {
+                font-size: 30px;
+        }
+
+        #parallax {
+                background-image: url("../images/index-three-slider-3.jpg");
+                height: 100vw;
+        }
+}
+
+/* X-Small devices (portrait phones, less than 576px) */
+@media (min-width: 400px) and (max-width: 575.98px) {
+
+        .title-ph2 {
+                font-size: 30px;
+        }
+
+        .text-normal {
+                font-size: 20px;
+        }
+
+        .titulo-parallax {
+                font-size: 60px;
+        }
+
+        .fontNombrePage {
+                font-size: 5em;
+        }
+
+        .fontNavbar {
+                font-size: 2em;
+        }
+
+        #parallax {
+                background-image: url("../images/6-planta-unsplash.jpg");
+                height: 100vw;
+        }
+}
+
+
+/* Small devices (landscape phones, less than 768px) */
+@media (min-width: 574px) and (max-width: 767.98px) {
+        .title-ph2 {
+                font-size: 30px;
+        }
+
+        .text-normal {
+                font-size: 20px;
+        }
+
+        .titulo-parallax {
+                font-size: 60px;
+        }
+
+
+        .fontNombrePage {
+                font-size: 5em;
+        }
+
+        .fontNavbar {
+                font-size: 2em;
+        }
+}
+
+
+/* Medium devices (tablets, less than 992px) */
+@media (min-width: 766px) and (max-width: 991.98px) {
+
+        .titulo-parallax {
+                font-size: 70px;
+        }
+
+
+        .fontNombrePage {
+                font-size: 5em;
+        }
+
+        .fontNavbar {
+                font-size: 2em;
+        }
+}
+
+
+/* Large devices (desktops, less than 1200px) */
+@media (min-width: 990px) and (max-width: 1199.98px) {
+
+        .titulo-parallax {
+                font-size: 60px;
+        }
+
+        .fontNombrePage {
+                font-size: 5em;
+        }
+
+        .fontNavbar {
+                font-size: 2em;
+        }
+}
+
+
+/* X-Large devices (large desktops, less than 1400px) */
+@media (min-width: 1200px) and (max-width: 1399.98px) {
+
+        .titulo-parallax {
+                font-size: 70px;
+        }
+
+
+
+        .fontNombrePage {
+                font-size: 5em;
+        }
+
+        .fontNavbar {
+                font-size: 2em;
+        }
+}
+
+@media (min-width: 1400px) {
+
+        .titulo-parallax {
+                font-size: 100px;
+        }
+
+
+        .fontNombrePage {
+                font-size: 5em;
+        }
+
+        .fontNavbar {
+                font-size: 2em;
+        }
+}

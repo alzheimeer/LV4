@@ -1,0 +1,196 @@
+<div class="panel-header " >
+  <div class="header text-center">
+    <h2 class="title">Formulario De Inmueble</h2>
+  </div>
+</div>
+
+
+<div class="main-content">
+  <div class="row">
+
+
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Ahora Completa Los Datos De El Inmueble</h5>
+        </div>
+        <div class="card-body">
+
+
+
+          <form (ngSubmit)="guardar(f)" #f="ngForm">
+
+            <div class="form-group">
+              <label>ID de Usuario</label>
+              <input [(ngModel)]="data.id" name="id" type="text" class="form-control" placeholder="ID Usuario"
+                disabled="disable" />
+              <small class="form-text text-muted">Este campo es autogenerado</small>
+            </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Tipo De Inmueble</label>
+                  <select [(ngModel)]="data.tipodoc" name="tipodoc" class="form-control custom-select" required>
+                    <option selected disabled value="">Escoge...</option>
+                    <option>Casa</option>
+                    <option>Apartamento</option>
+                    <option>Oficina</option>
+                    <option>Bodega</option>
+                    <option>Consultorio</option>
+                    <option>Local Comercial</option>
+                    <option>Lote</option>
+                    <option>Finca</option>
+                    <option>Edificio De Apartamentos</option>
+                    <option>Edificio De Oficinas</option>
+                  </select>
+
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label># De Matricula Inmobiliaria</label>
+                  <input [(ngModel)]="data.numdoc" name="numdoc" type="text" class="form-control"
+                    placeholder="# de matricula" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Uso Del Inmueble</label>
+                  <select [(ngModel)]="data.ciudad" name="ciudad" class="form-control custom-select"
+                    placeholder="Escoge Un Pais" required>
+                    <option selected disabled value="">Escoge...</option>
+                    <option>Residencial/option>
+                    <option>Comercial</option>
+                    <option>Mixto</option>
+                    <option>Agropecuario</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 px-1">
+                <div class="form-group">
+                  <label>Escoje El Estrato</label>
+                  <select [(ngModel)]="data.departamento" name="departamento" type="text"
+                    class="form-control  custom-select" placeholder="...." required>
+                    <option selected disabled value="">Escoge...</option>
+                    <option>Estrato 1</option>
+                    <option>Estrato 2</option>
+                    <option>Estrato 3</option>
+                    <option>Estrato 4</option>
+                    <option>Estrato 5</option>
+                    <option>Estrato 6</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label>Departamento</label>
+                  <input [(ngModel)]="data.barrio" name="barrio" type="text" class="form-control" placeholder="...."
+                    required>
+                </div>
+              </div>
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label>Ciudad</label>
+                  <input [(ngModel)]="data.barrio" name="barrio" type="text" class="form-control" placeholder="...."
+                    required>
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label>Localidad / Barrio / Vereda</label>
+                  <input [(ngModel)]="data.direccion" name="direccion" type="text" class="form-control"
+                    placeholder="...." required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Dirección</label>
+                  <input [(ngModel)]="data.pais" name="pais" type="text" class="form-control"
+                    placeholder="Digite Su Direccion" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label>Años De Antiguedad</label>
+                  <input [(ngModel)]="data.celular1" name="celular1" type="number" class="form-control"
+                    placeholder="Digite # de años" required>
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label>Area</label>
+                  <input [(ngModel)]="data.celular2" name="celular2" type="text" class="form-control"
+                    placeholder="Opcional ....">
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label>Valor comercial?</label>
+                  <input [(ngModel)]="data.celular2" name="celular2" type="number" class="form-control"
+                    placeholder="Valor">
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12 pl-1">
+              <p>¿Deseas abonar a capital en cada cuota?</p>
+              <div class="form-group custom-control custom-radio">
+                <input type="radio" id="customRadio1" name="customRadio" class="form-control custom-control-input">
+                <label class="custom-control-label" for="customRadio1">SI</label>
+              </div>
+              <div class="form-group custom-control custom-radio">
+                <input type="radio" id="customRadio2" name="customRadio" class="form-control custom-control-input">
+                <label class="custom-control-label" for="customRadio2">NO</label>
+              </div>
+            </div>
+
+
+
+            <div class="form-group d-flex h-100">
+              <div class="align-self-end ml-auto">
+                <button type="submit" class="btn btn-primary btn-block" [disabled]="f.invalid">
+                  <i class="fa fa-save"></i>
+                  Siguiente
+                </button>
+              </div>
+            </div>
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <mat-card class=" col-md-4">
+      <mat-card-header>
+        <img class="img-fluid" src="../assets/img/mike.jpg" alt="Photo of a Shiba Inu">
+      </mat-card-header>
+      <div mat-card-avatar class="example-header-image "></div>
+      <mat-card-title>{{usuario.name | uppercase}}</mat-card-title>
+      <mat-card-subtitle> {{usuario.surname | uppercase}}</mat-card-subtitle>
+      <mat-card-subtitle> {{usuario.email}}</mat-card-subtitle>
+
+      <mat-card-content>
+        <p>
+          "Aqui puedes llenar
+          <br> La solicitud
+          <br>Del prestamos
+          <br> que desees! "
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <!-- <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button> -->
+      </mat-card-actions>
+    </mat-card>
+
+
+  </div>
+</div>

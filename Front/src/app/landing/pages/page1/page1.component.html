@@ -1,0 +1,79 @@
+<!-- Full Page Intro -->
+<div class="view full-page-intro "
+  style="background-image: url('../../../../assets/images/portada-personal1.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+  <!-- Mask & flexbox options-->
+  <div class="mask rgba-black-light d-flex justify-content-center align-items-center ">
+
+    <!-- Content -->
+    <div class="container ">
+
+      <!--Grid row-->
+      <div class="row wow fadeIn ">
+
+        <!--Grid column-->
+        <div class="col-md-6 col-xl-5 white-text text-center text-md-left mtx">
+
+          <h1 class="display-4 font-weight-bold ">Prestamos Personales Rapidos</h1>
+
+          <hr class="hr-light">
+
+          <p>
+            <strong>Una prestamo pensado para ti, fácil de usar.</strong>
+          </p>
+
+          <p class="mb-4 d-none d-md-block">
+            <strong>Encontrarás respuesta a tu solicitud</strong>
+            <strong>de crédito en línea en minutos.</strong>
+          </p>
+          <!-- <i class="fas fa-list-ol"></i> -->
+          <a type="button" (click)="requisitos()" class="btn btn-indigo btn-lg">      Requisitos
+
+          </a>
+          <a  type="button" (click)="register()" class="btn btn-indigo btn-lg">Solicita Tu Prestamo
+            <!-- <i class="fas fa-wallet"></i> -->
+          </a>
+
+          <hr>
+
+          <p class="lead mb0">Solicite de<strong>$50.000 hasta $500.000</strong></p>
+          <span>(Si ya eres cliente antiguo pide hasta $2.000.000 )</span>
+
+
+          <!-- <div>
+            <hr>
+            <p>Ya Tienes Cuenta?</p>
+            <button class="btn btn-indigo btn-md" type="button" (click)="print()">INGRESA</button>
+          </div> -->
+        </div>
+
+
+
+
+        <!--Grid column-->
+        <div class="col-md-6 col-xl-5  mt-5">
+
+          <div [ngSwitch]="value">
+          <!--Card-->
+          <app-calc     *ngSwitchCase="0"></app-calc>
+          <app-card     *ngSwitchCase="1"></app-card>
+          <app-login    *ngSwitchCase="2"></app-login>
+          <app-register *ngSwitchCase="3" (value)="valuethesoon($event)"></app-register>
+          <app-rq1      *ngSwitchCase="4" (value)="valuethesoon($event)" ></app-rq1>
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+    <!-- Content -->
+
+  </div>
+  <!-- Mask & flexbox options-->
+
+</div>
+<!-- Full Page Intro -->

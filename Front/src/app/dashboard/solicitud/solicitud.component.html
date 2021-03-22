@@ -1,0 +1,122 @@
+<div class="panel-header ">
+  <div class="header text-center">
+    <h2 class="title">SOLICITUD DE PRESTAMOS</h2>
+  </div>
+</div>
+
+
+<div class="main-content">
+  <div class="row">
+
+
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Solicitud De Prestamo</h5>
+        </div>
+        <div class="card-body">
+
+          <form (ngSubmit)="guardar(f)" #f="ngForm">
+
+            <div class="form-group">
+              <label>ID de Usuario</label>
+              <input [(ngModel)]="data.id" name="id" type="text" class="form-control" placeholder="ID Usuario" disabled="disable" />
+              <small class="form-text text-muted">Este campo es autogenerado</small>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Tipo De Prestamo</label>
+                  <select #tipop name="tipop" class="form-control" placeholder="Escoge Un Tipo" required>
+                    <option selected disabled value="">Escoge...</option>
+                    <option>Personal</option>
+                    <option>Sobre Hipoteca</option>
+                    <option>Sobre Vehiculo</option>
+                    <option>Para Construccion</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-md-4 pr-1 slider1 form-group">
+                <h4 class="">Cuanto Dinero Necesitas?</h4>
+
+                <div id="pricipal-slide1"></div>
+                <div>
+                  <mat-slider class="min" thumbLabel [displayWith]="formatLabel1" step="50000" min="100000"
+                    max="500000" name="valor" [(ngModel)]="valor" (input)="changeValueValor($event)">
+                  </mat-slider>
+                  <p>
+                    <span *ngIf="valor > 1" class="">$  {{valor | number: '1.0-0'}} pesos</span>
+
+                  </p>
+
+                </div>
+              </div>
+
+              <div class="col-md-4 pr-1 slider form-group">
+                <h4 class="">A Cuantos Meses Deseas El Prestamo?</h4>
+                <div id="totalyear-slide"></div>
+                <div>
+                  <mat-slider name="meses" class="max" thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="6"
+                    [(ngModel)]="meses" (input)="changeValueMeses($event)"></mat-slider>
+                  <p>
+                    <span *ngIf="meses > 1" class="">{{meses}} meses</span>
+                    <span *ngIf="meses <= 1" class="">{{meses}} mes</span>
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group d-flex h-100">
+              <div class="align-self-end ml-auto">
+                <button type="button" class="btn btn-primary btn-block" [disabled]="f.invalid" (click)="next(tipop.value)">
+                  <i class="fa fa-save"></i>
+                  Siguiente
+                </button>
+              </div>
+            </div>
+
+
+
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+    <mat-card class=" col-md-4">
+      <mat-card-header>
+        <img class="img-fluid" src="../assets/img/mike.jpg" alt="Photo of a Shiba Inu">
+      </mat-card-header>
+      <div mat-card-avatar class="example-header-image "></div>
+      <mat-card-title>{{usuario.name | uppercase}}</mat-card-title>
+      <mat-card-subtitle> {{usuario.surname | uppercase}}</mat-card-subtitle>
+      <mat-card-subtitle> {{usuario.email}}</mat-card-subtitle>
+
+      <mat-card-content>
+        <p>
+          "Aqui puedes llenar
+          <br> La solicitud
+          <br>Del prestamos
+          <br> que desees! "
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <!-- <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button> -->
+      </mat-card-actions>
+    </mat-card>
+
+
+  </div>
+</div>

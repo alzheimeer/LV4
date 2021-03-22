@@ -1,0 +1,41 @@
+<!--Card-->
+<div class="card x">
+
+  <!--Card content-->
+  <div class="card-body ">
+
+    <!-- Form -->
+    <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="register()" class="text-white text-center">
+      <h1>Crear Cuenta</h1>
+
+      <p>Nombre:</p>
+        <input type="text" formControlName="name" placeholder="Ingrese su primer nombre">
+<hr>
+      <p>Apellido: </p>
+        <input type="text" formControlName="surname" placeholder="Ingrese su primer apellido">
+        <hr>
+      <p>Email: </p>
+        <input type="email" formControlName="email" placeholder="Ingrese su email">
+        <hr>
+      <p>Contraseña: </p>
+        <input type="password" formControlName="password" placeholder="Ingrese su contraseña">
+        <hr>
+      <p> </p>
+      <!-- <fieldset class="form-check">
+        <input type="checkbox" class="form-check-input" id="checkbox1">
+        <label for="checkbox1" class="form-check-label dark-grey-text">Acepto Terminos Y Condiciones</label>
+      </fieldset> -->
+     <div>
+      <button type="button"  (click)="calc(0)" class="mx-3">Atras  <i class="far fa-hand-point-left"></i></button>
+        <button type="submit"  [disabled]="miFormulario.invalid">Continuar</button>
+
+      </div>
+
+
+    </form>
+    <!-- Form -->
+
+  </div>
+
+</div>
+<!--/.Card-->

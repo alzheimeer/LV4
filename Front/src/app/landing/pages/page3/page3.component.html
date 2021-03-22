@@ -1,0 +1,79 @@
+<!-- Full Page Intro -->
+<div class="view full-page-intro "
+  style="background-image: url('../../../../assets/images/portada-hipoteca1.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+  <!-- Mask & flexbox options-->
+  <div class="mask rgba-black-light d-flex justify-content-center align-items-center ">
+
+    <!-- Content -->
+    <div class="container ">
+
+      <!--Grid row-->
+      <div class="row wow fadeIn ">
+
+        <!--Grid column-->
+        <div class="col-md-6 col-xl-5 white-text text-center text-md-left mtx">
+
+          <h1 class="display-4 font-weight-bold ">Prestamos Sobre Hipoteca</h1>
+
+          <hr class="hr-light">
+
+          <p>
+            <strong>Una prestamo pensado para ti, fácil de usar.</strong>
+          </p>
+
+          <p class="mb-4 d-none d-md-block">
+            <strong>Encontrarás respuesta a tu solicitud de crédito en línea en 48 horas.</strong>
+            <!-- <strong>de crédito en línea en minutos.</strong> -->
+          </p>
+          <!-- <i class="fas fa-list-ol"></i> -->
+          <a type="button" (click)="requisitos()" class="btn btn-indigo btn-lg">      Requisitos
+
+          </a>
+          <a  type="button" (click)="register()" class="btn btn-indigo btn-lg">Solicita Tu Prestamo
+            <!-- <i class="fas fa-wallet"></i> -->
+          </a>
+
+          <hr>
+
+          <p class="lead mb0">Te Prestamos Desde<strong>$4.000.000 hasta $50.000.00</strong></p>
+          <span>(Te prestamos hasta el 50% del avaluo de tu inmueble  )</span>
+
+
+          <!-- <div>
+            <hr>
+            <p>Ya Tienes Cuenta?</p>
+            <button class="btn btn-indigo btn-md" type="button" (click)="print()">INGRESA</button>
+          </div> -->
+        </div>
+
+
+
+
+        <!--Grid column-->
+        <div class="col-md-6 col-xl-5  mt-5">
+
+          <div [ngSwitch]="valuex">
+          <!--Card-->
+          <app-calc-hipoteca    *ngSwitchCase="0"></app-calc-hipoteca>
+          <app-card     *ngSwitchCase="1"></app-card>
+          <app-login    *ngSwitchCase="2"></app-login>
+          <app-register (value)="valuethesoon($event)" *ngSwitchCase="3"></app-register>
+          <app-rq3   (value)="valuethesoon($event)"    *ngSwitchCase="4"></app-rq3>
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+    <!-- Content -->
+
+  </div>
+  <!-- Mask & flexbox options-->
+
+</div>
+<!-- Full Page Intro -->

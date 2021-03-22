@@ -1,0 +1,194 @@
+<div class="panel-header ">
+  <div class="header text-center">
+    <h2 class="title">MI CUENTA</h2>
+  </div>
+</div>
+
+
+<div class="main-content">
+  <div class="row">
+
+
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Aqui Puedes Actualizar Tus Datos</h5>
+        </div>
+        <div class="card-body">
+
+
+          <form (ngSubmit)="guardar(f)" #f="ngForm">
+          <!-- <form  #f="ngForm"> -->
+            <div class="row">
+              <div class="col-md-6 pl-1">
+            <div class="form-group">
+              <label>ID de Usuario</label>
+              <input [(ngModel)]="usuario._id" name="id" type="text" class="form-control" placeholder="ID Usuario" disabled="disable" />
+              <small class="form-text text-muted">Este campo es autogenerado</small>
+            </div>
+            </div>
+            <div class="col-md-6 pl-1">
+            <div class="form-group">
+              <label>email</label>
+              <input [(ngModel)]="usuario.email" name="email" type="text" class="form-control" placeholder="ID Usuario" disabled="disable" />
+              <small class="form-text text-muted">Esto no se puede cambiar</small>
+            </div>
+          </div>
+        </div>
+            <div class="row">
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Nombre</label>
+                  <input [(ngModel)]="usuario.name" name="name" type="text" class="form-control"  required>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Apellido</label>
+                  <input [(ngModel)]="usuario.surname" name="surname" type="text" class="form-control"  required>
+                </div>
+              </div>
+              </div>
+            <div class="row">
+              <div class="col-md-6 pr-1">
+                <div class="form-group">
+                  <label>Tipo De Identificacion</label>
+
+                  <select [(ngModel)]="usuario.personal.tipodoc" name="tipodoc" class="form-control custom-select" placeholder="Escoge Un Tipo" required>
+                    <option [value]="item" *ngFor="let item of tiposIdentificacion">{{item}}</option>
+
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Numero</label>
+                  <input [(ngModel)]="usuario.personal.numdoc" name="numdoc" type="number" class="form-control" placeholder="# de documento" required>
+                </div>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3 pr-1">
+                <div class="form-group">
+                  <label>Pais</label>
+                  <select [(ngModel)]="usuario.personal.pais" name="pais" class="form-control custom-select" placeholder="Escoge Un Pais" required>
+                    <option [value]="item" *ngFor="let item of paises">{{item}}</option>
+
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <div class="form-group">
+                  <label>Departamento</label>
+                  <input [(ngModel)]="usuario.personal.departamento" name="departamento" type="text" class="form-control" placeholder="...." required>
+                </div>
+              </div>
+              <div class="col-md-3 px-1">
+                <div class="form-group">
+                  <label>Ciudad</label>
+                  <input [(ngModel)]="usuario.personal.ciudad" name="ciudad" type="text" class="form-control" placeholder="...." required>
+                </div>
+              </div>
+              <div class="col-md-3 pl-1">
+                <div class="form-group">
+                  <label>Barrio</label>
+                  <input [(ngModel)]="usuario.personal.barrio" name="barrio" type="text" class="form-control" placeholder="...." required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12">
+                <div class="form-group">
+                  <label>Dirección</label>
+                  <input [(ngModel)]="usuario.personal.direccion" name="direccion" type="text" class="form-control" placeholder="Digite Su Direccion" required>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 px-1">
+                <div class="form-group">
+                  <label>Celular</label>
+                  <input [(ngModel)]="usuario.personal.celular1" name="celular1" type="number" class="form-control" placeholder="Digite Su Numero Celular" required>
+                </div>
+              </div>
+              <div class="col-md-6 pl-1">
+                <div class="form-group">
+                  <label>Celular Alternativo</label>
+                  <input [(ngModel)]="usuario.personal.celular2" name="celular2" type="number" class="form-control" placeholder="Opcional ....">
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-4 pr-1">
+                <div class="form-group">
+                  <label>Banco</label>
+                  <select [(ngModel)]="usuario.banca.banco" name="banco" class="form-control custom-select" placeholder="Escoge Un Banco" required>
+                    <option [value]="item" *ngFor="let item of bancos">{{item}}</option>
+
+                  </select>
+                </div>
+              </div>
+              <div class="col-md-4 px-1">
+                <div class="form-group">
+                  <label>Tipo De Cuenta</label>
+                  <select [(ngModel)]="usuario.banca.tipocuenta" name="tipocuenta"  class="form-control custom-select" placeholder="Escoge Un Tipo" required>
+                    <option [value]="item" *ngFor="let item of tipocuenta">{{item}}</option>
+                  </select>
+
+                </div>
+              </div>
+              <div class="col-md-4 pl-1">
+                <div class="form-group">
+                  <label>Numero De Cuenta</label>
+                  <input [(ngModel)]="usuario.banca.numcuenta" name="numcuenta" type="number" class="form-control" placeholder="# de cuenta" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-group d-flex h-100">
+              <div class="align-self-end ml-auto">
+                <button type="submit" class="btn btn-primary btn-block" [disabled]="f.invalid">
+                  <i class="fa fa-save"></i>
+                 Actualizar
+                </button>
+              </div>
+            </div>
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+
+
+
+
+
+
+
+    <mat-card class=" col-md-4">
+      <mat-card-header>
+        <img class="img-fluid" src="../assets/img/mike.jpg" alt="Photo of a Shiba Inu">
+      </mat-card-header>
+      <div mat-card-avatar class="example-header-image "></div>
+      <mat-card-title>{{usuario.name | uppercase}}</mat-card-title>
+      <mat-card-subtitle> {{usuario.surname | uppercase}}</mat-card-subtitle>
+      <mat-card-subtitle> {{usuario.email}}</mat-card-subtitle>
+
+      <mat-card-content>
+        <p>
+          "Aqui puedes llenar
+          <br> La solicitud
+          <br>Del prestamos
+          <br> que desees! "
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <!-- <button mat-button>LIKE</button>
+        <button mat-button>SHARE</button> -->
+      </mat-card-actions>
+    </mat-card>
+
+
+  </div>
+</div>
