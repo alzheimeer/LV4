@@ -17,8 +17,8 @@ dbConnection();
 
 // If it is the first time the program has been run
 // Create Roles, Administrator User and 4 Base Products in the database
-createRoles();
-createAdmin();
+// Create Admin only is execute when createRoles is finished
+createRoles().then(()=>createAdmin())
 createProducts();
 
 // Read every request and response and display it on the console
@@ -37,6 +37,7 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth.router'));
 app.use('/api/users', require('./routes/users.router'));
 app.use('/api/products', require('./routes/products.router'));
+app.use('/api/request', require('./routes/request.router'));
 
 // Handle other angular routes
 app.get('*', (req, res) => {
