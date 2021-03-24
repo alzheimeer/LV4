@@ -22,7 +22,7 @@ const getRequestById = async(req, res) => {
     const request = await Request.findById(req.params.requestId);
     return res.status(200).json(request);
   } catch (error) {
-    return res.status(500).json({ msg: 'Id Del Requesto No Existe' });
+    return res.status(500).json({ msg: 'Id Del Request No Existe' });
   }
 }
 const updateRequestById = async(req, res) => {
@@ -30,16 +30,18 @@ const updateRequestById = async(req, res) => {
     const udRequest = await Request.findByIdAndUpdate(req.params.requestId, req.body, {new: true});
     return res.status(200).json(udRequest);
   } catch (error) {
-    return res.status(500).json({ msg: 'Id Del Requesto No Existe' });
+    return res.status(500).json({ msg: 'Id Del Request No Existe' });
   }
 }
 const deleteRequestById = async(req, res) => {
   const { requestId } = req.params;
   try {
-    await Request.findByIdAndDelete(requestId);
-    return res.status(204).json();
+    const request = await Request.findByIdAndDelete(requestId);
+    if (!request) return res.status(401).json({msg: 'No hay solicitud con ese Id'});
+    //si se encuentra la actividad
+    return res.status(200).json({ msg: 'Actividad Eliminada'});
   } catch (error) {
-    return res.status(500).json({ msg: 'Id Del Requesto No Existe' });
+    return res.status(500).json({ msg: 'Contacte Con El Administrador' });
   }
 }
 

@@ -12,7 +12,8 @@ import { EstadocuentaComponent } from './estadocuenta/estadocuenta.component';
 import { DatosconstruccionComponent } from './datosconstruccion/datosconstruccion.component';
 import { MisdatosComponent } from './misdatos/misdatos.component';
 import { AboutComponent } from './about/about.component';
-
+import { ProductoComponent } from './producto/producto.component';
+import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 
 
 const routes: Routes = [
@@ -21,6 +22,8 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
   { path: 'solicitud',        component: SolicitudComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
+  { path: 'solicitudes',        component: SolicitudesComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
+  { path: 'productos',        component: ProductoComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'datospersonales',  component: DatospersonalesComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'datosinmueble',  component: DatosinmuebleComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'datosvehiculo',    component: DatosvehiculoComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },

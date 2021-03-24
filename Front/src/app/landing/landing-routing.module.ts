@@ -19,7 +19,7 @@ import { One3Component } from './pages/landingv3/one3/one3.component';
 
 const routes: Routes = [
   {
-    path: 'op1',
+    path: '',
     component: LandingComponent,
     children: [
       { path: 'personal', component: Page1Component },
@@ -52,6 +52,7 @@ const routes: Routes = [
       { path: '**', redirectTo: 'one3' },
     ],
   },
+  // { path: '**', redirectTo: 'op1' }
 ];
 
 @NgModule({

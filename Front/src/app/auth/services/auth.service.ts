@@ -16,19 +16,14 @@ import { DataPersonalModel, DataPersonalModelComplet } from '../../models/datape
 export class AuthService {
 
   private baseUrl: string = environment.baseUrl;
-  // tslint:disable-next-line: variable-name
   private _usuario!: Usuario;
 
-  // tslint:disable-next-line: typedef
   get usuario() {
     return { ...this._usuario};
   }
 
   constructor(private http: HttpClient) { }
 
-
-
-  // tslint:disable-next-line: typedef
   register(name: string, surname: string, email: string, password: string) {
 
     const url = `${ this.baseUrl }/auth/new`;
@@ -38,7 +33,6 @@ export class AuthService {
       tap(({ok, token}) => {
         // If resp is Correct ok: true
         if (ok === true) {
-          // tslint:disable-next-line: no-non-null-assertion
           localStorage.setItem('token', token!);
         }
       }),
@@ -74,18 +68,12 @@ export class AuthService {
     return this.http.get<AuthResponse>(url, {headers}).pipe(
       map(resp => {
         // console.log(resp);
-        // tslint:disable-next-line: no-non-null-assertion
         localStorage.setItem('token', resp.token!);
         this._usuario = {
-          // tslint:disable-next-line: no-non-null-assertion
-          name: resp.name!,
-          // tslint:disable-next-line: no-non-null-assertion
-          surname: resp.surname!,
-          // tslint:disable-next-line: no-non-null-assertion
           uid: resp.uid!,
-          // tslint:disable-next-line: no-non-null-assertion
+          name: resp.name!,
+          surname: resp.surname!,
           email: resp.email!,
-          // tslint:disable-next-line: no-non-null-assertion
           roles: resp.roles!
         };
         return resp.ok;

@@ -7,11 +7,13 @@ mat-slider {
 
   background-color: rgba(187, 181, 181, 0.233);
   width: 100%;
+
 }
 
 
 :host ::ng-deep .min .mat-slider-thumb {
   background-color: blue;
+
 }
 
 :host ::ng-deep .min .mat-slider-thumb-label {

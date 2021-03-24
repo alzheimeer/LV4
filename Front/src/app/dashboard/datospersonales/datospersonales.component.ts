@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgForm } from '@angular/forms';
 import { AuthService } from '../../auth/services/auth.service';
-import { DashboardService } from '../../auth/services/dashboard.service';
+import { UserService } from '../../dashboard/services/user.service';
 import { User } from '../../models/user.models';
 import Swal from 'sweetalert2';
 
@@ -39,10 +39,10 @@ export class DatospersonalesComponent implements OnInit {
   }
   hayerror = false;
 
-  constructor(private router: Router, private dashboardService: DashboardService, private authService: AuthService) { }
+  constructor(private router: Router, private userService: UserService, private authService: AuthService) { }
 
   ngOnInit(): void {
-    this.dashboardService.getUserById(this.usuarioauth.uid)
+    this.userService.getUserById(this.usuarioauth.uid)
       .subscribe(resp => {
         this.usuario = resp;
       }, (err) => {
@@ -67,7 +67,7 @@ export class DatospersonalesComponent implements OnInit {
     });
     Swal.showLoading();
     if (this.usuario._id) {
-      this.dashboardService.updateUserById(this.usuario)
+      this.userService.updateUserById(this.usuario)
         .subscribe(resp => {
           console.log(resp);
           Swal.fire({

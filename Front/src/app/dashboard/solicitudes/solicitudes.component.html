@@ -1,0 +1,131 @@
+<div class="panel-header">
+  <div class="header text-center">
+    <h2 class="title">SOLICITUDES</h2>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="row">
+
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Informacion De Todas Las Solicitudes Realizadas</h5>
+        </div>
+        <div class="card-body">
+
+
+
+          <div class="accordion_display">
+            <div class="accordion_size">
+              <mat-accordion multi="true" *ngIf="solicitudes.length">
+                <mat-expansion-panel *ngFor="let solicitud of solicitudes" hiddenToggle="false">
+                  <mat-expansion-panel-header>
+                    <mat-panel-title>
+
+
+                      <span class="text_center"
+                        *ngFor="let producto of productos | searchnameproduct: solicitud.idProduct"> {{ producto.name }}
+                      </span>
+                      <span class="spacer"></span>
+                      <span class="text_center"> Monto: ${{ solicitud.value | number: '1.0-0' }} </span>
+                      <span class="text_center"> Plazo: {{ solicitud.time }} meses</span>
+
+                      <span class="spacer"></span>
+                      <button class="btDone" *ngIf="solicitud.estate == 'Pendiente'" mat-raised-button>{{
+                        solicitud.estate }}</button>
+                      <button class="btInProgress" *ngIf="solicitud.estate == 'Asignada'" mat-raised-button>{{
+                        solicitud.estate }}</button>
+                      <button class="btToDo" *ngIf="solicitud.estate == 'Aprobada'" mat-raised-button>{{
+                        solicitud.estate }}</button>
+                      <button class="btErr" *ngIf="solicitud.estate == 'Rechazada'" mat-raised-button>{{
+                        solicitud.estate }}</button>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <mat-panel-description>
+                    {{ solicitud.description }}
+                  </mat-panel-description>
+
+                  <mat-action-row *ngIf="usuario._id">
+                    <div class="col table-responsive">
+                      <table class="table  table-write table-bordered table-hover">
+                        <thead class="thead-white">
+                          <tr>
+                            <th scope="col">Nombre</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Celular</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr scope="row">
+                            <td>{{usuario.name}} {{usuario.surname}}</td>
+                            <td>{{usuario.email}}</td>
+                            <td>{{usuario.personal.celular1}}</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </mat-action-row>
+
+                  <mat-action-row>
+                    <button *ngIf="!usuario._id" class="btSelectTodo" mat-button (click)="verUsuario(solicitud)">Mostrar
+                      Usuario</button>
+                    <button *ngIf="usuario._id" class="btSelectTodo" mat-button (click)="noMostrarUsuario()">Esconder
+                      Usuario</button>
+                  </mat-action-row>
+
+                  <mat-action-row>
+                    <button class="btSelectTodo" mat-button
+                      (click)="cambiarEstado(solicitud, 'Pendiente')">Pendiente</button>
+                    <button class="btSelectInProgress" mat-button
+                      (click)="cambiarEstado(solicitud, 'Asignada')">Asignada</button>
+                    <button class="btSelectDone" mat-button
+                      (click)="cambiarEstado(solicitud, 'Aprobada')">Aprobada</button>
+                    <button class="btSelectErr" mat-button
+                      (click)="cambiarEstado(solicitud, 'Rechazada')">Rechazada</button>
+                    <span class="spacer"></span>
+                    <mat-icon color="primary" (click)="deleteRequest(solicitud._id)" arial-Label="delete_forever">
+                      delete_forever</mat-icon>
+                  </mat-action-row>
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+
+
+
+        </div>
+      </div>
+    </div>
+
+
+    <mat-card class=" col-md-4">
+
+      <mat-card-header>
+        <p>Buscar</p>
+      </mat-card-header>
+      <div mat-card-avatar class="example-header-image "></div>
+      <!-- <mat-card-title>Calculadora: </mat-card-title> -->
+
+
+      <mat-card-content>
+        <!-- <mat-card-title>Requisitos: </mat-card-title>
+        <mat-card-subtitle>Datos Personales</mat-card-subtitle>
+        <mat-card-subtitle>Datos Del Predio</mat-card-subtitle>
+        <mat-card-subtitle>Datos Del Vehiculo</mat-card-subtitle>
+        <mat-card-subtitle>Datos De La Construccion</mat-card-subtitle> -->
+      </mat-card-content>
+      <mat-card-actions>
+<!--
+          <button class="btSelectTodo" mat-button >Pendiente</button>
+          <button class="btSelectInProgress" mat-button >Asignada</button>
+          <button class="btSelectDone" mat-button >Aprobada</button>
+          <button class="btSelectErr" mat-button >Rechazada</button> -->
+
+
+
+      </mat-card-actions>
+    </mat-card>
+
+  </div>
+</div>

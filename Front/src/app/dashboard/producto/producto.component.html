@@ -1,0 +1,65 @@
+<div class="panel-header">
+  <div class="header text-center">
+    <h2 class="title">PRODUCTOS</h2>
+  </div>
+</div>
+
+
+<div class="main-content">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="card-title">Listado De Todos Los Productos</h4>
+        </div>
+        <div class="card-body">
+          <div class="row">
+            <div class="col table-responsive">
+              <table class="table  table-write table-bordered table-hover">
+                <!-- <caption>List of users</caption> -->
+                <thead class="thead-dark">
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">id Producto</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Valor Minimo</th>
+                    <th scope="col">Valor Maximo</th>
+                    <th scope="col">Documento</th>
+                    <th scope="col">Interes Minimo</th>
+                    <th scope="col">Termino Minimo</th>
+                    <th scope="col">Termino Maximo</th>
+                    <th scope="col">Direccion</th>
+                    <th scope="col">Fecha Creacion</th>
+                    <th scope="col">Fecha Actualizacion</th>
+
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr scope="row" *ngFor="let producto of productos; index as i">
+                    <td><button [routerLink]="['/dashboard/solicitud']" type="button">{{i+1}}</button></td>
+                    <td>{{producto._id}}</td>
+                    <td>{{producto.name}}</td>
+                    <td>{{producto.valuemin}}</td>
+                    <td>{{producto.valuemax}}</td>
+                    <td>{{producto.imin}}</td>
+                    <td>{{producto.imax}}</td>
+                    <td>{{producto.termmin}}</td>
+                    <td>{{producto.termmax}}</td>
+                    <td>{{producto.createdAt}}</td>
+                    <td>{{producto.updatedAt}}</td>
+
+
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<hr>
