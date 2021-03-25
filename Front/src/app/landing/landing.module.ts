@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { SharedModule } from '../shared/shared.module';
 
 import { LandingRoutingModule } from './landing-routing.module';
 import { LandingComponent } from './landing.component';
@@ -9,8 +11,7 @@ import { Page3Component } from './pages/page3/page3.component';
 import { Page4Component } from './pages/page4/page4.component';
 import { Page5Component } from './pages/page5/page5.component';
 
-import { FormsModule } from '@angular/forms';
-import { SharedModule } from '../shared/shared.module';
+
 import { ConstruccionComponent } from './pages/landingv2/construccion/construccion.component';
 import { HipotecaComponent } from './pages/landingv2/hipoteca/hipoteca.component';
 import { InvierteComponent } from './pages/landingv2/invierte/invierte.component';

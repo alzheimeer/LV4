@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from './../../../services/data.service';
 
 @Component({
   selector: 'app-page5',
@@ -7,26 +8,29 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class Page5Component implements OnInit {
 
-  @Input()
-  value!: number;
+  value = 0;
 
+  constructor(public dataService: DataService) { }
 
-  constructor() {}
-
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // service for detect click in navbar for see login in card
+    this.dataService.numberEnd$.subscribe(res => {
+      this.value = 2;
+    });
+  }
 
   print(){
-    this.value=2;
+    this.value = 2;
   }
-  valuethesoon(value:any) {
-    this.value=value;
+  valuethesoon(value: any) {
+    this.value = value;
   }
 
   register(){
-    this.value=3;
+    this.value = 3;
   }
   requisitos(){
-    this.value=4;
+    this.value = 4;
   }
 
 

@@ -1,5 +1,6 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { DataService } from '../../services/data.service';
 
 @Component({
   selector: 'app-navbar',
@@ -8,19 +9,11 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent implements OnInit {
 
-  @Output()
-  value = new EventEmitter<number>();
-
-  constructor(private router: Router) { }
+  constructor(private router: Router, public dataService: DataService) { }
 
   ngOnInit(): void {
   }
 
 
-  async calc(valor: number){
-    this.value.emit(valor);
-    // Aqui cambio de ruta para que recargue el componente y vayaal componente card login
-    await this.router.navigateByUrl('/landing/hipoteca');
-    this.router.navigateByUrl('/dashboard/personal');
-  }
+
 }

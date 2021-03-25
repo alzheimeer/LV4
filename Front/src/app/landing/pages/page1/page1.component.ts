@@ -1,48 +1,38 @@
-import { Component, OnInit, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { DataService } from '../../../services/data.service';
 
 @Component({
   selector: 'app-page1',
   templateUrl: './page1.component.html',
-  styleUrls: ['./page1.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default
+  styleUrls: ['./page1.component.scss']
 })
 export class Page1Component implements OnInit  {
 
-  @Input()
-  value!: number;
+  value = 0;
 
-
-  // ngOnChanges(changes: SimpleChanges) {
-  //   console.log('ngOnChanges was called!');
-  //   console.log(changes);
-  // }
-
-  // ngDoCheck() {
-  //   if(this.value == 2)
-  //     this.value=2;
-  //   console.log('ngDoCheck was called!', this.value);
-  // }
-
-  constructor() {
-
-  }
+  constructor(public dataService: DataService) { }
 
   ngOnInit(): void {
-    // console.log('page1', this.value);
+    // service for detect click in navbar for see login in card
+    this.dataService.numberEnd$.subscribe(res => {
+      this.value = 2;
+    });
   }
 
   print(){
-    this.value=2;
+    this.value = 2;
   }
-  valuethesoon(value:any) {
-    this.value=value;
+
+  valuethesoon(value: any) {
+    this.value = value;
   }
 
   register(){
-    this.value=3;
+    this.value = 3;
   }
+
   requisitos(){
-    this.value=4;
+    this.value = 4;
   }
 
 }

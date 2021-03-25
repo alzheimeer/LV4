@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NavbarComponent } from './navbar/navbar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from '../material/material.module';
+
+import { NavbarComponent } from './navbar/navbar.component';
 import { CardComponent } from './card/card.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { CalcComponent } from './calc/calc.component';
 import { RequisitoPersonalComponent } from './requisito-personal/requisito-personal.component';
-import { MaterialModule } from "../material/material.module";
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RequisitoHipotecaComponent } from './requisito-hipoteca/requisito-hipoteca.component';
 import { RequisitoVehiculoComponent } from './requisito-vehiculo/requisito-vehiculo.component';
 import { RequisitoConstruccionComponent } from './requisito-construccion/requisito-construccion.component';

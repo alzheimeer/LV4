@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { DataService } from './../../../services/data.service';
+import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-page3',
@@ -7,41 +8,29 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class Page3Component implements OnInit {
 
-  @Input()
-  valuex: number = 0;
+  value = 0;
 
-
-  // ngOnChanges(changes: SimpleChanges) {
-  //   console.log('ngOnChanges was called!');
-  //   console.log(changes);
-  // }
-
-  // ngDoCheck() {
-  //   if(this.value == 2)
-  //     this.value=2;
-  //   console.log('ngDoCheck was called!', this.value);
-  // }
-
-  constructor() {
-
-  }
+  constructor(public dataService: DataService) { }
 
   ngOnInit(): void {
-    // console.log('page1', this.value);
+    // service for detect click in navbar for see login in card
+    this.dataService.numberEnd$.subscribe(res => {
+      this.value = 2;
+    });
   }
 
   print(){
-    this.valuex=2;
+    this.value = 2;
   }
-  valuethesoon(value:any) {
-    this.valuex=value;
+  valuethesoon(value: any) {
+    this.value = value;
   }
 
   register(){
-    this.valuex=3;
+    this.value = 3;
   }
   requisitos(){
-    this.valuex=4;
+    this.value = 4;
   }
 
 
