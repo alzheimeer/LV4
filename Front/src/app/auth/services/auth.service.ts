@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../../environments/environment';
 import { catchError, map, tap } from 'rxjs/operators';
 import { of, Observable } from 'rxjs';
-import { AuthResponse, Usuario,  GetUsers, Uxuario } from '../interfaces';
+import { AuthResponse, Usuario,  Role, GetUsers, Uxuario } from '../interfaces';
 import { DataPersonalModel, DataPersonalModelComplet } from '../../models/datapersonal.models';
 
 
@@ -76,6 +76,7 @@ export class AuthService {
           email: resp.email!,
           roles: resp.roles!
         };
+
         return resp.ok;
       }),
       catchError((err) => of(false))
@@ -88,60 +89,6 @@ export class AuthService {
   }
 
 
-
-
-
-  // tslint:disable-next-line: typedef
-  // updateUserById( data: DataPersonalModelComplet ) {
-  //   const url = `${this.baseUrl}/users`;
-  //   const dataTemp = {
-  //     ...data
-  //   };
-
-  //   delete dataTemp.id;
-  //   const {
-  //     name,
-  //     surname,
-  //     email,
-  //     tipodoc,
-  //     numdoc,
-  //     pais,
-  //     departamento,
-  //     ciudad,
-  //     barrio,
-  //     direccion,
-  //     celular1,
-  //     celular2,
-  //     banco,
-  //     tipocuenta,
-  //     numcuenta,
-  //   } = dataTemp;
-  //   const x = {
-  //     name,
-  //     surname,
-  //     email,
-  //     personal: {
-  //       tipodoc,
-  //       numdoc,
-  //       pais,
-  //       departamento,
-  //       ciudad,
-  //       barrio,
-  //       direccion,
-  //       celular1,
-  //       celular2
-  //     },
-  //       banca: {
-  //         banco,
-  //         tipocuenta,
-  //         numcuenta
-  //       }
-  //   };
-  //   console.log(x);
-  //   return this.http.put(`${ url }/${ data.id }`, x);
-  // }
-
-  // tslint:disable-next-line: typedef
   completeUserById( data: DataPersonalModel ) {
     const url = `${this.baseUrl}/users`;
     const dataTemp = {
@@ -172,44 +119,16 @@ export class AuthService {
     return this.http.put(`${ url }/${ data.id }`, x);
   }
 
-  // tslint:disable-next-line: typedef
-  getUsers() {
-    const url = `${this.baseUrl}/users`;
-    // Hacemos la solicitud .get mandando el url tipado con la interfaz AllUsers
-    return this.http.get<GetUsers>(url);
-      // .pipe(
-        // map(resp => {
-          // La respuesta trae todo + el array de usuarios
-          // console.log('Resp:', resp);
-          // return resp.usuario.map(user => {
-            // Filtramos solo el array de usuarios sin el resto
-            // console.log('Resp.usuario.map:', user);
 
-            // const x = Uxuario.uxuarioDesdeJson(user);
-            // Solo sacamos los datos que necesitamos de cada usuario usando Uxuario
-            // console.log(x.roles);
-            // return x;
-        //  });
-        // })
-      // );
+  getRoles(): Observable<Role[]> {
+    const url = `${this.baseUrl}/roles`;
+    return this.http.get<Role[]>(url);
   }
 
-  // tslint:disable-next-line: typedef
-  getUserById(id: any) {
-    const url = `${this.baseUrl}/users/${id}`;
-
-    // Hacemos la solicitud .get mandando el url tipado con la interfaz AllUsers
-    return this.http.get<GetUsers>(url)
-      .pipe(
-        map(resp => {
-
-          console.log('Resp:', resp);
-          // const x = Uxuario.uxuarioDesdeJson(resp);
-          // console.log('2Resp:', x);
-          // return x;
-          return resp;
-          })
-        );
+  getRoleById(id: any) {
+    const url = `${this.baseUrl}/roles/${id}`;
+    const role = this.http.get<Role>(url);
+    return role
   }
 
 

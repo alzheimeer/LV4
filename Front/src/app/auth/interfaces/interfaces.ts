@@ -16,3 +16,8 @@ export interface Usuario {
   email?: string;
   roles?: [];
 }
+
+export interface Role {
+  uid?: string;
+  name?: string;
+}

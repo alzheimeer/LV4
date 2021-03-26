@@ -2,6 +2,9 @@ import { Component, OnInit, HostBinding, ViewChild, HostListener } from '@angula
 import { Router } from '@angular/router';
 import { AuthService } from '../auth/services/auth.service';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+import { Role } from '../auth/interfaces';
+
+
 
 
 declare interface RouteInfo {
@@ -26,38 +29,72 @@ export const ROUTES: RouteInfo[] = [
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.scss']
+  styleUrls: ['./dashboard.component.scss'],
 })
-
-
-
 export class DashboardComponent implements OnInit {
-  y:number = 0;
+  y: number = 0;
   opened: boolean = true;
   menuItems!: any[];
+  public roles: Role[] = [];
+  rolesUsuario: Array<string> = [];
+  hayerror = false;
+  admin = 0;
 
   get usuario() {
     return this.authService.usuario;
   }
 
   // Seccion que detecta pantalla pequeña y se colapsa el sidebar
-  isSmallScreen = this.breakpointObserver.isMatched('(max-width: 599px)');
+  isSmallScreen = this.breakpointObserver.isMatched('(max-width: 768px)');
   @HostListener('window:resize', ['$event'])
-  onResize(event:any){
-    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 599px)');
+  onResize(event: any) {
+    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 768px)'
+    );
     this.opened = !this.isSmallScreen;
+    // y nos dira el tamaño de la pantalla
     this.y = window.innerWidth;
-   // console.log(window.innerWidth);
+    // console.log(y);
   }
 
-  constructor(public breakpointObserver: BreakpointObserver,  private router: Router, private authService: AuthService) { }
+  constructor(
+    public breakpointObserver: BreakpointObserver,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
-  ngOnInit() {
-    this.menuItems = ROUTES.filter(menuItem => menuItem);
+  ngOnInit(): void {
+    this.authService.getRoles().subscribe(
+      (resp) => {
+        this.roles = resp;
+        this.usuario.roles?.map((id) => this.authService.getRoleById(id).subscribe(resp => {
+          this.rolesUsuario.push(resp.name as string)
+        }));
+      });
+
+    // this.menuItems = ROUTES.filter((menuItem) => menuItem);
+
   }
 
   logout() {
-    this.router.navigateByUrl('/landing');
+    console.log(this.rolesUsuario)
+    let isadmin = this.rolesUsuario.indexOf('admin')
+    let isuser = this.rolesUsuario.indexOf('user')
+    let ismoderator = this.rolesUsuario.indexOf('moderator')
+
+
+
+
+    // let s = this.usuario.roles?.map((x)=> {return x})
+
+    // console.log(s![0])
+    // console.log(this.usuario.roles)
+    // console.log(this.rolesUsuario)
+
+    // const resultado = this.roles.find( role => role.uid === 's' );
+    // console.log(this.roles);
+    // let u = this.roles.indexOf({'name':'user'})
+    // console.log('u',u)
     this.authService.logout();
+    this.router.navigateByUrl('/landing');
   }
 }
