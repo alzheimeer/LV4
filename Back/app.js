@@ -39,6 +39,7 @@ app.use('/api/users', require('./routes/users.router'));
 app.use('/api/products', require('./routes/products.router'));
 app.use('/api/request', require('./routes/request.router'));
 app.use('/api/roles', require('./routes/roles.router'));
+app.use('/api/bills', require('./routes/bills.router'));
 
 // Handle other angular routes
 app.get('*', (req, res) => {

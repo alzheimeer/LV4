@@ -76,10 +76,10 @@ export class DashboardComponent implements OnInit {
   }
 
   logout() {
-    console.log(this.rolesUsuario)
-    let isadmin = this.rolesUsuario.indexOf('admin')
-    let isuser = this.rolesUsuario.indexOf('user')
-    let ismoderator = this.rolesUsuario.indexOf('moderator')
+    // console.log(this.rolesUsuario)
+    // let isadmin = this.rolesUsuario.indexOf('admin')
+    // let isuser = this.rolesUsuario.indexOf('user')
+    // let ismoderator = this.rolesUsuario.indexOf('moderator')
 
 
 
@@ -87,7 +87,11 @@ export class DashboardComponent implements OnInit {
     // let s = this.usuario.roles?.map((x)=> {return x})
 
     // console.log(s![0])
-    // console.log(this.usuario.roles)
+    // console.log(this.usuario.roles[0])
+
+
+
+
     // console.log(this.rolesUsuario)
 
     // const resultado = this.roles.find( role => role.uid === 's' );
