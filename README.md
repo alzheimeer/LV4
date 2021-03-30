@@ -5,7 +5,7 @@ back .env
 PORT=3000
 BD_CNN=mongodb://localhost:27017/lendiup
 SECRET_JWT_SEED=AlzheimeerZpwjiexxn2*1979#
-
+ssh root@104.131.109.197
 First Start service Mongodb and Back Run with
 npm run dev 
 and front 
