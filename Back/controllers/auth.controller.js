@@ -2,6 +2,7 @@ const User = require('../models/User');
 const Role = require('../models/Role');
 const bcrypt = require('bcryptjs');
 const {generarJWT} = require('../helpers/jwt');
+const transporter = require('../middlewares/mailer')
 
 // Create User
 const crearUsuario = async function (req, res) {
@@ -32,6 +33,25 @@ const crearUsuario = async function (req, res) {
         }        
         // Save user in Database
         await newUser.save();
+
+         // send mail with defined transport object
+        verificationLink = `https://www.colombiandreamm.com/confirmemail/${token}`;
+       
+        await transporter.sendMail({
+            from: '"Email De Verificacion" <fogniebla@gmail.com>', // sender address
+            to: newUser.email, // list of receivers
+            subject: "Email De Verificacion", // Subject line
+            // text: "Hello world?", // plain text body
+            
+            /* html: `<b>Bienvenido A Lendiup</b>
+            <a href="${verificationLink}">${verificationLink} </a>`, */
+
+            html: "<b>Bienvenido A Lendiup</b>"
+        });
+
+
+
+
         // Generate successful response
         return res.status(201).json({
             ok: true,
