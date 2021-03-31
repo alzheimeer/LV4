@@ -35,7 +35,7 @@ const crearUsuario = async function (req, res) {
         await newUser.save();
 
          // send mail with defined transport object
-        verificationLink = `https://www.colombiandreamm.com/confirmemail/${token}`;
+        verificationLink = `https://www.colombiandreamm.com/api/auth/forget/${token}`;
        
         await transporter.sendMail({
             from: '"Email De Verificacion" <fogniebla@gmail.com>', // sender address
@@ -120,9 +120,49 @@ const revalidarToken = async function (req, res) {
     });
 }
 
+// forget
+const forget = async function (req, res) {
+
+    try {
+        const token = await User.find(req.params.token);
+        if(token)
+            console.log('existe')
+        else
+        console.log('no existe')
+            
+      } catch (error) {
+        return res.status(500).json({ msg: 'Token No Existe' });
+      }
+
+    /* const {uid} = req;
+    const dbUser = await User.findById(uid);
+    if (dbUser) {
+        name = dbUser.name;
+        surname = dbUser.surname;
+        email = dbUser.email;
+        roles = dbUser.roles;
+    } else {
+        name = '';
+        email = '';
+    }
+    const token = await generarJWT(uid, name);*/
+    return res.json({
+        ok: true,
+        /* uid,
+        name,
+        surname,
+        email,
+        roles,
+        token */
+    }); 
+}
+
+
+
 
 module.exports = {
     crearUsuario,
     loginUsuario,
     revalidarToken,
+    forget
 }
