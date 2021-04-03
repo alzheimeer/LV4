@@ -12,9 +12,8 @@
         <div class="card-header">
           <h5 class="title">Informacion De Todas Las Solicitudes Realizadas</h5>
         </div>
+
         <div class="card-body">
-
-
 
           <div class="accordion_display">
             <div class="accordion_size">
@@ -23,28 +22,19 @@
                   <mat-expansion-panel-header>
                     <mat-panel-title>
 
-
-                      <span class="text_center"
-                        *ngFor="let producto of productos | searchnameproduct: solicitud.idProduct"> {{ producto.name }}
-                      </span>
+                      <span class="text_center" *ngFor="let producto of productos | searchnameproduct: solicitud.idProduct"> {{ producto.name }}</span>
                       <span class="spacer"></span>
                       <span class="text_center"> Monto: ${{ solicitud.value | number: '1.0-0' }} </span>
                       <span class="text_center"> Plazo: {{ solicitud.time }} meses</span>
 
                       <span class="spacer"></span>
-                      <button class="btDone" *ngIf="solicitud.estate == 'Pendiente'" mat-raised-button>{{
-                        solicitud.estate }}</button>
-                      <button class="btInProgress" *ngIf="solicitud.estate == 'Asignada'" mat-raised-button>{{
-                        solicitud.estate }}</button>
-                      <button class="btToDo" *ngIf="solicitud.estate == 'Aprobada'" mat-raised-button>{{
-                        solicitud.estate }}</button>
-                      <button class="btErr" *ngIf="solicitud.estate == 'Rechazada'" mat-raised-button>{{
-                        solicitud.estate }}</button>
+                      <button class="btDone" *ngIf="solicitud.estate == 'Pendiente'" mat-raised-button>{{solicitud.estate }}</button>
+                      <button class="btInProgress" *ngIf="solicitud.estate == 'Asignada'" mat-raised-button>{{solicitud.estate }}</button>
+                      <button class="btToDo" *ngIf="solicitud.estate == 'Aprobada'" mat-raised-button>{{solicitud.estate }}</button>
+                      <button class="btErr" *ngIf="solicitud.estate == 'Rechazada'" mat-raised-button>{{solicitud.estate }}</button>
                     </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <mat-panel-description>
-                    {{ solicitud.description }}
-                  </mat-panel-description>
+                  <mat-panel-description>{{ solicitud.description }}</mat-panel-description>
 
                   <mat-action-row *ngIf="usuario._id">
                     <div class="col table-responsive">
@@ -68,24 +58,17 @@
                   </mat-action-row>
 
                   <mat-action-row>
-                    <button *ngIf="!usuario._id" class="btSelectTodo" mat-button (click)="verUsuario(solicitud)">Mostrar
-                      Usuario</button>
-                    <button *ngIf="usuario._id" class="btSelectTodo" mat-button (click)="noMostrarUsuario()">Esconder
-                      Usuario</button>
+                    <button *ngIf="!usuario._id" class="btSelectTodo" mat-button (click)="verUsuario(solicitud)">Mostrar Usuario</button>
+                    <button *ngIf="usuario._id" class="btSelectTodo" mat-button (click)="noMostrarUsuario()">Esconder Usuario</button>
                   </mat-action-row>
 
                   <mat-action-row>
-                    <button class="btSelectTodo" mat-button
-                      (click)="cambiarEstado(solicitud, 'Pendiente')">Pendiente</button>
-                    <button class="btSelectInProgress" mat-button
-                      (click)="cambiarEstado(solicitud, 'Asignada')">Asignada</button>
-                    <button class="btSelectDone" mat-button
-                      (click)="cambiarEstado(solicitud, 'Aprobada')">Aprobada</button>
-                    <button class="btSelectErr" mat-button
-                      (click)="cambiarEstado(solicitud, 'Rechazada')">Rechazada</button>
+                    <button class="btSelectTodo" mat-button (click)="cambiarEstado(solicitud, 'Pendiente')">Pendiente</button>
+                    <button class="btSelectInProgress" mat-button (click)="cambiarEstado(solicitud, 'Asignada')">Asignada</button>
+                    <button class="btSelectDone" mat-button (click)="cambiarEstado(solicitud, 'Aprobada')">Aprobada</button>
+                    <button class="btSelectErr" mat-button (click)="cambiarEstado(solicitud, 'Rechazada')">Rechazada</button>
                     <span class="spacer"></span>
-                    <mat-icon color="primary" (click)="deleteRequest(solicitud._id)" arial-Label="delete_forever">
-                      delete_forever</mat-icon>
+                    <mat-icon color="primary" (click)="deleteRequest(solicitud._id)" arial-Label="delete_forever">delete_forever</mat-icon>
                   </mat-action-row>
                 </mat-expansion-panel>
               </mat-accordion>

@@ -16,12 +16,13 @@
           <div class="row">
             <div class="col table-responsive">
               <table class="table  table-write table-bordered table-hover">
-                <!-- <caption>List of users</caption> -->
+
                 <thead class="thead-dark">
                   <tr>
-                    <th scope="col">#</th>
+                    <th scope="col" ></th>
                     <th scope="col">Registro</th>
                     <th scope="col">Nombre</th>
+                    <th scope="col">Apellido</th>
                     <th scope="col">Email</th>
                     <th scope="col">Tipo</th>
                     <th scope="col">Documento</th>
@@ -34,30 +35,98 @@
                     <th scope="col">Banco</th>
                     <th scope="col">Tipo</th>
                     <th scope="col"># Cuenta</th>
-                    <th scope="col">Roles</th>
+                    <th scope="col">Role1</th>
+                    <th scope="col">Role2</th>
+                    <th scope="col">Role3</th>
 
                   </tr>
                 </thead>
                 <tbody>
                   <tr scope="row" *ngFor="let usuario of usuarios; index as i">
-                    <td><button [routerLink]="['/dashboard/solicitud']" type="button">{{i+1}}</button></td>
+                    <td (click)="element = !element"><span class="material-icons" >edit</span></td>
+                    <!-- <td>{{i+1}}</td> -->
                     <td>{{usuario.createdAt| date}}</td>
-                    <td>{{usuario.name}} {{usuario.surname}}</td>
-                    <td>{{usuario.email}}</td>
-                    <td>{{usuario.personal.tipodoc}}</td>
-                    <td>{{usuario.personal.numdoc}}</td>
-                    <td>{{usuario.personal.pais}}</td>
-                    <td>{{usuario.personal.ciudad}}</td>
-                    <td>{{usuario.personal.barrio}}</td>
-                    <td>{{usuario.personal.direccion}}</td>
-                    <td>{{usuario.personal.celular1}}</td>
-                    <td>{{usuario.personal.celular2}}</td>
-                    <td>{{usuario.banca.banco}}</td>
-                    <td>{{usuario.banca.tipocuenta}}</td>
-                    <td>{{usuario.banca.numcuenta}}</td>
-                    <td>{{usuario.roles}}</td>
 
-                </tr>
+                    <td *ngIf="!element">{{usuario.name}}</td>
+                    <td *ngIf="!element">{{usuario.surname}}</td>
+                    <td *ngIf="!element">{{usuario.email}}</td>
+                    <td *ngIf="!element">{{usuario.personal.tipodoc}}</td>
+                    <td *ngIf="!element">{{usuario.personal.numdoc}}</td>
+                    <td *ngIf="!element">{{usuario.personal.pais}}</td>
+                    <td *ngIf="!element">{{usuario.personal.ciudad}}</td>
+                    <td *ngIf="!element">{{usuario.personal.barrio}}</td>
+                    <td *ngIf="!element">{{usuario.personal.direccion}}</td>
+                    <td *ngIf="!element">{{usuario.personal.celular1}}</td>
+                    <td *ngIf="!element">{{usuario.personal.celular2}}</td>
+                    <td *ngIf="!element">{{usuario.banca.banco}}</td>
+                    <td *ngIf="!element">{{usuario.banca.tipocuenta}}</td>
+                    <td *ngIf="!element">{{usuario.banca.numcuenta}}</td>
+
+                    <td *ngIf="!element && usuario.roles[0] == roles[0]._id">{{roles[0].name}}</td>
+                    <td *ngIf="!element && usuario.roles[1] == roles[0]._id">{{roles[0].name}}</td>
+                    <td *ngIf="!element && usuario.roles[2] == roles[0]._id">{{roles[0].name}}</td>
+
+                    <td *ngIf="!element && usuario.roles[0] == roles[1]._id">{{roles[1].name}}</td>
+                    <td *ngIf="!element && usuario.roles[1] == roles[1]._id">{{roles[1].name}}</td>
+                    <td *ngIf="!element && usuario.roles[2] == roles[1]._id">{{roles[1].name}}</td>
+
+                    <td *ngIf="!element && usuario.roles[0] == roles[2]._id">{{roles[2].name}}</td>
+                    <td *ngIf="!element && usuario.roles[1] == roles[2]._id">{{roles[2].name}}</td>
+                    <td *ngIf="!element && usuario.roles[2] == roles[2]._id">{{roles[2].name}}</td>
+
+                    <td *ngIf="element"><mat-form-field  class="example-full-width">
+                      <input #name (keyup)="save(usuario, name.value, 'name')" matInput value={{usuario.name}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field  class="example-full-width">
+                      <input #surname (keyup)="save(usuario, surname.value, 'surname')" matInput value={{usuario.surname}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field  class="example-full-width">
+                      <input #email (keyup)="save(usuario, email.value, 'email')" matInput value={{usuario.email}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field  class="example-full-width">
+                      <input #tipodoc (keyup)="save(usuario, tipodoc.value, 'tipodoc')" matInput value={{usuario.personal.tipodoc}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field class="example-full-width">
+                      <input #numdoc (keyup)="save(usuario, numdoc.value, 'numdoc')" matInput value={{usuario.personal.numdoc}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field class="example-full-width">
+                      <input #pais (keyup)="save(usuario, pais.value, 'pais')" matInput value={{usuario.personal.pais}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field  class="example-full-width">
+                      <input #ciudad (keyup)="save(usuario, ciudad.value, 'ciudad')" matInput value={{usuario.personal.ciudad}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field  class="example-full-width">
+                      <input #barrio (keyup)="save(usuario, barrio.value, 'barrio')" matInput value={{usuario.personal.barrio}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field  class="example-full-width">
+                      <input #direccion (keyup)="save(usuario, direccion.value, 'direccion')" matInput value={{usuario.personal.direccion}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field class="example-full-width">
+                      <input #celular1 (keyup)="save(usuario, celular1.value, 'celular1')" matInput value={{usuario.personal.celular1}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field class="example-full-width">
+                      <input #celular2 (keyup)="save(usuario, celular2.value, 'celular2')" matInput value={{usuario.personal.celular2}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field class="example-full-width">
+                      <input #banco (keyup)="save(usuario, banco.value, 'banco')" matInput value={{usuario.banca.banco}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field  class="example-full-width">
+                      <input #tipocuenta (keyup)="save(usuario, tipocuenta.value, 'tipocuenta')" matInput value={{usuario.banca.tipocuenta}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field class="example-full-width">
+                      <input #numcuenta (keyup)="save(usuario, numcuenta.value, 'numcuenta')" matInput value={{usuario.banca.numcuenta}}>
+                    </mat-form-field></td>
+                   <!--  <td *ngIf="element"><mat-form-field *ngFor="let role of roles"  class="example-full-width">
+                      <input *ngIf="usuario.roles[0] == role._id" #role1  matInput value={{role.name}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field *ngFor="let role of roles"  class="example-full-width">
+                      <input *ngIf="usuario.roles[1] == role._id" #role2  matInput value={{role.name}}>
+                    </mat-form-field></td>
+                    <td *ngIf="element"><mat-form-field *ngFor="let role of roles"  class="example-full-width">
+                      <input *ngIf="usuario.roles[2] == role._id" #role3  matInput value={{role.name}}>
+                    </mat-form-field></td> -->
+
+                  </tr>
                 </tbody>
               </table>
             </div>
@@ -68,7 +137,3 @@
 
   </div>
 </div>
-
-
-<hr>
-
