@@ -6,14 +6,14 @@ const transporter = nodemailer.createTransport({
     port: 465,
     secure: true, // true for 465, false for other ports
     auth: {
-      user: 'fogniebla@gmail.com', // generated ethereal user
-      pass: process.env.PASSGMAIL, // generated ethereal password
+        user: 'fogniebla@gmail.com', // generated ethereal user
+        pass: process.env.PASSGMAIL, // generated ethereal password
     },
-  });
+});
 
-  transporter.verify().then(() => {
-      console.log('Ready for send emails')
-  });
+transporter.verify().then(() => {
+    console.log('Ready for send emails')
+});
 
 
-  module.exports = transporter;
+module.exports = transporter;

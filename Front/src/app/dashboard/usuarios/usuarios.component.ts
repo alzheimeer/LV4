@@ -14,11 +14,35 @@ import { UserService } from '../services/user.service';
 })
 export class UsuariosComponent implements OnInit {
 
+  checkedUser = false;
+  checkedModerator = false;
+  checkedAdmin = false;
+  idAdmin = '';
+  idModerator = '';
+  idUser = '';
+
   public usuarios: User[] = [];
   public roles: Role[] = [];
   hayerror = false;
   element = false;
-
+  public tiposIdentificacion = ['Cedula De Ciudadania', 'Cedula De Extranjeria'];
+  public paises = ['Colombia', 'Venezuela', 'Brazil', 'Argentina', 'Peru', 'Chile', 'Ecuador', 'Bolivia', 'Uruguay', 'Paraguay', 'Otro'];
+  public tiposcuenta = ['Cuenta De Ahorros', 'Cuenta Corriente'];
+  public bancos = [
+    'Banco de Bogota',
+    'Banco Popular',
+    'Banco CorpBanca',
+    'Bancolombia',
+    'Citibank',
+    'Banco GNB Sudameris',
+    'BBVA Colombia',
+    'Banco De Occidente',
+    'Banco Caja Social',
+    'Davivienda',
+    'Scotiabanck',
+    'Banagrario',
+    'AV Villas',
+    'Scotiabank',]
 
   constructor(private router: Router, private userService: UserService, private roleService: RoleService ) { }
 
@@ -26,22 +50,34 @@ export class UsuariosComponent implements OnInit {
     this.userService.getUsers()
     .subscribe(resp => {
       this.usuarios = resp;
-      // console.log(this.usuarios[0].name);
-    }, (err) => {
-      this.hayerror = true;
-      console.log( 'Error' );
     });
 
 
     this.roleService.getRoles()
     .subscribe(resp2 => {
       this.roles = resp2;
-      console.log(this.roles)
+      this.rolesM();
     })
+
 
 
   }
 
+
+  rolesM(){
+
+    for (let j = 0; j < this.roles.length; j++) {
+
+      if (this.roles[j].name == 'admin')
+       this.idAdmin = this.roles[j]._id;
+      if (this.roles[j].name == 'moderator')
+        this.idModerator = this.roles[j]._id;
+      if (this.roles[j].name == 'user')
+        this.idUser = this.roles[j]._id;
+    }
+
+    // console.log('Admin:',this.idAdmin, 'Moderador:',this.idModerator, 'User:',this.idUser);
+  }
 
   save(usuario:any, valorinput: any, campo:string){
     console.log(campo, valorinput);
@@ -76,7 +112,17 @@ export class UsuariosComponent implements OnInit {
       usuario.banca.numcuenta = valorinput;
     if(campo == 'roles')
     {
-      usuario.roles = valorinput;
+      this.rolesM();
+
+
+      if(valorinput == 'admin')
+        usuario.roles = [this.idUser, this.idModerator, this.idAdmin];
+      if(valorinput == 'moderator')
+        usuario.roles = [this.idUser, this.idModerator];
+      if(valorinput == 'user')
+        usuario.roles = [this.idUser];
+
+
     }
 
 

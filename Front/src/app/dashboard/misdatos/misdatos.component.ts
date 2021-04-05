@@ -12,7 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./misdatos.component.scss'],
 })
 export class MisdatosComponent implements OnInit {
-  public tiposIdentificacion = ['Cedula De Ciudadania', 'Cedula De Extranjeria', 'Cedula De Ciudadania'];
+  public tiposIdentificacion = ['Cedula De Ciudadania', 'Cedula De Extranjeria'];
   public paises = ['Colombia', 'Venezuela', 'Brazil', 'Argentina', 'Peru', 'Chile', 'Ecuador', 'Bolivia', 'Uruguay', 'Paraguay', 'Otro'];
   public tipocuenta = ['Cuenta De Ahorros', 'Cuenta Corriente'];
   public bancos = [
