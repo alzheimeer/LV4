@@ -40,6 +40,13 @@ export class RequestService {
     return this.http.get<Request>(url, {headers});
   }
 
+  public getRequestByIdUser(id: any): Observable<Request> {
+    const url = `${this.baseUrl}/request/user/${id}`;
+    const headers = new HttpHeaders()
+      .set('x-token', localStorage.getItem('token') || '');
+    return this.http.get<Request>(url, {headers});
+  }
+
   public updateRequestsById( solicitud: Request ){
     const url = `${this.baseUrl}/request`;
     const headers = new HttpHeaders()

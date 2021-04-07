@@ -14,6 +14,7 @@ import { MisdatosComponent } from './misdatos/misdatos.component';
 import { AboutComponent } from './about/about.component';
 import { ProductoComponent } from './producto/producto.component';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
+import { MisolicitudComponent } from './misolicitud/misolicitud.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
     component: DashboardComponent,
     children: [
   { path: 'solicitud',        component: SolicitudComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
+  { path: 'misolicitud',        component: MisolicitudComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'solicitudes',        component: SolicitudesComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'productos',        component: ProductoComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'datospersonales',  component: DatospersonalesComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
@@ -33,7 +35,7 @@ const routes: Routes = [
   { path: 'misdatos',         component: MisdatosComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'about',         component: AboutComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
 
-  { path: '**', redirectTo: 'solicitud' },
+  { path: '**', redirectTo: 'misolicitud' },
 ],
   },
 ];

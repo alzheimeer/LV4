@@ -40,6 +40,10 @@
                         <mat-icon mat-list-icon>space_dashboard</mat-icon>
                         <p mat-line> Solicitud </p>
                     </mat-list-item>
+                    <mat-list-item routerLinkActive="active" routerLink="/dashboard/misolicitud" class="x aa">
+                        <mat-icon mat-list-icon>space_dashboard</mat-icon>
+                        <p mat-line> Mi Solicitud </p>
+                    </mat-list-item>
                     <mat-list-item *ngIf="this.rolesUsuario.indexOf('admin') != -1" routerLinkActive="active" routerLink="/dashboard/solicitudes" class="x aa">
                         <mat-icon mat-list-icon>space_dashboard</mat-icon>
                         <p mat-line> Solicitudes </p>

@@ -42,7 +42,7 @@ export class UsuariosComponent implements OnInit {
     'Scotiabanck',
     'Banagrario',
     'AV Villas',
-    'Scotiabank',]
+    'Scotiabank', ];
 
   constructor(private router: Router, private userService: UserService, private roleService: RoleService ) { }
 
@@ -57,70 +57,90 @@ export class UsuariosComponent implements OnInit {
     .subscribe(resp2 => {
       this.roles = resp2;
       this.rolesM();
-    })
+    });
 
 
 
   }
 
 
-  rolesM(){
+  rolesM(): void {
 
     for (let j = 0; j < this.roles.length; j++) {
 
-      if (this.roles[j].name == 'admin')
+      if (this.roles[j].name === 'admin') {
        this.idAdmin = this.roles[j]._id;
-      if (this.roles[j].name == 'moderator')
+      }
+      if (this.roles[j].name === 'moderator') {
         this.idModerator = this.roles[j]._id;
-      if (this.roles[j].name == 'user')
+      }
+      if (this.roles[j].name === 'user') {
         this.idUser = this.roles[j]._id;
+      }
     }
 
     // console.log('Admin:',this.idAdmin, 'Moderador:',this.idModerator, 'User:',this.idUser);
   }
 
-  save(usuario:any, valorinput: any, campo:string){
+  save(usuario: any, valorinput: any, campo: string){
     console.log(campo, valorinput);
     const usuarioTemp = usuario.campo;
-    if(campo == 'name')
+    if (campo === 'name') {
       usuario.name = valorinput;
-    if(campo == 'surname')
+    }
+    if (campo === 'surname') {
       usuario.surname = valorinput;
-    if(campo == 'email')
+    }
+    if (campo === 'email') {
       usuario.email = valorinput;
-    if(campo == 'tipodoc')
+    }
+    if (campo === 'tipodoc') {
       usuario.personal.tipodoc = valorinput;
-    if(campo == 'numdoc')
+    }
+    if (campo === 'numdoc') {
       usuario.personal.numdoc = valorinput;
-    if(campo == 'pais')
+    }
+    if (campo === 'pais') {
       usuario.personal.pais = valorinput;
-    if(campo == 'ciudad')
+    }
+    if (campo === 'ciudad') {
       usuario.personal.ciudad = valorinput;
-    if(campo == 'barrio')
+    }
+    if (campo === 'barrio') {
       usuario.personal.barrio = valorinput;
-    if(campo == 'direccion')
+    }
+    if (campo === 'direccion') {
       usuario.personal.direccion = valorinput;
-    if(campo == 'celular1')
+    }
+    if (campo === 'celular1') {
       usuario.personal.celular1 = valorinput;
-    if(campo == 'celular2')
+    }
+    if (campo === 'celular2') {
       usuario.personal.celular2 = valorinput;
-    if(campo == 'banco')
+    }
+    if (campo === 'banco') {
       usuario.banca.banco = valorinput;
-    if(campo == 'tipocuenta')
+    }
+    if (campo === 'tipocuenta') {
       usuario.banca.tipocuenta = valorinput;
-    if(campo == 'numcuenta')
+    }
+    if (campo === 'numcuenta') {
       usuario.banca.numcuenta = valorinput;
-    if(campo == 'roles')
+    }
+    if (campo === 'roles')
     {
       this.rolesM();
 
 
-      if(valorinput == 'admin')
+      if (valorinput === 'admin') {
         usuario.roles = [this.idUser, this.idModerator, this.idAdmin];
-      if(valorinput == 'moderator')
+      }
+      if (valorinput === 'moderator') {
         usuario.roles = [this.idUser, this.idModerator];
-      if(valorinput == 'user')
+      }
+      if (valorinput === 'user') {
         usuario.roles = [this.idUser];
+      }
 
 
     }

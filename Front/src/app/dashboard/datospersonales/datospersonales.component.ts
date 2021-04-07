@@ -75,7 +75,7 @@ export class DatospersonalesComponent implements OnInit {
             text: 'Datos Personales Enviados',
             icon: 'success',
           });
-          this.router.navigateByUrl('/dashboard/datosinmueble');
+          this.router.navigateByUrl('/dashboard/misolicitud');
         }, (err) => {
           this.hayerror = true;
           console.log('Error');

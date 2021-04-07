@@ -30,23 +30,12 @@ export class SolicitudesComponent implements OnInit {
     this.requestService.getRequests().subscribe(
       (resp) => {
         this.solicitudes = resp;
-      },
-      (err) => {
-        this.hayerror = true;
-        console.log('Error');
-      }
-    );
+      });
 
     this.productService.getProducts().subscribe(
       (resp) => {
         this.productos = resp;
-        console.log(this.productos);
-      },
-      (err) => {
-        this.hayerror = true;
-        console.log('Error');
-      }
-    );
+      });
   }
 
   cambiarEstado(solicitudElegida: any, estado: any) {

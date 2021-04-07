@@ -17,8 +17,10 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { AboutComponent } from './about/about.component';
 import { ProductoComponent } from './producto/producto.component';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
+import { MisolicitudComponent } from './misolicitud/misolicitud.component';
 
 import { SearchnameproductPipe } from './pipes/searchnameproduct.pipe';
+
 
 
 @NgModule({
@@ -36,6 +38,7 @@ import { SearchnameproductPipe } from './pipes/searchnameproduct.pipe';
     ProductoComponent,
     SolicitudesComponent,
     SearchnameproductPipe,
+    MisolicitudComponent,
   ],
   imports: [
     CommonModule,

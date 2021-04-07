@@ -1,0 +1,76 @@
+<div class="panel-header ">
+    <div class="header text-center">
+        <h2 class="title">MIS PRESTAMOS, SOLICITUDES Y PAGOS</h2>
+    </div>
+</div>
+
+<div class="main-content">
+    <div class="row">
+        <div class="col-md-8">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Solicitudes De Prestamo</mat-card-title>
+                    <mat-card-subtitle *ngIf="numrequests == 0">No tienes
+                        <hr>
+                        <button routerLink="/dashboard/solicitud">Solicitalo Ya</button>
+                    </mat-card-subtitle>
+
+                </mat-card-header>
+                <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+                <mat-card-content>
+                    <div class="text-black" *ngFor="let request of requests">
+                        <p> {{ request.createdAt | date: 'shortDate' }}</p>
+                        <p *ngFor="let producto of productos | searchnameproduct: request.idProduct"> {{ producto.name }}</p>
+                        <p> Monto: ${{ request.value | number: '1.0-0' }} </p>
+                        <p> Plazo: {{ request.time }} meses</p>
+                        <p>Estado</p>
+                        <button class="btDone" *ngIf="request.estate == 'Pendiente'" mat-raised-button>{{request.estate }}</button>
+                        <button class="btInProgress" *ngIf="request.estate == 'Asignada'" mat-raised-button>{{request.estate }}</button>
+                        <button class="btToDo" *ngIf="request.estate == 'Aprobada'" mat-raised-button>{{request.estate }}</button>
+                        <button class="btErr" *ngIf="request.estate == 'Rechazada'" mat-raised-button>{{request.estate }}</button>
+                        <hr>
+                        <p>Requisitos Faltantes</p>
+                        <button *ngIf="user == undefined " routerLink="/dashboard/datospersonales" class="button3">Datos Personales</button>
+                        <button routerLink="/dashboard/datosinmueble" class="button3">Datos Del Inmueble</button>
+                        <button routerLink="/dashboard/datosvehiculo" class="button3">Datos Del Vehiculo</button>
+                        <button routerLink="/dashboard/datosconstruccion" class="button3">Datos Construccion</button>
+                        <button routerLink="/dashboard/datostrabajo" class="button3">Datos De Trabajo</button>
+                        <hr>
+                        <p>Imagen O PDF De Las 2 Caras De Tu Cedula </p>
+                        <input type="file" class="file-upload" multiple>
+                        <button class="button3">Subir Documento</button>
+                        <hr>
+                        <p>Imagen O PDF De Las 2 Caras De Tu Tarjeta De Propiedad</p>
+                        <input type="file" class="file-upload" multiple>
+                        <button class="button3">Subir Documento</button>
+                        <hr>
+                        <p>Imagen O PDF De La Matricula Inmobiliaria</p>
+                        <input type="file" class="file-upload" multiple>
+                        <button class="button3">Subir Documento</button>
+                    </div>
+                </mat-card-content>
+
+            </mat-card>
+        </div>
+        <div class="col-md-4">
+            <mat-card class="example-card">
+                <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>Pepe</mat-card-title>
+                    <mat-card-subtitle>El Guapo</mat-card-subtitle>
+                </mat-card-header>
+                <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                <mat-card-content>
+                    <p>
+                        pepeelguapo@hotmail.com
+                    </p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <button mat-button>COMPLETO</button>
+                    <button mat-button>INCOMPLETO</button>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</div>

@@ -15,6 +15,7 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard/solicitud', title: 'Solicitud', icon: 'space_dashboard', class: 'x' },
+  { path: '/dashboard/misolicitud', title: 'Mi Solicitud', icon: 'space_dashboard', class: 'x' },
   { path: '/dashboard/solicitudes', title: 'Solicitudes', icon: 'space_dashboard', class: 'x' },
   { path: '/dashboard/productos', title: 'Productos', icon: 'space_dashboard', class: 'x' },
   { path: '/dashboard/datosinmueble', title: 'Datos Inmueble', icon: 'verified', class: 'x' },
@@ -76,28 +77,6 @@ export class DashboardComponent implements OnInit {
   }
 
   logout() {
-    // console.log(this.rolesUsuario)
-    // let isadmin = this.rolesUsuario.indexOf('admin')
-    // let isuser = this.rolesUsuario.indexOf('user')
-    // let ismoderator = this.rolesUsuario.indexOf('moderator')
-
-
-
-
-    // let s = this.usuario.roles?.map((x)=> {return x})
-
-    // console.log(s![0])
-    // console.log(this.usuario.roles[0])
-
-
-
-
-    // console.log(this.rolesUsuario)
-
-    // const resultado = this.roles.find( role => role.uid === 's' );
-    // console.log(this.roles);
-    // let u = this.roles.indexOf({'name':'user'})
-    // console.log('u',u)
     this.authService.logout();
     this.router.navigateByUrl('/landing');
   }

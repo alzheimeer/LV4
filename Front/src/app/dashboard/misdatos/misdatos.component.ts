@@ -68,7 +68,6 @@ export class MisdatosComponent implements OnInit {
     if (this.usuario._id) {
       this.userService.updateUserById(this.usuario)
         .subscribe(resp => {
-          //console.log(resp);
           Swal.fire({
             title: 'OK',
             text: 'Actualización Exitosa',
