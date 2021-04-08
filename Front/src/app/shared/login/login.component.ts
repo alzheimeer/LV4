@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
       Swal.showLoading();
       console.log(ok);
       if (ok === true) {
-        this.router.navigateByUrl('/dashboard/solicitud');
+        this.router.navigateByUrl('/dashboard/misolicitud');
         Swal.fire({
           title: 'Bienvenido',
           text: email,

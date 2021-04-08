@@ -113,7 +113,7 @@ var RequestSchema = Schema({
         tipo: {
             type: String,
             required: false,
-            default: "",
+
         },
         placa: {
             type: String,
@@ -123,37 +123,37 @@ var RequestSchema = Schema({
         modelo: {
             type: Number,
             required: false,
-            default: 0,
+
         },
         tipoCaja: {
             type: String,
             required: false,
-            default: "",
+
         },
         linea: {
             type: String,
             required: false,
-            default: "",
+
         },
         referencia: {
             type: String,
             required: false,
-            default: "",
+
         },
         kilometraje: {
             type: Number,
             required: false,
-            default: 0,
+
         },
         tipoPlaca: {
             type: String,
             required: false,
-            default: "",
+
         },
         unicoDueno: {
             type: Boolean,
             required: false,
-            default: false,
+
         },
     },
     trabajoEmpleado: {

@@ -1,15 +1,15 @@
 const User = require('../models/User');
 const Role = require('../models/Role');
 const bcrypt = require('bcryptjs');
-const {generarJWT} = require('../helpers/jwt');
+const { generarJWT } = require('../helpers/jwt');
 const transporter = require('../middlewares/mailer')
 
 // Create User
-const crearUsuario = async function (req, res) {
+const crearUsuario = async function(req, res) {
     const { email, password, roles } = req.body;
     try {
         // verify the email that does not exist
-        const existeEmail = await User.findOne({email});
+        const existeEmail = await User.findOne({ email });
         if (existeEmail) {
             return res.status(400).json({
                 ok: false,
@@ -25,24 +25,24 @@ const crearUsuario = async function (req, res) {
         const token = await generarJWT(newUser._id, newUser.name);
         // We check if they sent roles and if so, we check if it exists
         if (roles) {
-            const foundRoles = await Role.find({name: {$in: roles}})
+            const foundRoles = await Role.find({ name: { $in: roles } })
             newUser.roles = foundRoles.map(role => role._id)
         } else {
-            const role = await Role.findOne({name: "user"})
+            const role = await Role.findOne({ name: "user" })
             newUser.roles = [role._id];
-        }        
+        }
         // Save user in Database
         await newUser.save();
 
-         // send mail with defined transport object
-        verificationLink = `https://www.colombiandreamm.com/api/auth/forget/${token}`;
-       
+        // send mail with defined transport object
+        verificationLink = `https://www.lendiup.com/api/auth/forget/${token}`;
+
         await transporter.sendMail({
             from: '"Email De Verificacion" <fogniebla@gmail.com>', // sender address
             to: newUser.email, // list of receivers
             subject: "Email De Verificacion", // Subject line
             // text: "Hello world?", // plain text body
-            
+
             /* html: `<b>Bienvenido A Lendiup</b>
             <a href="${verificationLink}">${verificationLink} </a>`, */
 
@@ -60,22 +60,24 @@ const crearUsuario = async function (req, res) {
             surname: newUser.surname,
             email: newUser.email,
             roles: newUser.roles,
+            solicitud: newUser.solicitud,
             token
         });
     } catch (error) {
-        return res.status(500).json({ok: false, msg: 'Por favor hable con el administrador'});}
+        return res.status(500).json({ ok: false, msg: 'Por favor hable con el administrador' });
+    }
 }
 
 // User Login
-const loginUsuario = async function (req, res) {
-    const {email,password} = req.body;
+const loginUsuario = async function(req, res) {
+    const { email, password } = req.body;
     try {
         // We check if the email exists and we bring the user to newUser
-        const userfound = await User.findOne({email}).populate("roles");
-        if (!userfound) {return res.status(400).json({ok: false, msg: 'El correo no existe'});}
+        const userfound = await User.findOne({ email }).populate("roles");
+        if (!userfound) { return res.status(400).json({ ok: false, msg: 'El correo no existe' }); }
         // Confirm if the password does math 
         const validPassword = bcrypt.compareSync(password, userfound.password);
-        if (!validPassword) {return res.status(400).json({ok: false, msg: 'El password no es valido'});}
+        if (!validPassword) { return res.status(400).json({ ok: false, msg: 'El password no es valido' }); }
         // Generate the JWT
         const token = await generarJWT(userfound._id, userfound.name);
         // Generate successful response
@@ -86,15 +88,18 @@ const loginUsuario = async function (req, res) {
             name: userfound.name,
             surname: userfound.surname,
             email: userfound.email,
+            solicitud: userfound.solicitud,
             token
         });
     } catch (error) {
-        console.log(error);return res.status(500).json({ok: false, msg: 'Hable con el administrador'})}
+        console.log(error);
+        return res.status(500).json({ ok: false, msg: 'Hable con el administrador' })
+    }
 }
 
 // Revalidate The Token
-const revalidarToken = async function (req, res) {
-    const {uid} = req;
+const revalidarToken = async function(req, res) {
+    const { uid } = req;
     // We look if the token exists
     const dbUser = await User.findById(uid);
     if (dbUser) {
@@ -102,6 +107,7 @@ const revalidarToken = async function (req, res) {
         surname = dbUser.surname;
         email = dbUser.email;
         roles = dbUser.roles;
+        solicitud = dbUser.solicitud;
     } else {
         name = '';
         email = '';
@@ -116,23 +122,24 @@ const revalidarToken = async function (req, res) {
         surname,
         email,
         roles,
+        solicitud,
         token
     });
 }
 
 // forget
-const forget = async function (req, res) {
+const forget = async function(req, res) {
 
     try {
         const token = await User.find(req.params.token);
-        if(token)
+        if (token)
             console.log('existe')
         else
-        console.log('no existe')
-            
-      } catch (error) {
+            console.log('no existe')
+
+    } catch (error) {
         return res.status(500).json({ msg: 'Token No Existe' });
-      }
+    }
 
     /* const {uid} = req;
     const dbUser = await User.findById(uid);
@@ -154,7 +161,7 @@ const forget = async function (req, res) {
         email,
         roles,
         token */
-    }); 
+    });
 }
 
 

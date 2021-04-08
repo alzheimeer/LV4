@@ -130,9 +130,14 @@ export class SolicitudComponent implements OnInit {
       return;
     }
     this.formularioSolicitud.get('idUser')?.enable();
+
+
     this.requestService.createRequest(this.formularioSolicitud.value).subscribe(
-      (res) => {
+      (resp) => {
         this.formularioSolicitud.reset();
+        this.authService.updateSolicitudUserById(resp.idUser, resp._id).subscribe((res) => {
+          console.log('OK');
+        });
         this.router.navigate(['/dashboard/misolicitud']);
       },
       (err) => {

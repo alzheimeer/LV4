@@ -39,10 +39,10 @@ export class RegisterComponent implements OnInit {
       });
       console.log(ok);
       if (ok === true) {
-        this.router.navigateByUrl('/dashboard/solicitud');
+        this.router.navigateByUrl('/dashboard/misolicitud');
         Swal.fire({
           title: 'Bienvenido',
-          text: email,
+          text: name,
           icon: 'success',
         });
       } else {

@@ -7,6 +7,7 @@ export interface AuthResponse {
   token?: string;
   msg?: string;
   roles?: [];
+  solicitud?: string;
 }
 export interface Usuario {
 
@@ -15,6 +16,7 @@ export interface Usuario {
   surname?: string;
   email?: string;
   roles?: [];
+  solicitud?: string;
 }
 
 export interface Role {

@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Product } from '../../models/product.models';
 import Swal from 'sweetalert2';
-import { Request } from '../../models/request.models';
+import { Requestx } from '../../models/request.models';
 import { ProductService } from '../services/product.service';
 import { RequestService } from '../services/request.service';
 import { User } from 'src/app/models/user.models';
@@ -21,7 +21,7 @@ export class SolicitudesComponent implements OnInit {
     private userService: UserService,
   ) {}
 
-  public solicitudes: Request[] = [];
+  public solicitudes: Requestx[] = [];
   public productos: Product[] = [];
   public usuario: any = [];
   hayerror = false;

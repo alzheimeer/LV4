@@ -1,3 +1,4 @@
+import { Requestx } from './../../models/request.models';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/services/auth.service';
@@ -12,7 +13,7 @@ import { Product } from '../../models/product.models';
   styleUrls: ['./misolicitud.component.scss'],
 })
 export class MisolicitudComponent implements OnInit {
-  requests: any = [];
+  requests: Requestx[] = [];
   numrequests = 0;
   productos: Product[] = [];
   user: any;

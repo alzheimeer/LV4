@@ -20,4 +20,5 @@ export interface Uxuario {
         tipocuenta: string;
         numcuenta: number;
         roles: [];
+        solicitud: string;
     }

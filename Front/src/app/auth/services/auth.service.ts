@@ -74,7 +74,8 @@ export class AuthService {
           name: resp.name!,
           surname: resp.surname!,
           email: resp.email!,
-          roles: resp.roles!
+          roles: resp.roles!,
+          solicitud: resp.solicitud!,
         };
 
         return resp.ok;
@@ -117,6 +118,12 @@ export class AuthService {
     };
     console.log(x);
     return this.http.put(`${ url }/${ data.id }`, x);
+  }
+
+  updateSolicitudUserById( idUser: String, idSolicitud: String ) {
+    const url = `${this.baseUrl}/users`;
+    const x = {'solicitud': idSolicitud};
+    return this.http.put(`${ url }/${ idUser }`, x);
   }
 
 

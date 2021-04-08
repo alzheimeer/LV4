@@ -12,6 +12,7 @@ export interface Usuario {
   email?:     string;
   createdAt?: Date;
   updatedAt?: Date;
+  solicitud?: string;
 }
 interface Banca {
   banco?:      string;
