@@ -22,6 +22,8 @@ export const ROUTES: RouteInfo[] = [
   { path: '/dashboard/datospersonales', title: 'Datos Personales', icon: 'verified', class: 'x' },
   { path: '/dashboard/datosvehiculo', title: 'Datos Vehiculo', icon: 'verified', class: 'x' },
   { path: '/dashboard/datosconstruccion', title: 'Datos Construccion', icon: 'verified', class: 'x' },
+  { path: '/dashboard/datostrabajo', title: 'Datos Trabajo', icon: 'verified', class: 'x' },
+  { path: '/dashboard/datosreferencias', title: 'Datos Referencias', icon: 'verified', class: 'x' },
   { path: '/dashboard/usuarios', title: 'Usuarios', icon: 'groups', class: 'x' },
   { path: '/dashboard/estadocuenta', title: 'Pagar Cuota', icon: 'savings', class: 'x' },
   { path: '/dashboard/misdatos', title: 'Mi Cuenta', icon: 'person', class: 'x' }
