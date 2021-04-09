@@ -30,32 +30,13 @@
                         <button class="btToDo" *ngIf="request.estate == 'Aprobada'" mat-raised-button>{{request.estate }}</button>
                         <button class="btErr" *ngIf="request.estate == 'Rechazada'" mat-raised-button>{{request.estate }}</button>
                         <hr>
-                        <div *ngFor="let producto of productos | searchnameproduct: request.idProduct">
-                            <p>Requisitos Faltantes</p>
-                            <div *ngIf="producto.name == 'Prestamo Sobre Hipoteca'">
-                                <button *ngIf="user == undefined " routerLink="/dashboard/datospersonales" class="button3">Datos Personales</button>
-                                <button *ngIf="request.regInmueble == false" routerLink="/dashboard/datosinmueble" class="button3">Datos Del Inmueble</button>
-                            </div>
-                            <div *ngIf="producto.name == 'Prestamo Sobre Vehiculo'">
-                                <button *ngIf="user == undefined " routerLink="/dashboard/datospersonales" class="button3">Datos Personales</button>
-                                <button *ngIf="request.regVehiculo == false" routerLink="/dashboard/datosvehiculo" class="button3">Datos Del Vehiculo</button>
-                            </div>
-                            <div *ngIf="producto.name == 'Prestamo Para Construcción'">
-                                <button *ngIf="user == undefined " routerLink="/dashboard/datospersonales" class="button3">Datos Personales</button>
-                                <button routerLink="/dashboard/datosconstruccion" class="button3">Datos Construccion</button>
-                            </div>
-                            <div *ngIf="producto.name == 'Prestamo Personal'">
-                                <button *ngIf="user == undefined " routerLink="/dashboard/datospersonales" class="button3">Datos Personales</button>
-                                <button *ngIf="request.regTrabajo == false" routerLink="/dashboard/datostrabajo" class="button3">Datos De Trabajo</button>
-                                <button *ngIf="request.regReferencias == false" routerLink="/dashboard/datostrabajo" class="button3">Referencias</button>
-                            </div>
-                        </div>
-                        <!-- <button *ngIf="user == undefined " routerLink="/dashboard/datospersonales" class="button3">Datos Personales</button>
-                        <button *ngIf="request.regInmueble == false" routerLink="/dashboard/datosinmueble" class="button3">Datos Del Inmueble</button>
-                        <button *ngIf="request.regVehiculo == false" routerLink="/dashboard/datosvehiculo" class="button3">Datos Del Vehiculo</button>
-                        <button routerLink="/dashboard/datosconstruccion" class="button3">Datos Construccion</button>
-                        <button *ngIf="request.regTrabajo == false" routerLink="/dashboard/datostrabajo" class="button3">Datos De Trabajo</button>
-                        <button *ngIf="request.regReferencias == false" routerLink="/dashboard/datostrabajo" class="button3">Referencias</button> -->
+                        <p>Requisitos Faltantes</p>
+                        <button *ngIf="user == undefined && regPersonales" routerLink="/dashboard/datospersonales" class="button3">Datos Personales</button>
+                        <button *ngIf="request.regInmueble == false && regInmueble" routerLink="/dashboard/datosinmueble" class="button3">Datos Del Inmueble</button>
+                        <button *ngIf="request.regVehiculo == false && regVehiculo" routerLink="/dashboard/datosvehiculo" class="button3">Datos Del Vehiculo</button>
+                        <button *ngIf="regInmueble" routerLink="/dashboard/datosconstruccion" class="button3">Datos Construccion</button>
+                        <button *ngIf="request.regTrabajo == false && regTrabajo" routerLink="/dashboard/datostrabajo" class="button3">Datos De Trabajo</button>
+                        <button *ngIf="request.regReferencias == false && regReferencias" routerLink="/dashboard/datostrabajo" class="button3">Referencias</button>
                         <hr>
                         <p>Imagen O PDF De Las 2 Caras De Tu Cedula </p>
                         <input type="file" class="file-upload" multiple>
@@ -94,3 +75,15 @@
         </div>
     </div>
 </div>
+
+
+
+<!-- <h3>Formulario:</h3>
+<pre>Valid:{{formularioSolicitud.valid}}</pre>
+<pre>{{tasa}}</pre>
+<pre>{{formularioSolicitud.value | json}}</pre>
+<pre>{{this.regInmueble}}</pre>
+<pre>{{this.regPersonales}}</pre>
+<pre>{{this.regVehiculo}}</pre>
+<pre>{{this.regTrabajo}}</pre>
+<pre>{{this.regReferencias}}</pre> -->

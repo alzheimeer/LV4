@@ -138,6 +138,7 @@ export class SolicitudComponent implements OnInit {
         this.authService.updateSolicitudUserById(resp.idUser, resp._id).subscribe((res) => {
           console.log('OK');
         });
+        if (this.productos)
         this.router.navigate(['/dashboard/misolicitud']);
       },
       (err) => {

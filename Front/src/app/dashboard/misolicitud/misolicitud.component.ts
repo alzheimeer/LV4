@@ -17,6 +17,12 @@ export class MisolicitudComponent implements OnInit {
   numrequests = 0;
   productos: Product[] = [];
   user: any;
+  regInmueble = false;
+  regPersonales = false;
+  regTrabajo = false;
+  regVehiculo = false;
+  regReferencias = false;
+
   get usuario() {
     return this.authService.usuario;
   }
@@ -35,19 +41,29 @@ export class MisolicitudComponent implements OnInit {
       .subscribe((resp) => {
         this.requests = resp;
         this.numrequests = this.requests.length;
-        // console.log(this.numrequests);
+        // console.log(this.requests);
       });
-
-    this.productService
-    .getProducts()
-    .subscribe((resp) => {
+      this.productService.getProducts().subscribe((resp) => {
         this.productos = resp;
+        this.productService.getProductById(this.requests[0].idProduct).subscribe((resp) => {
+          if (resp.regInmueble == true)
+            this.regInmueble = true;
+          if (resp.regPersonales == true)
+            this.regPersonales = true;
+          if (resp.regTrabajo == true)
+            this.regTrabajo = true;
+          if (resp.regVehiculo == true)
+            this.regVehiculo = true;
+          if (resp.regReferencias== true)
+            this.regReferencias = true;
+          });
       });
 
     this.userService.getUserById(this.usuario.uid).subscribe((resp) => {
-      console.log('resp:', resp.personal.numdoc);
+      // console.log('resp:', resp.personal.numdoc);
       this.user = resp.personal.numdoc;
       });
-
   }
+
+
 }

@@ -3,16 +3,16 @@ const User = require('../models/User');
 const Product = require('../models/Product');
 const bcrypt = require('bcryptjs');
 
-const createRoles = async function () {
+const createRoles = async function() {
     try {
         const count = await Role.estimatedDocumentCount();
 
         if (count > 0) return;
 
         await Promise.all([
-            new Role({name: 'user'}).save(),
-            new Role({name: 'moderator'}).save(),
-            new Role({name: 'admin'}).save(),
+            new Role({ name: 'user' }).save(),
+            new Role({ name: 'moderator' }).save(),
+            new Role({ name: 'admin' }).save(),
         ]);
         console.log('Roles creados');
     } catch (error) {
@@ -21,7 +21,7 @@ const createRoles = async function () {
     }
 };
 
-const createAdmin = async function () {
+const createAdmin = async function() {
     try {
         const count = await User.estimatedDocumentCount();
 
@@ -36,10 +36,10 @@ const createAdmin = async function () {
         const salt = bcrypt.genSaltSync(10);
         newUser.password = bcrypt.hashSync('adminadmin', salt);
         // We check if they sent roles and if so, we check if it exists
-        const roles= ['admin', 'user', 'moderator']
-        const foundRoles = await Role.find({name: {$in: roles}})
+        const roles = ['admin', 'user', 'moderator']
+        const foundRoles = await Role.find({ name: { $in: roles } })
         newUser.roles = foundRoles.map(role => role._id)
-        // Save user in Database
+            // Save user in Database
         await newUser.save();
         console.log('Admin creado');
     } catch (error) {
@@ -48,7 +48,7 @@ const createAdmin = async function () {
     }
 };
 
-const createProducts = async function () {
+const createProducts = async function() {
     try {
         const count = await Product.estimatedDocumentCount();
 
@@ -63,7 +63,13 @@ const createProducts = async function () {
                 imax: "1.8",
                 termmin: "1",
                 termmax: "36",
-                imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9V13zPbPG139Jryws7WCEsbSNF2C58qfYXg&usqp=CAU"
+                imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9V13zPbPG139Jryws7WCEsbSNF2C58qfYXg&usqp=CAU",
+                regInmueble: false,
+                regPersonales: true,
+                regVehiculo: false,
+                regTrabajo: true,
+                regReferencias: true
+
             }).save(),
             new Product({
                 name: "Prestamo Sobre Hipoteca",
@@ -73,7 +79,13 @@ const createProducts = async function () {
                 imax: "1.8",
                 termmin: "1",
                 termmax: "36",
-                imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9V13zPbPG139Jryws7WCEsbSNF2C58qfYXg&usqp=CAU"
+                imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9V13zPbPG139Jryws7WCEsbSNF2C58qfYXg&usqp=CAU",
+                regInmueble: true,
+                regPersonales: true,
+                regVehiculo: false,
+                regTrabajo: false,
+                regReferencias: false
+
             }).save(),
             new Product({
                 name: "Prestamo Sobre Vehiculo",
@@ -83,7 +95,13 @@ const createProducts = async function () {
                 imax: "1.8",
                 termmin: "1",
                 termmax: "36",
-                imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9V13zPbPG139Jryws7WCEsbSNF2C58qfYXg&usqp=CAU"
+                imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9V13zPbPG139Jryws7WCEsbSNF2C58qfYXg&usqp=CAU",
+                regInmueble: false,
+                regPersonales: true,
+                regVehiculo: true,
+                regTrabajo: false,
+                regReferencias: false
+
             }).save(),
             new Product({
                 name: "Prestamo Para Construcción",
@@ -93,10 +111,16 @@ const createProducts = async function () {
                 imax: "1.8",
                 termmin: "1",
                 termmax: "36",
-                imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9V13zPbPG139Jryws7WCEsbSNF2C58qfYXg&usqp=CAU"
+                imageUrl: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9V13zPbPG139Jryws7WCEsbSNF2C58qfYXg&usqp=CAU",
+                regInmueble: true,
+                regPersonales: true,
+                regVehiculo: false,
+                regTrabajo: false,
+                regReferencias: false
+
             }).save()
         ]);
-            console.log('Creados 4 Productos Base');
+        console.log('Creados 4 Productos Base');
     } catch (error) {
         console.log(error);
         throw new Error('Error Creando Administrador');

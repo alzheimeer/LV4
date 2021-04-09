@@ -9,5 +9,5 @@ SECRET_JWT_SEED=AlzheimeerZpwjiexxn2*1979#
 PASSGMAIL=kkwijkhozefbyxud
 NODE_TLS_REJECT_UNAUTHORIZED='0'            //este es cuando sale error con el password de la aplicacion gmail
 
-
+PASSGMAIL=exncylmrditqlvre                 //el de gmail lendiup
 BD_CNN1=mongodb+srv://alzheimeer:Qazwsxx2@cluster0.ozyo7.mongodb.net/miBaseDatos

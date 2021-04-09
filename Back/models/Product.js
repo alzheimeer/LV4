@@ -1,6 +1,6 @@
 var { Schema, model } = require('mongoose');
 
-var ProductSchema  = Schema({
+var ProductSchema = Schema({
     name: {
         type: String,
         required: true
@@ -32,7 +32,32 @@ var ProductSchema  = Schema({
     imageUrl: {
         type: String,
         required: false
-    }
+    },
+    regInmueble: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regPersonales: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regVehiculo: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regTrabajo: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regReferencias: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
 }, {
     timestamps: true,
     versionkey: false
