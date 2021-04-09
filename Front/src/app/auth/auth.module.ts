@@ -6,7 +6,7 @@ import { AuthComponent } from './auth.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MaterialModule } from '../bck/material/material.module';
+import { MaterialModule } from '../material/material.module';
 import { LogoComponent } from './pages/logo/logo.component';
 
 
