@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/services/auth.service';
-import { FormArray, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { DataPersonalModel } from '../../models/datapersonal.models';
+import { NgForm } from '@angular/forms';
+import { Requestx } from '../../models/request.models';
 import Swal from 'sweetalert2';
-import { Observable } from 'rxjs';
+import { RequestService } from '../services/request.service';
 
 @Component({
   selector: 'app-datosconstruccion',
@@ -12,12 +12,28 @@ import { Observable } from 'rxjs';
   styleUrls: ['./datosconstruccion.component.scss']
 })
 export class DatosconstruccionComponent implements OnInit {
-  data: DataPersonalModel = new DataPersonalModel();
+  id: any = '';
+  requests!: Requestx;
 
-  get usuario() {
+  get usuarioauth() {
     return this.authService.usuario;
   }
-  constructor(private router: Router, private authService: AuthService) { }
+
+  constructor(private router: Router, private authService: AuthService, private requestService: RequestService) { }
+
+  ngOnInit(): void {
+    this.id = this.usuarioauth.uid;
+
+    this.requestService.getRequestById(this.usuarioauth.solicitud)
+      .subscribe(resp => {
+        this.requests = resp;
+        console.log(this.requests);
+
+      },(err) => {
+        console.log('error:', err)
+      });
+  }
+
 
   guardar(form: NgForm) {
     if ( form.invalid ) {
@@ -29,36 +45,34 @@ export class DatosconstruccionComponent implements OnInit {
       });
       return;
     }
-
-
-
     Swal.fire({
       title: 'Espere',
       text: 'Guardando Informacion',
       allowOutsideClick: false
     });
     Swal.showLoading();
+    if (this.requests._id) {
+      this.requests.regVehiculo = true;
+      this.requestService.updateRequestsById(this.requests)
+        .subscribe(resp => {
+         // console.log(resp);
+          Swal.fire({
+            title: 'OK',
+            text: 'Datos De Vehiculo Enviados',
+            icon: 'success',
+          });
 
-    let peticion: Observable<any>;
-
-    if ( this.data.id ) {
-      peticion = this.authService.completeUserById( this.data );
+          this.router.navigateByUrl('/dashboard/misolicitud');
+        }, (err) => {
+          Swal.fire({
+            title: 'Error',
+            text: 'Formulario no válido',
+            icon: 'error',
+          });
+          // console.log('Error');
+        });
     }
-
-    // peticion.subscribe( resp => {
-
-    //   Swal.fire({
-    //     title: 'Datos Personales',
-    //     text: 'Guardados Con Exito',
-    //     icon: 'success',
-    //   });
-    // });
-
   }
 
-
-  ngOnInit(): void {
-    this.data.id = this.usuario.uid;
-  }
 
 }

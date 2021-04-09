@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MisdatosComponent } from './misdatos.component';
+import { DatostrabajoComponent } from './datostrabajo.component';
 
-describe('MisdatosComponent', () => {
-  let component: MisdatosComponent;
-  let fixture: ComponentFixture<MisdatosComponent>;
+describe('DatostrabajoComponent', () => {
+  let component: DatostrabajoComponent;
+  let fixture: ComponentFixture<DatostrabajoComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MisdatosComponent ]
+      declarations: [ DatostrabajoComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MisdatosComponent);
+    fixture = TestBed.createComponent(DatostrabajoComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

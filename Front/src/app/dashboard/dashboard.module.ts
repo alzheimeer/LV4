@@ -20,6 +20,8 @@ import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { MisolicitudComponent } from './misolicitud/misolicitud.component';
 
 import { SearchnameproductPipe } from './pipes/searchnameproduct.pipe';
+import { DatostrabajoComponent } from './datostrabajo/datostrabajo.component';
+import { DatosreferenciasComponent } from './datosreferencias/datosreferencias.component';
 
 
 
@@ -39,6 +41,8 @@ import { SearchnameproductPipe } from './pipes/searchnameproduct.pipe';
     SolicitudesComponent,
     SearchnameproductPipe,
     MisolicitudComponent,
+    DatostrabajoComponent,
+    DatosreferenciasComponent,
   ],
   imports: [
     CommonModule,

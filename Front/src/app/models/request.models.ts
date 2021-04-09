@@ -93,7 +93,7 @@ export interface Vehiculo {
   modelo:      number;
   tipoCaja:    string;
   linea:       string;
-  referencia:  string;
+  marca:       string;
   kilometraje: number;
   tipoPlaca:   string;
   unicoDueno:  boolean;

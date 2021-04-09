@@ -135,7 +135,7 @@ var RequestSchema = Schema({
             required: false,
 
         },
-        referencia: {
+        marca: {
             type: String,
             required: false,
 

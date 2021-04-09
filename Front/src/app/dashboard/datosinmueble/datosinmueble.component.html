@@ -22,14 +22,14 @@
 
                         <div class="form-group">
                             <label>ID de Usuario</label>
-                            <input [(ngModel)]="data.id" name="id" type="text" class="form-control" placeholder="ID Usuario" disabled="disable" />
+                            <input [(ngModel)]="id" name="id" type="text" class="form-control" placeholder="ID Usuario" disabled="disable" />
                             <small class="form-text text-muted">Este campo es autogenerado</small>
                         </div>
                         <div class="row">
                             <div class="col-md-6 pr-1">
                                 <div class="form-group">
                                     <label>Tipo De Inmueble</label>
-                                    <select [(ngModel)]="data.tipodoc" name="tipodoc" class="form-control custom-select" required>
+                                    <select [(ngModel)]="requests.inmueble.tipo" name="tipo" class="form-control custom-select" required>
                     <option selected disabled value="">Escoge...</option>
                     <option>Casa</option>
                     <option>Apartamento</option>
@@ -48,7 +48,7 @@
                             <div class="col-md-6 pl-1">
                                 <div class="form-group">
                                     <label># De Matricula Inmobiliaria</label>
-                                    <input [(ngModel)]="data.numdoc" name="numdoc" type="text" class="form-control" placeholder="# de matricula" required>
+                                    <input [(ngModel)]="requests.inmueble.matricula" name="matricula" type="text" class="form-control" placeholder="# de matricula" required>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
                             <div class="col-md-6 pr-1">
                                 <div class="form-group">
                                     <label>Uso Del Inmueble</label>
-                                    <select [(ngModel)]="data.ciudad" name="ciudad" class="form-control custom-select" placeholder="Escoge Un Pais" required>
+                                    <select [(ngModel)]="requests.inmueble.uso" name="uso" class="form-control custom-select" placeholder="Uso del inmueble" required>
                     <option selected disabled value="">Escoge...</option>
                     <option>Residencial/option>
                     <option>Comercial</option>
@@ -69,7 +69,7 @@
                             <div class="col-md-6 px-1">
                                 <div class="form-group">
                                     <label>Escoje El Estrato</label>
-                                    <select [(ngModel)]="data.departamento" name="departamento" type="text" class="form-control  custom-select" placeholder="...." required>
+                                    <select [(ngModel)]="requests.inmueble.estrato" name="estrato" type="text" class="form-control  custom-select" placeholder="...." required>
                     <option selected disabled value="">Escoge...</option>
                     <option>Estrato 1</option>
                     <option>Estrato 2</option>
@@ -83,19 +83,19 @@
                             <div class="col-md-4 px-1">
                                 <div class="form-group">
                                     <label>Departamento</label>
-                                    <input [(ngModel)]="data.barrio" name="barrio" type="text" class="form-control" placeholder="...." required>
+                                    <input [(ngModel)]="requests.inmueble.departamento" name="departamento" type="text" class="form-control" placeholder="Departamento" required>
                                 </div>
                             </div>
                             <div class="col-md-4 px-1">
                                 <div class="form-group">
                                     <label>Ciudad</label>
-                                    <input [(ngModel)]="data.barrio" name="barrio" type="text" class="form-control" placeholder="...." required>
+                                    <input [(ngModel)]="requests.inmueble.ciudad" name="ciudad" type="text" class="form-control" placeholder="Ciudad" required>
                                 </div>
                             </div>
                             <div class="col-md-4 pl-1">
                                 <div class="form-group">
                                     <label>Localidad / Barrio / Vereda</label>
-                                    <input [(ngModel)]="data.direccion" name="direccion" type="text" class="form-control" placeholder="...." required>
+                                    <input [(ngModel)]="requests.inmueble.barrio" name="barrio" type="text" class="form-control" placeholder="Barrio" required>
                                 </div>
                             </div>
                         </div>
@@ -103,7 +103,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Dirección</label>
-                                    <input [(ngModel)]="data.pais" name="pais" type="text" class="form-control" placeholder="Digite Su Direccion" required>
+                                    <input [(ngModel)]="requests.inmueble.direccion" name="direccion" type="text" class="form-control" placeholder="Digite Su Direccion" required>
                                 </div>
                             </div>
                         </div>
@@ -111,19 +111,19 @@
                             <div class="col-md-4 px-1">
                                 <div class="form-group">
                                     <label>Años De Antiguedad</label>
-                                    <input [(ngModel)]="data.celular1" name="celular1" type="number" class="form-control" placeholder="Digite # de años" required>
+                                    <input [(ngModel)]="requests.inmueble.antiguedad" name="antiguedad" type="number" class="form-control" placeholder="Digite # de años" required>
                                 </div>
                             </div>
                             <div class="col-md-4 pl-1">
                                 <div class="form-group">
                                     <label>Area</label>
-                                    <input [(ngModel)]="data.celular2" name="celular2" type="text" class="form-control" placeholder="Opcional ....">
+                                    <input [(ngModel)]="requests.inmueble.area" name="area" type="number" class="form-control" placeholder="Area" required>
                                 </div>
                             </div>
                             <div class="col-md-4 pl-1">
                                 <div class="form-group">
                                     <label>Valor comercial?</label>
-                                    <input [(ngModel)]="data.celular2" name="celular2" type="number" class="form-control" placeholder="Valor">
+                                    <input [(ngModel)]="requests.inmueble.valorComercial" name="valorcomercial" type="number" class="form-control" placeholder="Valor" required>
                                 </div>
                             </div>
                         </div>
@@ -162,9 +162,9 @@
                 <img class="img-fluid" src="../assets/img/mike.jpg" alt="Photo of a Shiba Inu">
             </mat-card-header>
             <div mat-card-avatar class="example-header-image "></div>
-            <mat-card-title>{{usuario.name | uppercase}}</mat-card-title>
-            <mat-card-subtitle> {{usuario.surname | uppercase}}</mat-card-subtitle>
-            <mat-card-subtitle> {{usuario.email}}</mat-card-subtitle>
+            <mat-card-title>{{usuarioauth.name | uppercase}}</mat-card-title>
+            <mat-card-subtitle> {{usuarioauth.surname | uppercase}}</mat-card-subtitle>
+            <mat-card-subtitle> {{usuarioauth.email}}</mat-card-subtitle>
 
             <mat-card-content>
                 <p>

@@ -84,14 +84,14 @@
                             </div>
                             <div class="col-md-4 px-1">
                                 <div class="form-group">
-                                    <label>Referencia</label>
-                                    <input [(ngModel)]="requests.vehiculo.referencia" name="referencia" type="text" class="form-control" placeholder="...." required>
+                                    <label>Marca</label>
+                                    <input [(ngModel)]="requests.vehiculo.marca" name="marca" type="text" class="form-control" placeholder="Marca" required>
                                 </div>
                             </div>
                             <div class="col-md-4 pl-1">
                                 <div class="form-group">
                                     <label>Kilometraje</label>
-                                    <input [(ngModel)]="requests.vehiculo.kilometraje" name="kilometraje" type="text" class="form-control" placeholder="...." required>
+                                    <input [(ngModel)]="requests.vehiculo.kilometraje" name="kilometraje" type="number" class="form-control" placeholder="...." required>
                                 </div>
                             </div>
                         </div>
@@ -185,4 +185,4 @@
 </div>
 
 
-{{f.value | json}} {{f.valid}}
+<!-- {{f.value | json}} {{f.valid}} -->

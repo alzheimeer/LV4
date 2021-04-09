@@ -6,13 +6,13 @@ import { Requestx } from '../../models/request.models';
 import Swal from 'sweetalert2';
 import { RequestService } from '../services/request.service';
 
-
 @Component({
-  selector: 'app-datosdeinmueble',
-  templateUrl: './datosinmueble.component.html',
-  styleUrls: ['./datosinmueble.component.scss']
+  selector: 'app-datostrabajo',
+  templateUrl: './datostrabajo.component.html',
+  styleUrls: ['./datostrabajo.component.scss']
 })
-export class DatosinmuebleComponent implements OnInit {
+export class DatostrabajoComponent implements OnInit {
+
   id: any = '';
   requests!: Requestx;
 

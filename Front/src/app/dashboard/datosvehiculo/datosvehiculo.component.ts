@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/services/auth.service';
-import { FormArray, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { DataPersonalModel } from '../../models/datapersonal.models';
+import { NgForm } from '@angular/forms';
 import { Requestx } from '../../models/request.models';
-
 import Swal from 'sweetalert2';
-import { Observable } from 'rxjs';
 import { RequestService } from '../services/request.service';
 
 @Component({
