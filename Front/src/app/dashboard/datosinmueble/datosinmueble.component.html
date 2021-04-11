@@ -1,185 +1,217 @@
-<div class="panel-header ">
-    <div class="header text-center">
-        <h2 class="title">Formulario De Inmueble</h2>
-    </div>
+<div class="panel-header">
+  <div class="header text-center">
+    <h2 class="title">Formulario De Inmueble</h2>
+  </div>
 </div>
 
 
 <div class="main-content">
-    <div class="row">
+  <div class="row">
+
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Ahora Completa Los Datos De El Inmueble</h5>
+        </div>
+        <div class="card-body">
 
 
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="title">Ahora Completa Los Datos De El Inmueble</h5>
-                </div>
-                <div class="card-body">
+          <form autocomplete="off" [formGroup]="miFormulario"
+            (ngSubmit)="guardar()">
 
+            <!-- Primera Fila -->
+            <div class="row">
 
+              <!-- Tipo de Inmueble -->
+              <mat-form-field appearance="fill" class="form-group col-md-6">
+                <mat-select formControlName="tipo">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option value="Casa">Casa</mat-option>
+                  <mat-option value="Apartamento">Apartamento</mat-option>
+                  <mat-option value="Oficina">Oficina</mat-option>
+                  <mat-option value="Bodega">Bodega</mat-option>
+                  <mat-option value="Consultorio">Consultorio</mat-option>
+                  <mat-option value="Local Comercial">Local Comercial</mat-option>
+                  <mat-option value="Lote">Lote</mat-option>
+                  <mat-option value="Finca">Finca</mat-option>
+                  <mat-option value="Edificio De Apartamentos">Edificio De
+                    Apartamentos</mat-option>
+                  <mat-option value="Edificio De Oficinas">Edificio De Oficinas</mat-option>
+                </mat-select>
+                <mat-label><mat-icon>home</mat-icon> <b> Tipo De Inmueble</b></mat-label>
+              </mat-form-field>
 
-                    <form (ngSubmit)="guardar(f)" #f="ngForm">
+              <!-- Matricula Inmobiliaria -->
+              <mat-form-field class="form-group col-md-6 pl-1">
+                <mat-label># De Matricula Inmobiliaria</mat-label>
+                <input matInput formControlName="matricula" type="text"
+                  class="form-control" >
+                <mat-error *ngIf="campoEsValido('matricula')">
+                  {{getError('matricula')}}
+                </mat-error>
+              </mat-form-field>
+            </div>
 
-                        <div class="form-group">
-                            <label>ID de Usuario</label>
-                            <input [(ngModel)]="id" name="id" type="text" class="form-control" placeholder="ID Usuario" disabled="disable" />
-                            <small class="form-text text-muted">Este campo es autogenerado</small>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 pr-1">
-                                <div class="form-group">
-                                    <label>Tipo De Inmueble</label>
-                                    <select [(ngModel)]="requests.inmueble.tipo" name="tipo" class="form-control custom-select" required>
-                    <option selected disabled value="">Escoge...</option>
-                    <option>Casa</option>
-                    <option>Apartamento</option>
-                    <option>Oficina</option>
-                    <option>Bodega</option>
-                    <option>Consultorio</option>
-                    <option>Local Comercial</option>
-                    <option>Lote</option>
-                    <option>Finca</option>
-                    <option>Edificio De Apartamentos</option>
-                    <option>Edificio De Oficinas</option>
-                  </select>
+            <!-- Segunda Fila -->
+            <div class="row">
 
-                                </div>
-                            </div>
-                            <div class="col-md-6 pl-1">
-                                <div class="form-group">
-                                    <label># De Matricula Inmobiliaria</label>
-                                    <input [(ngModel)]="requests.inmueble.matricula" name="matricula" type="text" class="form-control" placeholder="# de matricula" required>
-                                </div>
-                            </div>
-                        </div>
+              <!-- Uso del Inmueble -->
+              <mat-form-field appearance="fill" class="form-group col-md-6">
+                <mat-select formControlName="uso">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option value="Residencial">Casa</mat-option>
+                  <mat-option value="Comercial">Apartamento</mat-option>
+                  <mat-option value="Mixto">Oficina</mat-option>
+                  <mat-option value="Agropecuario">Bodega</mat-option>
+                </mat-select>
+                <mat-label><mat-icon>home</mat-icon> <b> Uso Del Inmueble</b></mat-label>
+              </mat-form-field>
 
-                        <div class="row">
-                            <div class="col-md-6 pr-1">
-                                <div class="form-group">
-                                    <label>Uso Del Inmueble</label>
-                                    <select [(ngModel)]="requests.inmueble.uso" name="uso" class="form-control custom-select" placeholder="Uso del inmueble" required>
-                    <option selected disabled value="">Escoge...</option>
-                    <option>Residencial/option>
-                    <option>Comercial</option>
-                    <option>Mixto</option>
-                    <option>Agropecuario</option>
-                  </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6 px-1">
-                                <div class="form-group">
-                                    <label>Escoje El Estrato</label>
-                                    <select [(ngModel)]="requests.inmueble.estrato" name="estrato" type="text" class="form-control  custom-select" placeholder="...." required>
-                    <option selected disabled value="">Escoge...</option>
-                    <option>Estrato 1</option>
-                    <option>Estrato 2</option>
-                    <option>Estrato 3</option>
-                    <option>Estrato 4</option>
-                    <option>Estrato 5</option>
-                    <option>Estrato 6</option>
-                  </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4 px-1">
-                                <div class="form-group">
-                                    <label>Departamento</label>
-                                    <input [(ngModel)]="requests.inmueble.departamento" name="departamento" type="text" class="form-control" placeholder="Departamento" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4 px-1">
-                                <div class="form-group">
-                                    <label>Ciudad</label>
-                                    <input [(ngModel)]="requests.inmueble.ciudad" name="ciudad" type="text" class="form-control" placeholder="Ciudad" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4 pl-1">
-                                <div class="form-group">
-                                    <label>Localidad / Barrio / Vereda</label>
-                                    <input [(ngModel)]="requests.inmueble.barrio" name="barrio" type="text" class="form-control" placeholder="Barrio" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Dirección</label>
-                                    <input [(ngModel)]="requests.inmueble.direccion" name="direccion" type="text" class="form-control" placeholder="Digite Su Direccion" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 px-1">
-                                <div class="form-group">
-                                    <label>Años De Antiguedad</label>
-                                    <input [(ngModel)]="requests.inmueble.antiguedad" name="antiguedad" type="number" class="form-control" placeholder="Digite # de años" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4 pl-1">
-                                <div class="form-group">
-                                    <label>Area</label>
-                                    <input [(ngModel)]="requests.inmueble.area" name="area" type="number" class="form-control" placeholder="Area" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4 pl-1">
-                                <div class="form-group">
-                                    <label>Valor comercial?</label>
-                                    <input [(ngModel)]="requests.inmueble.valorComercial" name="valorcomercial" type="number" class="form-control" placeholder="Valor" required>
-                                </div>
-                            </div>
-                        </div>
-                        <!--  <div class="col-md-12 pl-1">
-              <p>¿Deseas abonar a capital en cada cuota?</p>
-              <div class="form-group custom-control custom-radio">
-                <input type="radio" id="customRadio1" name="customRadio" class="form-control custom-control-input">
-                <label class="custom-control-label" for="customRadio1">SI</label>
-              </div>
-              <div class="form-group custom-control custom-radio">
-                <input type="radio" id="customRadio2" name="customRadio" class="form-control custom-control-input">
-                <label class="custom-control-label" for="customRadio2">NO</label>
-              </div>
-            </div> -->
+              <!-- Estrato del Inmueble -->
+              <mat-form-field appearance="fill" class="form-group col-md-6">
+                <mat-select formControlName="estrato">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option value="1">Estrato 1</mat-option>
+                  <mat-option value="2">Estrato 2</mat-option>
+                  <mat-option value="3">Estrato 3</mat-option>
+                  <mat-option value="4">Estrato 4</mat-option>
+                  <mat-option value="5">Estrato 5</mat-option>
+                  <mat-option value="6">Estrato 6</mat-option>
+                </mat-select>
+                <mat-label><mat-icon>home</mat-icon> <b> Estrato Del Inmueble</b></mat-label>
+              </mat-form-field>
 
+            </div>
+            <!-- Tercera Fila -->
+            <div class="row">
 
+              <!-- Departamento del Inmueble -->
+              <mat-form-field appearance="fill" class="form-group col-md-4">
+                <mat-select formControlName="departamento">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option [value]="item" *ngFor="let item of departamentos">{{item}}</mat-option>
+                </mat-select>
+                <mat-label><mat-icon>home</mat-icon> <b> Departamento</b></mat-label>
+              </mat-form-field>
 
-                        <div class="form-group d-flex h-100">
-                            <div class="align-self-end ml-auto">
-                                <button type="submit" class="btn btn-primary btn-block" [disabled]="f.invalid">
+              <!-- Ciudad del Inmueble -->
+              <mat-form-field class="form-group col-md-4">
+                <mat-label>Ciudad</mat-label>
+                <input matInput formControlName="ciudad" type="text"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValido('ciudad')">
+                  {{getError('ciudad')}}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Barrio del Inmueble -->
+              <mat-form-field class="form-group col-md-4">
+                <mat-label>Barrio</mat-label>
+                <input matInput formControlName="barrio" type="text"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValido('barrio')">
+                  {{getError('barrio')}}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+
+            <!-- Cuarta Fila -->
+            <div class="row">
+
+              <!-- Direccion -->
+              <mat-form-field class="form-group col-md-12">
+                <mat-label>Dirección</mat-label>
+                <input matInput formControlName="direccion" type="text"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValido('direccion')">
+                  {{getError('direccion')}}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+
+            <!-- Quinta Fila -->
+            <div class="row">
+
+              <!-- Antiguedad -->
+              <mat-form-field class="form-group col-md-4">
+                <mat-label>Años De Antiguedad</mat-label>
+                <input matInput formControlName="antiguedad" type="number"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValido('antiguedad')">
+                  {{getError('antiguedad')}}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Area -->
+              <mat-form-field class="form-group col-md-4">
+                <mat-label>Area m2</mat-label>
+                <input matInput formControlName="area" type="number"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValido('area')">
+                  {{getError('area')}}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Valor comercial -->
+              <mat-form-field class="form-group col-md-4">
+                <mat-label>Valor comercial?</mat-label>
+                <input matInput formControlName="valorComercial" type="number"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValido('valorComercial')">
+                  {{getError('valorComercial')}}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+            <!-- Boton De Enviar Formulario -->
+            <div class="form-group d-flex h-100">
+              <div class="align-self-end ml-auto">
+                <button type="submit" class="btn btn-primary btn-block"
+                  [disabled]="miFormulario.invalid">
                   <i class="fa fa-save"></i>
                   Siguiente
                 </button>
-                            </div>
-                        </div>
-                    </form>
-
-
-                </div>
+              </div>
             </div>
+          </form>
+
+
         </div>
-
-
-        <mat-card class=" col-md-4">
-            <mat-card-header>
-                <img class="img-fluid" src="../assets/img/mike.jpg" alt="Photo of a Shiba Inu">
-            </mat-card-header>
-            <div mat-card-avatar class="example-header-image "></div>
-            <mat-card-title>{{usuarioauth.name | uppercase}}</mat-card-title>
-            <mat-card-subtitle> {{usuarioauth.surname | uppercase}}</mat-card-subtitle>
-            <mat-card-subtitle> {{usuarioauth.email}}</mat-card-subtitle>
-
-            <mat-card-content>
-                <p>
-                    "Aqui puedes llenar
-                    <br> La solicitud
-                    <br>Del prestamos
-                    <br> que desees! "
-                </p>
-            </mat-card-content>
-            <mat-card-actions>
-                <!-- <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button> -->
-            </mat-card-actions>
-        </mat-card>
-
-
+      </div>
     </div>
+
+
+    <mat-card class="col-md-4">
+      <mat-card-header>
+        <img class="img-fluid" src="../assets/img/mike.jpg" alt="Photo of a
+          Shiba Inu">
+      </mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-content>
+        <p>
+          "Aqui puedes llenar
+          <br> La solicitud
+          <br>Del prestamos
+          <br> que desees! "</p>
+      </mat-card-content>
+      <mat-card-actions>
+
+      </mat-card-actions>
+    </mat-card>
+
+
+  </div>
 </div>
+
+
+
+
+<!-- <span>Valid</span>
+<pre>{{ miFormulario.valid }}</pre>
+<br>
+
+<span>Value</span>
+<pre>{{ miFormulario.value | json }}</pre>
+<br> -->

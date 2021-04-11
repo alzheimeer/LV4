@@ -68,7 +68,8 @@ const createProducts = async function() {
                 regPersonales: true,
                 regVehiculo: false,
                 regTrabajo: true,
-                regReferencias: true
+                regReferencias: true,
+                regReferenciasCom: true,
 
             }).save(),
             new Product({
@@ -84,7 +85,8 @@ const createProducts = async function() {
                 regPersonales: true,
                 regVehiculo: false,
                 regTrabajo: false,
-                regReferencias: false
+                regReferencias: false,
+                regReferenciasCom: false,
 
             }).save(),
             new Product({
@@ -100,7 +102,8 @@ const createProducts = async function() {
                 regPersonales: true,
                 regVehiculo: true,
                 regTrabajo: false,
-                regReferencias: false
+                regReferencias: false,
+                regReferenciasCom: false
 
             }).save(),
             new Product({
@@ -116,7 +119,8 @@ const createProducts = async function() {
                 regPersonales: true,
                 regVehiculo: false,
                 regTrabajo: false,
-                regReferencias: false
+                regReferencias: false,
+                regReferenciasCom: false
 
             }).save()
         ]);

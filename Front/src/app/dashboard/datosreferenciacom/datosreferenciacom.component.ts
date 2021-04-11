@@ -10,48 +10,11 @@ import { RequestService } from '../services/request.service';
 
 
 @Component({
-  selector: 'app-datosdeinmueble',
-  templateUrl: './datosinmueble.component.html',
-  styleUrls: ['./datosinmueble.component.scss']
+  selector: 'app-datosreferenciacom',
+  templateUrl: './datosreferenciacom.component.html',
+  styleUrls: ['./datosreferenciacom.component.scss']
 })
-export class DatosinmuebleComponent implements OnInit {
-
-  public departamentos = [
-    'Amazonas',
-    'Antioquia',
-    'Arauca',
-    'Atlántico',
-    'Bolívar',
-    'Boyacá',
-    'Caldas',
-    'Caquetá',
-    'Casanare',
-    'Cauca',
-    'Cesar',
-    'Chocó',
-    'Córdoba',
-    'Cundinamarca',
-    'Guainía',
-    'Guaviare',
-    'Huila',
-    'La Guajira',
-    'Magdalena',
-    'Meta',
-    'Nariño',
-    'Norte de Santander',
-    'Putumayo',
-    'Quindío',
-    'Risaralda',
-    'San Andrés y Providencia',
-    'Santander',
-    'Sucre',
-    'Tolima',
-    'Valle del Cauca',
-    'Vaupés',
-    'Vichada'];
-
-
-
+export class DatosreferenciacomComponent implements OnInit {
 
   get usuarioauth() {
     return this.authService.usuario;
@@ -60,17 +23,19 @@ export class DatosinmuebleComponent implements OnInit {
 
 
   miFormulario = this.fb.group({
-    tipo: ['', [Validators.required, Validators.minLength(3)]],
-    matricula: ['', [Validators.required, Validators.minLength(3)]],
-    uso: ['', [Validators.required, Validators.minLength(3)]],
-    estrato: ['', [Validators.required]],
-    departamento: ['', [Validators.required, Validators.minLength(3)]],
-    ciudad: ['', [Validators.required, Validators.minLength(3)]],
-    barrio: ['', [Validators.required, Validators.minLength(3)]],
-    direccion: ['', [Validators.required, Validators.minLength(3)]],
-    antiguedad: ['', [Validators.required]],
-    area: ['', [Validators.required]],
-    valorComercial: [{ disabled: false, value: '' }, [Validators.required, Validators.minLength(3)]],
+    nombre1: ['', [Validators.required, Validators.minLength(3)]],
+    empresa1: ['', [Validators.required, Validators.minLength(3)]],
+    direccion1: ['', [Validators.required, Validators.minLength(3)]],
+    celular1: ['', [Validators.required]],
+    nombre2: ['', [Validators.required, Validators.minLength(3)]],
+    empresa2: ['', [Validators.required, Validators.minLength(3)]],
+    direccion2: ['', [Validators.required, Validators.minLength(3)]],
+    celular2: ['', [Validators.required]],
+    nombre3: ['', [Validators.required, Validators.minLength(3)]],
+    empresa3: ['', [Validators.required, Validators.minLength(3)]],
+    direccion3: ['', [Validators.required, Validators.minLength(3)]],
+    celular3: ['', [Validators.required]],
+
   });
 
   requests!: Requestx;
@@ -139,39 +104,42 @@ export class DatosinmuebleComponent implements OnInit {
     });
     Swal.showLoading();
     const {
-      tipo,
-      matricula,
-      uso,
-      estrato,
-      departamento,
-      ciudad,
-      barrio,
-      direccion,
-      antiguedad,
-      area,
-      valorComercial,
+      nombre1,
+      empresa1,
+      direccion1,
+      celular1,
+      nombre2,
+      empresa2,
+      direccion2,
+      celular2,
+      nombre3,
+      empresa3,
+      direccion3,
+      celular3,
+
     } = this.miFormulario.value;
     if (this.requests._id) {
       this.requestService
-        .updateRequestsByIdInmueble(
+        .updateRequestsByIdRefCom(
           this.requests._id,
-          tipo,
-          matricula,
-          uso,
-          estrato,
-          departamento,
-          ciudad,
-          barrio,
-          direccion,
-          antiguedad,
-          area,
-          valorComercial
+          nombre1,
+          empresa1,
+          direccion1,
+          celular1,
+          nombre2,
+          empresa2,
+          direccion2,
+          celular2,
+          nombre3,
+          empresa3,
+          direccion3,
+          celular3,
         )
         .subscribe(
           (resp) => {
             Swal.fire({
               title: 'OK',
-              text: 'Datos De Inmueble Enviados',
+              text: 'Datos De Referencias Enviados',
               icon: 'success',
             });
             this.router.navigateByUrl('/dashboard/misolicitud');

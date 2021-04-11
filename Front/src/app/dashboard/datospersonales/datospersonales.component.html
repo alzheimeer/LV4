@@ -1,201 +1,213 @@
-<div class="panel-header ">
-    <div class="header text-center">
-        <h2 class="title">Formulario De Datos Personales</h2>
-    </div>
+<div class="panel-header">
+  <div class="header text-center">
+    <h2 class="title">Lendiup</h2>
+  </div>
 </div>
 
 
 <div class="main-content">
-    <div class="row">
+  <div class="row">
 
-
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="title">Ahora Completa Tus Datos Personales</h5>
-                </div>
-                <div class="card-body">
-
-
-
-                    <form (ngSubmit)="guardar(f)" #f="ngForm">
-                        <!-- <form  #f="ngForm"> -->
-                        <div class="row">
-                            <div class="col-md-6 pl-1">
-                                <div class="form-group">
-                                    <label>ID de Usuario</label>
-                                    <input [(ngModel)]="usuario._id" name="id" type="text" class="form-control" placeholder="ID Usuario" disabled="disable" />
-                                    <small class="form-text text-muted">Este campo es autogenerado</small>
-                                </div>
-                            </div>
-                            <div class="col-md-6 pl-1">
-                                <div class="form-group">
-                                    <label>email</label>
-                                    <input [(ngModel)]="usuario.email" name="email" type="text" class="form-control" placeholder="ID Usuario" disabled="disable" />
-                                    <small class="form-text text-muted">Esto no se puede cambiar</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 pl-1">
-                                <div class="form-group">
-                                    <label>Nombre</label>
-                                    <input [(ngModel)]="usuario.name" name="name" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6 pl-1">
-                                <div class="form-group">
-                                    <label>Apellido</label>
-                                    <input [(ngModel)]="usuario.surname" name="surname" type="text" class="form-control" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 pr-1">
-                                <div class="form-group">
-                                    <label>Tipo De Identificacion</label>
-
-                                    <select [(ngModel)]="usuario.personal.tipodoc" name="tipodoc" class="form-control custom-select" placeholder="Escoge Un Tipo" required>
-                      <option [value]="item" *ngFor="let item of tiposIdentificacion">{{item}}</option>
-
-                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6 pl-1">
-                                <div class="form-group">
-                                    <label>Numero</label>
-                                    <input [(ngModel)]="usuario.personal.numdoc" name="numdoc" type="number" class="form-control" placeholder="# de documento" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-3 pr-1">
-                                <div class="form-group">
-                                    <label>Pais</label>
-                                    <select [(ngModel)]="usuario.personal.pais" name="pais" class="form-control custom-select" placeholder="Escoge Un Pais" required>
-                      <option [value]="item" *ngFor="let item of paises">{{item}}</option>
-
-                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-3 px-1">
-                                <div class="form-group">
-                                    <label>Departamento</label>
-                                    <input [(ngModel)]="usuario.personal.departamento" name="departamento" type="text" class="form-control" placeholder="...." required>
-                                </div>
-                            </div>
-                            <div class="col-md-3 px-1">
-                                <div class="form-group">
-                                    <label>Ciudad</label>
-                                    <input [(ngModel)]="usuario.personal.ciudad" name="ciudad" type="text" class="form-control" placeholder="...." required>
-                                </div>
-                            </div>
-                            <div class="col-md-3 pl-1">
-                                <div class="form-group">
-                                    <label>Barrio</label>
-                                    <input [(ngModel)]="usuario.personal.barrio" name="barrio" type="text" class="form-control" placeholder="...." required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group">
-                                    <label>Dirección</label>
-                                    <input [(ngModel)]="usuario.personal.direccion" name="direccion" type="text" class="form-control" placeholder="Digite Su Direccion" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 px-1">
-                                <div class="form-group">
-                                    <label>Celular</label>
-                                    <input [(ngModel)]="usuario.personal.celular1" name="celular1" type="number" class="form-control" placeholder="Digite Su Numero Celular" required>
-                                </div>
-                            </div>
-                            <div class="col-md-6 pl-1">
-                                <div class="form-group">
-                                    <label>Celular Alternativo</label>
-                                    <input [(ngModel)]="usuario.personal.celular2" name="celular2" type="number" class="form-control" placeholder="Opcional ....">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-4 pr-1">
-                                <div class="form-group">
-                                    <label>Banco</label>
-                                    <select [(ngModel)]="usuario.banca.banco" name="banco" class="form-control custom-select" placeholder="Escoge Un Banco" required>
-                      <option [value]="item" *ngFor="let item of bancos">{{item}}</option>
-
-                    </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4 px-1">
-                                <div class="form-group">
-                                    <label>Tipo De Cuenta</label>
-                                    <select [(ngModel)]="usuario.banca.tipocuenta" name="tipocuenta" class="form-control custom-select" placeholder="Escoge Un Tipo" required>
-                      <option [value]="item" *ngFor="let item of tipocuenta">{{item}}</option>
-                    </select>
-
-                                </div>
-                            </div>
-                            <div class="col-md-4 pl-1">
-                                <div class="form-group">
-                                    <label>Numero De Cuenta</label>
-                                    <input [(ngModel)]="usuario.banca.numcuenta" name="numcuenta" type="number" class="form-control" placeholder="# de cuenta" required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="form-group d-flex h-100">
-                            <div class="align-self-end ml-auto">
-                                <button type="submit" class="btn btn-primary btn-block" [disabled]="f.invalid">
-                    <i class="fa fa-save"></i>
-                   Siguiente
-                  </button>
-                            </div>
-                        </div>
-                    </form>
-
-
-
-
-
-                </div>
-            </div>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Ahora Completa Sus Datos Personales</h5>
         </div>
+        <div class="card-body">
 
 
+          <form autocomplete="off" [formGroup]="miFormulario"
+            (ngSubmit)="guardar()">
+
+            <!-- Primera Fila -->
+            <div class="row">
+
+              <!-- Tipo de Documento -->
+              <mat-form-field appearance="fill" class="form-group col-md-6">
+                <mat-select formControlName="tipodoc">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option [value]="item" *ngFor="let item of tiposIdentificacion">{{item}}</mat-option>
+
+                </mat-select>
+                <mat-label><mat-icon>description</mat-icon> <b> Tipo de Documento </b></mat-label>
+              </mat-form-field>
+
+              <!-- Numero De Documento -->
+              <mat-form-field class="form-group col-md-6 pl-1">
+                <mat-label>Numero De Documento</mat-label>
+                <input matInput formControlName="numdoc" type="number"
+                  class="form-control" >
+                <mat-error *ngIf="campoEsValido('numdoc')">
+                  {{getError('numdoc')}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- Segunda Fila -->
+            <div class="row">
+
+              <!-- Pais -->
+              <mat-form-field appearance="fill" class="form-group col-md-3">
+                <mat-select formControlName="pais">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option [value]="item" *ngFor="let item of paises">{{item}}</mat-option>
+
+                </mat-select>
+                <mat-label><mat-icon>flag</mat-icon> <b> Pais</b></mat-label>
+              </mat-form-field>
+
+              <!-- Departamento -->
+              <mat-form-field appearance="fill" class="form-group col-md-3">
+                <mat-select formControlName="departamento">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option [value]="item" *ngFor="let item of departamentos">{{item}}</mat-option>
+
+                </mat-select>
+                <mat-label><mat-icon>flag</mat-icon> <b> Departamento</b></mat-label>
+              </mat-form-field>
+
+              <!-- Ciudad -->
+              <mat-form-field class="form-group col-md-3 pl-1">
+                <mat-label>Ciudad</mat-label>
+                <input matInput formControlName="ciudad" type="text"
+                  class="form-control" >
+                <mat-error *ngIf="campoEsValido('ciudad')">
+                  {{getError('ciudad')}}
+                </mat-error>
+              </mat-form-field>
+
+               <!-- Barrio -->
+               <mat-form-field class="form-group col-md-3 pl-1">
+                <mat-label>Barrio</mat-label>
+                <input matInput formControlName="barrio" type="text"
+                  class="form-control" >
+                <mat-error *ngIf="campoEsValido('barrio')">
+                  {{getError('barrio')}}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+            <!-- Tercera Fila -->
+            <div class="row">
+
+              <!-- Direccion -->
+              <mat-form-field class="form-group col-md-12 pl-1">
+                <mat-label>Direccion</mat-label>
+                <input matInput formControlName="direccion" type="text"
+                  class="form-control" >
+                <mat-error *ngIf="campoEsValido('direccion')">
+                  {{getError('direccion')}}
+                </mat-error>
+              </mat-form-field>
+
+                </div>
+
+            <!-- Cuarta Fila -->
+            <div class="row">
+
+              <!-- Celular -->
+              <mat-form-field class="form-group col-md-6">
+                <mat-label>Celular</mat-label>
+                <input matInput formControlName="celular1" type="number"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValido('celular1')">
+                  {{getError('celular1')}}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Celular 2 -->
+              <mat-form-field class="form-group col-md-4">
+                <mat-label>Celular Alternativo "Opcional"</mat-label>
+                <input matInput formControlName="celular2" type="number"
+                  class="form-control" >
+                <mat-error *ngIf="campoEsValido('celular2')">
+                  {{getError('celular2')}}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+
+            <!-- Quinta Fila -->
+            <div class="row">
+
+               <!-- Banco -->
+               <mat-form-field appearance="fill" class="form-group col-md-4">
+                <mat-select formControlName="banco">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option [value]="item" *ngFor="let item of bancos">{{item}}</mat-option>
+
+                </mat-select>
+                <mat-label><mat-icon>account_balance</mat-icon> <b> Banco</b></mat-label>
+              </mat-form-field>
+               <!-- Tipo Cuenta -->
+               <mat-form-field appearance="fill" class="form-group col-md-4">
+                <mat-select formControlName="tipocuenta">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option [value]="item" *ngFor="let item of tipocuenta">{{item}}</mat-option>
+
+                </mat-select>
+                <mat-label><mat-icon>account_balance</mat-icon> <b> Tipo De Cuenta</b></mat-label>
+              </mat-form-field>
+
+              <!-- Numero de Cuenta -->
+              <mat-form-field class="form-group col-md-4">
+                <mat-label>Numero De Cuenta</mat-label>
+                <input matInput formControlName="numcuenta" type="number"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValido('numcuenta')">
+                  {{getError('numcuenta')}}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+
+            <!-- Boton De Enviar Formulario -->
+            <div class="form-group d-flex h-100">
+              <div class="align-self-end ml-auto">
+                <button type="submit" class="btn btn-primary btn-block"
+                  [disabled]="miFormulario.invalid">
+                  <i class="fa fa-save"></i>
+                  Siguiente
+                </button>
+              </div>
+            </div>
+          </form>
 
 
-
-
-
-
-
-
-        <mat-card class=" col-md-4">
-            <mat-card-header>
-                <img class="img-fluid" src="../assets/img/mike.jpg" alt="Photo of a Shiba Inu">
-            </mat-card-header>
-            <div mat-card-avatar class="example-header-image "></div>
-            <mat-card-title>{{usuario.name | uppercase}}</mat-card-title>
-            <mat-card-subtitle> {{usuario.surname | uppercase}}</mat-card-subtitle>
-            <mat-card-subtitle> {{usuario.email}}</mat-card-subtitle>
-
-            <mat-card-content>
-                <p>
-                    "Aqui puedes llenar
-                    <br> La solicitud
-                    <br>Del prestamos
-                    <br> que desees! "
-                </p>
-            </mat-card-content>
-            <mat-card-actions>
-                <!-- <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button> -->
-            </mat-card-actions>
-        </mat-card>
-
-
+        </div>
+      </div>
     </div>
+
+
+    <mat-card class="col-md-4">
+      <mat-card-header>
+        <img class="img-fluid" src="../assets/img/mike.jpg" alt="Photo of a
+          Shiba Inu">
+      </mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-content>
+        <p>
+          "Aqui puedes llenar
+          <br> La solicitud
+          <br>Del prestamos
+          <br> que desees! "</p>
+      </mat-card-content>
+      <mat-card-actions>
+
+      </mat-card-actions>
+    </mat-card>
+
+
+  </div>
 </div>
+
+
+
+
+<!-- <span>Valid</span>
+<pre>{{ miFormulario.valid }}</pre>
+<br>
+
+<span>Value</span>
+<pre>{{ miFormulario.value | json }}</pre>
+<br> -->

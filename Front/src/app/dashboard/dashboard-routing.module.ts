@@ -16,6 +16,7 @@ import { ProductoComponent } from './producto/producto.component';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { MisolicitudComponent } from './misolicitud/misolicitud.component';
 import { DatosreferenciasComponent } from './datosreferencias/datosreferencias.component';
+import { DatosreferenciacomComponent } from './datosreferenciacom/datosreferenciacom.component';
 import { DatostrabajoComponent } from './datostrabajo/datostrabajo.component';
 
 
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'datospersonales',  component: DatospersonalesComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'datostrabajo',  component: DatostrabajoComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'datosreferencias',  component: DatosreferenciasComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
+  { path: 'datosreferenciascom',  component: DatosreferenciacomComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'datosinmueble',  component: DatosinmuebleComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'datosvehiculo',    component: DatosvehiculoComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'usuarios',         component: UsuariosComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },

@@ -1,188 +1,199 @@
-<div class="panel-header ">
-    <div class="header text-center">
-        <h2 class="title">Formulario De Vehiculo</h2>
-    </div>
+<div class="panel-header">
+  <div class="header text-center">
+    <h2 class="title">Formulario De Vehiculo</h2>
+  </div>
 </div>
 
 
 <div class="main-content">
-    <div class="row">
+  <div class="row">
+
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Ahora Completa Los Datos Del Vehiculo</h5>
+        </div>
+        <div class="card-body">
 
 
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="title">Ahora Completa Los Datos Del Vehiculo</h5>
-                </div>
-                <div class="card-body">
+          <form autocomplete="off" [formGroup]="miFormulario"
+            (ngSubmit)="guardar()">
+
+            <!-- Primera Fila -->
+            <div class="row">
+
+              <!-- Tipo de Vehiculo -->
+              <mat-form-field appearance="fill" class="form-group col-md-6">
+                <mat-select formControlName="tipo">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option value="Automovil">Automovil</mat-option>
+                  <mat-option value="Camioneta">Camioneta</mat-option>
+                  <mat-option>Motocicleta</mat-option>
+                </mat-select>
+                <mat-label><mat-icon>directions_car</mat-icon> <b> Tipo De Vehiculo</b></mat-label>
+              </mat-form-field>
+
+              <!-- Numero de placa -->
+              <mat-form-field class="form-group col-md-6 pl-1">
+                <mat-label>Numero De Placa</mat-label>
+                <input matInput formControlName="placa" type="text"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValido('placa')">
+                  {{getError('placa')}}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+
+            <!-- Segunda Fila -->
+            <div class="row">
+
+              <!-- Modelo -->
+              <mat-form-field appearance="fill" class="form-group col-md-6">
+                <mat-select formControlName="modelo">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option value="2022">2022</mat-option>
+                  <mat-option value="2021">2021</mat-option>
+                  <mat-option value="2020">2020</mat-option>
+                  <mat-option value="2019">2019</mat-option>
+                  <mat-option value="2018">2018</mat-option>
+                  <mat-option value="2017">2017</mat-option>
+                  <mat-option value="2016">2016</mat-option>
+                  <mat-option value="2015">2015</mat-option>
+                  <mat-option value="2014">2014</mat-option>
+                  <mat-option value="2013">2013</mat-option>
+                  <mat-option value="2012">2012</mat-option>
+                </mat-select>
+                <mat-label><mat-icon>directions_car</mat-icon> <b> Modelo?</b></mat-label>
+              </mat-form-field>
+
+              <!-- Tido De Caja -->
+              <mat-form-field appearance="fill" class="form-group col-md-6">
+                <mat-select formControlName="tipoCaja">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option value="Trasmisión Manual">Trasmisión Manual</mat-option>
+                  <mat-option value="Trasmisión Automatica">Trasmisión
+                    Automatica</mat-option>
+                </mat-select>
+                <mat-label><mat-icon>directions_car</mat-icon> <b> Tipo De Trasmisión</b></mat-label>
+              </mat-form-field>
+
+            </div>
+
+            <!-- Tercera Fila -->
+            <div class="row">
+
+               <!-- Marca -->
+               <mat-form-field class="form-group col-md-4">
+                <mat-label>Marca</mat-label>
+                <input matInput formControlName="marca" type="text"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValido('marca')">
+                  {{getError('marca')}}
+                </mat-error>
+              </mat-form-field>
+
+               <!-- Linea -->
+               <mat-form-field class="form-group col-md-4">
+                <mat-label>Linea</mat-label>
+                <input matInput formControlName="linea" type="text"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValido('linea')">
+                  {{getError('linea')}}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Kilometraje -->
+              <mat-form-field class="form-group col-md-4">
+                <mat-label>Kilometraje</mat-label>
+                <input matInput formControlName="kilometraje" type="number"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValido('kilometraje')">
+                  {{getError('kilometraje')}}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+
+             <!-- Cuarta Fila -->
+            <div class="row">
+
+               <!--Tipo De Placa? -->
+               <mat-form-field appearance="fill" class="form-group col-md-6">
+                <mat-select formControlName="tipoPlaca">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option value="Particular">Particular</mat-option>
+                  <mat-option value="Publica">Publica</mat-option>
+                </mat-select>
+                <mat-label><mat-icon>directions_car</mat-icon> <b> Tipo De Placa?</b></mat-label>
+              </mat-form-field>
 
 
+              <!--Unico Dueño? -->
+               <mat-form-field appearance="fill" class="form-group col-md-6">
+                <mat-select formControlName="unicoDueno">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option value="Si">Si</mat-option>
+                  <mat-option value="No">No</mat-option>
+                </mat-select>
+                <mat-label><mat-icon>
+                  directions_car
+                 </mat-icon> <b> Unico Dueño?</b></mat-label>
+              </mat-form-field>
 
-                    <form (ngSubmit)="guardar(f)" #f="ngForm">
+            </div>
 
-                        <div class="form-group">
-                            <label>ID de Usuario</label>
-                            <input [(ngModel)]="id" name="id" type="text" class="form-control" placeholder="ID Usuario" disabled="disable" />
-                            <small class="form-text text-muted">Este campo es autogenerado</small>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-6 pr-1">
-                                <div class="form-group">
-                                    <label>Tipo De Vehiculo</label>
-                                    <select [(ngModel)]="requests.vehiculo.tipo" name="tipo" class="form-control custom-select" required>
-                    <option selected disabled value="">Escoge...</option>
-                    <option>Automovil</option>
-                    <option>Camioneta</option>
-                    <option>Motocicleta</option>
-                  </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6 pl-1">
-                                <div class="form-group">
-                                    <label># De Placa</label>
-                                    <input [(ngModel)]="requests.vehiculo.placa" name="numplaca" type="text" class="form-control" placeholder="# de placa" required>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-6 pr-1">
-                                <div class="form-group">
-                                    <label>Modelo</label>
-                                    <select [(ngModel)]="requests.vehiculo.modelo" name="modelo" class="form-control custom-select" placeholder="Escoge Un Modelo" required>
-                    <option selected disabled value="">Escoge...</option>
-                    <option>2022</option>
-                    <option>2021</option>
-                    <option>2020</option>
-                    <option>2019</option>
-                    <option>2018</option>
-                    <option>2017</option>
-                    <option>2016</option>
-                    <option>2015</option>
-                    <option>2014</option>
-                    <option>2013</option>
-                    <option>2012</option>
-                  </select>
-                                </div>
-                            </div>
-                            <div class="col-md-6 px-1">
-                                <div class="form-group">
-                                    <label>Tipo De Caja</label>
-                                    <select [(ngModel)]="requests.vehiculo.tipoCaja" name="tipocaja" type="text" class="form-control  custom-select" placeholder="...." required>
-                    <option selected disabled value="">Escoge...</option>
-                    <option>Trasmisión Manual</option>
-                    <option>Trasmisión Automatica</option>
-
-                  </select>
-                                </div>
-                            </div>
-                            <div class="col-md-4 px-1">
-                                <div class="form-group">
-                                    <label>Linea</label>
-                                    <input [(ngModel)]="requests.vehiculo.linea" name="linea" type="text" class="form-control" placeholder="...." required>
-                                </div>
-                            </div>
-                            <div class="col-md-4 px-1">
-                                <div class="form-group">
-                                    <label>Marca</label>
-                                    <input [(ngModel)]="requests.vehiculo.marca" name="marca" type="text" class="form-control" placeholder="Marca" required>
-                                </div>
-                            </div>
-                            <div class="col-md-4 pl-1">
-                                <div class="form-group">
-                                    <label>Kilometraje</label>
-                                    <input [(ngModel)]="requests.vehiculo.kilometraje" name="kilometraje" type="number" class="form-control" placeholder="...." required>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-
-
-                            <div class="form-group col-md-6 pl-1">
-                                <label>¿Tipo De Placa?</label>
-                                <div class="radio">
-                                    <label>
-                                      <input type="radio" name="tipoPlaca" value="Particular" [(ngModel)]="requests.vehiculo.tipoPlaca" required>
-                                      Particular
-                                  </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                      <input type="radio" name="tipoPlaca" value="Publica" [(ngModel)]="requests.vehiculo.tipoPlaca" required>
-                                      Publica
-                                  </label>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group col-md-6 pl-1">
-                                <label>¿Unico Dueño?</label>
-                                <div class="radio">
-                                    <label>
-                                      <input type="radio"  name="udueno" value=true [(ngModel)]="requests.vehiculo.unicoDueno" required>
-                                      Si
-                                  </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                      <input type="radio"  name="udueno" value=false [(ngModel)]="requests.vehiculo.unicoDueno" required>
-                                      No
-                                  </label>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="form-group d-flex h-100">
-                            <div class="align-self-end ml-auto">
-                                <button type="submit" class="btn btn-primary btn-block" [disabled]="f.invalid">
+            <!-- Boton De Enviar Formulario -->
+            <div class="form-group d-flex h-100">
+              <div class="align-self-end ml-auto">
+                <button type="submit" class="btn btn-primary btn-block"
+                  [disabled]="miFormulario.invalid">
                   <i class="fa fa-save"></i>
                   Siguiente
                 </button>
-                            </div>
-                        </div>
-                    </form>
-
-
-                </div>
+              </div>
             </div>
+          </form>
+
+
         </div>
-
-
-
-
-
-
-
-
-
-        <mat-card class=" col-md-4">
-            <mat-card-header>
-                <img class="img-fluid" src="../assets/img/mike.jpg" alt="Photo of a Shiba Inu">
-            </mat-card-header>
-            <div mat-card-avatar class="example-header-image "></div>
-            <mat-card-title>{{usuarioauth.name | uppercase}}</mat-card-title>
-            <mat-card-subtitle> {{usuarioauth.surname | uppercase}}</mat-card-subtitle>
-            <mat-card-subtitle> {{usuarioauth.email}}</mat-card-subtitle>
-
-            <mat-card-content>
-                <p>
-                    "Aqui puedes llenar
-                    <br> La solicitud
-                    <br>Del prestamos
-                    <br> que desees! "
-                </p>
-            </mat-card-content>
-            <mat-card-actions>
-                <!-- <button mat-button>LIKE</button>
-        <button mat-button>SHARE</button> -->
-            </mat-card-actions>
-        </mat-card>
-
-
+      </div>
     </div>
+
+
+
+
+
+
+
+
+
+
+    <mat-card class="col-md-4">
+      <mat-card-header>
+        <img class="img-fluid" src="../assets/img/mike.jpg" alt="Photo of a
+          Shiba Inu">
+      </mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-content>
+        <p>
+          "Aqui puedes llenar
+          <br> La solicitud
+          <br>Del prestamos
+          <br> que desees! "</p>
+      </mat-card-content>
+      <mat-card-actions>
+
+      </mat-card-actions>
+    </mat-card>
+
+  </div>
 </div>
 
+<!-- <span>Valid</span>
+<pre>{{ miFormulario.valid }}</pre>
+<br>
 
-<!-- {{f.value | json}} {{f.valid}} -->
+<span>Value</span>
+<pre>{{ miFormulario.value | json }}</pre>
+<br> -->

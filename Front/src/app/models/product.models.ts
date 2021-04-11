@@ -4,6 +4,7 @@ export interface Product {
   regVehiculo:    boolean;
   regTrabajo:     boolean;
   regReferencias: boolean;
+  regReferenciasCom: boolean;
   _id:            string;
   name:           string;
   valuemin:       number;

@@ -34,9 +34,10 @@
                         <button *ngIf="user == undefined && regPersonales" routerLink="/dashboard/datospersonales" class="button3">Datos Personales</button>
                         <button *ngIf="request.regInmueble == false && regInmueble" routerLink="/dashboard/datosinmueble" class="button3">Datos Del Inmueble</button>
                         <button *ngIf="request.regVehiculo == false && regVehiculo" routerLink="/dashboard/datosvehiculo" class="button3">Datos Del Vehiculo</button>
-                        <button *ngIf="regInmueble" routerLink="/dashboard/datosconstruccion" class="button3">Datos Construccion</button>
+                        <!-- <button *ngIf="request.regInmueble == false && regInmueble" routerLink="/dashboard/datosconstruccion" class="button3">Datos Construccion</button> -->
                         <button *ngIf="request.regTrabajo == false && regTrabajo" routerLink="/dashboard/datostrabajo" class="button3">Datos De Trabajo</button>
-                        <button *ngIf="request.regReferencias == false && regReferencias" routerLink="/dashboard/datosreferencias" class="button3">Referencias</button>
+                        <button *ngIf="request.regReferencias == false && regReferencias" routerLink="/dashboard/datosreferencias" class="button3">Referencias Personales</button>
+                        <button *ngIf="request.regReferenciasCom == false && regReferenciasCom" routerLink="/dashboard/datosreferenciascom" class="button3">Referencias Comerciales</button>
                         <hr>
                         <p>Imagen O PDF De Las 2 Caras De Tu Cedula </p>
                         <input type="file" class="file-upload" multiple>
@@ -47,6 +48,10 @@
                         <button class="button3">Subir Documento</button>
                         <hr>
                         <p>Imagen O PDF De La Matricula Inmobiliaria</p>
+                        <input type="file" class="file-upload" multiple>
+                        <button class="button3">Subir Documento</button>
+                        <hr>
+                        <p>Imagen O PDF De Estractos Bancarios Ultimos 6 meses</p>
                         <input type="file" class="file-upload" multiple>
                         <button class="button3">Subir Documento</button>
                     </div>
@@ -70,6 +75,7 @@
                 <mat-card-actions>
                     <button mat-button>COMPLETO</button>
                     <button mat-button>INCOMPLETO</button>
+
                 </mat-card-actions>
             </mat-card>
         </div>
@@ -84,8 +90,8 @@
 <pre>{{formularioSolicitud.value | json}}</pre> -->
 
 
-<pre class="noS">{{this.regInmueble}}</pre>
+<!-- <pre class="noS">{{this.regInmueble}}</pre>
 <pre class="noS">{{this.regPersonales}}</pre>
 <pre class="noS">{{this.regVehiculo}}</pre>
 <pre class="noS">{{this.regTrabajo}}</pre>
-<pre class="noS">{{this.regReferencias}}</pre>
+<pre class="noS">{{this.regReferencias}}</pre> -->

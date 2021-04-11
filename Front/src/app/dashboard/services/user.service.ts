@@ -1,6 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { environment } from '../../../environments/environment';
 import { User } from '../../models/user.models';
 
@@ -37,6 +38,30 @@ export class UserService {
   public updateUserById( usuario: User ){
     const url = `${this.baseUrl}/users`;
     return this.http.put(`${ url }/${ usuario._id }`, usuario);
+  }
+
+  public updateUserByIdX(id: string, tipodoc: string, pais: string, departamento: string, ciudad: string, barrio: string, direccion: string, numdoc: number, celular1: number, celular2: number, banco: string, tipocuenta: string, numcuenta: number) {
+    const url = `${this.baseUrl}/users`;
+    const body = {
+      'personal': {
+        'tipodoc': tipodoc,
+        'pais': pais,
+        'departamento': departamento,
+        'ciudad': ciudad,
+        'barrio': barrio,
+        'direccion': direccion,
+        'numdoc': numdoc,
+        'celular1': celular1,
+        'celular2': celular2,
+      },
+      'banca': {
+        'banco': banco,
+        'tipocuenta': tipocuenta,
+        'numcuenta': numcuenta,
+      }
+    };
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return this.http.put(`${url}/${id}`, body, { headers });
   }
 
   public deleteUserById( id: any ){

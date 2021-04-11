@@ -4,15 +4,13 @@ import { AuthService } from '../auth/services/auth.service';
 import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
 import { Role } from '../auth/interfaces';
 
-
-
-
 declare interface RouteInfo {
   path: string;
   title: string;
   icon: string;
   class: string;
 }
+
 export const ROUTES: RouteInfo[] = [
   { path: '/dashboard/solicitud', title: 'Solicitud', icon: 'space_dashboard', class: 'x' },
   { path: '/dashboard/misolicitud', title: 'Mi Solicitud', icon: 'space_dashboard', class: 'x' },
@@ -23,7 +21,8 @@ export const ROUTES: RouteInfo[] = [
   { path: '/dashboard/datosvehiculo', title: 'Datos Vehiculo', icon: 'verified', class: 'x' },
   { path: '/dashboard/datosconstruccion', title: 'Datos Construccion', icon: 'verified', class: 'x' },
   { path: '/dashboard/datostrabajo', title: 'Datos Trabajo', icon: 'verified', class: 'x' },
-  { path: '/dashboard/datosreferencias', title: 'Datos Referencias', icon: 'verified', class: 'x' },
+  { path: '/dashboard/datosreferencias', title: 'Datos Referencias Personales', icon: 'verified', class: 'x' },
+  { path: '/dashboard/datosreferenciacom', title: 'Datos Referencias Comerciales', icon: 'verified', class: 'x' },
   { path: '/dashboard/usuarios', title: 'Usuarios', icon: 'groups', class: 'x' },
   { path: '/dashboard/estadocuenta', title: 'Pagar Cuota', icon: 'savings', class: 'x' },
   { path: '/dashboard/misdatos', title: 'Mi Cuenta', icon: 'person', class: 'x' }
@@ -48,10 +47,10 @@ export class DashboardComponent implements OnInit {
   }
 
   // Seccion que detecta pantalla pequeña y se colapsa el sidebar
-  isSmallScreen = this.breakpointObserver.isMatched('(max-width: 768px)');
+  isSmallScreen = this.breakpointObserver.isMatched('(max-width: 894px)');
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
-    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 768px)'
+    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 894px)'
     );
     this.opened = !this.isSmallScreen;
     // y nos dira el tamaño de la pantalla

@@ -1,6 +1,6 @@
-<div class="panel-header ">
+<div class="panel-header">
   <div class="header text-center">
-      <h2 class="title">Formulario De Datos De Trabajo</h2>
+    <h2 class="title">Formulario De Datos De Trabajo</h2>
   </div>
 </div>
 
@@ -9,176 +9,325 @@
   <div class="row">
 
 
-      <div class="col-md-8">
-          <div class="card">
-              <div class="card-header">
-                  <h5 class="title">Ahora Completa Los Datos De El Inmueble</h5>
-              </div>
-              <div class="card-body">
-
-
-
-                  <form (ngSubmit)="guardar(f)" #f="ngForm">
-
-                      <div class="form-group">
-                          <label>ID de Usuario</label>
-                          <input [(ngModel)]="id" name="id" type="text" class="form-control" placeholder="ID Usuario" disabled="disable" />
-                          <small class="form-text text-muted">Este campo es autogenerado</small>
-                      </div>
-                      <div class="row">
-                          <div class="col-md-6 pr-1">
-                              <div class="form-group">
-                                  <label>Tipo De Inmueble</label>
-                                  <select [(ngModel)]="requests.inmueble.tipo" name="tipo" class="form-control custom-select" required>
-                  <option selected disabled value="">Escoge...</option>
-                  <option>Casa</option>
-                  <option>Apartamento</option>
-                  <option>Oficina</option>
-                  <option>Bodega</option>
-                  <option>Consultorio</option>
-                  <option>Local Comercial</option>
-                  <option>Lote</option>
-                  <option>Finca</option>
-                  <option>Edificio De Apartamentos</option>
-                  <option>Edificio De Oficinas</option>
-                </select>
-
-                              </div>
-                          </div>
-                          <div class="col-md-6 pl-1">
-                              <div class="form-group">
-                                  <label># De Matricula Inmobiliaria</label>
-                                  <input [(ngModel)]="requests.inmueble.matricula" name="matricula" type="text" class="form-control" placeholder="# de matricula" required>
-                              </div>
-                          </div>
-                      </div>
-
-                      <div class="row">
-                          <div class="col-md-6 pr-1">
-                              <div class="form-group">
-                                  <label>Uso Del Inmueble</label>
-                                  <select [(ngModel)]="requests.inmueble.uso" name="uso" class="form-control custom-select" placeholder="Uso del inmueble" required>
-                  <option selected disabled value="">Escoge...</option>
-                  <option>Residencial/option>
-                  <option>Comercial</option>
-                  <option>Mixto</option>
-                  <option>Agropecuario</option>
-                </select>
-                              </div>
-                          </div>
-                          <div class="col-md-6 px-1">
-                              <div class="form-group">
-                                  <label>Escoje El Estrato</label>
-                                  <select [(ngModel)]="requests.inmueble.estrato" name="estrato" type="text" class="form-control  custom-select" placeholder="...." required>
-                  <option selected disabled value="">Escoge...</option>
-                  <option>Estrato 1</option>
-                  <option>Estrato 2</option>
-                  <option>Estrato 3</option>
-                  <option>Estrato 4</option>
-                  <option>Estrato 5</option>
-                  <option>Estrato 6</option>
-                </select>
-                              </div>
-                          </div>
-                          <div class="col-md-4 px-1">
-                              <div class="form-group">
-                                  <label>Departamento</label>
-                                  <input [(ngModel)]="requests.inmueble.departamento" name="departamento" type="text" class="form-control" placeholder="Departamento" required>
-                              </div>
-                          </div>
-                          <div class="col-md-4 px-1">
-                              <div class="form-group">
-                                  <label>Ciudad</label>
-                                  <input [(ngModel)]="requests.inmueble.ciudad" name="ciudad" type="text" class="form-control" placeholder="Ciudad" required>
-                              </div>
-                          </div>
-                          <div class="col-md-4 pl-1">
-                              <div class="form-group">
-                                  <label>Localidad / Barrio / Vereda</label>
-                                  <input [(ngModel)]="requests.inmueble.barrio" name="barrio" type="text" class="form-control" placeholder="Barrio" required>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-md-12">
-                              <div class="form-group">
-                                  <label>Dirección</label>
-                                  <input [(ngModel)]="requests.inmueble.direccion" name="direccion" type="text" class="form-control" placeholder="Digite Su Direccion" required>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="row">
-                          <div class="col-md-4 px-1">
-                              <div class="form-group">
-                                  <label>Años De Antiguedad</label>
-                                  <input [(ngModel)]="requests.inmueble.antiguedad" name="antiguedad" type="number" class="form-control" placeholder="Digite # de años" required>
-                              </div>
-                          </div>
-                          <div class="col-md-4 pl-1">
-                              <div class="form-group">
-                                  <label>Area</label>
-                                  <input [(ngModel)]="requests.inmueble.area" name="area" type="number" class="form-control" placeholder="Area" required>
-                              </div>
-                          </div>
-                          <div class="col-md-4 pl-1">
-                              <div class="form-group">
-                                  <label>Valor comercial?</label>
-                                  <input [(ngModel)]="requests.inmueble.valorComercial" name="valorcomercial" type="number" class="form-control" placeholder="Valor" required>
-                              </div>
-                          </div>
-                      </div>
-                      <!--  <div class="col-md-12 pl-1">
-            <p>¿Deseas abonar a capital en cada cuota?</p>
-            <div class="form-group custom-control custom-radio">
-              <input type="radio" id="customRadio1" name="customRadio" class="form-control custom-control-input">
-              <label class="custom-control-label" for="customRadio1">SI</label>
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Ahora Completa Los Datos De Tu Trabajo</h5>
+        </div>
+        <div class="row">
+          <div class="col-md-12 px-5 pl-5 mt-5">
+            <div class="form-group">
+              <label>Escoje Tu Modalidad De Trabajo</label>
+              <select (change)="modalidad(tipo.value)" name="tipo"
+              class="form-control custom-select" #tipo
+              required>
+                <option selected disabled value="">Escoge...</option>
+                <option value="empleado">Empleado</option>
+                <option value="independiente">Independiente</option>
+                <option value="empresa">Empresa</option>
+              </select>
             </div>
-            <div class="form-group custom-control custom-radio">
-              <input type="radio" id="customRadio2" name="customRadio" class="form-control custom-control-input">
-              <label class="custom-control-label" for="customRadio2">NO</label>
-            </div>
-          </div> -->
-
-
-
-                      <div class="form-group d-flex h-100">
-                          <div class="align-self-end ml-auto">
-                              <button type="submit" class="btn btn-primary btn-block" [disabled]="f.invalid">
-                <i class="fa fa-save"></i>
-                Siguiente
-              </button>
-                          </div>
-                      </div>
-                  </form>
-
-
-              </div>
           </div>
+        </div>
+
+
+
+        <!-- card body empleado -->
+
+        <div class="card-body" *ngIf="sw == 1">
+          <form autocomplete="off" [formGroup]="miFormularioEmpleado"
+            (ngSubmit)="guardarEmpleado()">
+
+            <!-- Primera Fila -->
+            <div class="row">
+
+              <!-- tiempoTrabajando -->
+              <mat-form-field class="form-group col-md-6 pl-1">
+                <mat-label>Antiguedad En Meses</mat-label>
+                <input matInput formControlName="tiempoTrabajando" type="number"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValidoEmpleado('tiempoTrabajando')">
+                  {{getErrorEmpleado('tiempoTrabajando')}}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Ingreso Mensual -->
+              <mat-form-field class="form-group col-md-6 pl-1">
+                <mat-label>Ingreso Mensual</mat-label>
+                <input matInput formControlName="ingresoMensual" type="number"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValidoEmpleado('ingresoMensual')">
+                  {{getErrorEmpleado('ingresoMensual')}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- Segunda Fila -->
+            <div class="row">
+
+              <!-- Direccion De La Empresa -->
+              <mat-form-field class="form-group col-md-12 pl-1">
+                <mat-label>Direccion De La Empresa</mat-label>
+                <input matInput formControlName="direccion" type="text"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValidoEmpleado('direccion')">
+                  {{getErrorEmpleado('direccion')}}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+
+            <!-- Tercera Fila -->
+            <div class="row">
+
+              <!-- Telefono -->
+              <mat-form-field class="form-group col-md-4 pl-1">
+                <mat-label>Telefono</mat-label>
+                <input matInput formControlName="telefono" type="number"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValidoEmpleado('telefono')">
+                  {{getErrorEmpleado('telefono')}}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Jefe Inmediato -->
+              <mat-form-field class="form-group col-md-4 pl-1">
+                <mat-label>Jefe Inmediato</mat-label>
+                <input matInput formControlName="jefeInmediato" type="text"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValidoEmpleado('jefeInmediato')">
+                  {{getErrorEmpleado('jefeInmediato')}}
+                </mat-error>
+              </mat-form-field>
+
+              <!--Cargo Actual -->
+              <mat-form-field class="form-group col-md-4 pl-1">
+                <mat-label>Cargo Actual</mat-label>
+                <input matInput formControlName="cargoActual" type="text"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValidoEmpleado('cargoActual')">
+                  {{getErrorEmpleado('cargoActual')}}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+
+            <!-- Boton De Enviar Formulario Empleado-->
+            <div class="form-group d-flex h-100">
+              <div class="align-self-end ml-auto">
+                <button type="submit" class="btn btn-primary btn-block"
+                  [disabled]="miFormularioEmpleado.invalid">
+                  <i class="fa fa-save"></i>
+                  Siguiente
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- card Independiente -->
+        <div class="card-body" *ngIf="sw == 2">
+          <form autocomplete="off" [formGroup]="miFormularioIndependiente"
+            (ngSubmit)="guardarIndependiente()">
+
+
+            <!-- Primera Fila -->
+            <div class="row">
+
+              <!-- tiempoTrabajando -->
+              <mat-form-field class="form-group col-md-6 pl-1">
+                <mat-label>Cuanto Llevas Como Independiente</mat-label>
+                <input matInput formControlName="tiempoTrabajando" type="number"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValidoIndependiente('tiempoTrabajando')">
+                  {{getErrorIndependiente('tiempoTrabajando')}}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Ingreso Mensual -->
+              <mat-form-field class="form-group col-md-6 pl-1">
+                <mat-label>Ingreso Mensual</mat-label>
+                <input matInput formControlName="ingresoMensual" type="number"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValidoIndependiente('ingresoMensual')">
+                  {{getErrorIndependiente('ingresoMensual')}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- Segunda Fila -->
+            <div class="row">
+
+              <!-- Direccion De La Empresa -->
+              <mat-form-field class="form-group col-md-12 pl-1">
+                <mat-label>Direccion Donde Laboras</mat-label>
+                <input matInput formControlName="direccion" type="text"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValidoIndependiente('direccion')">
+                  {{getErrorIndependiente('direccion')}}
+                </mat-error>
+              </mat-form-field>
+
+            </div>
+
+            <!-- Tercera Fila -->
+            <div class="row">
+
+              <!-- Telefono -->
+              <mat-form-field class="form-group col-md-6 pl-1">
+                <mat-label>Telefono</mat-label>
+                <input matInput formControlName="telefono" type="number"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValidoIndependiente('telefono')">
+                  {{getErrorIndependiente('telefono')}}
+                </mat-error>
+              </mat-form-field>
+
+                <!-- Actividad Comercial -->
+                <mat-form-field class="form-group col-md-6 pl-1">
+                  <mat-label>Actividad Comercial</mat-label>
+                  <input matInput formControlName="actividadComercial" type="text"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValidoIndependiente('actividadComercial')">
+                    {{getErrorIndependiente('actividadComercial')}}
+                  </mat-error>
+                </mat-form-field>
+
+            </div>
+            <!-- Boton De Enviar Formulario Independiente-->
+            <div class="form-group d-flex h-100">
+              <div class="align-self-end ml-auto">
+                <button type="submit" class="btn btn-primary btn-block"
+                  [disabled]="miFormularioIndependiente.invalid">
+                  <i class="fa fa-save"></i>
+                  Siguiente
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <!-- card Empresa -->
+
+        <div class="card-body" *ngIf="sw == 3">
+          <form autocomplete="off" [formGroup]="miFormularioEmpresa"
+            (ngSubmit)="guardarEmpresa()">
+
+
+             <!-- Primera Fila -->
+             <div class="row">
+
+              <!-- Nombre Empresa -->
+              <mat-form-field class="form-group col-md-6 pl-1">
+                <mat-label>Nombre De La Empresa</mat-label>
+                <input matInput formControlName="nombreEmpresa" type="text"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValidoEmpresa('nombreEmpresa')">
+                  {{getErrorEmpresa('nombreEmpresa')}}
+                </mat-error>
+              </mat-form-field>
+
+              <!-- Nit -->
+              <mat-form-field class="form-group col-md-6 pl-1">
+                <mat-label>Nit De La Empresa</mat-label>
+                <input matInput formControlName="nitEmpresa" type="string"
+                  class="form-control">
+                <mat-error *ngIf="campoEsValidoEmpresa('nitEmpresa')">
+                  {{getErrorEmpresa('nitEmpresa')}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <!-- Segunda Fila -->
+            <div class="row">
+
+                <!-- Actividad Comercial -->
+                <mat-form-field class="form-group col-md-6 pl-1">
+                  <mat-label>Actividad Comercial</mat-label>
+                  <input matInput formControlName="actividadComercial" type="text"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValidoEmpresa('actividadComercial')">
+                    {{getErrorEmpresa('actividadComercial')}}
+                  </mat-error>
+                </mat-form-field>
+
+                <!-- Ingreso Mesual -->
+                <mat-form-field class="form-group col-md-6 pl-1">
+                  <mat-label>Ingreso Mensual</mat-label>
+                  <input matInput formControlName="ingresoMensual" type="number"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValidoEmpresa('ingresoMensual')">
+                    {{getErrorEmpresa('ingresoMensual')}}
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+
+              <!-- Tercera Fila -->
+              <div class="row">
+
+                <!-- Direccion De La Empresa -->
+                <mat-form-field class="form-group col-md-6 pl-1">
+                  <mat-label>Direccion</mat-label>
+                  <input matInput formControlName="direccion" type="text"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValidoEmpresa('direccion')">
+                    {{getErrorEmpresa('direccion')}}
+                  </mat-error>
+                </mat-form-field>
+
+                  <!-- Telefono De La Empresa -->
+                  <mat-form-field class="form-group col-md-6 pl-1">
+                    <mat-label>Telefono</mat-label>
+                    <input matInput formControlName="telefonoEmpresa" type="number"
+                      class="form-control">
+                    <mat-error *ngIf="campoEsValidoEmpresa('telefonoEmpresa')">
+                      {{getErrorEmpresa('telefonoEmpresa')}}
+                    </mat-error>
+                  </mat-form-field>
+
+              </div>
+
+                <!-- Boton De Enviar Formulario Empresa-->
+              <div class="form-group d-flex h-100">
+              <div class="align-self-end ml-auto">
+                <button type="submit" class="btn btn-primary btn-block"
+                  [disabled]="miFormularioEmpresa.invalid">
+                  <i class="fa fa-save"></i>
+                  Siguiente
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+
+
       </div>
+    </div>
 
 
-      <mat-card class=" col-md-4">
-          <mat-card-header>
-              <img class="img-fluid" src="../assets/img/mike.jpg" alt="Photo of a Shiba Inu">
-          </mat-card-header>
-          <div mat-card-avatar class="example-header-image "></div>
-          <mat-card-title>{{usuarioauth.name | uppercase}}</mat-card-title>
-          <mat-card-subtitle> {{usuarioauth.surname | uppercase}}</mat-card-subtitle>
-          <mat-card-subtitle> {{usuarioauth.email}}</mat-card-subtitle>
-
-          <mat-card-content>
-              <p>
-                  "Aqui puedes llenar
-                  <br> La solicitud
-                  <br>Del prestamos
-                  <br> que desees! "
-              </p>
-          </mat-card-content>
-          <mat-card-actions>
-              <!-- <button mat-button>LIKE</button>
+    <mat-card class="col-md-4">
+      <mat-card-header>
+        <img class="img-fluid" src="../assets/img/mike.jpg" alt="Photo of a
+          Shiba Inu">
+      </mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title>{{usuarioauth.name | uppercase}}</mat-card-title>
+      <mat-card-subtitle> {{usuarioauth.surname | uppercase}}</mat-card-subtitle>
+      <mat-card-subtitle> {{usuarioauth.email}}</mat-card-subtitle>
+      <mat-card-content>
+        <p>
+          "Aqui puedes llenar
+          <br> La solicitud
+          <br>Del prestamos
+          <br> que desees! "</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <!-- <button mat-button>LIKE</button>
       <button mat-button>SHARE</button> -->
-          </mat-card-actions>
-      </mat-card>
+      </mat-card-actions>
+    </mat-card>
 
 
   </div>

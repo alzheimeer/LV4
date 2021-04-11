@@ -58,6 +58,11 @@ var ProductSchema = Schema({
         required: false,
         default: false
     },
+    regReferenciasCom: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
 }, {
     timestamps: true,
     versionkey: false

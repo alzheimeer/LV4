@@ -35,6 +35,7 @@ const getRequestByIdUser = async(req, res) => {
 }
 const updateRequestById = async(req, res) => {
     try {
+        // console.log('req:', req.body);
         const udRequest = await Request.findByIdAndUpdate(req.params.requestId, req.body, { new: true });
         return res.status(200).json(udRequest);
     } catch (error) {
