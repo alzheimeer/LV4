@@ -17,6 +17,7 @@ export interface Usuario {
   email?: string;
   roles?: [];
   solicitud?: string;
+  avatarPath?: string;
 }
 
 export interface Role {

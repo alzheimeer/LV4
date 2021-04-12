@@ -28,6 +28,10 @@ var UserSchema = Schema({
         type: String,
         required: true,
     },
+    avatarPath: {
+        type: String,
+        required: false
+    },
     personal: {
         tipodoc: {
             type: String,

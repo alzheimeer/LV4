@@ -1,6 +1,6 @@
 const {response} = require('express');
 const User = require('../models/User');
-
+const uploadX = require('../middlewares/multer')
 
 // Search all users
 const getUsers = async function (req, res) {
@@ -47,10 +47,20 @@ const deleteUserById = async function (req, res) {
         return res.status(500).json({ msg: 'Id De Usuario No Existe'});}
 };
 
+//Upload Avatar
+const uploadFile = async function (req, res) {
+    try {
+        const usuario = await User.findByIdAndUpdate(req.params.userId, {"avatarPath": req.file.path}, {new: true});
+        return res.status(200).json(usuario);
+    } catch (error) {
+        return res.status(500).json({ msg: 'Id De Usuario No Existe'});}
+};
+
 module.exports = {
     getUsers,
     getUserById,
     deleteUserById,
     updateUserById,
-    completeUserById
+    completeUserById,
+    uploadFile
 }

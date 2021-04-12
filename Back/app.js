@@ -26,6 +26,7 @@ app.use(morgan('dev'));
 
 // Public Directory
 app.use(express.static('public'));
+app.use('/uploads', express.static(path.resolve('uploads')));
 
 // Use CORS
 app.use(cors());

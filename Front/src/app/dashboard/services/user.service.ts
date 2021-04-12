@@ -63,6 +63,15 @@ export class UserService {
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, body, { headers });
   }
+  public updateUserByIdPhoto(id: string, photo: File) {
+    const url = `${this.baseUrl}/users/avatar`;
+    const fd = new FormData();
+    fd.append('avatar', photo);
+    console.log('fd', fd)
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    console.log(id)
+    return this.http.put(`${url}/${id}`, fd, { headers });
+  }
 
   public deleteUserById( id: any ){
     const url = `${this.baseUrl}/users/${id}`;

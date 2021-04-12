@@ -1,8 +1,11 @@
 const { Router } = require('express');
-const { getUsers, getUserById, updateUserById, deleteUserById, completeUserById } = require('../controllers/users.controller');
+const { getUsers, getUserById, updateUserById, deleteUserById, completeUserById, showFile, uploadFile } = require('../controllers/users.controller');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
+const { uploadX } = require('../middlewares/multer')
 const router = Router();
+
+
 
 //all users
 router.get('/', getUsers);
@@ -32,5 +35,7 @@ router.put('/:userId', updateUserById);
 //Delete
 router.delete('/:userId', deleteUserById);
 
+//Upload Photo Avatar
+router.put('/avatar/:userId', uploadX, uploadFile);
 
 module.exports = router;
