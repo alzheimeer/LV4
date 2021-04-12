@@ -1,13 +1,22 @@
 
   <div class="our-team">
+    <p><small>Click En Imagen Para Cambiarla</small></p>
  <div class="picture">
 
-   <img [src]="'http://lendiup.com/'+usuarioTest.avatarPath || '../../../../../assets/img/mike.jpg'" class="img-fluid">
-
+<div *ngIf="usuarioTest.avatarPath">
+   <img [src]="baseUrlN+usuarioTest.avatarPath" class="img-fluid">
+  </div>
+  <div *ngIf="!usuarioTest.avatarPath">
+    <img [src]="'../../../assets/img/mike.jpg'" class="img-fluid" (click)="photoInput.click()">
+   </div>
  </div>
  <div class="team-content">
+  <button *ngIf="file" class="btn button3" (click)="uploadPhoto()">Cambiar</button>
    <h3 class="name">{{usuario.name | uppercase}} {{usuario.surname | uppercase}}</h3>
    <h4 class="email">{{usuario.email}}</h4>
    <h4 routerLink="/dashboard/misdatos" >Actualiza Tus Datos</h4>
+   <input type="file" class="d-none" (change)="OnPhotoSelected($event)" #photoInput>
+
+
  </div>
 </div>

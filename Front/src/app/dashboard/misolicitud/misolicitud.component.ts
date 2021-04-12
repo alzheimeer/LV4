@@ -86,10 +86,7 @@ export class MisolicitudComponent implements OnInit {
   OnDocSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
       this.file = <File>event.target.files[0];
-      //image preview
-      // const reader = new FileReader();
-      // reader.onload = e => this.photoSeleted = reader.result;
-      // reader.readAsDataURL(this.file);
+
     }
   }
 

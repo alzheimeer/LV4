@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../../auth/services/auth.service';
 import { UserService } from '../../dashboard/services/user.service';
 import { Product } from '../../models/product.models';
@@ -26,6 +27,7 @@ export class DatosconstruccionComponent implements OnInit {
   //File Preview and Upload
   file!: File;
   photoSeleted?: any | ArrayBuffer;
+  baseUrlN: string = environment.baseUrlN;
 
   requests: Requestx[] = [];
   numrequests = 0;
@@ -75,6 +77,45 @@ export class DatosconstruccionComponent implements OnInit {
       this.usuarioTest = resp;
       this.user = resp.personal.numdoc;
     });
+
+
   }
 
+
+
+  OnPhotoSelected(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      this.file = <File>event.target.files[0];
+      //image preview
+      const reader = new FileReader();
+      reader.onload = e => this.photoSeleted = reader.result;
+      reader.readAsDataURL(this.file);
+    }
+
+  }
+  OnDocSelected(event: any): void {
+    if (event.target.files && event.target.files[0]) {
+      this.file = <File>event.target.files[0];
+
+    }
+  }
+
+  uploadPhoto() {
+
+    this.userService.updateUserByIdPhoto(this.usuario.uid as string, this.file)
+      .subscribe((resp) => {
+        console.log(resp);
+      }, (err) => {
+        console.log(err);
+      })
+  }
+  uploadExtracto() {
+
+    this.userService.updateUserByIdPhoto(this.usuario.uid as string, this.file)
+      .subscribe((resp) => {
+        console.log(resp);
+      }, (err) => {
+        console.log(err);
+      })
+  }
 }
