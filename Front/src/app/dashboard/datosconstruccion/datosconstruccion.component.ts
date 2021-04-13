@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 import { environment } from '../../../environments/environment';
 import { AuthService } from '../../auth/services/auth.service';
@@ -20,10 +21,11 @@ interface HtmlInputEvent extends Event {
 @Component({
   selector: 'app-datosconstruccion',
   templateUrl: './datosconstruccion.component.html',
-  styleUrls: ['./datosconstruccion.component.scss']
+  styleUrls: ['./datosconstruccion.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class DatosconstruccionComponent implements OnInit {
-
+  @Input() estollegadelpadre: any;
   //File Preview and Upload
   file!: File;
   photoSeleted?: any | ArrayBuffer;
@@ -32,7 +34,7 @@ export class DatosconstruccionComponent implements OnInit {
   requests: Requestx[] = [];
   numrequests = 0;
   productos: Product[] = [];
-  usuarioTest!: User;
+  usuarioTest: User | undefined;
   user: any;
   regInmueble!: Boolean;
   regPersonales = false;
@@ -40,7 +42,7 @@ export class DatosconstruccionComponent implements OnInit {
   regVehiculo = false;
   regReferencias = false;
   regReferenciasCom = false;
-
+  x = '';
   get usuario() {
     return this.authService.usuario;
   }
@@ -75,6 +77,7 @@ export class DatosconstruccionComponent implements OnInit {
     });
     this.userService.getUserById(this.usuario.uid).subscribe((resp) => {
       this.usuarioTest = resp;
+      this.x = resp.avatarPath;
       this.user = resp.personal.numdoc;
     });
 
@@ -104,7 +107,11 @@ export class DatosconstruccionComponent implements OnInit {
 
     this.userService.updateUserByIdPhoto(this.usuario.uid as string, this.file)
       .subscribe((resp) => {
-        console.log(resp);
+        Swal.fire({
+          title: 'OK',
+          text: 'Foto Actualizada',
+          icon: 'success',
+        });
       }, (err) => {
         console.log(err);
       })
@@ -113,7 +120,11 @@ export class DatosconstruccionComponent implements OnInit {
 
     this.userService.updateUserByIdPhoto(this.usuario.uid as string, this.file)
       .subscribe((resp) => {
-        console.log(resp);
+        Swal.fire({
+          title: 'OK',
+          text: 'Foto Actualizada',
+          icon: 'success',
+        });
       }, (err) => {
         console.log(err);
       })

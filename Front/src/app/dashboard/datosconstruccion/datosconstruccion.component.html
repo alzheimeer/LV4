@@ -1,12 +1,13 @@
 
   <div class="our-team">
     <p><small>Click En Imagen Para Cambiarla</small></p>
+    <!-- <p><small>Tamaño 130x130 px</small></p> -->
  <div class="picture">
 
-<div *ngIf="usuarioTest.avatarPath">
-   <img [src]="baseUrlN+usuarioTest.avatarPath" class="img-fluid">
+<div *ngIf="x">
+   <img  [src]="baseUrlN+x" class="img-fluid" (click)="photoInput.click()">
   </div>
-  <div *ngIf="!usuarioTest.avatarPath">
+  <div *ngIf="!x">
     <img [src]="'../../../assets/img/mike.jpg'" class="img-fluid" (click)="photoInput.click()">
    </div>
  </div>
@@ -16,7 +17,6 @@
    <h4 class="email">{{usuario.email}}</h4>
    <h4 routerLink="/dashboard/misdatos" >Actualiza Tus Datos</h4>
    <input type="file" class="d-none" (change)="OnPhotoSelected($event)" #photoInput>
-
-
+   <!-- <label>jj{{estollegadelpadre}}</label> -->
  </div>
 </div>

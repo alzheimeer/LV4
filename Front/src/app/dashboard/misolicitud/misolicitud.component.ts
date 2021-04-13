@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 import { AuthService } from '../../auth/services/auth.service';
 import { UserService } from '../../dashboard/services/user.service';
 import { Product } from '../../models/product.models';
 import { User } from '../../models/user.models';
+import { DatosconstruccionComponent } from '../datosconstruccion/datosconstruccion.component';
 import { ProductService } from '../services/product.service';
 import { RequestService } from '../services/request.service';
 import { Requestx } from './../../models/request.models';
@@ -19,8 +21,13 @@ interface HtmlInputEvent extends Event {
   selector: 'app-misolicitud',
   templateUrl: './misolicitud.component.html',
   styleUrls: ['./misolicitud.component.scss'],
+  changeDetection: ChangeDetectionStrategy.Default
 })
 export class MisolicitudComponent implements OnInit {
+  @ViewChild('datosDesdeElPadre', { static: false }) datosDesdeElPadre: DatosconstruccionComponent | any;
+  arrayPadre: number[];
+  textoPadre: string;
+
   //File Preview and Upload
   file!: File;
   photoSeleted?: any | ArrayBuffer;
@@ -48,7 +55,10 @@ export class MisolicitudComponent implements OnInit {
     private requestService: RequestService,
     private productService: ProductService,
     private userService: UserService,
-  ) {}
+  ) {
+    this.arrayPadre = [];
+    this.textoPadre = '';
+  }
 
   ngOnInit(): void {
     this.requestService
@@ -91,10 +101,15 @@ export class MisolicitudComponent implements OnInit {
   }
 
   uploadPhoto() {
-
+    this.arrayPadre = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    this.datosDesdeElPadre.estollegadelpadre = this.arrayPadre;
     this.userService.updateUserByIdPhoto(this.usuario.uid as string, this.file)
       .subscribe((resp) => {
-        console.log(resp);
+        Swal.fire({
+          title: 'OK',
+          text: 'Foto Actualizada',
+          icon: 'success',
+        });
       }, (err) => {
         console.log(err);
       })
@@ -103,7 +118,11 @@ export class MisolicitudComponent implements OnInit {
 
     this.userService.updateUserByIdPhoto(this.usuario.uid as string, this.file)
       .subscribe((resp) => {
-        console.log(resp);
+        Swal.fire({
+          title: 'OK',
+          text: 'Foto Actualizada',
+          icon: 'success',
+        });
       }, (err) => {
         console.log(err);
       })
