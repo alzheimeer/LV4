@@ -79,6 +79,8 @@ export class DatospersonalesComponent implements OnInit {
 
   miFormulario = this.fb.group({
     tipodoc: ['', [Validators.required, Validators.minLength(3)]],
+    fechaNac: ['', Validators.required],
+    fechaExp: ['', Validators.required],
     pais: ['', [Validators.required, Validators.minLength(3)]],
     departamento: ['', [Validators.required, Validators.minLength(3)]],
     ciudad: ['', [Validators.required]],
@@ -152,6 +154,8 @@ export class DatospersonalesComponent implements OnInit {
     Swal.showLoading();
     const {
       tipodoc,
+      fechaNac,
+      fechaExp,
       pais,
       departamento,
       ciudad,
@@ -168,6 +172,8 @@ export class DatospersonalesComponent implements OnInit {
       this.userService.updateUserByIdX(
         this.usuarioauth.uid,
         tipodoc,
+        fechaNac,
+        fechaExp,
         pais,
         departamento,
         ciudad,

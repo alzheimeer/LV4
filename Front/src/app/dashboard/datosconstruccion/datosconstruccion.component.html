@@ -4,10 +4,10 @@
     <!-- <p><small>Tamaño 130x130 px</small></p> -->
  <div class="picture">
 
-<div *ngIf="x">
-   <img  [src]="baseUrlN+x" class="img-fluid" (click)="photoInput.click()">
+<div *ngIf="avatar">
+   <img  [src]="baseUrlN+avatar" class="img-fluid" (click)="photoInput.click()">
   </div>
-  <div *ngIf="!x">
+  <div *ngIf="!avatar">
     <img [src]="'../../../assets/img/mike.jpg'" class="img-fluid" (click)="photoInput.click()">
    </div>
  </div>
@@ -17,6 +17,13 @@
    <h4 class="email">{{usuario.email}}</h4>
    <h4 routerLink="/dashboard/misdatos" >Actualiza Tus Datos</h4>
    <input type="file" class="d-none" (change)="OnPhotoSelected($event)" #photoInput>
-   <!-- <label>jj{{estollegadelpadre}}</label> -->
+   <label>{{estollegadelpadre}}</label>
  </div>
+
 </div>
+<div *ngIf="this.usuarioTest?.cedulaPath">
+  <a [href]="baseUrlN+cedula"mat-raised-button target="_blank">Ver Mi Cedula</a>
+ </div>
+<div *ngIf="this.usuarioTest?.pasaportePath">
+  <a [href]="baseUrlN+pasaporte"mat-raised-button target="_blank">Ver Mi Pasaporte</a>
+ </div>

@@ -136,31 +136,13 @@ const forget = async function(req, res) {
             console.log('existe')
         else
             console.log('no existe')
-
     } catch (error) {
         return res.status(500).json({ msg: 'Token No Existe' });
     }
 
-    /* const {uid} = req;
-    const dbUser = await User.findById(uid);
-    if (dbUser) {
-        name = dbUser.name;
-        surname = dbUser.surname;
-        email = dbUser.email;
-        roles = dbUser.roles;
-    } else {
-        name = '';
-        email = '';
-    }
-    const token = await generarJWT(uid, name);*/
     return res.json({
         ok: true,
-        /* uid,
-        name,
-        surname,
-        email,
-        roles,
-        token */
+      
     });
 }
 

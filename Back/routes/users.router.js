@@ -1,8 +1,8 @@
 const { Router } = require('express');
-const { getUsers, getUserById, updateUserById, deleteUserById, completeUserById, showFile, uploadFile } = require('../controllers/users.controller');
+const { getUsers, getUserById, updateUserById, deleteUserById, completeUserById, showFile, uploadFileAvatar, uploadFileCedula, uploadFilePasaporte } = require('../controllers/users.controller');
 const { check } = require('express-validator');
 const { validarCampos } = require('../middlewares/validar-campos');
-const { uploadX } = require('../middlewares/multer')
+const { uploadAvatar, uploadCedula, uploadPasaporte } = require('../middlewares/multer')
 const router = Router();
 
 
@@ -36,6 +36,10 @@ router.put('/:userId', updateUserById);
 router.delete('/:userId', deleteUserById);
 
 //Upload Photo Avatar
-router.put('/avatar/:userId', uploadX, uploadFile);
+router.put('/avatar/:userId', uploadAvatar, uploadFileAvatar);
+//Upload Photo Cedula
+router.put('/cedula/:userId', uploadCedula, uploadFileCedula);
+//Upload Photo Pasaporte
+router.put('/pasaporte/:userId', uploadPasaporte, uploadFilePasaporte);
 
 module.exports = router;

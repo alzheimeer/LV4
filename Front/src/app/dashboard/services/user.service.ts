@@ -40,11 +40,13 @@ export class UserService {
     return this.http.put(`${ url }/${ usuario._id }`, usuario);
   }
 
-  public updateUserByIdX(id: string, tipodoc: string, pais: string, departamento: string, ciudad: string, barrio: string, direccion: string, numdoc: number, celular1: number, celular2: number, banco: string, tipocuenta: string, numcuenta: number) {
+  public updateUserByIdX(id: string, tipodoc: string, fechaNac: Date, fechaExp: Date, pais: string, departamento: string, ciudad: string, barrio: string, direccion: string, numdoc: number, celular1: number, celular2: number, banco: string, tipocuenta: string, numcuenta: number) {
     const url = `${this.baseUrl}/users`;
     const body = {
       'personal': {
         'tipodoc': tipodoc,
+        'fechaNac': fechaNac,
+        'fechaExp': fechaExp,
         'pais': pais,
         'departamento': departamento,
         'ciudad': ciudad,
@@ -67,9 +69,23 @@ export class UserService {
     const url = `${this.baseUrl}/users/avatar`;
     const fd = new FormData();
     fd.append('avatar', photo);
-    console.log('fd', fd)
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    console.log(id)
+    return this.http.put(`${url}/${id}`, fd, { headers });
+  }
+
+  public updateUserByIdCedula(id: string, photoCedula: File) {
+    const url = `${this.baseUrl}/users/cedula`;
+    const fd = new FormData();
+    fd.append('cedula', photoCedula);
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return this.http.put(`${url}/${id}`, fd, { headers });
+  }
+
+  public updateUserByIdPasaporte(id: string, photoPasaporte: File) {
+    const url = `${this.baseUrl}/users/pasaporte`;
+    const fd = new FormData();
+    fd.append('pasaporte', photoPasaporte);
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, fd, { headers });
   }
 

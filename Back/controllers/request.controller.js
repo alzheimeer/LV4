@@ -42,6 +42,36 @@ const updateRequestById = async(req, res) => {
         return res.status(500).json({ msg: 'Id Del Request No Existe' });
     }
 }
+
+// Upload Doc Tarjetav
+const uploadFileTarjetav = async function (req, res) {
+    try {
+        console.log(req.params)
+        const request = await Request.findByIdAndUpdate(req.params.requestId, {"tarjetavPath": req.file.path}, {new: true});
+        return res.status(200).json(request);
+    } catch (error) {
+        return res.status(500).json({ msg: 'Id De Usuario No Existe'});}
+};
+// Upload Doc Matricula
+const uploadFileMatricula = async function (req, res) {
+    try {
+       // console.log(req.params)
+        const request = await Request.findByIdAndUpdate(req.params.requestId, {"matriculaPath": req.file.path}, {new: true});
+        return res.status(200).json(request);
+    } catch (error) {
+        return res.status(500).json({ msg: 'Id De Usuario No Existe'});}
+};
+// Upload Doc Extracto
+const uploadFileExtracto = async function (req, res) {
+    try {
+      //  console.log(req.params)
+        const request = await Request.findByIdAndUpdate(req.params.requestId, {"extractoPath": req.file.path}, {new: true});
+        return res.status(200).json(request);
+    } catch (error) {
+        return res.status(500).json({ msg: 'Id De Usuario No Existe'});}
+};
+
+
 const deleteRequestById = async(req, res) => {
     const { requestId } = req.params;
     try {
@@ -54,11 +84,16 @@ const deleteRequestById = async(req, res) => {
     }
 }
 
+
+
 module.exports = {
     createRequest,
     getRequests,
     getRequestById,
     getRequestByIdUser,
     updateRequestById,
-    deleteRequestById
+    deleteRequestById,
+    uploadFileTarjetav,
+    uploadFileMatricula,
+    uploadFileExtracto
 }

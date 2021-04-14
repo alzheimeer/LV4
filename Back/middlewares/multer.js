@@ -11,6 +11,65 @@ const storage = multer.diskStorage({
     }
 });
 
-const uploadX = multer({ storage: storage });
+const storageCedula = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads');
+    },
+    filename: function (req, file, cb) {
+        cb(null,'Id-'+req.params.userId+'-'+'cedula'+'-'+ Date.now()+path.extname(file.originalname));
+        // cb(null,'cedula'+ '-' + Date.now() + file.originalname + '-'+ path.extname(file.originalname));
+    }
+});
 
-exports.uploadX = uploadX.single('avatar');
+const storagePasaporte = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads');
+    },
+    filename: function (req, file, cb) {
+        cb(null,'Id-'+req.params.userId+'-'+'pasaporte'+'-'+ Date.now()+path.extname(file.originalname));
+        // cb(null,'cedula'+ '-' + Date.now() + file.originalname + '-'+ path.extname(file.originalname));
+    }
+});
+
+const storageTarjetav = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads');
+    },
+    filename: function (req, file, cb) {
+        cb(null,'Id-'+req.params.requestId+'-'+'tarjetav'+'-'+ Date.now()+path.extname(file.originalname));
+        // cb(null,'cedula'+ '-' + Date.now() + file.originalname + '-'+ path.extname(file.originalname));
+    }
+});
+const storageMatricula = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads');
+    },
+    filename: function (req, file, cb) {
+        cb(null,'Id-'+req.params.requestId+'-'+'matricula'+'-'+ Date.now()+path.extname(file.originalname));
+        // cb(null,'cedula'+ '-' + Date.now() + file.originalname + '-'+ path.extname(file.originalname));
+    }
+});
+const storageExtracto = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads');
+    },
+    filename: function (req, file, cb) {
+        cb(null,'Id-'+req.params.requestId+'-'+'extracto'+'-'+ Date.now()+path.extname(file.originalname));
+        // cb(null,'cedula'+ '-' + Date.now() + file.originalname + '-'+ path.extname(file.originalname));
+    }
+});
+
+const uploadAvatar = multer({ storage: storage });
+const uploadCedula = multer({ storage: storageCedula });
+const uploadPasaporte = multer({ storage: storagePasaporte });
+const uploadTarjetav = multer({ storage: storageTarjetav });
+const uploadMatricula = multer({ storage: storageMatricula });
+const uploadExtracto = multer({ storage: storageExtracto });
+
+exports.uploadAvatar = uploadAvatar.single('avatar');
+exports.uploadCedula = uploadCedula.single('cedula');
+exports.uploadPasaporte = uploadPasaporte.single('pasaporte');
+exports.uploadTarjetav = uploadTarjetav.single('tarjetav');
+exports.uploadMatricula = uploadMatricula.single('matricula');
+exports.uploadExtracto = uploadExtracto.single('extracto');
+

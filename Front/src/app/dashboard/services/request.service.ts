@@ -123,6 +123,30 @@ export class RequestService {
     return this.http.put(`${url}/${id}`, body, { headers });
   }
 
+  public updateRequestsByIdTarjetav(id: string, docTarjetav: File) {
+    const url = `${this.baseUrl}/request/tarjetav`;
+    const fd = new FormData();
+    fd.append('tarjetav', docTarjetav);
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return this.http.put(`${url}/${id}`, fd, { headers });
+  }
+  public updateRequestsByIdMatricula(id: string, docMatricula: File) {
+    const url = `${this.baseUrl}/request/matricula`;
+    const fd = new FormData();
+    fd.append('matricula', docMatricula);
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return this.http.put(`${url}/${id}`, fd, { headers });
+  }
+  public updateRequestsByIdExtracto(id: string, docExtracto: File) {
+    const url = `${this.baseUrl}/request/extracto`;
+    const fd = new FormData();
+    fd.append('extracto', docExtracto);
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return this.http.put(`${url}/${id}`, fd, { headers });
+  }
+
+
+
   public deleteRequestById( id: any ){
     const url = `${this.baseUrl}/request/${id}`;
     const headers = new HttpHeaders()

@@ -1,6 +1,6 @@
 const {response} = require('express');
 const User = require('../models/User');
-const uploadX = require('../middlewares/multer')
+
 
 // Search all users
 const getUsers = async function (req, res) {
@@ -48,9 +48,26 @@ const deleteUserById = async function (req, res) {
 };
 
 //Upload Avatar
-const uploadFile = async function (req, res) {
+const uploadFileAvatar = async function (req, res) {
     try {
         const usuario = await User.findByIdAndUpdate(req.params.userId, {"avatarPath": req.file.path}, {new: true});
+        return res.status(200).json(usuario);
+    } catch (error) {
+        return res.status(500).json({ msg: 'Id De Usuario No Existe'});}
+};
+
+// Upload Doc Cedula
+const uploadFileCedula = async function (req, res) {
+    try {
+        const usuario = await User.findByIdAndUpdate(req.params.userId, {"cedulaPath": req.file.path}, {new: true});
+        return res.status(200).json(usuario);
+    } catch (error) {
+        return res.status(500).json({ msg: 'Id De Usuario No Existe'});}
+};
+// Upload Doc Pasaporte
+const uploadFilePasaporte = async function (req, res) {
+    try {
+        const usuario = await User.findByIdAndUpdate(req.params.userId, {"pasaportePath": req.file.path}, {new: true});
         return res.status(200).json(usuario);
     } catch (error) {
         return res.status(500).json({ msg: 'Id De Usuario No Existe'});}
@@ -62,5 +79,7 @@ module.exports = {
     deleteUserById,
     updateUserById,
     completeUserById,
-    uploadFile
+    uploadFileAvatar,
+    uploadFileCedula,
+    uploadFilePasaporte,
 }

@@ -11,6 +11,18 @@ var RequestSchema = Schema({
         type: Schema.Types.ObjectId,
         required: true
     },
+    tarjetavPath: {
+        type: String,
+        required: false
+    },
+    matriculaPath: {
+        type: String,
+        required: false
+    },
+    extractoPath: {
+        type: String,
+        required: false
+    },
     value: {
         type: Number,
         required: true,

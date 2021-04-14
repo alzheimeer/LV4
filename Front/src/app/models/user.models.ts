@@ -7,6 +7,8 @@ export interface User {
   surname:   string;
   email:     string;
   avatarPath: string;
+  cedulaPath: string;
+  pasaportePath: string;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -19,6 +21,8 @@ export interface Banca {
 
 export interface Personal {
   tipodoc:      string;
+  fechaNac: Date;
+  fechaExp: Date;
   pais:         string;
   departamento: string;
   ciudad:       string;

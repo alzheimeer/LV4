@@ -67,6 +67,28 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="row">
+                          <div class="col-md-6">
+
+                              <label>Fecha De Nacimiento - Actual: {{fechaNac | date: 'dd/MM/YYYY'}}</label>
+                              <input [(ngModel)]="fechaNac" type="date" name="fechaNac" class="form-control" required>
+
+
+                          </div>
+                          <div class="col-md-6">
+                            <label>Fecha De Expedicion - Actual: {{fechaExp | date: 'dd/MM/YYYY'}}</label>
+                            <input [(ngModel)]="fechaExp" type="date" name="fechaExp" class="form-control" required>
+
+
+                          </div>
+                        </div>
+
+<hr>
+
+
+
+
+
 
                         <div class="row">
                             <div class="col-md-3 pr-1">

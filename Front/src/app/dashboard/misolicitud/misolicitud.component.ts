@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -21,9 +21,9 @@ interface HtmlInputEvent extends Event {
   selector: 'app-misolicitud',
   templateUrl: './misolicitud.component.html',
   styleUrls: ['./misolicitud.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default
+
 })
-export class MisolicitudComponent implements OnInit {
+export class MisolicitudComponent implements OnInit, OnChanges {
   @ViewChild('datosDesdeElPadre', { static: false }) datosDesdeElPadre: DatosconstruccionComponent | any;
   arrayPadre: number[];
   textoPadre: string;
@@ -60,7 +60,14 @@ export class MisolicitudComponent implements OnInit {
     this.textoPadre = '';
   }
 
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('ngOnChanges was called! padre');
+    console.log(changes);
+  }
+
+
   ngOnInit(): void {
+    console.log('ngOnInt se ejecuta')
     this.requestService
       .getRequestByIdUser(this.usuario.uid).subscribe((resp) => {
         this.requests = resp;
@@ -80,6 +87,7 @@ export class MisolicitudComponent implements OnInit {
     this.userService.getUserById(this.usuario.uid).subscribe((resp) => {
       this.usuarioTest = resp;
       this.user = resp.personal.numdoc;
+
       });
   }
 
@@ -93,6 +101,7 @@ export class MisolicitudComponent implements OnInit {
       reader.readAsDataURL(this.file);
     }
   }
+
   OnDocSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
       this.file = <File>event.target.files[0];
@@ -103,18 +112,6 @@ export class MisolicitudComponent implements OnInit {
   uploadPhoto() {
     this.arrayPadre = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     this.datosDesdeElPadre.estollegadelpadre = this.arrayPadre;
-    this.userService.updateUserByIdPhoto(this.usuario.uid as string, this.file)
-      .subscribe((resp) => {
-        Swal.fire({
-          title: 'OK',
-          text: 'Foto Actualizada',
-          icon: 'success',
-        });
-      }, (err) => {
-        console.log(err);
-      })
-  }
-  uploadExtracto() {
 
     this.userService.updateUserByIdPhoto(this.usuario.uid as string, this.file)
       .subscribe((resp) => {
@@ -123,8 +120,33 @@ export class MisolicitudComponent implements OnInit {
           text: 'Foto Actualizada',
           icon: 'success',
         });
+        console.log('deberia refrescar aqui')
+        this.ngOnInit();
       }, (err) => {
         console.log(err);
       })
+  }
+
+  uploadExtracto(tipo: string) {
+    if (tipo == 'cedula')
+      this.userService.updateUserByIdCedula(this.usuario.uid as string, this.file).subscribe((resp) => this.docOk());
+    if (tipo == 'pasaporte')
+      this.userService.updateUserByIdPasaporte(this.usuario.uid as string, this.file).subscribe((resp) => this.docOk());
+    if (tipo == 'tarjetav')
+      this.requestService.updateRequestsByIdTarjetav(this.requests[0]._id as string, this.file).subscribe((resp) => this.docOk());
+    if (tipo == 'matricula')
+      this.requestService.updateRequestsByIdMatricula(this.requests[0]._id as string, this.file).subscribe((resp) => this.docOk());
+    if (tipo == 'extracto')
+      this.requestService.updateRequestsByIdExtracto(this.requests[0]._id as string, this.file).subscribe((resp) => this.docOk());
+
+  }
+
+
+  docOk() {
+    Swal.fire({
+      title: 'OK',
+      text: 'Documento Enviado',
+      icon: 'success',
+    });
   }
 }

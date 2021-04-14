@@ -55,70 +55,87 @@
             <button *ngIf="request.regReferenciasCom == false &&
               regReferenciasCom" routerLink="/dashboard/datosreferenciascom"
               class="button3">Referencias Comerciales</button>
+          </div>
+          <hr>
+          <div class="row">
+            <div class="col-md-2">
+              <p class="text-center">Cedula</p>
+              <img [src]="'../../../assets/img/cedula.jpg'" class="photo"
+                alt="Sin Imagen" (click)="cedulaInput.click()">
+            </div>
+            <div class="col-md-10">
+              <input type="file" class="custom-file-upload" accept=".doc,.docx,.pdf,image/x-png, image/gif, image/jpeg, image/jpg"
+                (change)="OnDocSelected($event)" #cedulaInput>
+              <button (click)="uploadExtracto('cedula')" mat-mini-fab><mat-icon>backup</mat-icon>Subir Documento</button>
+              <p><small> Ambas Caras</small></p>
+            </div>
+          </div>
+
+          <hr>
+          <div class="row">
+            <div class="col-md-2">
+              <p class="text-center">Pasaporte</p>
+              <img [src]="'../../../assets/img/pasaporte.jpg'" class="photo"
+                alt="Sin Imagen" (click)="pasaporteInput.click()">
+            </div>
+            <div class="col-md-10">
+              <input type="file" class="custom-file-upload " accept=".doc,.docx,.pdf,image/x-png, image/gif, image/jpeg, image/jpg"
+                (change)="OnDocSelected($event)" #pasaporteInput>
+              <button (click)="uploadExtracto('pasaporte')" mat-mini-fab><mat-icon>backup</mat-icon>Subir Documento</button>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="row">
+            <div class="col-md-2">
+              <p class="text-center">Tarjeta De Propiedad</p>
+              <img [src]="'../../../assets/img/Tvehiculo.jpg'" class="photo"
+                alt="Sin Imagen" (click)="tarjetavInput.click()">
+            </div>
+            <div class="col-md-10">
+              <input type="file" class="custom-file-upload " accept=".doc,.docx,.pdf,image/x-png, image/gif, image/jpeg, image/jpg"
+                (change)="OnDocSelected($event)" #tarjetavInput>
+              <button (click)="uploadExtracto('tarjetav')" mat-mini-fab><mat-icon>backup</mat-icon>Subir Documento</button>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="row">
+            <div class="col-md-2">
+              <p class="text-center">Matricula Inmobiliaria</p>
+              <img [src]="'../../../assets/img/tradicion.jpg'" class="photo"
+                alt="Sin Imagen" (click)="matriculaInput.click()">
+            </div>
+            <div class="col-md-10">
+              <input type="file" class="custom-file-upload" accept=".doc,.docx,.pdf,image/x-png, image/gif, image/jpeg, image/jpg"
+                (change)="OnDocSelected($event)" #matriculaInput>
+              <button (click)="uploadExtracto('matricula')" mat-mini-fab><mat-icon>backup</mat-icon>Subir Documento</button>
+              <p><small> No Mayor A 30 Dias</small></p>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="row">
+            <div class="col-md-2">
+              <p class="text-center">Extractos Bancarios</p>
+              <img [src]="'../../../assets/img/extractobanco.jpg'" class="photo"
+                alt="Sin Imagen" (click)="extractoInput.click()">
+            </div>
+            <div class="col-md-10">
+              <input type="file" class="custom-file-upload " accept=".doc,.docx,.pdf,image/x-png, image/gif, image/jpeg, image/jpg"
+                (change)="OnDocSelected($event)" #extractoInput>
+              <button (click)="uploadExtracto('extracto')" mat-mini-fab><mat-icon>backup</mat-icon>Subir Documento</button>
+              <p><small> Ultimos 3 Meses</small></p>
+            </div>
+
+          </div>
+
             <hr>
-            <div class="row">
-              <div class="col-3  mb-3">
-                <p>Cedula - PDF/IMAGEN Con Ambas Caras</p>
-                <input type="file" class="d-none"
-                  (change)="OnDocSelected($event)" #cedulaInput>
-                <p><small>Haga Click En La Imagen Para Seleccionar Su Documento</small></p>
-                <img [src]="'../../../assets/img/cedula.jpg'" class="photo"
-                  alt="Sin
-                  Imagen" (click)="cedulaInput.click()">
-                <button class="btn button3 " (click)="uploadExtracto()">Enviar</button>
-              </div>
 
-              <div class="col-3  mb-3">
-                <p>Pasaporte</p>
-                <input type="file" class="d-none"
-                  (change)="OnDocSelected($event)" #pasaporteInput>
-                <p><small>Haga Click En La Imagen Para Seleccionar Su Documento</small></p>
-                <img [src]="'../../../assets/img/pasaporte.jpg'" class="photo"
-                  alt="Sin
-                  Imagen" (click)="pasaporteInput.click()">
-                <button class="btn button3" (click)="uploadExtracto()">Enviar</button>
-              </div>
-
-              <hr>
-
-
-              <div class="col-3 mb-3">
-                <p>Tarjeta De Propiedad Del Vehiculo</p>
-                <input type="file" class="d-none"
-                  (change)="OnDocSelected($event)" #tarjetavInput>
-                <p><small>Haga Click En La Imagen Para Seleccionar Su Documento</small></p>
-                <img [src]="'../../../assets/img/Tvehiculo.jpg'" class="photo"
-                  alt="Sin
-                  Imagen" (click)="tarjetavInput.click()">
-                <button class="btn button3" (click)="uploadExtracto()">Enviar</button>
-              </div>
-
-
-              <div class="col-3  mb-3">
-                <p>Matricula Inmobiliaria</p>
-                <input type="file" class="d-none"
-                  (change)="OnDocSelected($event)" #matriculaInput>
-                <p><small>Haga Click En La Imagen Para Seleccionar Su Documento</small></p>
-                <img [src]="'../../../assets/img/tradicion.jpg'" class="photo"
-                  alt="Sin
-                  Imagen" (click)="matriculaInput.click()">
-                <button class="btn button3" (click)="uploadExtracto()">Enviar</button>
-              </div>
-
-              <hr>
-
-              <div class="col-3  mb-3">
-                <p>Extractos Bancarios Ultimos 6 Meses</p>
-                <input type="file" class="d-none"
-                  (change)="OnDocSelected($event)" #extractoInput>
-                <p><small>Haga Click En La Imagen Para Seleccionar Su Documento</small></p>
-                <img [src]="'../../../assets/img/extractobanco.jpg'"
-                  class="photo" alt="Sin Imagen"
-                  (click)="extractoInput.click()">
-                <button class="btn button3" (click)="uploadExtracto()">Enviar</button>
-              </div>
-
-              <hr>
+            <!-- <hr>
               <div class="col-3 mb-3">
                 <p>Foto Personal</p>
                 <input type="file" class="d-none"
@@ -126,27 +143,25 @@
                 <p><small>Click En La Imagen Para Seleccionar Su Foto</small></p>
                 <img [src]="photoSeleted || '../../../assets/img/mike.jpg'"
                   class="photo" alt="Sin Imagen" (click)="photoInput.click()">
-                <button class="btn button3" (click)="uploadPhoto()">Enviar</button>
-              </div>
+                <button type="button" class="btn button3" (click)="uploadPhoto()">Enviar</button>
+              </div> -->
 
-            </div>
-          </div>
         </mat-card-content>
 
       </mat-card>
     </div>
     <div class="col-md-4">
-    <app-datosconstruccion #datosDesdeElPadre></app-datosconstruccion>
+      <app-datosconstruccion #datosDesdeElPadre></app-datosconstruccion>
+    </div>
   </div>
-</div>
 
 
 
-<!-- <h3>Formulario:</h3>
+  <!-- <h3>Formulario:</h3>
 <pre>Valid:{{formularioSolicitud.valid}}</pre>
 <pre>{{tasa}}</pre>
 <pre>{{formularioSolicitud.value | json}}</pre> -->
-<!-- <pre class="noS">{{this.regInmueble}}</pre>
+  <!-- <pre class="noS">{{this.regInmueble}}</pre>
 <pre class="noS">{{this.regPersonales}}</pre>
 <pre class="noS">{{this.regVehiculo}}</pre>
 <pre class="noS">{{this.regTrabajo}}</pre>

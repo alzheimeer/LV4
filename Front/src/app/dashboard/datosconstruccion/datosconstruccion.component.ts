@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -21,10 +21,9 @@ interface HtmlInputEvent extends Event {
 @Component({
   selector: 'app-datosconstruccion',
   templateUrl: './datosconstruccion.component.html',
-  styleUrls: ['./datosconstruccion.component.scss'],
-  changeDetection: ChangeDetectionStrategy.Default
+  styleUrls: ['./datosconstruccion.component.scss']
 })
-export class DatosconstruccionComponent implements OnInit {
+export class DatosconstruccionComponent implements OnInit, OnChanges {
   @Input() estollegadelpadre: any;
   //File Preview and Upload
   file!: File;
@@ -42,7 +41,10 @@ export class DatosconstruccionComponent implements OnInit {
   regVehiculo = false;
   regReferencias = false;
   regReferenciasCom = false;
-  x = '';
+  avatar = '';
+  cedula = '';
+  pasaporte = '';
+  tarjetav = '';
   get usuario() {
     return this.authService.usuario;
   }
@@ -55,7 +57,13 @@ export class DatosconstruccionComponent implements OnInit {
     private requestService: RequestService,
     private productService: ProductService,
     private userService: UserService,
+
   ) { }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    console.log(changes);
+
+  }
 
 
   ngOnInit(): void {
@@ -77,10 +85,11 @@ export class DatosconstruccionComponent implements OnInit {
     });
     this.userService.getUserById(this.usuario.uid).subscribe((resp) => {
       this.usuarioTest = resp;
-      this.x = resp.avatarPath;
+      this.avatar = resp.avatarPath;
+      this.cedula = resp.cedulaPath;
+      this.pasaporte = resp.pasaportePath;
       this.user = resp.personal.numdoc;
     });
-
 
   }
 
@@ -112,6 +121,7 @@ export class DatosconstruccionComponent implements OnInit {
           text: 'Foto Actualizada',
           icon: 'success',
         });
+
       }, (err) => {
         console.log(err);
       })

@@ -32,6 +32,14 @@ var UserSchema = Schema({
         type: String,
         required: false
     },
+    cedulaPath: {
+        type: String,
+        required: false
+    },
+    pasaportePath: {
+        type: String,
+        required: false
+    },
     personal: {
         tipodoc: {
             type: String,
@@ -42,6 +50,16 @@ var UserSchema = Schema({
             type: Number,
             required: false,
         },
+        fechaNac: {
+            type: Date,
+            required: false,
+            default: "",
+        },
+        fechaExp: {
+            type: Date,
+            required: false,
+            default: "",
+        },        
         pais: {
             type: String,
             required: false,

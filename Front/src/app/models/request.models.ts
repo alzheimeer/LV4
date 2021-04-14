@@ -1,5 +1,8 @@
 export interface Requestx {
   _id: string;
+  tarjetavPath: string,
+  matriculaPath: string,
+  extractoPath: string,
   inmueble: Inmueble;
   vehiculo: Vehiculo;
   trabajoEmpleado: TrabajoEmpleado;
