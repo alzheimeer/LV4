@@ -43,6 +43,11 @@ export class MisolicitudComponent implements OnInit, OnChanges {
   regVehiculo = false;
   regReferencias = false;
   regReferenciasCom = false;
+  regCedula = false;
+  regPasaporte = false;
+  regTarjetav = false;
+  regMatricula = false;
+  regExtracto = false;
 
   get usuario() {
     return this.authService.usuario;
@@ -75,20 +80,31 @@ export class MisolicitudComponent implements OnInit, OnChanges {
         this.productService.getProducts().subscribe((resp) => {
           this.productos = resp;
           this.productService.getProductById(this.requests[0].idProduct).subscribe((resp) => {
+            console.log(resp)
             if (resp.regInmueble === true) { this.regInmueble = true; }
             if (resp.regPersonales === true) { this.regPersonales = true; }
             if (resp.regTrabajo === true) { this.regTrabajo = true; }
             if (resp.regVehiculo === true) { this.regVehiculo = true; }
             if (resp.regReferencias === true) { this.regReferencias = true; }
             if (resp.regReferenciasCom === true) { this.regReferenciasCom = true; }
+            if (resp.regCedula === true) { this.regCedula = true; }
+            if (resp.regPasaporte === true) { this.regPasaporte = true; }
+            if (resp.regTarjetav === true) { this.regTarjetav = true; }
+            if (resp.regMatricula === true) { this.regMatricula = true; }
+            if (resp.regExtracto === true) { this.regExtracto = true; }
+
             });
         });
       });
     this.userService.getUserById(this.usuario.uid).subscribe((resp) => {
       this.usuarioTest = resp;
       this.user = resp.personal.numdoc;
-
+      // if (resp.cedulaPath)
+      //   this.regCedula = true;
+      // if (resp.pasaportePath)
+      //   this.regPasaporte = true;
       });
+
   }
 
 

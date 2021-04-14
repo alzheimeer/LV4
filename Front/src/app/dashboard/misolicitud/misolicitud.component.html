@@ -55,9 +55,9 @@
             <button *ngIf="request.regReferenciasCom == false &&
               regReferenciasCom" routerLink="/dashboard/datosreferenciascom"
               class="button3">Referencias Comerciales</button>
-          </div>
+
           <hr>
-          <div class="row">
+          <div class="row" *ngIf="(regPasaporte && !usuarioTest.pasaportePath) && (regCedula && !usuarioTest.cedulaPath)">
             <div class="col-md-2">
               <p class="text-center">Cedula</p>
               <img [src]="'../../../assets/img/cedula.jpg'" class="photo"
@@ -72,7 +72,7 @@
           </div>
 
           <hr>
-          <div class="row">
+          <div class="row" *ngIf="(regPasaporte && !usuarioTest.pasaportePath) && (regCedula && !usuarioTest.cedulaPath)">
             <div class="col-md-2">
               <p class="text-center">Pasaporte</p>
               <img [src]="'../../../assets/img/pasaporte.jpg'" class="photo"
@@ -87,7 +87,7 @@
 
           <hr>
 
-          <div class="row">
+          <div class="row" *ngIf="regTarjetav">
             <div class="col-md-2">
               <p class="text-center">Tarjeta De Propiedad</p>
               <img [src]="'../../../assets/img/Tvehiculo.jpg'" class="photo"
@@ -102,7 +102,7 @@
 
           <hr>
 
-          <div class="row">
+          <div class="row" *ngIf="regMatricula">
             <div class="col-md-2">
               <p class="text-center">Matricula Inmobiliaria</p>
               <img [src]="'../../../assets/img/tradicion.jpg'" class="photo"
@@ -118,7 +118,7 @@
 
           <hr>
 
-          <div class="row">
+          <div class="row" *ngIf="regExtracto">
             <div class="col-md-2">
               <p class="text-center">Extractos Bancarios</p>
               <img [src]="'../../../assets/img/extractobanco.jpg'" class="photo"
@@ -132,7 +132,7 @@
             </div>
 
           </div>
-
+        </div>
             <hr>
 
             <!-- <hr>

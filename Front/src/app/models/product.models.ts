@@ -5,6 +5,11 @@ export interface Product {
   regTrabajo:     boolean;
   regReferencias: boolean;
   regReferenciasCom: boolean;
+  regCedula: boolean;
+  regPasaporte: boolean;
+  regTarjetav: boolean;
+  regMatricula: boolean;
+  regExtracto: boolean;
   _id:            string;
   name:           string;
   valuemin:       number;

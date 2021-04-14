@@ -63,6 +63,31 @@ var ProductSchema = Schema({
         required: false,
         default: false
     },
+    regCedula: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regPasaporte: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regTarjetav: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regMatricula: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regExtracto: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
 }, {
     timestamps: true,
     versionkey: false

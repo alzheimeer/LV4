@@ -70,6 +70,11 @@ const createProducts = async function() {
                 regTrabajo: true,
                 regReferencias: true,
                 regReferenciasCom: true,
+                regCedula: true,
+                regPasaporte: true,
+                regTarjetav: false,
+                regMatricula: false,
+                regExtracto: true,
 
             }).save(),
             new Product({
@@ -87,6 +92,11 @@ const createProducts = async function() {
                 regTrabajo: false,
                 regReferencias: false,
                 regReferenciasCom: false,
+                regCedula: true,
+                regPasaporte: true,
+                regTarjetav: false,
+                regMatricula: true,
+                regExtracto: false,
 
             }).save(),
             new Product({
@@ -103,7 +113,12 @@ const createProducts = async function() {
                 regVehiculo: true,
                 regTrabajo: false,
                 regReferencias: false,
-                regReferenciasCom: false
+                regReferenciasCom: false,
+                regCedula: true,
+                regPasaporte: true,
+                regTarjetav: false,
+                regMatricula: true,
+                regExtracto: false,
 
             }).save(),
             new Product({
@@ -120,7 +135,12 @@ const createProducts = async function() {
                 regVehiculo: false,
                 regTrabajo: false,
                 regReferencias: false,
-                regReferenciasCom: false
+                regReferenciasCom: false,
+                regCedula: true,
+                regPasaporte: true,
+                regTarjetav: false,
+                regMatricula: true,
+                regExtracto: true,
 
             }).save()
         ]);
