@@ -27,12 +27,12 @@
 <div *ngIf="this.usuarioTest?.pasaportePath">
   <a [href]="baseUrlN+pasaporte"mat-raised-button target="_blank">Ver Mi Pasaporte</a>
  </div>
-<div *ngIf="this.requests[0].tarjetavPath">
+<div *ngIf="this.requests[0]?.tarjetavPath">
   <a [href]="baseUrlN+tarjetav"mat-raised-button target="_blank">Ver Mi Tarjeta De Propiedad</a>
  </div>
-<div *ngIf="this.requests[0].matriculaPath">
+<div *ngIf="this.requests[0]?.matriculaPath">
   <a [href]="baseUrlN+matricula"mat-raised-button target="_blank">Ver Mi Matricula Inmobiliaria</a>
  </div>
-<div *ngIf="this.requests[0].extractoPath">
+<div *ngIf="this.requests[0]?.extractoPath">
   <a [href]="baseUrlN+extracto"mat-raised-button target="_blank">Ver Mi Extracto Bancario</a>
  </div>

@@ -1,23 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent } from './dashboard.component';
-import { ValidarTokenGuard } from '../guards/validar-token.guard';
 
-import { SolicitudComponent } from './solicitud/solicitud.component';
-import { DatospersonalesComponent } from './datospersonales/datospersonales.component';
-import { DatosinmuebleComponent } from './datosinmueble/datosinmueble.component';
-import { DatosvehiculoComponent } from './datosvehiculo/datosvehiculo.component';
-import { UsuariosComponent } from './usuarios/usuarios.component';
-import { EstadocuentaComponent } from './estadocuenta/estadocuenta.component';
-import { DatosconstruccionComponent } from './datosconstruccion/datosconstruccion.component';
-import { MisdatosComponent } from './misdatos/misdatos.component';
+import { ValidarTokenGuard } from '../guards/validar-token.guard';
 import { AboutComponent } from './about/about.component';
-import { ProductoComponent } from './producto/producto.component';
-import { SolicitudesComponent } from './solicitudes/solicitudes.component';
-import { MisolicitudComponent } from './misolicitud/misolicitud.component';
-import { DatosreferenciasComponent } from './datosreferencias/datosreferencias.component';
+import { DashboardComponent } from './dashboard.component';
+import { DatosconstruccionComponent } from './datosconstruccion/datosconstruccion.component';
+import { DatosinmuebleComponent } from './datosinmueble/datosinmueble.component';
+import { DatospersonalesComponent } from './datospersonales/datospersonales.component';
 import { DatosreferenciacomComponent } from './datosreferenciacom/datosreferenciacom.component';
+import { DatosreferenciasComponent } from './datosreferencias/datosreferencias.component';
 import { DatostrabajoComponent } from './datostrabajo/datostrabajo.component';
+import { DatosvehiculoComponent } from './datosvehiculo/datosvehiculo.component';
+import { EstadocuentaComponent } from './estadocuenta/estadocuenta.component';
+import { MisdatosComponent } from './misdatos/misdatos.component';
+import { MisolicitudComponent } from './misolicitud/misolicitud.component';
+import { ProductoComponent } from './producto/producto.component';
+import { SolicitudComponent } from './solicitud/solicitud.component';
+import { SolicitudesComponent } from './solicitudes/solicitudes.component';
+import { UsuariosComponent } from './usuarios/usuarios.component';
 
 
 const routes: Routes = [
