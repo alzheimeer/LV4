@@ -41,10 +41,18 @@ export class DatosconstruccionComponent implements OnInit, OnChanges {
   regVehiculo = false;
   regReferencias = false;
   regReferenciasCom = false;
+  regCedula = false;
+  regPasaporte = false;
+  regTarjetav = false;
+  regMatricula = false;
+  regExtracto = false;
   avatar = '';
   cedula = '';
   pasaporte = '';
   tarjetav = '';
+  matricula = '';
+  extracto = '';
+
   get usuario() {
     return this.authService.usuario;
   }
@@ -70,9 +78,13 @@ export class DatosconstruccionComponent implements OnInit, OnChanges {
     this.requestService
       .getRequestByIdUser(this.usuario.uid).subscribe((resp) => {
         this.requests = resp;
+        this.tarjetav = resp[0].tarjetavPath;
+        this.matricula = resp[0].matriculaPath;
+        this.extracto = resp[0].extractoPath;
         this.numrequests = this.requests.length;
         this.productService.getProducts().subscribe((resp) => {
           this.productos = resp;
+
           this.productService.getProductById(this.requests[0].idProduct).subscribe((resp) => {
             if (resp.regInmueble === true) { this.regInmueble = true; }
             if (resp.regPersonales === true) { this.regPersonales = true; }
@@ -80,6 +92,11 @@ export class DatosconstruccionComponent implements OnInit, OnChanges {
             if (resp.regVehiculo === true) { this.regVehiculo = true; }
             if (resp.regReferencias === true) { this.regReferencias = true; }
             if (resp.regReferenciasCom === true) { this.regReferenciasCom = true; }
+            if (resp.regCedula === true) { this.regCedula = true; }
+            if (resp.regPasaporte === true) { this.regPasaporte = true; }
+            if (resp.regTarjetav === true) { this.regTarjetav = true; }
+            if (resp.regMatricula === true) { this.regMatricula = true; }
+            if (resp.regExtracto === true) { this.regExtracto = true; }
         });
       });
     });

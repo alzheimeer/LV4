@@ -87,7 +87,7 @@
 
           <hr>
 
-          <div class="row" *ngIf="regTarjetav">
+          <div class="row" *ngIf="regTarjetav && !request.tarjetavPath">
             <div class="col-md-2">
               <p class="text-center">Tarjeta De Propiedad</p>
               <img [src]="'../../../assets/img/Tvehiculo.jpg'" class="photo"
@@ -102,7 +102,7 @@
 
           <hr>
 
-          <div class="row" *ngIf="regMatricula">
+          <div class="row" *ngIf="regMatricula && !request.matriculaPath">
             <div class="col-md-2">
               <p class="text-center">Matricula Inmobiliaria</p>
               <img [src]="'../../../assets/img/tradicion.jpg'" class="photo"
@@ -118,7 +118,7 @@
 
           <hr>
 
-          <div class="row" *ngIf="regExtracto">
+          <div class="row" *ngIf="regExtracto && !request.extractoPath">
             <div class="col-md-2">
               <p class="text-center">Extractos Bancarios</p>
               <img [src]="'../../../assets/img/extractobanco.jpg'" class="photo"
