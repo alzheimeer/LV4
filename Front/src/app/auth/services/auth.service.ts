@@ -1,10 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../../../environments/environment';
+import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { of, Observable } from 'rxjs';
-import { AuthResponse, Usuario,  Role, GetUsers, Uxuario } from '../interfaces';
-import { DataPersonalModel, DataPersonalModelComplet } from '../../models/datapersonal.models';
+
+import { environment } from '../../../environments/environment';
+import { DataPersonalModel } from '../../models/datapersonal.models';
+import { AuthResponse, Role, Usuario } from '../interfaces';
 
 
 
@@ -116,7 +117,7 @@ export class AuthService {
           numcuenta
         }
     };
-    console.log(x);
+    // console.log(x);
     return this.http.put(`${ url }/${ data.id }`, x);
   }
 

@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Product } from '../../models/product.models';
+import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
+
+import { Product } from '../../models/product.models';
 import { Requestx } from '../../models/request.models';
 import { ProductService } from '../services/product.service';
 import { RequestService } from '../services/request.service';
-import { User } from 'src/app/models/user.models';
 import { UserService } from '../services/user.service';
 
 @Component({
@@ -13,18 +14,20 @@ import { UserService } from '../services/user.service';
   templateUrl: './solicitudes.component.html',
   styleUrls: ['./solicitudes.component.scss'],
 })
+
 export class SolicitudesComponent implements OnInit {
+  suscription!: Subscription;
+  solicitudes: Requestx[] = [];
+  productos: Product[] = [];
+  usuario: any = [];
+
+  hayerror = false;
   constructor(
     private router: Router,
     private requestService: RequestService,
     private productService: ProductService,
     private userService: UserService,
   ) {}
-
-  public solicitudes: Requestx[] = [];
-  public productos: Product[] = [];
-  public usuario: any = [];
-  hayerror = false;
 
   ngOnInit(): void {
     this.requestService.getRequests().subscribe(
@@ -36,9 +39,12 @@ export class SolicitudesComponent implements OnInit {
       (resp) => {
         this.productos = resp;
       });
+    this.suscription = this.requestService.refresh$.subscribe(() => {
+      this.ngOnInit();
+    });
   }
 
-  cambiarEstado(solicitudElegida: any, estado: any) {
+  cambiarEstado(solicitudElegida: any, estado: any): void {
     const estadoTemp = solicitudElegida.estate;
     solicitudElegida.estate = estado;
     this.requestService.updateRequestsById(solicitudElegida).subscribe(
@@ -52,11 +58,10 @@ export class SolicitudesComponent implements OnInit {
     );
   }
 
-  deleteRequest(idRequest: any) {
+  deleteRequest(idRequest: any): void {
     this.requestService.deleteRequestById(idRequest).subscribe(
       (res) => {
         const index = this.solicitudes.indexOf(idRequest);
-        //if is ok delete return -1
         if (index > -1) {
           this.solicitudes.splice(index, 1);
         }
@@ -77,18 +82,18 @@ export class SolicitudesComponent implements OnInit {
     );
   }
 
-  verUsuario(solicitud:any){
-    console.log(this.usuario)
+  verUsuario(solicitud: any): void {
+    console.log(this.usuario);
     this.userService.getUserById(solicitud.idUser)
-
     .subscribe(resp => {
         this.usuario = resp;
-        console.log(this.usuario)
+      // console.log(this.usuario);
       }, (err) => {
         this.hayerror = true;
       });
   }
-  noMostrarUsuario(){
+
+  noMostrarUsuario(): void {
     this.usuario = [];
   }
 }

@@ -34,108 +34,142 @@
               mat-raised-button>{{request.estate }}</button>
             <button class="btErr" *ngIf="request.estate == 'Rechazada'"
               mat-raised-button>{{request.estate }}</button>
+            <button class="btToDo" *ngIf="request.estate == 'Completo'"
+              mat-raised-button>{{request.estate }}</button>
             <hr>
-            <p>Requisitos Faltantes</p>
-            <button *ngIf="user == undefined && regPersonales"
-              routerLink="/dashboard/datospersonales" class="button3">Datos
-              Personales</button>
-            <button *ngIf="request.regInmueble == false && regInmueble"
-              routerLink="/dashboard/datosinmueble" class="button3">Datos Del
-              Inmueble</button>
-            <button *ngIf="request.regVehiculo == false && regVehiculo"
-              routerLink="/dashboard/datosvehiculo" class="button3">Datos Del
-              Vehiculo</button>
-            <!-- <button *ngIf="request.regInmueble == false && regInmueble" routerLink="/dashboard/datosconstruccion" class="button3">Datos Construccion</button> -->
-            <button *ngIf="request.regTrabajo == false && regTrabajo"
-              routerLink="/dashboard/datostrabajo" class="button3">Datos De
-              Trabajo</button>
-            <button *ngIf="request.regReferencias == false && regReferencias"
-              routerLink="/dashboard/datosreferencias" class="button3">Referencias
-              Personales</button>
-            <button *ngIf="request.regReferenciasCom == false &&
-              regReferenciasCom" routerLink="/dashboard/datosreferenciascom"
-              class="button3">Referencias Comerciales</button>
+            <div *ngIf="request.estate == 'Completo'">
+              <p>Ahora Pasaremos A Verificar Tus Documentos</p>
+              <p>Apenas Tengamos Respuesta Te Enviaremos Un Email Con La Respuesta A Tu Solicitud</p>
+            </div>
 
-          <hr>
-          <div class="row" *ngIf="(regPasaporte && !usuarioTest.pasaportePath) && (regCedula && !usuarioTest.cedulaPath)">
-            <div class="col-md-2">
-              <p class="text-center">Cedula</p>
-              <img [src]="'../../../assets/img/cedula.jpg'" class="photo"
-                alt="Sin Imagen" (click)="cedulaInput.click()">
+
+
+            <div *ngIf="!regAllOk">
+              <p>Requisitos Faltantes</p>
+              <p><small>Por favor complete cada uno de los formularios Y
+                  documentos que se le muestran</small></p>
+
+
+              <button *ngIf="user == 0 && regPersonales"
+                routerLink="/dashboard/datospersonales" class="button3">Datos
+                Personales</button>
+              <button *ngIf="request.regInmuebleOk === false && regInmueble"
+                routerLink="/dashboard/datosinmueble" class="button3">Datos Del
+                Inmueble</button>
+              <button *ngIf="request.regVehiculoOk === false && regVehiculo"
+                routerLink="/dashboard/datosvehiculo" class="button3">Datos Del
+                Vehiculo</button>
+              <!-- <button *ngIf="request.regInmueble == false && regInmueble" routerLink="/dashboard/datosconstruccion" class="button3">Datos Construccion</button> -->
+              <button *ngIf="regTrabajo && !request.regTrabajoOk"
+                routerLink="/dashboard/datostrabajo" class="button3">Datos De
+                Trabajo</button>
+              <button *ngIf="request.regReferenciasOk === false &&
+                regReferencias"
+                routerLink="/dashboard/datosreferencias" class="button3">Referencias
+                Personales</button>
+              <button *ngIf="request.regReferenciasComOk === false &&
+                regReferenciasCom" routerLink="/dashboard/datosreferenciascom"
+                class="button3">Referencias Comerciales</button>
+
+              <hr>
+
+              <div class="row" *ngIf="(regPasaporte &&
+                !usuarioTest.pasaportePath) && (regCedula &&
+                !usuarioTest.cedulaPath)">
+                <div class="col-md-2">
+                  <p class="text-center">Cedula</p>
+                  <img [src]="'../../../assets/img/cedula.jpg'" class="photo"
+                    alt="Sin Imagen" (click)="cedulaInput.click()">
+                </div>
+                <div class="col-md-10">
+                  <input type="file" class="custom-file-upload"
+                    accept=".doc,.docx,.pdf,image/x-png, image/gif, image/jpeg,
+                    image/jpg"
+                    (change)="OnDocSelected($event)" #cedulaInput>
+                  <button (click)="uploadExtracto('cedula')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    Documento</button>
+                  <p><small> Ambas Caras</small></p>
+                </div>
+              </div>
+              <hr *ngIf="(regPasaporte && !usuarioTest.pasaportePath) &&
+                (regCedula && !usuarioTest.cedulaPath)">
+
+              <div class="row" *ngIf="(regPasaporte &&
+                !usuarioTest.pasaportePath) && (regCedula &&
+                !usuarioTest.cedulaPath)">
+                <div class="col-md-2">
+                  <p class="text-center">Pasaporte</p>
+                  <img [src]="'../../../assets/img/pasaporte.jpg'" class="photo"
+                    alt="Sin Imagen" (click)="pasaporteInput.click()">
+                </div>
+                <div class="col-md-10">
+                  <input type="file" class="custom-file-upload"accept=".doc,.docx,.pdf,image/x-png,
+                    image/gif, image/jpeg, image/jpg"
+                    (change)="OnDocSelected($event)" #pasaporteInput>
+                  <button (click)="uploadExtracto('pasaporte')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    Documento</button>
+                </div>
+              </div>
+              <hr *ngIf="(regPasaporte && !usuarioTest.pasaportePath) &&
+                (regCedula && !usuarioTest.cedulaPath)">
+
+              <div class="row" *ngIf="regTarjetav && !request.tarjetavPath">
+                <div class="col-md-2">
+                  <p class="text-center">Tarjeta De Propiedad</p>
+                  <img [src]="'../../../assets/img/Tvehiculo.jpg'" class="photo"
+                    alt="Sin Imagen" (click)="tarjetavInput.click()">
+                </div>
+                <div class="col-md-10">
+                  <input type="file" class="custom-file-upload"accept=".doc,.docx,.pdf,image/x-png,
+                    image/gif, image/jpeg, image/jpg"
+                    (change)="OnDocSelected($event)" #tarjetavInput>
+                  <button (click)="uploadExtracto('tarjetav')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    Documento</button>
+                </div>
+              </div>
+              <hr *ngIf="regTarjetav && !request.tarjetavPath">
+
+              <div class="row" *ngIf="regMatricula && !request.matriculaPath">
+                <div class="col-md-2">
+                  <p class="text-center">Matricula Inmobiliaria</p>
+                  <img [src]="'../../../assets/img/tradicion.jpg'" class="photo"
+                    alt="Sin Imagen" (click)="matriculaInput.click()">
+                </div>
+                <div class="col-md-10">
+                  <input type="file" class="custom-file-upload"
+                    accept=".doc,.docx,.pdf,image/x-png, image/gif, image/jpeg,
+                    image/jpg"
+                    (change)="OnDocSelected($event)" #matriculaInput>
+                  <button (click)="uploadExtracto('matricula')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    Documento</button>
+                  <p><small> No Mayor A 30 Dias</small></p>
+                </div>
+              </div>
+              <hr *ngIf="regMatricula && !request.matriculaPath">
+
+              <div class="row" *ngIf="regExtracto && !request.extractoPath">
+                <div class="col-md-2">
+                  <p class="text-center">Extractos Bancarios</p>
+                  <img [src]="'../../../assets/img/extractobanco.jpg'"
+                    class="photo"
+                    alt="Sin Imagen" (click)="extractoInput.click()">
+                </div>
+                <div class="col-md-10">
+                  <input type="file" class="custom-file-upload"accept=".doc,.docx,.pdf,image/x-png,
+                    image/gif, image/jpeg, image/jpg"
+                    (change)="OnDocSelected($event)" #extractoInput>
+                  <button (click)="uploadExtracto('extracto')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    Documento</button>
+                  <p><small> Ultimos 3 Meses</small></p>
+                </div>
+              </div>
             </div>
-            <div class="col-md-10">
-              <input type="file" class="custom-file-upload" accept=".doc,.docx,.pdf,image/x-png, image/gif, image/jpeg, image/jpg"
-                (change)="OnDocSelected($event)" #cedulaInput>
-              <button (click)="uploadExtracto('cedula')" mat-mini-fab><mat-icon>backup</mat-icon>Subir Documento</button>
-              <p><small> Ambas Caras</small></p>
-            </div>
+
+            <hr *ngIf="regExtracto && !request.extractoPath">
           </div>
 
-          <hr>
-          <div class="row" *ngIf="(regPasaporte && !usuarioTest.pasaportePath) && (regCedula && !usuarioTest.cedulaPath)">
-            <div class="col-md-2">
-              <p class="text-center">Pasaporte</p>
-              <img [src]="'../../../assets/img/pasaporte.jpg'" class="photo"
-                alt="Sin Imagen" (click)="pasaporteInput.click()">
-            </div>
-            <div class="col-md-10">
-              <input type="file" class="custom-file-upload " accept=".doc,.docx,.pdf,image/x-png, image/gif, image/jpeg, image/jpg"
-                (change)="OnDocSelected($event)" #pasaporteInput>
-              <button (click)="uploadExtracto('pasaporte')" mat-mini-fab><mat-icon>backup</mat-icon>Subir Documento</button>
-            </div>
-          </div>
 
-          <hr>
-
-          <div class="row" *ngIf="regTarjetav && !request.tarjetavPath">
-            <div class="col-md-2">
-              <p class="text-center">Tarjeta De Propiedad</p>
-              <img [src]="'../../../assets/img/Tvehiculo.jpg'" class="photo"
-                alt="Sin Imagen" (click)="tarjetavInput.click()">
-            </div>
-            <div class="col-md-10">
-              <input type="file" class="custom-file-upload " accept=".doc,.docx,.pdf,image/x-png, image/gif, image/jpeg, image/jpg"
-                (change)="OnDocSelected($event)" #tarjetavInput>
-              <button (click)="uploadExtracto('tarjetav')" mat-mini-fab><mat-icon>backup</mat-icon>Subir Documento</button>
-            </div>
-          </div>
-
-          <hr>
-
-          <div class="row" *ngIf="regMatricula && !request.matriculaPath">
-            <div class="col-md-2">
-              <p class="text-center">Matricula Inmobiliaria</p>
-              <img [src]="'../../../assets/img/tradicion.jpg'" class="photo"
-                alt="Sin Imagen" (click)="matriculaInput.click()">
-            </div>
-            <div class="col-md-10">
-              <input type="file" class="custom-file-upload" accept=".doc,.docx,.pdf,image/x-png, image/gif, image/jpeg, image/jpg"
-                (change)="OnDocSelected($event)" #matriculaInput>
-              <button (click)="uploadExtracto('matricula')" mat-mini-fab><mat-icon>backup</mat-icon>Subir Documento</button>
-              <p><small> No Mayor A 30 Dias</small></p>
-            </div>
-          </div>
-
-          <hr>
-
-          <div class="row" *ngIf="regExtracto && !request.extractoPath">
-            <div class="col-md-2">
-              <p class="text-center">Extractos Bancarios</p>
-              <img [src]="'../../../assets/img/extractobanco.jpg'" class="photo"
-                alt="Sin Imagen" (click)="extractoInput.click()">
-            </div>
-            <div class="col-md-10">
-              <input type="file" class="custom-file-upload " accept=".doc,.docx,.pdf,image/x-png, image/gif, image/jpeg, image/jpg"
-                (change)="OnDocSelected($event)" #extractoInput>
-              <button (click)="uploadExtracto('extracto')" mat-mini-fab><mat-icon>backup</mat-icon>Subir Documento</button>
-              <p><small> Ultimos 3 Meses</small></p>
-            </div>
-
-          </div>
-        </div>
-            <hr>
-
-            <!-- <hr>
+          <!--
               <div class="col-3 mb-3">
                 <p>Foto Personal</p>
                 <input type="file" class="d-none"
@@ -145,13 +179,12 @@
                   class="photo" alt="Sin Imagen" (click)="photoInput.click()">
                 <button type="button" class="btn button3" (click)="uploadPhoto()">Enviar</button>
               </div> -->
-
         </mat-card-content>
-
       </mat-card>
     </div>
+
     <div class="col-md-4">
-      <app-datosconstruccion #datosDesdeElPadre></app-datosconstruccion>
+      <app-datosconstruccion></app-datosconstruccion>
     </div>
   </div>
 

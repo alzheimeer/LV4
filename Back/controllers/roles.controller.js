@@ -20,7 +20,7 @@ const getRoles = async(req, res) => {
 }
 const getRoleById = async(req, res) => {
     try {
-        console.log('prueba', req.params);
+        // console.log('prueba', req.params);
         const role = await Role.findById(req.params.rolesId);
 
         return res.status(200).json(role);

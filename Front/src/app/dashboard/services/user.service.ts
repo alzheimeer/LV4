@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
+import { tap } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { User } from '../../models/user.models';
@@ -10,12 +11,17 @@ import { User } from '../../models/user.models';
   providedIn: 'root'
 })
 export class UserService {
+  private _refresh$ = new Subject<void>();
 
   private baseUrl: string = environment.baseUrl;
   private _usuario!: User;
 
   get usuario() {
     return { ...this._usuario };
+  }
+
+  get refresh$() {
+    return this._refresh$;
   }
 
   constructor(private http: HttpClient) { }
@@ -40,26 +46,28 @@ export class UserService {
     return this.http.put(`${ url }/${ usuario._id }`, usuario);
   }
 
-  public updateUserByIdX(id: string, tipodoc: string, fechaNac: Date, fechaExp: Date, pais: string, departamento: string, ciudad: string, barrio: string, direccion: string, numdoc: number, celular1: number, celular2: number, banco: string, tipocuenta: string, numcuenta: number) {
+  public updateUserByIdX(id: string, tipodoc: string, fechaNac: Date, fechaExp: Date, pais: string,
+    departamento: string, ciudad: string, barrio: string, direccion: string, numdoc: number,
+    celular1: number, celular2: number, banco: string, tipocuenta: string, numcuenta: number) {
     const url = `${this.baseUrl}/users`;
     const body = {
-      'personal': {
-        'tipodoc': tipodoc,
-        'fechaNac': fechaNac,
-        'fechaExp': fechaExp,
-        'pais': pais,
-        'departamento': departamento,
-        'ciudad': ciudad,
-        'barrio': barrio,
-        'direccion': direccion,
-        'numdoc': numdoc,
-        'celular1': celular1,
-        'celular2': celular2,
+      personal: {
+        tipodoc,
+        fechaNac,
+        fechaExp,
+        pais,
+        departamento,
+        ciudad,
+        barrio,
+        direccion,
+        numdoc,
+        celular1,
+        celular2,
       },
-      'banca': {
-        'banco': banco,
-        'tipocuenta': tipocuenta,
-        'numcuenta': numcuenta,
+      banca: {
+        banco,
+        tipocuenta,
+        numcuenta,
       }
     };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
@@ -70,7 +78,11 @@ export class UserService {
     const fd = new FormData();
     fd.append('avatar', photo);
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, fd, { headers });
+    return this.http.put(`${url}/${id}`, fd, { headers }).pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    );
   }
 
   public updateUserByIdCedula(id: string, photoCedula: File) {
@@ -78,7 +90,12 @@ export class UserService {
     const fd = new FormData();
     fd.append('cedula', photoCedula);
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, fd, { headers });
+    return this.http.put(`${url}/${id}`, fd, { headers })
+      .pipe(
+        tap(() => {
+          this._refresh$.next();
+        })
+      );
   }
 
   public updateUserByIdPasaporte(id: string, photoPasaporte: File) {
@@ -86,7 +103,11 @@ export class UserService {
     const fd = new FormData();
     fd.append('pasaporte', photoPasaporte);
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, fd, { headers });
+    return this.http.put(`${url}/${id}`, fd, { headers }).pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    );
   }
 
   public deleteUserById( id: any ){

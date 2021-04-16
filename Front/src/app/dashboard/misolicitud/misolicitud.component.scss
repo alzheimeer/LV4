@@ -197,3 +197,39 @@ ul {
   padding-left: 2rem;
   list-style-type: none;
 }
+
+
+
+.btDone {
+  background-color: #c2b332;
+  color: #286ed8;
+}
+.btErr {
+  background-color: #e40a0a;
+  color: #ffffff;
+}
+
+.btInProgress {
+  background-color: #3e31f5;
+  color: #ffffff;
+}
+
+.btToDo {
+  background-color: #26752d;
+  color: #ffffff;
+}
+
+.btSelectDone {
+  color: #3cb44b;
+}
+
+.btSelectInProgress {
+  color: #3e31f5;
+}
+
+.btSelectTodo {
+  color: #c2b332;
+}
+.btSelectErr {
+  color: #fd3300;
+}

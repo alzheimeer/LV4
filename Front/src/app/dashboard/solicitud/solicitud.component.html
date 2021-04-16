@@ -1,112 +1,123 @@
 <div class="panel-header">
-    <div class="header text-center">
-        <h2 class="title">SOLICITUD DE PRESTAMOS</h2>
-    </div>
+  <div class="header text-center">
+    <h2 class="title">SOLICITUD DE PRESTAMOS</h2>
+  </div>
 </div>
 
 <div class="main-content">
-    <div class="row">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="title">Solicitud De Prestamo</h5>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Solicitud De Prestamo</h5>
+        </div>
+        <div class="card-body">
+          <form class="form" (ngSubmit)="guardar()"
+            [formGroup]="formularioSolicitud" #f="ngForm">
+            <mat-card class="card">
+              <mat-card-title>Crear Solicitud</mat-card-title>
+              <mat-card-content>
+                <div class="container">
+                  <mat-grid-list cols="1" rowHeight="80px">
+                    <mat-grid-tile>
+                      <mat-form-field>
+                        <input formControlName="idUser" type="text" matInput
+                          placeholder="Id Usuario" />
+                        <!-- <small class="form-text text-muted">Este campo es autogenerado</small> -->
+                      </mat-form-field>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                      <mat-form-field>
+                        <mat-select class="sliderx" #x placeholder="Tipo De
+                          Prestamo?" formControlName="idProduct">
+                          <mat-option [value]="producto._id" *ngFor="let
+                            producto of productos">{{ producto.name }}</mat-option>
+                        </mat-select>
+                        <span class="form-text text-danger"
+                          *ngIf="campoEsValido('idProduct')">Debe Seleccionar Un
+                          Tipo De Prestamo</span>
+                      </mat-form-field>
+                    </mat-grid-tile>
+                  </mat-grid-list>
+                  <mat-grid-list *ngIf="valor" cols="1" rowHeight="120px">
+                    <mat-grid-tile>
+                      <div>
+                        <h4 class="">Cuanto Dinero Necesitas?</h4>
+                        <!-- <input  formControlName="value" matInput placeholder="" required /> -->
+                        <mat-slider formControlName="value" class="min"
+                          thumbLabel step="50000" [min]=valuemin [max]=valuemax
+                          name="valor">
+                        </mat-slider>
+                        <p>
+                          <span *ngIf="valor> 1" class="">$ {{ valor | number:
+                            "1.0-0" }} pesos</span>
+                        </p>
+                      </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                      <div>
+                        <h4 class="">Que Plazo Deseas?</h4>
+                        <!-- <input formControlName="time" type="number" matInput placeholder="" required /> -->
+                        <mat-slider formControlName="time" name="meses"
+                          class="max" thumbLabel tickInterval="1" [min]=termmin
+                          [max]=termmax>
+                        </mat-slider>
+                        <p>
+                          <span *ngIf="meses> 1" class="">{{ meses }} meses</span>
+                          <span *ngIf="meses <= 1" class="">{{ meses }} mes</span>
+                        </p>
+                      </div>
+                    </mat-grid-tile>
+                    <mat-grid-tile>
+                      <mat-form-field appearance="outline" class="sliderx">
+                        <mat-label>Comentarios</mat-label>
+                        <textarea matInput formControlName="description"
+                          placeholder="Opcional" required></textarea>
+                      </mat-form-field>
+                    </mat-grid-tile>
+                  </mat-grid-list>
                 </div>
-                <div class="card-body">
-                    <form class="form" (ngSubmit)="guardar()" [formGroup]="formularioSolicitud" #f="ngForm">
-                        <mat-card class="card">
-                            <mat-card-title>Crear Solicitud</mat-card-title>
-                            <mat-card-content>
-                                <div class="container">
-                                    <mat-grid-list cols="1" rowHeight="80px">
-                                        <mat-grid-tile>
-                                            <mat-form-field>
-                                                <input formControlName="idUser" type="text" matInput placeholder="Id Usuario" />
-                                                <!-- <small class="form-text text-muted">Este campo es autogenerado</small> -->
-                                            </mat-form-field>
-                                        </mat-grid-tile>
-                                        <mat-grid-tile>
-                                            <mat-form-field>
-                                                <mat-select class="sliderx" #x placeholder="Tipo De Prestamo?" formControlName="idProduct">
-                                                    <mat-option [value]="producto._id" *ngFor="let producto of productos">{{ producto.name }}</mat-option>
-                                                </mat-select>
-                                                <span class="form-text text-danger" *ngIf="campoEsValido('idProduct')">Debe Seleccionar Un Tipo De Prestamo</span>
-                                            </mat-form-field>
-                                        </mat-grid-tile>
-                                    </mat-grid-list>
-                                    <mat-grid-list *ngIf="valor" cols="1" rowHeight="120px">
-                                        <mat-grid-tile>
-                                            <div>
-                                                <h4 class="">Cuanto Dinero Necesitas?</h4>
-                                                <!-- <input  formControlName="value" matInput placeholder="" required /> -->
-                                                <mat-slider formControlName="value" class="min" thumbLabel step="50000" [min]=valuemin [max]=valuemax name="valor">
-                                                </mat-slider>
-                                                <p>
-                                                    <span *ngIf="valor > 1" class="">$ {{ valor | number: "1.0-0" }} pesos</span>
-                                                </p>
-                                            </div>
-                                        </mat-grid-tile>
-                                        <mat-grid-tile>
-                                            <div>
-                                                <h4 class="">Que Plazo Deseas?</h4>
-                                                <!-- <input formControlName="time" type="number" matInput placeholder="" required /> -->
-                                                <mat-slider formControlName="time" name="meses" class="max" thumbLabel tickInterval="1" [min]=termmin [max]=termmax>
-                                                </mat-slider>
-                                                <p>
-                                                    <span *ngIf="meses > 1" class="">{{ meses }} meses</span>
-                                                    <span *ngIf="meses <= 1" class="">{{ meses }} mes</span>
-                                                </p>
-                                            </div>
-                                        </mat-grid-tile>
-                                        <mat-grid-tile>
-                                            <mat-form-field appearance="outline" class="sliderx">
-                                                <mat-label>Comentarios</mat-label>
-                                                <textarea matInput formControlName="description" placeholder="Opcional" required></textarea>
-                                            </mat-form-field>
-                                        </mat-grid-tile>
-                                    </mat-grid-list>
-                                </div>
-                            </mat-card-content>
-                            <mat-card-actions>
-                                <button type="submit" class="button col">
+              </mat-card-content>
+              <mat-card-actions>
+                <button type="submit" class="button col">
                   Empezar La Solicitud
                 </button>
-                            </mat-card-actions>
-                        </mat-card>
-                    </form>
+              </mat-card-actions>
+            </mat-card>
+          </form>
 
-                </div>
-            </div>
         </div>
+      </div>
+    </div>
 
-        <mat-card class="col-md-4">
-            <!-- <mat-card-header>
+    <mat-card class="col-md-4">
+      <!-- <mat-card-header>
 
       </mat-card-header> -->
-            <div mat-card-avatar class="example-header-image"></div>
-            <!-- <mat-card-title>Calculadora: </mat-card-title> -->
-            <mat-card-subtitle>Intereses: $ {{ interes | number: "1.0-0" }}</mat-card-subtitle>
-            <mat-card-subtitle>Iva: $ {{ iva | number: "1.0-0" }}</mat-card-subtitle>
-            <mat-card-subtitle>Aval: $ {{ aval | number: "1.0-0" }}</mat-card-subtitle>
-            <mat-card-subtitle>Tecno: $ {{ tecno | number: "1.0-0" }}</mat-card-subtitle>
-            <mat-card-title>Total Prestamo: $ {{ total | number: "1.0-0" }}</mat-card-title>
-            <mat-card-title>Valor Cuota Mensual: {{ emi | number: "1.0-0" }}</mat-card-title>
-
-            <mat-card-content>
-                <!-- <mat-card-title>Requisitos: </mat-card-title>
+      <div mat-card-avatar class="example-header-image"></div>
+      <!-- <mat-card-title>Calculadora: </mat-card-title> -->
+      <mat-card-subtitle>Intereses: $ {{ interes | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle>Iva: $ {{ iva | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle>Aval: $ {{ aval | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle>Tecno: $ {{ tecno | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-title>Total Prestamo: $ {{ total | number: "1.0-0" }}</mat-card-title>
+      <mat-card-title>Valor Cuota Mensual: {{ emi | number: "1.0-0" }}</mat-card-title>
+      <mat-card-content>
+        <!-- <mat-card-title>Requisitos: </mat-card-title>
         <mat-card-subtitle>Datos Personales</mat-card-subtitle>
         <mat-card-subtitle>Datos Del Predio</mat-card-subtitle>
         <mat-card-subtitle>Datos Del Vehiculo</mat-card-subtitle>
         <mat-card-subtitle>Datos De La Construccion</mat-card-subtitle> -->
-            </mat-card-content>
-            <mat-card-actions>
-                <!--
+      </mat-card-content>
+      <mat-card-actions>
+        <!--
           <button class="btSelectTodo" mat-button >Pendiente</button>
           <button class="btSelectInProgress" mat-button >Asignada</button>
           <button class="btSelectDone" mat-button >Aprobada</button>
           <button class="btSelectErr" mat-button >Rechazada</button> -->
-            </mat-card-actions>
-        </mat-card>
-    </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
 
 <!--

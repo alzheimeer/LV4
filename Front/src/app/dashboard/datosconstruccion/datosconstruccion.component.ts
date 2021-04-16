@@ -1,5 +1,6 @@
-import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 
 import { environment } from '../../../environments/environment';
@@ -12,20 +13,16 @@ import { RequestService } from '../services/request.service';
 import { Requestx } from './../../models/request.models';
 
 interface HtmlInputEvent extends Event {
-  target: HTMLInputElement & EventTarget
+  target: HTMLInputElement & EventTarget;
 }
-
-
-
 
 @Component({
   selector: 'app-datosconstruccion',
   templateUrl: './datosconstruccion.component.html',
   styleUrls: ['./datosconstruccion.component.scss']
 })
-export class DatosconstruccionComponent implements OnInit, OnChanges {
-  @Input() estollegadelpadre: any;
-  //File Preview and Upload
+export class DatosconstruccionComponent implements OnInit {
+  suscription!: Subscription;
   file!: File;
   photoSeleted?: any | ArrayBuffer;
   baseUrlN: string = environment.baseUrlN;
@@ -35,7 +32,7 @@ export class DatosconstruccionComponent implements OnInit, OnChanges {
   productos: Product[] = [];
   usuarioTest: User | undefined;
   user: any;
-  regInmueble!: Boolean;
+  regInmueble!: boolean;
   regPersonales = false;
   regTrabajo = false;
   regVehiculo = false;
@@ -53,7 +50,7 @@ export class DatosconstruccionComponent implements OnInit, OnChanges {
   matricula = '';
   extracto = '';
 
-  get usuario() {
+  get usuario(): any {
     return this.authService.usuario;
   }
 
@@ -68,23 +65,20 @@ export class DatosconstruccionComponent implements OnInit, OnChanges {
 
   ) { }
 
-  ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
 
-  }
 
 
   ngOnInit(): void {
     this.requestService
-      .getRequestByIdUser(this.usuario.uid).subscribe((resp) => {
-        this.requests = resp;
-        this.tarjetav = resp[0].tarjetavPath;
-        this.matricula = resp[0].matriculaPath;
-        this.extracto = resp[0].extractoPath;
+      .getRequestByIdUser(this.usuario.uid).subscribe((res) => {
+        // console.log('cambios');
+        this.requests = res;
+        this.tarjetav = res[0].tarjetavPath;
+        this.matricula = res[0].matriculaPath;
+        this.extracto = res[0].extractoPath;
         this.numrequests = this.requests.length;
-        this.productService.getProducts().subscribe((resp) => {
-          this.productos = resp;
-
+        this.productService.getProducts().subscribe((r) => {
+          this.productos = r;
           this.productService.getProductById(this.requests[0].idProduct).subscribe((resp) => {
             if (resp.regInmueble === true) { this.regInmueble = true; }
             if (resp.regPersonales === true) { this.regPersonales = true; }
@@ -108,29 +102,31 @@ export class DatosconstruccionComponent implements OnInit, OnChanges {
       this.user = resp.personal.numdoc;
     });
 
+    this.suscription = this.userService.refresh$.subscribe(() => {
+      this.ngOnInit();
+    });
+    this.suscription = this.requestService.refresh$.subscribe(() => {
+      this.ngOnInit();
+    });
   }
-
-
 
   OnPhotoSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
-      this.file = <File>event.target.files[0];
-      //image preview
+      this.file = (event.target.files[0] as File);
+      // image preview
       const reader = new FileReader();
       reader.onload = e => this.photoSeleted = reader.result;
       reader.readAsDataURL(this.file);
     }
-
   }
+
   OnDocSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
-      this.file = <File>event.target.files[0];
-
+      this.file = (event.target.files[0] as File);
     }
   }
 
-  uploadPhoto() {
-
+  uploadPhoto(): void {
     this.userService.updateUserByIdPhoto(this.usuario.uid as string, this.file)
       .subscribe((resp) => {
         Swal.fire({
@@ -138,13 +134,12 @@ export class DatosconstruccionComponent implements OnInit, OnChanges {
           text: 'Foto Actualizada',
           icon: 'success',
         });
-
       }, (err) => {
         console.log(err);
-      })
+      });
   }
-  uploadExtracto() {
 
+  uploadExtracto(): void {
     this.userService.updateUserByIdPhoto(this.usuario.uid as string, this.file)
       .subscribe((resp) => {
         Swal.fire({
@@ -154,6 +149,6 @@ export class DatosconstruccionComponent implements OnInit, OnChanges {
         });
       }, (err) => {
         console.log(err);
-      })
+      });
   }
 }

@@ -44,7 +44,17 @@ var RequestSchema = Schema({
         required: false,
         default: false
     },
+    regInmuebleOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
     regPersonales: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regPersonalesOk: {
         type: Boolean,
         required: false,
         default: false
@@ -54,7 +64,17 @@ var RequestSchema = Schema({
         required: false,
         default: false
     },
+    regVehiculoOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
     regTrabajo: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regTrabajoOk: {
         type: Boolean,
         required: false,
         default: false
@@ -64,7 +84,72 @@ var RequestSchema = Schema({
         required: false,
         default: false
     },
+    regReferenciasOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
     regReferenciasCom: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regReferenciasComOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regCedula: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regCedulaOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regPasaporte: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regPasaporteOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regTarjetav: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regTarjetavOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regMatricula: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regMatriculaOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regExtracto: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regExtractoOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regOk: {
         type: Boolean,
         required: false,
         default: false

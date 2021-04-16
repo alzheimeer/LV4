@@ -116,8 +116,8 @@ const createProducts = async function() {
                 regReferenciasCom: false,
                 regCedula: true,
                 regPasaporte: true,
-                regTarjetav: false,
-                regMatricula: true,
+                regTarjetav: true,
+                regMatricula: false,
                 regExtracto: false,
 
             }).save(),
