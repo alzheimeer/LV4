@@ -12,7 +12,7 @@
    </div>
  </div>
  <div class="team-content">
-  <button *ngIf="file" class="btn button3" (click)="uploadPhoto()">Cambiar</button>
+  <button *ngIf="buttonSelect" class="btn button3" (click)="uploadPhoto()">Cambiar</button>
    <h3 class="name">{{usuario.name | uppercase}} {{usuario.surname | uppercase}}</h3>
    <h4 class="email">{{usuario.email}}</h4>
    <h4 routerLink="/dashboard/misdatos" >Actualiza Tus Datos</h4>

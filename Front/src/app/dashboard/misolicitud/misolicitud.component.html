@@ -85,8 +85,8 @@
                   <input type="file" class="custom-file-upload"
                     accept=".doc,.docx,.pdf,image/x-png, image/gif, image/jpeg,
                     image/jpg"
-                    (change)="OnDocSelected($event)" #cedulaInput>
-                  <button (click)="uploadExtracto('cedula')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    (change)="onDocSelected($event, 'cedula')" #cedulaInput>
+                  <button *ngIf="buttonSelect0 == true" (click)="uploadExtracto('cedula')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
                     Documento</button>
                   <p><small> Ambas Caras</small></p>
                 </div>
@@ -105,8 +105,8 @@
                 <div class="col-md-10">
                   <input type="file" class="custom-file-upload"accept=".doc,.docx,.pdf,image/x-png,
                     image/gif, image/jpeg, image/jpg"
-                    (change)="OnDocSelected($event)" #pasaporteInput>
-                  <button (click)="uploadExtracto('pasaporte')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    (change)="onDocSelected($event, 'pasaporte')" #pasaporteInput>
+                  <button *ngIf="buttonSelect1 == true" (click)="uploadExtracto('pasaporte')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
                     Documento</button>
                 </div>
               </div>
@@ -122,8 +122,8 @@
                 <div class="col-md-10">
                   <input type="file" class="custom-file-upload"accept=".doc,.docx,.pdf,image/x-png,
                     image/gif, image/jpeg, image/jpg"
-                    (change)="OnDocSelected($event)" #tarjetavInput>
-                  <button (click)="uploadExtracto('tarjetav')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    (change)="onDocSelected($event, 'tarjetav')" #tarjetavInput>
+                  <button *ngIf="buttonSelect2 == true"  (click)="uploadExtracto('tarjetav')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
                     Documento</button>
                 </div>
               </div>
@@ -139,8 +139,8 @@
                   <input type="file" class="custom-file-upload"
                     accept=".doc,.docx,.pdf,image/x-png, image/gif, image/jpeg,
                     image/jpg"
-                    (change)="OnDocSelected($event)" #matriculaInput>
-                  <button (click)="uploadExtracto('matricula')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    (change)="onDocSelected($event, 'matricula')" #matriculaInput>
+                  <button *ngIf="buttonSelect3 == true" (click)="uploadExtracto('matricula')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
                     Documento</button>
                   <p><small> No Mayor A 30 Dias</small></p>
                 </div>
@@ -157,8 +157,8 @@
                 <div class="col-md-10">
                   <input type="file" class="custom-file-upload"accept=".doc,.docx,.pdf,image/x-png,
                     image/gif, image/jpeg, image/jpg"
-                    (change)="OnDocSelected($event)" #extractoInput>
-                  <button (click)="uploadExtracto('extracto')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    (change)="onDocSelected($event, 'extracto')" #extractoInput>
+                  <button *ngIf="buttonSelect4 == true" (click)="uploadExtracto('extracto')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
                     Documento</button>
                   <p><small> Ultimos 3 Meses</small></p>
                 </div>

@@ -49,6 +49,8 @@ export class DatosconstruccionComponent implements OnInit {
   tarjetav = '';
   matricula = '';
   extracto = '';
+  buttonSelect = false;
+  MAXIMO_TAMANIO_BYTES = 2000000; // 1MB = 1 millón de bytes
 
   get usuario(): any {
     return this.authService.usuario;
@@ -113,6 +115,14 @@ export class DatosconstruccionComponent implements OnInit {
   OnPhotoSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
       this.file = (event.target.files[0] as File);
+      if (this.file.size > this.MAXIMO_TAMANIO_BYTES) {
+        const tamanioEnMb = this.MAXIMO_TAMANIO_BYTES / 1000000;
+        alert(`El tamaño máximo es ${tamanioEnMb} MB Con Tamaño 130x130 px`);
+        // Limpiar
+        this.buttonSelect = false;
+        return
+      }
+      this.buttonSelect = true;
       // image preview
       const reader = new FileReader();
       reader.onload = e => this.photoSeleted = reader.result;
@@ -134,6 +144,7 @@ export class DatosconstruccionComponent implements OnInit {
           text: 'Foto Actualizada',
           icon: 'success',
         });
+        this.buttonSelect = false;
       }, (err) => {
         console.log(err);
       });
@@ -147,6 +158,7 @@ export class DatosconstruccionComponent implements OnInit {
           text: 'Foto Actualizada',
           icon: 'success',
         });
+        this.buttonSelect = false;
       }, (err) => {
         console.log(err);
       });
