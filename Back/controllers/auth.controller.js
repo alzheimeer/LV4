@@ -51,7 +51,7 @@ const crearUsuario = async function(req, res) {
             <p >${name} </p>
             <h3> Email:</h3>
             <p >${email} </p>
-            <p>Solo Escoge El Valor De Tu Prestamo, Completa Los Requisitos Y Te Consignaremos A Tu Cuenta Bancaria En Poco Tiempo</p>
+            <p>Solo Escoge El Valor De Tu Prestamo, Completa Los Requisitos Y Te Consignaremos A Tu Cuenta Bancaria En Poco Tiempo</p>`
         });
 
 
