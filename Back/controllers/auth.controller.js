@@ -6,7 +6,7 @@ const transporter = require('../middlewares/mailer')
 
 // Create User
 const crearUsuario = async function(req, res) {
-    const { email, password, roles } = req.body;
+    const { name, surname, email, password, roles } = req.body;
     try {
         // verify the email that does not exist
         const existeEmail = await User.findOne({ email });
@@ -38,7 +38,7 @@ const crearUsuario = async function(req, res) {
         verificationLink = `https://www.lendiup.com/api/auth/forget/${token}`;
 
         await transporter.sendMail({
-            from: '"Email De Verificacion" <fogniebla@gmail.com>', // sender address
+            from: '"Bienvenido A Lendiup" <administrador@lendiup.com', // sender address
             to: newUser.email, // list of receivers
             subject: "Email De Verificacion", // Subject line
             // text: "Hello world?", // plain text body
@@ -46,7 +46,12 @@ const crearUsuario = async function(req, res) {
             /* html: `<b>Bienvenido A Lendiup</b>
             <a href="${verificationLink}">${verificationLink} </a>`, */
 
-            html: "<b>Bienvenido A Lendiup</b>"
+            html: `<b>Bienvenido A Lendiup</b>
+            <h3> Nombre:</h3>
+            <p >${name} </p>
+            <h3> Email:</h3>
+            <p >${email} </p>
+            <p>Solo Escoge El Valor De Tu Prestamo, Completa Los Requisitos Y Te Consignaremos A Tu Cuenta Bancaria En Poco Tiempo</p>
         });
 
 
