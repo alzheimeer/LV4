@@ -37,7 +37,7 @@ const routes: Routes = [
   { path: 'datosvehiculo',    component: DatosvehiculoComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'usuarios',         component: UsuariosComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'estadocuenta',     component: EstadocuentaComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-  { path: 'datosconstruccion',component: DatosconstruccionComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
+      { path: 'datosconstruccion', component: DatosconstruccionComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'misdatos',         component: MisdatosComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
   { path: 'about',         component: AboutComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
 
@@ -48,7 +48,10 @@ const routes: Routes = [
 
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  // imports: [RouterModule.forChild(routes)],
+  imports: [
+    RouterModule.forChild(routes),
+  ],
   exports: [RouterModule]
 })
 export class DashboardRoutingModule { }

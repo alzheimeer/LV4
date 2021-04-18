@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -17,12 +17,15 @@ interface HtmlInputEvent extends Event {
 
 
 
+
 @Component({
   selector: 'app-misolicitud',
   templateUrl: './misolicitud.component.html',
   styleUrls: ['./misolicitud.component.scss'],
-})
-export class MisolicitudComponent implements OnInit {
+  })
+export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
+
+
   suscription!: Subscription;
   file!: File;
   photoSeleted?: any | ArrayBuffer;
@@ -52,10 +55,22 @@ export class MisolicitudComponent implements OnInit {
   buttonSelect3 = false;
   buttonSelect4 = false;
   MAXIMO_TAMANIO_BYTES = 4000000; // 1MB = 1 millón de bytes
+  seguro = 0;
+  seguro1 = 0;
+  isScrolled = false;
+
 
   get usuario(): any {
     return this.authService.usuario;
   }
+
+  @HostListener("scroll", ['$event'])
+  doSomethingOnWindowsScroll($event: any) {
+    console.log('w')
+    let scrollOffset = $event.srcElement.children[0].scrollTop;
+    console.log("window scroll: ", scrollOffset);
+  }
+
 
   constructor(
     private router: Router,
@@ -64,170 +79,157 @@ export class MisolicitudComponent implements OnInit {
     private productService: ProductService,
     private userService: UserService
   ) {
-
+    console.log('Inicia CONSTRUCTOR');
+    this.requestService.getRequestByIdUser(this.usuario.uid).subscribe((resp) => {
+      console.log('OBTIENE SOLICITUD CONSTRUCTOR');
+      this.requests = resp;
+    }, (err) => {
+      this.router.navigate(['/dashboard/solicitud']);
+    });
+    this.userService.getUserById(this.usuario.uid).subscribe((usuario) => {
+      console.log('OBTIENE USUARIO CONSTRUCTOR');
+      this.usuarioTest = usuario;
+    });
+    // Traemos Todos Los Producto Y Los Guardamos En la Variable productos
+    this.productService.getProducts().subscribe((productos) => {
+      console.log('OBTIENE PRODUCTOS CONSTRUCTOR');
+      this.productos = productos;
+    });
   }
 
+  scroll(event: any): void {
+    const number = event.srcElement.scrollTop;
+    // console.log(event);
+    console.log(number);
+    event.srcElement.scrollTop >= 100 ? (this.isScrolled = true) : (this.isScrolled = false);
+    console.log(screenTop)
+  }
 
+  ngOnDestroy(): void {
+    window.removeEventListener('scroll', this.scroll, true);
+  }
+
+  pepe() {
+    console.log('Ancho', window.top, window.innerWidth);
+    console.log('Alto', window.innerHeight);
+    console.log('scroll', window.outerHeight);
+
+    // setTimeout(() => window.scroll(0, 0), 0);
+    window.scrollTo(0, 1000);
+    window.scroll(0, 0);
+    // this.requestService.updateRequestsByIdMiSolicitud(this.requests[0]).subscribe(() => {
+    //   this.docOk();
+
+    // });
+  }
 
   ngOnInit(): void {
-    this.requestService.getRequestByIdUser(this.usuario.uid)
-      .subscribe((resp1) => {
-        this.requests = resp1;
-        this.regAllOk = resp1[0].regOk;
-        this.numrequests = this.requests.length;
-        if (resp1[0].regInmueble === true) { this.regInmueble = true; }
-        if (resp1[0].regPersonales === true) { this.regPersonales = true; }
-        if (resp1[0].regTrabajo === true) { this.regTrabajo = true; }
-        if (resp1[0].regVehiculo === true) { this.regVehiculo = true; }
-        if (resp1[0].regReferencias === true) { this.regReferencias = true; }
-        if (resp1[0].regReferenciasCom === true) { this.regReferenciasCom = true; }
-        if (resp1[0].regCedula === true) { this.regCedula = true; }
-        if (resp1[0].regPasaporte === true) { this.regPasaporte = true; }
-        if (resp1[0].regTarjetav === true) { this.regTarjetav = true; }
-        if (resp1[0].regMatricula === true) { this.regMatricula = true; }
-        if (resp1[0].regExtracto === true) { this.regExtracto = true; }
+    window.addEventListener('scroll', this.scroll, true);
 
-        this.productService.getProducts().subscribe((res) => this.productos = res);
-        this.userService.getUserById(this.usuario.uid).subscribe((r) => {
-          this.usuarioTest = r;
-          this.verificarUsuarioProp();
-          this.verificarallOk();
-        });
-      });
-    this.suscription = this.userService.refresh$.subscribe(() => this.ngOnInit());
-    this.suscription = this.requestService.refresh$.subscribe(() => this.ngOnInit());
-  }
 
-  verificarUsuarioProp(): void {
-    if (this.usuarioTest.personal.ciudad) {
-      const body: any = { _id: this.requests[0]._id, regPersonalesOk: true };
-      this.requestService.updateRequestsById(body).subscribe();
-      this.user = this.usuarioTest.personal.numdoc;
-    } else {
-      const body: any = { _id: this.requests[0]._id, regPersonalesOk: false };
-      this.requestService.updateRequestsById(body).subscribe();
-      this.user = 0;
-    }
-    if (this.usuarioTest.cedulaPath || this.usuarioTest.pasaportePath) {
-      const body: any = { _id: this.requests[0]._id, regCedulaOk: true, regPasaporteOk: true };
-      this.requestService.updateRequestsById(body).subscribe();
-    } else {
-      const body: any = { _id: this.requests[0]._id, regCedulaOk: false, regPasaporteOk: false };
-      this.requestService.updateRequestsById(body).subscribe();
-    }
-    if (this.requests[0].tarjetavPath) {
-      const body: any = { _id: this.requests[0]._id, regTarjetavOk: true };
-      this.requestService.updateRequestsById(body).subscribe();
-    } else {
-      const body: any = { _id: this.requests[0]._id, regTarjetavOk: false };
-      this.requestService.updateRequestsById(body).subscribe();
-    }
-    if (this.requests[0].matriculaPath) {
-      const body: any = { _id: this.requests[0]._id, regMatriculaOk: true };
-      this.requestService.updateRequestsById(body).subscribe();
-    } else {
-      const body: any = { _id: this.requests[0]._id, regMatriculaOk: false };
-      this.requestService.updateRequestsById(body).subscribe();
-    }
-    if (this.requests[0].extractoPath) {
-      const body: any = { _id: this.requests[0]._id, regExtractoOk: true };
-      this.requestService.updateRequestsById(body).subscribe();
-    } else {
-      const body: any = { _id: this.requests[0]._id, regExtractoOk: false };
-      this.requestService.updateRequestsById(body).subscribe();
-    }
-  }
+    console.log('Inicio - OnInit');
+    this.requestService.getRequestByIdUser(this.usuario.uid).subscribe((solicitudes) => {
+      console.log('Obtiene Usuario - OnInit');
+      this.requests = solicitudes;
+      this.numrequests = this.requests.length;
+      // Setea Los requisitos actuales de la solicitud
 
-  verificarallOk(): void {
-    if (this.requests[0].estate !== 'Completo') {
-      this.flaq = 0;
-      this.allOk = 0;
-      // Verificamos si Todo Esta OK
-      if (this.flaq === 0 && this.requests[0].regInmueble === true && this.requests[0].regInmuebleOk === true) {
-        this.allOk = 1;
+      // Si el usuario ya tiene cedula o pasaporte colocmos la bandera en OK
+      if (this.requests[0].regCedulaOk === false || solicitudes[0].regPasaporteOk === false) {
+        if (this.usuarioTest.cedulaPath || this.usuarioTest.pasaportePath) {
+          console.log('Entro a bandera cedula o pasaporte OK  - OnInit');
+          const body: any = { _id: solicitudes[0]._id, regCedulaOk: true, regPasaporteOk: true };
+          this.requestService.updateRequestsById(body).subscribe(() => this.ngOnInit());
+        }
       }
-      if (this.flaq === 0 && this.requests[0].regInmueble === true && this.requests[0].regInmuebleOk === false) {
-        this.allOk = 0;
-        this.flaq = 1;
+      // Si el usurio ya tiene datos Personales Colocamos la bandera en OK
+      if (solicitudes[0].regPersonalesOk === false) {
+        if (this.usuarioTest.personal.direccion) {
+          console.log('Entro a bandera PersonalesOk - OnInit');
+          const body: any = { _id: solicitudes[0]._id, regPersonalesOk: true };
+          this.requestService.updateRequestsById(body).subscribe(() => this.ngOnInit());
+        }
       }
-      if (this.flaq === 0 && this.requests[0].regPersonales === true && this.requests[0].regPersonalesOk === true) {
-        this.allOk = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regPersonales === true && this.requests[0].regPersonalesOk === false) {
-        this.allOk = 0;
-        this.flaq = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regVehiculo === true && this.requests[0].regVehiculoOk === true) {
-        this.allOk = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regVehiculo === true && this.requests[0].regVehiculoOk === false) {
-        this.allOk = 0;
-        this.flaq = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regTrabajo === true && this.requests[0].regTrabajoOk === true) {
-        this.allOk = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regTrabajo === true && this.requests[0].regTrabajoOk === false) {
-        this.allOk = 0;
-        this.flaq = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regReferencias === true && this.requests[0].regReferenciasOk === true) {
-        this.allOk = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regReferencias === true && this.requests[0].regReferenciasOk === false) {
-        this.allOk = 0;
-        this.flaq = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regReferenciasCom === true && this.requests[0].regReferenciasComOk === true) {
-        this.allOk = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regReferenciasCom === true && this.requests[0].regReferenciasComOk === false) {
-        this.allOk = 0;
-        this.flaq = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regCedula === true && this.requests[0].regCedulaOk === true) {
-        this.allOk = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regCedula === true && this.requests[0].regCedulaOk === false) {
-        this.allOk = 0;
-        this.flaq = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regPasaporte === true && this.requests[0].regPasaporteOk === true) {
-        this.allOk = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regPasaporte === true && this.requests[0].regPasaporteOk === false) {
-        this.allOk = 0;
-        this.flaq = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regTarjetav === true && this.requests[0].regTarjetavOk === true) {
-        this.allOk = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regTarjetav === true && this.requests[0].regTarjetavOk === false) {
-        this.allOk = 0;
-        this.flaq = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regMatricula === true && this.requests[0].regMatriculaOk === true) {
-        this.allOk = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regMatricula === true && this.requests[0].regMatriculaOk === false) {
-        this.allOk = 0;
-        this.flaq = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regExtracto === true && this.requests[0].regExtractoOk === true) {
-        this.allOk = 1;
-      }
-      if (this.flaq === 0 && this.requests[0].regExtracto === true && this.requests[0].regExtractoOk === false) {
-        this.allOk = 0;
-        this.flaq = 1;
-      }
-      if (this.allOk === 1) {
-        const body: any = { _id: this.requests[0]._id, regOk: true, estate: 'Completo' };
-        this.requestService.updateRequestsById(body).subscribe(() => {
+      this.setReq(solicitudes[0]);
+      this.verificarallOk(solicitudes[0]);
+    }, (err) => {
+      console.log('Usuario No Tiene Solicitudes Aun');
+    });
+    if (this.seguro1 === 0) {
+      // Implementaciones para refrescar este componente
+      this.suscription = this.userService.refresh$.subscribe(() => {
+        this.userService.getUserById(this.usuario.uid).subscribe((usuario) => {
+          console.log('REFRESH OBTIENE USUARIO  - OnInit');
+          this.usuarioTest = usuario;
+          this.seguro1 = 1;
           this.ngOnInit();
         });
-      } else {
-        const body: any = { _id: this.requests[0]._id, regOk: false };
-        this.requestService.updateRequestsById(body).subscribe();
+      });
+  }
+    if (this.seguro === 0) {
+      this.suscription = this.requestService.refresh$.subscribe((res) => {
+        console.log('REFRESH REQUEST  - OnInit', res);
+        this.seguro = 1;
+        this.ngOnInit();
+      });
+    }
+
+  }
+
+
+  setReq(solicitud: Requestx): void {
+    console.log('seteo variables')
+    this.regAllOk = solicitud.regOk;
+    this.regInmueble = solicitud.regInmueble;
+    this.regPersonales = solicitud.regPersonales;
+    this.regTrabajo = solicitud.regTrabajo;
+    this.regVehiculo = solicitud.regVehiculo;
+    this.regReferencias = solicitud.regReferencias;
+    this.regReferenciasCom = solicitud.regReferenciasCom;
+    this.regCedula = solicitud.regCedula;
+    this.regPasaporte = solicitud.regPasaporte;
+    this.regTarjetav = solicitud.regTarjetav;
+    this.regMatricula = solicitud.regMatricula;
+    this.regExtracto = solicitud.regExtracto;
+  }
+
+
+  verificarallOk(solicitud: Requestx): void {
+    // Verificamos si ya todos los requisitos se completaron Y cambiamos estado a Completo
+    if (solicitud.estate !== 'Completo') {
+      this.flaq = 0;
+      this.allOk = 0;
+
+      // Verificamos si Todo Esta OK
+      if (this.flaq === 0 && solicitud.regInmueble === true && solicitud.regInmuebleOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regInmueble === true && solicitud.regInmuebleOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regPersonales === true && solicitud.regPersonalesOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regPersonales === true && solicitud.regPersonalesOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regVehiculo === true && solicitud.regVehiculoOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regVehiculo === true && solicitud.regVehiculoOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regTrabajo === true && solicitud.regTrabajoOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regTrabajo === true && solicitud.regTrabajoOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regReferencias === true && solicitud.regReferenciasOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regReferencias === true && solicitud.regReferenciasOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regReferenciasCom === true && solicitud.regReferenciasComOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regReferenciasCom === true && solicitud.regReferenciasComOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regCedula === true && solicitud.regCedulaOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regCedula === true && solicitud.regCedulaOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regPasaporte === true && solicitud.regPasaporteOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regPasaporte === true && solicitud.regPasaporteOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regTarjetav === true && solicitud.regTarjetavOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regTarjetav === true && solicitud.regTarjetavOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regMatricula === true && solicitud.regMatriculaOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regMatricula === true && solicitud.regMatriculaOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regExtracto === true && solicitud.regExtractoOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regExtracto === true && solicitud.regExtractoOk === false) { this.allOk = 0; this.flaq = 1; }
+      console.log('Verifica todoOk');
+      // Si cumple Cambiamos la bandera principal
+      if (this.allOk === 1) {
+        const body: any = { _id: solicitud._id, regOk: true, estate: 'Completo' };
+        this.requestService.updateRequestsByIdMiSolicitud(body).subscribe(() => {
+          this.ngOnInit();
+        });
       }
     }
   }
@@ -235,12 +237,10 @@ export class MisolicitudComponent implements OnInit {
   OnPhotoSelected(event: any): void {
     if (event.target.files && event.target.files[0]) {
       this.file = (event.target.files[0] as File);
-
       // image preview
       const reader = new FileReader();
       reader.onload = (e) => (this.photoSeleted = reader.result);
       reader.readAsDataURL(this.file);
-
     }
   }
 
@@ -255,7 +255,7 @@ export class MisolicitudComponent implements OnInit {
           alert(`El tamaño máximo es ${tamanioEnMb} MB`);
           // Limpiar
           this.buttonSelect0 = false;
-          return
+          return;
         }
         if (!this.file) {
           this.buttonSelect0 = false;
@@ -273,7 +273,7 @@ export class MisolicitudComponent implements OnInit {
           alert(`El tamaño máximo es ${tamanioEnMb} MB`);
           // Limpiar
           this.buttonSelect1 = false;
-          return
+          return;
         }
         if (!this.file) {
           this.buttonSelect1 = false;
@@ -291,7 +291,7 @@ export class MisolicitudComponent implements OnInit {
           alert(`El tamaño máximo es ${tamanioEnMb} MB`);
           // Limpiar
           this.buttonSelect2 = false;
-          return
+          return;
         }
         if (!this.file) {
           this.buttonSelect2 = false;
@@ -309,7 +309,7 @@ export class MisolicitudComponent implements OnInit {
           alert(`El tamaño máximo es ${tamanioEnMb} MB`);
           // Limpiar
           this.buttonSelect3 = false;
-          return
+          return;
         }
         if (!this.file) {
           this.buttonSelect3 = false;
@@ -327,7 +327,7 @@ export class MisolicitudComponent implements OnInit {
           alert(`El tamaño máximo es ${tamanioEnMb} MB`);
           // Limpiar
           this.buttonSelect4 = false;
-          return
+          return;
         }
         if (!this.file) {
           this.buttonSelect4 = false;
@@ -340,6 +340,7 @@ export class MisolicitudComponent implements OnInit {
   }
 
   uploadPhoto(): void {
+    console.log('ENVIA FOTO');
     this.userService
       .updateUserByIdPhoto(this.usuario.uid as string, this.file)
       .subscribe(
@@ -357,35 +358,51 @@ export class MisolicitudComponent implements OnInit {
   }
 
   uploadExtracto(tipo: string): void {
+    console.log('SSUBE DOC');
     if (tipo === 'cedula') {
-      this.userService
-        .updateUserByIdCedula(this.usuario.uid as string, this.file)
-        .subscribe(() => this.docOk());
+      this.userService.updateUserByIdCedula(this.usuario.uid as string, this.file).subscribe(() => {
+        const body: any = { _id: this.requests[0]._id, regCedulaOk: true, regPasaporteOk: true };
+        this.requestService.updateRequestsByIdMiSolicitud(body).subscribe(() => {
+          this.docOk();
+          this.ngOnInit();
+        });
+      });
     }
     if (tipo === 'pasaporte') {
-      this.userService
-        .updateUserByIdPasaporte(this.usuario.uid as string, this.file)
-        .subscribe(() => this.docOk());
+      this.userService.updateUserByIdPasaporte(this.usuario.uid as string, this.file).subscribe(() => {
+        const body: any = { _id: this.requests[0]._id, regCedulaOk: true, regPasaporteOk: true };
+        this.requestService.updateRequestsByIdMiSolicitud(body).subscribe(() => {
+          this.docOk();
+          this.ngOnInit();
+        });
+      });
     }
     if (tipo === 'tarjetav') {
-      this.requestService
-        .updateRequestsByIdTarjetav(this.requests[0]._id as string, this.file)
-        .subscribe(() => this.docOk());
+      this.requestService.updateRequestsByIdTarjetav(this.requests[0]._id as string, this.file).subscribe(() => {
+
+        this.docOk();
+        this.ngOnInit();
+
+      });
     }
+
     if (tipo === 'matricula') {
-      this.requestService
-        .updateRequestsByIdMatricula(this.requests[0]._id as string, this.file)
-        .subscribe(() => this.docOk());
+      this.requestService.updateRequestsByIdMatricula(this.requests[0]._id as string, this.file).subscribe(() => {
+
+        this.docOk();
+        this.ngOnInit();
+
+      });
     }
+
     if (tipo === 'extracto') {
-      this.requestService
-        .updateRequestsByIdExtracto(this.requests[0]._id as string, this.file)
-        .subscribe(() => this.docOk());
+      this.requestService.updateRequestsByIdExtracto(this.requests[0]._id as string, this.file).subscribe(() => {
+
+        this.docOk();
+        this.ngOnInit();
+
+      });
     }
-
-
-
-
   }
 
   docOk(): void {
@@ -394,6 +411,14 @@ export class MisolicitudComponent implements OnInit {
       text: 'Documento Enviado',
       icon: 'success',
     });
+  }
+
+  /*  ngOnDestroy() {
+     this.xxx.unsubscribe();
+   } */
+
+  ngAfterViewInit() {
+    window.scrollTo(0, 0);
   }
 
 }

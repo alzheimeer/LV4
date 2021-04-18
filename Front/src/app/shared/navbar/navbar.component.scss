@@ -22,8 +22,23 @@ header,
     height: 650px;
   }
 }
-@media (min-width: 800px) and (max-width: 850px) {
+.controlFixed{
+  position:fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+@media (min-width: 100px) and (max-width: 991px) {
   .navbar:not(.top-nav-collapse) {
     background: #1c2331 !important;
+  }
+  .controlFixed{
+    position:relative;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 2;
   }
 }

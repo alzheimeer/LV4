@@ -22,12 +22,12 @@ export class DatosvehiculoComponent implements OnInit {
 
   miFormulario = this.fb.group({
     tipo: ['', [Validators.required, Validators.minLength(3)]],
-    placa: ['', [Validators.required, Validators.minLength(3)]],
-    modelo: ['', [Validators.required, Validators.minLength(3)]],
+    placa: ['', [Validators.required, Validators.minLength(6)]],
+    modelo: ['', [Validators.required, Validators.max(3000)]],
     tipoCaja: ['', [Validators.required]],
-    linea: ['', [Validators.required, Validators.minLength(3)]],
-    marca: ['', [Validators.required, Validators.minLength(3)]],
-    kilometraje: ['', [Validators.required, Validators.minLength(3)]],
+    linea: ['', [Validators.required, Validators.minLength(5)]],
+    marca: ['', [Validators.required, Validators.minLength(5)]],
+    kilometraje: ['', [Validators.required]],
     tipoPlaca: ['', [Validators.required, Validators.minLength(3)]],
     unicoDueno: ['', [Validators.required]]
   });

@@ -71,14 +71,19 @@ export class UserService {
       }
     };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, body, { headers });
+    return this.http.put(`${url}/${id}`, body, { headers }).pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    );
   }
   public updateUserByIdPhoto(id: string, photo: File) {
     const url = `${this.baseUrl}/users/avatar`;
     const fd = new FormData();
     fd.append('avatar', photo);
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, fd, { headers }).pipe(
+    return this.http.put(`${url}/${id}`, fd, { headers })
+      .pipe(
       tap(() => {
         this._refresh$.next();
       })
@@ -91,11 +96,11 @@ export class UserService {
     fd.append('cedula', photoCedula);
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, fd, { headers })
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      );
+    .pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    );
   }
 
   public updateUserByIdPasaporte(id: string, photoPasaporte: File) {
@@ -103,7 +108,8 @@ export class UserService {
     const fd = new FormData();
     fd.append('pasaporte', photoPasaporte);
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, fd, { headers }).pipe(
+    return this.http.put(`${url}/${id}`, fd, { headers })
+      .pipe(
       tap(() => {
         this._refresh$.next();
       })
@@ -112,7 +118,11 @@ export class UserService {
 
   public deleteUserById( id: any ){
     const url = `${this.baseUrl}/users/${id}`;
-    return this.http.delete(url);
+    return this.http.delete(url).pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    );
   }
 
 }

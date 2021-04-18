@@ -61,16 +61,16 @@ export class DatosinmuebleComponent implements OnInit {
 
   miFormulario = this.fb.group({
     tipo: ['', [Validators.required, Validators.minLength(3)]],
-    matricula: ['', [Validators.required, Validators.minLength(3)]],
+    matricula: ['', [Validators.required, Validators.minLength(5)]],
     uso: ['', [Validators.required, Validators.minLength(3)]],
     estrato: ['', [Validators.required]],
     departamento: ['', [Validators.required, Validators.minLength(3)]],
-    ciudad: ['', [Validators.required, Validators.minLength(3)]],
-    barrio: ['', [Validators.required, Validators.minLength(3)]],
-    direccion: ['', [Validators.required, Validators.minLength(3)]],
-    antiguedad: ['', [Validators.required]],
+    ciudad: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]')]],
+    barrio: ['', [Validators.required, Validators.minLength(3), Validators.pattern('[a-zA-Z ]')]],
+    direccion: ['', [Validators.required, Validators.minLength(10)]],
+    antiguedad: ['', [Validators.required, Validators.max(999)]],
     area: ['', [Validators.required]],
-    valorComercial: [{ disabled: false, value: '' }, [Validators.required, Validators.minLength(3)]],
+    valorComercial: [{ disabled: false, value: '' }, [Validators.required, Validators.min(50000)]],
   });
 
   requests!: Requestx;
@@ -91,7 +91,7 @@ export class DatosinmuebleComponent implements OnInit {
       .subscribe(resp => {
         this.requests = resp[0];
       }, (err) => {
-        console.log('error:', err)
+        console.log('error:', err);
       });
   }
 
@@ -102,7 +102,14 @@ export class DatosinmuebleComponent implements OnInit {
     } else if (this.miFormulario.get(campo)?.hasError('minlength')) {
       const minLength = this.miFormulario.get(campo)?.errors?.minlength.requiredLength;
       message = `Debe Tener mas mas de ${minLength} letras`;
+    } else if (this.miFormulario.get(campo)?.hasError('pattern')) {
+      message = `No Se Admiten Numeros Ni Simbolos`;
+    } else if (this.miFormulario.get(campo)?.hasError('min')) {
+      message = `El Valor Es Muy Bajo`;
+    } else if (this.miFormulario.get(campo)?.hasError('max')) {
+      message = `El Valor Es Muy Alto`;
     }
+
     return message;
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -15,6 +15,7 @@ import { RequestService } from '../services/request.service';
   styleUrls: ['./datosreferenciacom.component.scss']
 })
 export class DatosreferenciacomComponent implements OnInit {
+  isScrolled = false;
 
   get usuarioauth() {
     return this.authService.usuario;
@@ -35,11 +36,17 @@ export class DatosreferenciacomComponent implements OnInit {
     empresa3: ['', [Validators.required, Validators.minLength(3)]],
     direccion3: ['', [Validators.required, Validators.minLength(3)]],
     celular3: ['', [Validators.required]],
-
   });
 
   requests!: Requestx;
 
+
+  @HostListener('window:scroll')
+  scrollEvent() {
+    window.pageYOffset >= 80
+      ? (this.isScrolled = true)
+      : (this.isScrolled = false);
+  }
 
 
   nuevoFavorito: FormControl = this.fb.control('', Validators.required);

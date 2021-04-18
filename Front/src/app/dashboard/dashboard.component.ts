@@ -1,8 +1,9 @@
-import { Component, OnInit, HostBinding, ViewChild, HostListener } from '@angular/core';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../auth/services/auth.service';
-import {BreakpointObserver, Breakpoints} from '@angular/cdk/layout';
+
 import { Role } from '../auth/interfaces';
+import { AuthService } from '../auth/services/auth.service';
 
 declare interface RouteInfo {
   path: string;
@@ -46,23 +47,29 @@ export class DashboardComponent implements OnInit {
     return this.authService.usuario;
   }
 
+
   // Seccion que detecta pantalla pequeña y se colapsa el sidebar
   isSmallScreen = this.breakpointObserver.isMatched('(max-width: 894px)');
   @HostListener('window:resize', ['$event'])
-  onResize(event: any) {
-    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 894px)'
-    );
+  onResize(event: any): any {
+    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 894px)');
     this.opened = !this.isSmallScreen;
     // y nos dira el tamaño de la pantalla
     this.y = window.innerWidth;
-    // console.log(y);
+    console.log(this.y);
   }
+
+
 
   constructor(
     public breakpointObserver: BreakpointObserver,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) {
+    this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 894px)');
+
+    this.onResize(event);
+  }
 
   ngOnInit(): void {
     this.authService.getRoles().subscribe(

@@ -64,21 +64,21 @@ export class SolicitudComponent implements OnInit {
     private productService: ProductService,
     private authService: AuthService,
     private requestService: RequestService
-  ) { }
-
-  ngOnInit(): void {
-    this.requestService
-      .getRequestByIdUser(this.usuario.uid)
-      .subscribe((resp) => {
-        this.request = resp;
-        if (this.request.length > 0) {
-          this.router.navigate(['/dashboard/misolicitud']);
-        }
-      });
+  ) {
+    this.requestService.getRequestByIdUser(this.usuario.uid).subscribe((resp) => {
+      if (resp.length > 0) {
+        this.router.navigate(['/dashboard/misolicitud']);
+      }
+      this.request = resp;
+    });
 
     this.productService.getProducts().subscribe((resp) => {
       this.productos = resp;
     });
+  }
+
+  ngOnInit(): void {
+
     this.formularioSolicitud.get('idProduct')?.valueChanges.subscribe((id) => {
       this.productService.getProductById(id).subscribe((producto) => {
         this.producto = producto;
@@ -155,7 +155,7 @@ export class SolicitudComponent implements OnInit {
       this.requestService.createRequest(this.formularioSolicitud.value).subscribe(
         (resp2) => {
           this.formularioSolicitud.reset();
-          this.authService.updateSolicitudUserById(resp2.idUser, resp2._id).subscribe((x) => console.log(x));
+          this.authService.updateSolicitudUserById(resp2.idUser, resp2._id).subscribe();
           if (this.productos) {
             this.router.navigate(['/dashboard/misolicitud']);
           }

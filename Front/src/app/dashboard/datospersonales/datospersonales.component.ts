@@ -76,22 +76,21 @@ export class DatospersonalesComponent implements OnInit {
   hayerror = false;
 
 
-
   miFormulario = this.fb.group({
     tipodoc: ['', [Validators.required, Validators.minLength(3)]],
     fechaNac: ['', Validators.required],
     fechaExp: ['', Validators.required],
     pais: ['', [Validators.required, Validators.minLength(3)]],
     departamento: ['', [Validators.required, Validators.minLength(3)]],
-    ciudad: ['', [Validators.required]],
-    barrio: ['', [Validators.required, Validators.minLength(3)]],
+    ciudad: ['', [Validators.required, Validators.minLength(5)]],
+    barrio: ['', [Validators.required, Validators.minLength(5)]],
     direccion: ['', [Validators.required, Validators.minLength(3)]],
-    numdoc: ['', [Validators.required, Validators.minLength(3)]],
-    celular1: ['', [Validators.required, Validators.minLength(3)]],
+    numdoc: ['', [Validators.required, Validators.minLength(5)]],
+    celular1: ['', [Validators.required, Validators.min(999999999), Validators.max(9999999999)]],
     celular2: '',
     banco: ['', [Validators.required]],
     tipocuenta: ['', [Validators.required, Validators.minLength(3)]],
-    numcuenta: ['', [Validators.required, Validators.minLength(3)]],
+    numcuenta: ['', [Validators.required, Validators.minLength(5)]],
   });
 
 
@@ -116,6 +115,11 @@ export class DatospersonalesComponent implements OnInit {
     } else if (this.miFormulario.get(campo)?.hasError('minlength')) {
       const minLength = this.miFormulario.get(campo)?.errors?.minlength.requiredLength;
       message = `Debe Tener mas mas de ${minLength} letras`;
+    } else if (this.miFormulario.get(campo)?.hasError('min')) {
+      message = `NO ES UN NUMERO DE TELEFONO VALIDO`;
+    }
+    else if (this.miFormulario.get(campo)?.hasError('max')) {
+      message = `NO ES UN NUMERO DE TELEFONO VALIDO`;
     }
     return message;
   }

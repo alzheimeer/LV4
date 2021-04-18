@@ -1,6 +1,7 @@
 <div class="panel-header">
   <div class="header text-center">
     <h2 class="title">MIS PRESTAMOS, SOLICITUDES Y PAGOS</h2>
+    <button (click)=(pepe())></button>
   </div>
 </div>
 
@@ -50,7 +51,7 @@
                   documentos que se le muestran</small></p>
 
 
-              <button *ngIf="user == 0 && regPersonales"
+              <button *ngIf="request.regPersonalesOk === false && regPersonales"
                 routerLink="/dashboard/datospersonales" class="button3">Datos
                 Personales</button>
               <button *ngIf="request.regInmuebleOk === false && regInmueble"

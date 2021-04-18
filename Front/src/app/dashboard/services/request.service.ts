@@ -59,18 +59,25 @@ export class RequestService {
     return this.http.put(`${url}/${solicitud._id}`, solicitud, { headers });
   }
 
+  public updateRequestsByIdMiSolicitud(solicitud: any) {
+    const url = `${this.baseUrl}/request`;
+    const headers = new HttpHeaders()
+      .set('x-token', localStorage.getItem('token') || '');
+    return this.http.put(`${url}/${solicitud._id}`, solicitud, { headers })
+      .pipe(
+        tap(() => {
+          this._refresh$.next();
+        })
+      );
+  }
+
   public updateRequestsByIdInmueble(id: string, tipo: string, matricula: string, uso: string, estrato: number,
     departamento: string, ciudad: string, barrio: string, direccion: string,
     antiguedad: number, area: number, valorComercial: number) {
     const url = `${this.baseUrl}/request`;
     const body = { "regInmuebleOk": true, "inmueble": { "tipo": tipo, "matricula": matricula, "uso": uso, "estrato": estrato, "departamento": departamento, "ciudad": ciudad, "barrio": barrio, "direccion": direccion, "antiguedad": antiguedad, "area": area, "valorComercial": valorComercial } };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, body, { headers })
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      );
+    return this.http.put(`${url}/${id}`, body, { headers });
   }
 
   public updateRequestsByIdVehiculo(id: string, tipo: string, placa: string, modelo: number, tipoCaja: string,
@@ -78,12 +85,7 @@ export class RequestService {
     const url = `${this.baseUrl}/request`;
     const body = { "regVehiculoOk": true, "vehiculo": { "tipo": tipo, "placa": placa, "modelo": modelo, "tipoCaja": tipoCaja, "linea": linea, "marca": marca, "kilometraje": kilometraje, "tipoPlaca": tipoPlaca, "unicoDueno": unicoDueno } };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, body, { headers })
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      );
+    return this.http.put(`${url}/${id}`, body, { headers });
   }
 
   public updateRequestsByIdTrabajoEmpleado(id: string, tiempo: number, ingreso: number, direccion: string,
@@ -91,12 +93,7 @@ export class RequestService {
     const url = `${this.baseUrl}/request`;
     const body = { "regTrabajoOk": true, "trabajoEmpleado": { "tiempoTrabajando": tiempo, "ingresoMensual": ingreso, "direccion": direccion, "telefono": telefono, "jefeInmediato": jefe, "cargoActual": cargo } };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, body, { headers })
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      );
+    return this.http.put(`${url}/${id}`, body, { headers });
   }
 
   public updateRequestsByIdTrabajoIndependiente(id: string, tiempo: number, ingreso: number, direccion: string,
@@ -104,12 +101,7 @@ export class RequestService {
     const url = `${this.baseUrl}/request`;
     const body = { "regTrabajoOk": true, "trabajoIndependiente": { "tiempoTrabajando": tiempo, "ingresoMensual": ingreso, "direccion": direccion, "telefono": telefono, "actividadComercial": actividadComercial } };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, body, { headers })
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      );
+    return this.http.put(`${url}/${id}`, body, { headers });
   }
 
   public updateRequestsByIdTrabajoEmpresa(id: string, nombre: string, nit: string, ingresoMensual: number,
@@ -117,12 +109,7 @@ export class RequestService {
     const url = `${this.baseUrl}/request`;
     const body = { "regTrabajoOk": true, "trabajoEmpresa": { "nombre": nombre, "nit": nit, "ingresoMensual": ingresoMensual, "direccion": direccion, "telefono": telefono, "actividadComercial": actividadComercial } };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, body, { headers })
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      );
+    return this.http.put(`${url}/${id}`, body, { headers });
   }
 
   public updateRequestsByIdRefFam(id: string, nombre1: string, parentezco1: string, direccion1: string, celular1: number, nombre2: string, parentezco2: string, direccion2: string, celular2: number, nombre3: string, parentezco3: string, direccion3: string, celular3: number) {
@@ -138,12 +125,7 @@ export class RequestService {
       }
     };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, body, { headers })
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      );
+    return this.http.put(`${url}/${id}`, body, { headers });
   }
 
   public updateRequestsByIdRefCom(id: string, nombre1: string, empresa1: string, direccion1: string, celular1: number, nombre2: string, empresa2: string, direccion2: string, celular2: number, nombre3: string, empresa3: string, direccion3: string, celular3: number) {
@@ -159,12 +141,7 @@ export class RequestService {
       }
     };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, body, { headers })
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      );
+    return this.http.put(`${url}/${id}`, body, { headers });
   }
 
   public updateRequestsByIdTarjetav(id: string, docTarjetav: File) {
@@ -172,36 +149,21 @@ export class RequestService {
     const fd = new FormData();
     fd.append('tarjetav', docTarjetav);
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, fd, { headers })
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      );
+    return this.http.put(`${url}/${id}`, fd, { headers });
   }
   public updateRequestsByIdMatricula(id: string, docMatricula: File) {
     const url = `${this.baseUrl}/request/matricula`;
     const fd = new FormData();
     fd.append('matricula', docMatricula);
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, fd, { headers })
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      );
+    return this.http.put(`${url}/${id}`, fd, { headers });
   }
   public updateRequestsByIdExtracto(id: string, docExtracto: File) {
     const url = `${this.baseUrl}/request/extracto`;
     const fd = new FormData();
     fd.append('extracto', docExtracto);
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, fd, { headers })
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      );
+    return this.http.put(`${url}/${id}`, fd, { headers });
   }
 
 
@@ -210,12 +172,7 @@ export class RequestService {
     const url = `${this.baseUrl}/request/${id}`;
     const headers = new HttpHeaders()
       .set('x-token', localStorage.getItem('token') || '');
-    return this.http.delete(url, { headers })
-      .pipe(
-        tap(() => {
-          this._refresh$.next();
-        })
-      );
+    return this.http.delete(url, { headers });
   }
 
 }

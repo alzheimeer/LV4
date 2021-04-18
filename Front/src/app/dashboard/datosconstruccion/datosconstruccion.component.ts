@@ -51,7 +51,8 @@ export class DatosconstruccionComponent implements OnInit {
   extracto = '';
   buttonSelect = false;
   MAXIMO_TAMANIO_BYTES = 2000000; // 1MB = 1 millón de bytes
-
+  seguro = 0;
+  seguro1 = 0;
   get usuario(): any {
     return this.authService.usuario;
   }
@@ -103,13 +104,16 @@ export class DatosconstruccionComponent implements OnInit {
       this.pasaporte = resp.pasaportePath;
       this.user = resp.personal.numdoc;
     });
-
-    this.suscription = this.userService.refresh$.subscribe(() => {
-      this.ngOnInit();
+    if (this.seguro === 0) {
+      this.suscription = this.userService.refresh$.subscribe(() => {
+        this.ngOnInit();
     });
-    this.suscription = this.requestService.refresh$.subscribe(() => {
-      this.ngOnInit();
+    }
+    if (this.seguro1 === 0) {
+      this.suscription = this.requestService.refresh$.subscribe(() => {
+        this.ngOnInit();
     });
+  }
   }
 
   OnPhotoSelected(event: any): void {

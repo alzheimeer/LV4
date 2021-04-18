@@ -139,5 +139,10 @@ export class AuthService {
     return role
   }
 
+  enviarEmail(nombre: string, email: string, celular: string, mensaje: string) {
+    const url = `${this.baseUrl}/emails`;
+    const body = { nombre, email, celular, mensaje };
+    return this.http.post(url, body);
+  }
 
 }

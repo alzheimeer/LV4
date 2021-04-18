@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, HostListener, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/auth/services/auth.service';
@@ -14,7 +14,8 @@ import { RequestService } from '../services/request.service';
   templateUrl: './datosreferencias.component.html',
   styleUrls: ['./datosreferencias.component.scss']
 })
-export class DatosreferenciasComponent implements OnInit {
+export class DatosreferenciasComponent implements OnInit, AfterViewInit {
+  isScrolled = false;
 
   get usuarioauth() {
     return this.authService.usuario;
@@ -40,7 +41,12 @@ export class DatosreferenciasComponent implements OnInit {
 
   requests!: Requestx;
 
-
+  @HostListener('window:scroll')
+  scrollEvent() {
+    window.pageYOffset >= 80
+      ? (this.isScrolled = true)
+      : (this.isScrolled = false);
+  }
 
   nuevoFavorito: FormControl = this.fb.control('', Validators.required);
   get favoritosArr() {
@@ -50,6 +56,9 @@ export class DatosreferenciasComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService, private requestService: RequestService) {
   }
 
+  ngAfterViewInit() {
+    window.scrollTo(0, 0);
+  }
 
   ngOnInit(): void {
     this.requestService.getRequestByIdUser(this.usuarioauth.uid)

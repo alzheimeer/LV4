@@ -6,6 +6,7 @@ Run server with nodemon
 PORT=3000
 BD_CNN=mongodb://localhost:27017/lendiup
 SECRET_JWT_SEED=AlzheimeerZpwjiexxn2*1979#
+PASSGODADDYEMAIL=Zpwjiexxn123*
 PASSGMAIL=kkwijkhozefbyxud
 NODE_TLS_REJECT_UNAUTHORIZED='0'            //este es cuando sale error con el password de la aplicacion gmail
 

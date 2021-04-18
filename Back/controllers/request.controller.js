@@ -20,17 +20,21 @@ const getRequests = async(req, res) => {
 const getRequestById = async(req, res) => {
     try {
         const request = await Request.findById(req.params.requestId);
+        if (request === null)
+            return res.status(500).json({msg: 'No Existe Esa Solicitud'});
         return res.status(200).json(request);
     } catch (error) {
-        return res.status(500).json({ msg: 'Id Del Request No Existe' });
+        return res.status(500).json({ msg: 'Formato de Id Es Erroneo' });
     }
 }
 const getRequestByIdUser = async(req, res) => {
     try {
         const request = await Request.find({ idUser: req.params.userId });
+        if (request.length === 0)
+            return res.status(500).json(request);
         return res.status(200).json(request);
     } catch (error) {
-        return res.status(500).json({ msg: 'el Id proporcionado no es un id de usuario' });
+        return res.status(500).json({ msg: 'Formato de Id Erroneo' });
     }
 }
 const updateRequestById = async(req, res) => {
@@ -48,7 +52,7 @@ const updateRequestById = async(req, res) => {
 const uploadFileTarjetav = async function (req, res) {
     try {
         console.log(req.params)
-        const request = await Request.findByIdAndUpdate(req.params.requestId, {"tarjetavPath": req.file.path}, {new: true});
+        const request = await Request.findByIdAndUpdate(req.params.requestId, {"tarjetavPath": req.file.path, "regTarjetavOk": true}, {new: true});
         return res.status(200).json(request);
     } catch (error) {
         return res.status(500).json({ msg: 'Id De Usuario No Existe'});}
@@ -57,7 +61,7 @@ const uploadFileTarjetav = async function (req, res) {
 const uploadFileMatricula = async function (req, res) {
     try {
        // console.log(req.params)
-        const request = await Request.findByIdAndUpdate(req.params.requestId, {"matriculaPath": req.file.path}, {new: true});
+        const request = await Request.findByIdAndUpdate(req.params.requestId, {"matriculaPath": req.file.path, "regMatriculaOk": true}, {new: true});
         return res.status(200).json(request);
     } catch (error) {
         return res.status(500).json({ msg: 'Id De Usuario No Existe'});}
@@ -66,7 +70,7 @@ const uploadFileMatricula = async function (req, res) {
 const uploadFileExtracto = async function (req, res) {
     try {
       //  console.log(req.params)
-        const request = await Request.findByIdAndUpdate(req.params.requestId, {"extractoPath": req.file.path}, {new: true});
+        const request = await Request.findByIdAndUpdate(req.params.requestId, {"extractoPath": req.file.path, "regExtractoOk": true}, {new: true});
         return res.status(200).json(request);
     } catch (error) {
         return res.status(500).json({ msg: 'Id De Usuario No Existe'});}
