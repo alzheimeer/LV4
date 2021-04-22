@@ -66,9 +66,9 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
 
   @HostListener("scroll", ['$event'])
   doSomethingOnWindowsScroll($event: any) {
-    console.log('w')
+    //  console.log('w')
     let scrollOffset = $event.srcElement.children[0].scrollTop;
-    console.log("window scroll: ", scrollOffset);
+    //  console.log("window scroll: ", scrollOffset);
   }
 
 
@@ -79,20 +79,20 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
     private productService: ProductService,
     private userService: UserService
   ) {
-    console.log('Inicia CONSTRUCTOR');
+    //  console.log('Inicia CONSTRUCTOR');
     this.requestService.getRequestByIdUser(this.usuario.uid).subscribe((resp) => {
-      console.log('OBTIENE SOLICITUD CONSTRUCTOR');
+      //  console.log('OBTIENE SOLICITUD CONSTRUCTOR');
       this.requests = resp;
     }, (err) => {
       this.router.navigate(['/dashboard/solicitud']);
     });
     this.userService.getUserById(this.usuario.uid).subscribe((usuario) => {
-      console.log('OBTIENE USUARIO CONSTRUCTOR');
+      //  console.log('OBTIENE USUARIO CONSTRUCTOR');
       this.usuarioTest = usuario;
     });
     // Traemos Todos Los Producto Y Los Guardamos En la Variable productos
     this.productService.getProducts().subscribe((productos) => {
-      console.log('OBTIENE PRODUCTOS CONSTRUCTOR');
+      //  console.log('OBTIENE PRODUCTOS CONSTRUCTOR');
       this.productos = productos;
     });
   }
@@ -100,7 +100,7 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
   scroll(event: any): void {
     const number = event.srcElement.scrollTop;
     // console.log(event);
-    console.log(number);
+    //  console.log(number);
     event.srcElement.scrollTop >= 100 ? (this.isScrolled = true) : (this.isScrolled = false);
     console.log(screenTop)
   }
@@ -127,9 +127,9 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
     window.addEventListener('scroll', this.scroll, true);
 
 
-    console.log('Inicio - OnInit');
+    // console.log('Inicio - OnInit');
     this.requestService.getRequestByIdUser(this.usuario.uid).subscribe((solicitudes) => {
-      console.log('Obtiene Usuario - OnInit');
+      //  console.log('Obtiene Usuario - OnInit');
       this.requests = solicitudes;
       this.numrequests = this.requests.length;
       // Setea Los requisitos actuales de la solicitud
@@ -137,7 +137,7 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
       // Si el usuario ya tiene cedula o pasaporte colocmos la bandera en OK
       if (this.requests[0].regCedulaOk === false || solicitudes[0].regPasaporteOk === false) {
         if (this.usuarioTest.cedulaPath || this.usuarioTest.pasaportePath) {
-          console.log('Entro a bandera cedula o pasaporte OK  - OnInit');
+          //  console.log('Entro a bandera cedula o pasaporte OK  - OnInit');
           const body: any = { _id: solicitudes[0]._id, regCedulaOk: true, regPasaporteOk: true };
           this.requestService.updateRequestsById(body).subscribe(() => this.ngOnInit());
         }
@@ -145,7 +145,7 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
       // Si el usurio ya tiene datos Personales Colocamos la bandera en OK
       if (solicitudes[0].regPersonalesOk === false) {
         if (this.usuarioTest.personal.direccion) {
-          console.log('Entro a bandera PersonalesOk - OnInit');
+          //  console.log('Entro a bandera PersonalesOk - OnInit');
           const body: any = { _id: solicitudes[0]._id, regPersonalesOk: true };
           this.requestService.updateRequestsById(body).subscribe(() => this.ngOnInit());
         }
@@ -153,13 +153,13 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
       this.setReq(solicitudes[0]);
       this.verificarallOk(solicitudes[0]);
     }, (err) => {
-      console.log('Usuario No Tiene Solicitudes Aun');
+      //  console.log('Usuario No Tiene Solicitudes Aun');
     });
     if (this.seguro1 === 0) {
       // Implementaciones para refrescar este componente
       this.suscription = this.userService.refresh$.subscribe(() => {
         this.userService.getUserById(this.usuario.uid).subscribe((usuario) => {
-          console.log('REFRESH OBTIENE USUARIO  - OnInit');
+          //  console.log('REFRESH OBTIENE USUARIO  - OnInit');
           this.usuarioTest = usuario;
           this.seguro1 = 1;
           this.ngOnInit();
@@ -168,7 +168,7 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
   }
     if (this.seguro === 0) {
       this.suscription = this.requestService.refresh$.subscribe((res) => {
-        console.log('REFRESH REQUEST  - OnInit', res);
+        //  console.log('REFRESH REQUEST  - OnInit', res);
         this.seguro = 1;
         this.ngOnInit();
       });
@@ -178,7 +178,7 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   setReq(solicitud: Requestx): void {
-    console.log('seteo variables')
+    //  console.log('seteo variables')
     this.regAllOk = solicitud.regOk;
     this.regInmueble = solicitud.regInmueble;
     this.regPersonales = solicitud.regPersonales;
@@ -223,7 +223,7 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.flaq === 0 && solicitud.regMatricula === true && solicitud.regMatriculaOk === false) { this.allOk = 0; this.flaq = 1; }
       if (this.flaq === 0 && solicitud.regExtracto === true && solicitud.regExtractoOk === true) { this.allOk = 1; }
       if (this.flaq === 0 && solicitud.regExtracto === true && solicitud.regExtractoOk === false) { this.allOk = 0; this.flaq = 1; }
-      console.log('Verifica todoOk');
+      //  console.log('Verifica todoOk');
       // Si cumple Cambiamos la bandera principal
       if (this.allOk === 1) {
         const body: any = { _id: solicitud._id, regOk: true, estate: 'Completo' };
@@ -340,7 +340,7 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   uploadPhoto(): void {
-    console.log('ENVIA FOTO');
+    //  console.log('ENVIA FOTO');
     this.userService
       .updateUserByIdPhoto(this.usuario.uid as string, this.file)
       .subscribe(
@@ -358,7 +358,7 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   uploadExtracto(tipo: string): void {
-    console.log('SSUBE DOC');
+    //  console.log('SSUBE DOC');
     if (tipo === 'cedula') {
       this.userService.updateUserByIdCedula(this.usuario.uid as string, this.file).subscribe(() => {
         const body: any = { _id: this.requests[0]._id, regCedulaOk: true, regPasaporteOk: true };

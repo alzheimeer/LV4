@@ -78,7 +78,7 @@ const loginUsuario = async function(req, res) {
     const { email, password } = req.body;
     try {
         // We check if the email exists and we bring the user to newUser
-        const userfound = await User.findOne({ email }).populate("roles");
+        const userfound = await User.findOne({ email }).populate("roles").populate("roles");
         if (!userfound) { return res.status(400).json({ ok: false, msg: 'El correo no existe' }); }
         // Confirm if the password does math 
         const validPassword = bcrypt.compareSync(password, userfound.password);

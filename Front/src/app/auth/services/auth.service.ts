@@ -56,15 +56,30 @@ export class AuthService {
           localStorage.setItem('token', resp.token!);
         }
       }),
-      map((resp) => resp.ok),
+      map((resp) => {
+        // tslint:disable-next-line: no-non-null-assertion
+        let y = resp.roles?.find((fruta: any) => fruta!.name === 'admin') === undefined;
+        if (y === false) {
+          sessionStorage.setItem('a', '79');
+          return 'admin';
+        }
+        // tslint:disable-next-line: no-non-null-assertion
+        y = resp.roles?.find((fruta: any) => fruta!.name === 'moderator') === undefined;
+        if (y === false) {
+          sessionStorage.setItem('a', '152')
+          return 'moderator';
+
+        }
+        sessionStorage.setItem('a', '0');
+        return 'user';
+      }),
       catchError((err) => of(err.error.msg))
     );
   }
 
   validarToken(): Observable<boolean> {
     const url = `${ this.baseUrl }/auth/renew`;
-    const headers = new HttpHeaders()
-      .set('x-token', localStorage.getItem('token') || '');
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     // return this observable
     return this.http.get<AuthResponse>(url, {headers}).pipe(
       map(resp => {
@@ -88,6 +103,7 @@ export class AuthService {
   // tslint:disable-next-line: typedef
   logout() {
     localStorage.clear();
+    sessionStorage.clear();
   }
 
 

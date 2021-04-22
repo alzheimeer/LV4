@@ -17,7 +17,9 @@
         <button mat-button [matMenuTriggerFor]="userMenu">
       <mat-icon>person</mat-icon>
       <span fxShow fxHide.xs>
-        <!-- {{userName}} -->
+        <a *ngIf="this.rolesUsuario.indexOf('admin') != -1 && flaq">Administrador: {{usuario.name}} {{usuario.surname}}</a>
+        <a *ngIf="this.rolesUsuario.indexOf('moderator') != -1  && flaq && this.rolesUsuario.indexOf('admin') == -1">Analista: {{usuario.name}} {{usuario.surname}}</a>
+        <a *ngIf="this.rolesUsuario.indexOf('moderator') == -1  && flaq && this.rolesUsuario.indexOf('admin') == -1">{{usuario.name}} {{usuario.surname}}</a>
       </span>
     </button>
         <mat-menu #userMenu="matMenu" xPosition="before" yPosition="above" [overlapTrigger]="false">
@@ -36,43 +38,27 @@
             <mat-nav-list>
                 <h3 mat-subheader class="aa">Menu</h3>
                 <mat-list>
-                    <!--  <mat-list-item *ngIf="this.rolesUsuario.indexOf('admin') != -1" routerLinkActive="active" routerLink="/dashboard/solicitud" class="x aa">
+                    <!--  <mat-list-item *ngIf="role === 'user'" routerLinkActive="active" routerLink="/dashboard/solicitud" class="x aa">
                         <mat-icon mat-list-icon>space_dashboard</mat-icon>
                         <p mat-line> Solicitud </p>
                     </mat-list-item> -->
-                    <mat-list-item routerLinkActive="active" routerLink="/dashboard/misolicitud" class="x aa">
+                    <mat-list-item *ngIf="role === 'user'" routerLinkActive="active" routerLink="/dashboard/misolicitud" class="x aa">
                         <mat-icon mat-list-icon>space_dashboard</mat-icon>
                         <p mat-line> Mi Solicitud </p>
                     </mat-list-item>
-                    <mat-list-item *ngIf="this.rolesUsuario.indexOf('admin') != -1" routerLinkActive="active" routerLink="/dashboard/solicitudes" class="x aa">
+                    <mat-list-item *ngIf="role === 'moderator' || role === 'admin'" routerLinkActive="active" routerLink="/dashboard/solicitudes" class="x aa">
                         <mat-icon mat-list-icon>space_dashboard</mat-icon>
                         <p mat-line> Solicitudes </p>
                     </mat-list-item>
-                    <mat-list-item *ngIf="this.rolesUsuario.indexOf('admin') != -1" routerLinkActive="active" routerLink="/dashboard/productos" class="x aa">
+                    <mat-list-item *ngIf="role === 'admin'" routerLinkActive="active" routerLink="/dashboard/productos" class="x aa">
                         <mat-icon mat-list-icon>space_dashboard</mat-icon>
                         <p mat-line> Productos </p>
                     </mat-list-item>
-                    <!-- <mat-list-item *ngIf="this.rolesUsuario.indexOf('admin') != -1" routerLinkActive="active" routerLink="/dashboard/datosinmueble" class="x aa">
-                        <mat-icon mat-list-icon>verified</mat-icon>
-                        <p mat-line> Datos Inmueble </p>
-                    </mat-list-item>
-                    <mat-list-item *ngIf="this.rolesUsuario.indexOf('admin') != -1" routerLinkActive="active" routerLink="/dashboard/datospersonales" class="x aa">
-                        <mat-icon mat-list-icon>verified</mat-icon>
-                        <p mat-line> Datos Personales </p>
-                    </mat-list-item>
-                    <mat-list-item *ngIf="this.rolesUsuario.indexOf('admin') != -1" routerLinkActive="active" routerLink="/dashboard/datosvehiculo" class="x aa">
-                        <mat-icon mat-list-icon>verified</mat-icon>
-                        <p mat-line> Datos Vehiculo </p>
-                    </mat-list-item>
-                    <mat-list-item *ngIf="this.rolesUsuario.indexOf('admin') != -1" routerLinkActive="active" routerLink="/dashboard/datosconstruccion" class="x aa">
-                        <mat-icon mat-list-icon>verified</mat-icon>
-                        <p mat-line> Datos Construccion </p>
-                    </mat-list-item> -->
-                    <mat-list-item *ngIf="this.rolesUsuario.indexOf('admin') != -1" routerLinkActive="active" routerLink="/dashboard/usuarios" class="x aa">
+                    <mat-list-item *ngIf="role === 'admin'" routerLinkActive="active" routerLink="/dashboard/usuarios" class="x aa">
                         <mat-icon mat-list-icon>groups</mat-icon>
                         <p mat-line> Usuarios </p>
                     </mat-list-item>
-                    <mat-list-item routerLinkActive="active" routerLink="/dashboard/estadocuenta" class="x aa">
+                    <mat-list-item *ngIf="role === 'user'" routerLinkActive="active" routerLink="/dashboard/estadocuenta" class="x aa">
                         <mat-icon mat-list-icon>savings</mat-icon>
                         <p mat-line> Pagar Cuota </p>
                     </mat-list-item>

@@ -35,6 +35,7 @@ export const ROUTES: RouteInfo[] = [
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
+  role = '';
   y: number = 0;
   opened: boolean = true;
   menuItems!: any[];
@@ -42,7 +43,7 @@ export class DashboardComponent implements OnInit {
   rolesUsuario: Array<string> = [];
   hayerror = false;
   admin = 0;
-
+  flaq = true;
   get usuario() {
     return this.authService.usuario;
   }
@@ -54,9 +55,11 @@ export class DashboardComponent implements OnInit {
   onResize(event: any): any {
     this.isSmallScreen = this.breakpointObserver.isMatched('(max-width: 894px)');
     this.opened = !this.isSmallScreen;
+    this.flaq = !this.breakpointObserver.isMatched('(max-width: 500px)');
+
     // y nos dira el tamaño de la pantalla
-    this.y = window.innerWidth;
-    console.log(this.y);
+    // this.y = window.innerWidth;
+    // console.log(this.y);
   }
 
 
@@ -76,12 +79,22 @@ export class DashboardComponent implements OnInit {
       (resp) => {
         this.roles = resp;
         this.usuario.roles?.map((id) => this.authService.getRoleById(id).subscribe(resp => {
-          this.rolesUsuario.push(resp.name as string)
+          this.rolesUsuario.push(resp.name as string);
+
         }));
       });
 
     // this.menuItems = ROUTES.filter((menuItem) => menuItem);
+    this.getRole();
+  }
 
+
+  getRole(): void {
+    const r = sessionStorage.getItem('a');
+    if (r === '0') { this.role = 'user'; }
+    if (r === '79') { this.role = 'admin'; }
+    if (r === '152') { this.role = 'moderator'; }
+    // console.log(this.role)
   }
 
   logout() {

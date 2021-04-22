@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { RolesGuard } from '../guards/roles.guard';
 import { ValidarTokenGuard } from '../guards/validar-token.guard';
 import { AboutComponent } from './about/about.component';
 import { DashboardComponent } from './dashboard.component';
@@ -22,27 +23,28 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 
 const routes: Routes = [
   {
-  path: '',
+    path: '',
     component: DashboardComponent,
     children: [
-  { path: 'solicitud',        component: SolicitudComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-  { path: 'misolicitud',        component: MisolicitudComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-  { path: 'solicitudes',        component: SolicitudesComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-  { path: 'productos',        component: ProductoComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-  { path: 'datospersonales',  component: DatospersonalesComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-  { path: 'datostrabajo',  component: DatostrabajoComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-  { path: 'datosreferencias',  component: DatosreferenciasComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-  { path: 'datosreferenciascom',  component: DatosreferenciacomComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-  { path: 'datosinmueble',  component: DatosinmuebleComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-  { path: 'datosvehiculo',    component: DatosvehiculoComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-  { path: 'usuarios',         component: UsuariosComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-  { path: 'estadocuenta',     component: EstadocuentaComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-      { path: 'datosconstruccion', component: DatosconstruccionComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-  { path: 'misdatos',         component: MisdatosComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
-  { path: 'about',         component: AboutComponent, canActivate: [ValidarTokenGuard], canLoad: [ValidarTokenGuard] },
+      { path: 'solicitud', component: SolicitudComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user'] } },
+      { path: 'misolicitud', component: MisolicitudComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user'] } },
+      { path: 'estadocuenta', component: EstadocuentaComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user'] } },
 
-  { path: '**', redirectTo: 'misolicitud' },
-],
+      { path: 'datospersonales', component: DatospersonalesComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user'] } },
+      { path: 'datostrabajo', component: DatostrabajoComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user'] } },
+      { path: 'datosreferencias', component: DatosreferenciasComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user'] } },
+      { path: 'datosreferenciascom', component: DatosreferenciacomComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user'] } },
+      { path: 'datosinmueble', component: DatosinmuebleComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user'] } },
+      { path: 'datosvehiculo', component: DatosvehiculoComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user'] } },
+      { path: 'datosconstruccion', component: DatosconstruccionComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user'] } },
+      { path: 'solicitudes', component: SolicitudesComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['moderator', 'admin'] } },
+      { path: 'productos', component: ProductoComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['admin'] } },
+      { path: 'usuarios', component: UsuariosComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['admin'] } },
+      { path: 'misdatos', component: MisdatosComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user', 'moderator', 'admin'] } },
+      { path: 'about', component: AboutComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user', 'moderator', 'admin'] } },
+
+      { path: '**', redirectTo: 'misolicitud' },
+    ],
   },
 ];
 
