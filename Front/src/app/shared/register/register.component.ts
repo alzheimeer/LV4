@@ -1,8 +1,9 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth/services/auth.service';
 import Swal from 'sweetalert2';
+
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -31,22 +32,36 @@ export class RegisterComponent implements OnInit {
 
     const { name, surname, email, password } = this.miFormulario.value;
 
-    this.authService.register(name, surname, email, password).subscribe((ok) => {
+    this.authService.register(name, surname, email, password).subscribe((resp) => {
       Swal.fire({
         title: 'Espere',
         text: 'Registrando',
         allowOutsideClick: false
       });
-      console.log(ok);
-      if (ok === true) {
+      // console.log(ok);
+      if (resp === 'user') {
         this.router.navigateByUrl('/dashboard/misolicitud');
         Swal.fire({
           title: 'Bienvenido',
-          text: name,
+          text: email,
+          icon: 'success',
+        });
+      } else if (resp === 'moderator') {
+        this.router.navigateByUrl('/dashboard/solicitudes');
+        Swal.fire({
+          title: 'Bienvenido Analista',
+          text: email,
+          icon: 'success',
+        });
+      } else if (resp === 'admin') {
+        this.router.navigateByUrl('/dashboard/usuarios');
+        Swal.fire({
+          title: 'Bienvenido  Administrador',
+          text: email,
           icon: 'success',
         });
       } else {
-        Swal.fire('Error', ok, 'error');
+        Swal.fire('Error', resp, 'error');
       }
     });
   }

@@ -23,6 +23,7 @@ import { SearchnameproductPipe } from './pipes/searchnameproduct.pipe';
 import { DatostrabajoComponent } from './datostrabajo/datostrabajo.component';
 import { DatosreferenciasComponent } from './datosreferencias/datosreferencias.component';
 import { DatosreferenciacomComponent } from './datosreferenciacom/datosreferenciacom.component';
+import { FilterforamountPipe } from './pipes/filterforamount.pipe';
 
 
 
@@ -45,6 +46,7 @@ import { DatosreferenciacomComponent } from './datosreferenciacom/datosreferenci
     DatostrabajoComponent,
     DatosreferenciasComponent,
     DatosreferenciacomComponent,
+    FilterforamountPipe,
   ],
   imports: [
     CommonModule,

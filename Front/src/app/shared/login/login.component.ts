@@ -38,7 +38,7 @@ export class LoginComponent implements OnInit {
         allowOutsideClick: false
       });
       Swal.showLoading();
-      console.log('login:', resp);
+      // console.log('login:', resp);
       if (resp === 'user') {
         this.router.navigateByUrl('/dashboard/misolicitud');
         Swal.fire({

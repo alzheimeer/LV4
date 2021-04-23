@@ -54,9 +54,6 @@ const crearUsuario = async function(req, res) {
             <p>Solo Escoge El Valor De Tu Prestamo, Completa Los Requisitos Y Te Consignaremos A Tu Cuenta Bancaria En Poco Tiempo</p>`
         });
 
-
-
-
         // Generate successful response
         return res.status(201).json({
             ok: true,

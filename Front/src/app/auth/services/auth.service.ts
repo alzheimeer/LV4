@@ -8,7 +8,6 @@ import { DataPersonalModel } from '../../models/datapersonal.models';
 import { AuthResponse, Role, Usuario } from '../interfaces';
 
 
-
 @Injectable({
   providedIn: 'root'
 })
@@ -37,7 +36,23 @@ export class AuthService {
           localStorage.setItem('token', token!);
         }
       }),
-      map((resp) => resp.ok),
+      map((resp) => {
+        // tslint:disable-next-line: no-non-null-assertion
+        let y = resp.roles?.find((fruta: any) => fruta!.name === 'admin') === undefined;
+        if (y === false) {
+          sessionStorage.setItem('a', '79');
+          return 'admin';
+        }
+        // tslint:disable-next-line: no-non-null-assertion
+        y = resp.roles?.find((fruta: any) => fruta!.name === 'moderator') === undefined;
+        if (y === false) {
+          sessionStorage.setItem('a', '152')
+          return 'moderator';
+
+        }
+        sessionStorage.setItem('a', '0');
+        return 'user';
+      }),
       catchError((err) => of(err.error.msg))
     );
   }
