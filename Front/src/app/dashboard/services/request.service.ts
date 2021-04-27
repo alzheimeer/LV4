@@ -59,6 +59,15 @@ export class RequestService {
     return this.http.put(`${url}/${solicitud._id}`, solicitud, { headers });
   }
 
+  public updateRequestsByIdNumdoc(id: string, numdoc: string) {
+    const url = `${this.baseUrl}/request/`;
+    const body = {
+      numdoc
+    };
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return this.http.put(`${url}/${id}`, body, { headers });
+  }
+
   public updateRequestsByIdMiSolicitud(solicitud: any) {
     const url = `${this.baseUrl}/request`;
     const headers = new HttpHeaders()
@@ -72,42 +81,47 @@ export class RequestService {
   }
 
   public updateRequestsByIdInmueble(id: string, tipo: string, matricula: string, uso: string, estrato: number,
-    departamento: string, ciudad: string, barrio: string, direccion: string,
-    antiguedad: number, area: number, valorComercial: number) {
+                                    departamento: string, ciudad: string, barrio: string, direccion: string,
+                                    antiguedad: number, area: number, valorComercial: number) {
     const url = `${this.baseUrl}/request`;
-    const body = { "regInmuebleOk": true, "inmueble": { "tipo": tipo, "matricula": matricula, "uso": uso, "estrato": estrato, "departamento": departamento, "ciudad": ciudad, "barrio": barrio, "direccion": direccion, "antiguedad": antiguedad, "area": area, "valorComercial": valorComercial } };
+    const body = {
+      regInmuebleOk: true, inmueble: {
+        tipo, matricula, uso, estrato,
+        departamento, ciudad, barrio, direccion, antiguedad, area, valorComercial
+      }
+    };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, body, { headers });
   }
 
   public updateRequestsByIdVehiculo(id: string, tipo: string, placa: string, modelo: number, tipoCaja: string,
-    linea: string, marca: string, kilometraje: number, tipoPlaca: string, unicoDueno: string) {
+                                    linea: string, marca: string, kilometraje: number, tipoPlaca: string, unicoDueno: string) {
     const url = `${this.baseUrl}/request`;
-    const body = { "regVehiculoOk": true, "vehiculo": { "tipo": tipo, "placa": placa, "modelo": modelo, "tipoCaja": tipoCaja, "linea": linea, "marca": marca, "kilometraje": kilometraje, "tipoPlaca": tipoPlaca, "unicoDueno": unicoDueno } };
+    const body = { regVehiculoOk: true, vehiculo: { tipo, placa, modelo, tipoCaja, linea, marca, kilometraje, tipoPlaca, unicoDueno } };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, body, { headers });
   }
 
   public updateRequestsByIdTrabajoEmpleado(id: string, tiempo: number, ingreso: number, direccion: string,
-    telefono: number, jefe: string, cargo: string) {
+                                           telefono: number, jefe: string, cargo: string) {
     const url = `${this.baseUrl}/request`;
-    const body = { "regTrabajoOk": true, "trabajoEmpleado": { "tiempoTrabajando": tiempo, "ingresoMensual": ingreso, "direccion": direccion, "telefono": telefono, "jefeInmediato": jefe, "cargoActual": cargo } };
+    const body = { regTrabajoOk: true, trabajoEmpleado: { tiempoTrabajando: tiempo, ingresoMensual: ingreso, direccion, telefono, jefeInmediato: jefe, cargoActual: cargo } };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, body, { headers });
   }
 
   public updateRequestsByIdTrabajoIndependiente(id: string, tiempo: number, ingreso: number, direccion: string,
-    telefono: number, actividadComercial: string) {
+                                                telefono: number, actividadComercial: string) {
     const url = `${this.baseUrl}/request`;
-    const body = { "regTrabajoOk": true, "trabajoIndependiente": { "tiempoTrabajando": tiempo, "ingresoMensual": ingreso, "direccion": direccion, "telefono": telefono, "actividadComercial": actividadComercial } };
+    const body = { regTrabajoOk: true, trabajoIndependiente: { tiempoTrabajando: tiempo, ingresoMensual: ingreso, direccion, telefono, actividadComercial } };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, body, { headers });
   }
 
   public updateRequestsByIdTrabajoEmpresa(id: string, nombre: string, nit: string, ingresoMensual: number,
-    direccion: string, telefono: number, actividadComercial: string) {
+                                          direccion: string, telefono: number, actividadComercial: string) {
     const url = `${this.baseUrl}/request`;
-    const body = { "regTrabajoOk": true, "trabajoEmpresa": { "nombre": nombre, "nit": nit, "ingresoMensual": ingresoMensual, "direccion": direccion, "telefono": telefono, "actividadComercial": actividadComercial } };
+    const body = { regTrabajoOk: true, trabajoEmpresa: { nombre, nit, ingresoMensual, direccion, telefono, actividadComercial } };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, body, { headers });
   }
@@ -115,14 +129,10 @@ export class RequestService {
   public updateRequestsByIdRefFam(id: string, nombre1: string, parentezco1: string, direccion1: string, celular1: number, nombre2: string, parentezco2: string, direccion2: string, celular2: number, nombre3: string, parentezco3: string, direccion3: string, celular3: number) {
     const url = `${this.baseUrl}/request`;
     const body = {
-      "regReferenciasOk": true,
-      "referencias": {
-        "refFamiliar": {
-          "ref1": { "nombre": nombre1, "parentezco": parentezco1, "direccion": direccion1, "celular": celular1 },
-          "ref2": { "nombre": nombre2, "parentezco": parentezco2, "direccion": direccion2, "celular": celular2 },
-          "ref3": { "nombre": nombre3, "parentezco": parentezco3, "direccion": direccion3, "celular": celular3 },
-        }
-      }
+      regReferenciasOk: true,
+      refFamiliar1: { nombre: nombre1, parentezco: parentezco1, direccion: direccion1, celular: celular1 },
+      refFamiliar2: { nombre: nombre2, parentezco: parentezco2, direccion: direccion2, celular: celular2 },
+      refFamiliar3: { nombre: nombre3, parentezco: parentezco3, direccion: direccion3, celular: celular3 },
     };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, body, { headers });
@@ -131,14 +141,29 @@ export class RequestService {
   public updateRequestsByIdRefCom(id: string, nombre1: string, empresa1: string, direccion1: string, celular1: number, nombre2: string, empresa2: string, direccion2: string, celular2: number, nombre3: string, empresa3: string, direccion3: string, celular3: number) {
     const url = `${this.baseUrl}/request`;
     const body = {
-      "regReferenciasComOk": true,
-      "referencias": {
-        "refComercial": {
-          "ref1": { "nombre": nombre1, "empresa": empresa1, "direccion": direccion1, "celular": celular1 },
-          "ref2": { "nombre": nombre2, "empresa": empresa2, "direccion": direccion2, "celular": celular2 },
-          "ref3": { "nombre": nombre3, "empresa": empresa3, "direccion": direccion3, "celular": celular3 },
-        }
-      }
+      regReferenciasComOk: true,
+      refComercial1: { nombre: nombre1, empresa: empresa1, direccion: direccion1, celular: celular1 },
+      refComercial2: { nombre: nombre2, empresa: empresa2, direccion: direccion2, celular: celular2 },
+      refComercial3: { nombre: nombre3, empresa: empresa3, direccion: direccion3, celular: celular3 },
+    };
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return this.http.put(`${url}/${id}`, body, { headers });
+  }
+
+  public updateRequestsByIdResultadoCalificacion(id: string, resultado: string, calificacion: number) {
+    const url = `${this.baseUrl}/request`;
+    const body = {
+      resultado,
+      calificacion
+    };
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return this.http.put(`${url}/${id}`, body, { headers });
+  }
+
+  public updateRequestsByIdFechaConsignacion(id: string, fechaConsignacion: Date) {
+    const url = `${this.baseUrl}/request`;
+    const body = {
+      fechaConsignacion
     };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, body, { headers });
@@ -165,6 +190,7 @@ export class RequestService {
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, fd, { headers });
   }
+
 
 
 

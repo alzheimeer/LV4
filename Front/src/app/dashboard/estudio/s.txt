@@ -1,0 +1,98 @@
+
+    <!-- Datos De Referencias Familiares-->
+    <div class="borderx" *ngIf="solicitud.referencias.refFamiliar">
+      <p><span class="mb-4">Referencias Familiares:</span></p>
+      <p><span class="mb-4">Referencia 1:</span></p>
+      <p><span class="m-2">Nombre:
+          {{solicitud.referencias.refFamiliar.ref1.nombre}}</span></p>
+      <p> <span class="m-2">Parentezco:
+          {{solicitud.referencias.refFamiliar.ref1.parentezco}}</span></p>
+      <p><span class="m-2">Celular:
+          {{solicitud.referencias.refFamiliar.ref1.celular}}</span></p>
+      <p><span class="m-2">Direccion:
+          {{solicitud.referencias.refFamiliar.ref1.direccion}}</span></p>
+      <p><span class="mb-4">Referencia 2:</span></p>
+      <p><span class="m-2">Nombre:
+          {{solicitud.referencias.refFamiliar.ref2.nombre}}</span></p>
+      <p> <span class="m-2">Parentezco:
+          {{solicitud.referencias.refFamiliar.ref2.parentezco}}</span></p>
+      <p><span class="m-2">Celular:
+          {{solicitud.referencias.refFamiliar.ref2.celular}}</span></p>
+      <p><span class="m-2">Direccion:
+          {{solicitud.referencias.refFamiliar.ref2.direccion}}</span></p>
+      <p><span class="mb-4">Referencia 3:</span></p>
+      <p><span class="m-2">Nombre:
+          {{solicitud.referencias.refFamiliar.ref3.nombre}}</span></p>
+      <p> <span class="m-2">Parentezco:
+          {{solicitud.referencias.refFamiliar.ref3.parentezco}}</span></p>
+      <p><span class="m-2">Celular:
+          {{solicitud.referencias.refFamiliar.ref3.celular}}</span></p>
+      <p><span class="m-2">Direccion:
+          {{solicitud.referencias.refFamiliar.ref3.direccion}}</span></p>
+    </div>
+    <!-- Datos De Referencias Comerciales-->
+    <div class="borderx" *ngIf="solicitud.referencias.refComercial">
+      <p><span class="mb-4">Referencias Comerciales:</span></p>
+      <p><span class="mb-4">Referencia 1:</span></p>
+      <p><span class="m-2">Nombre:
+          {{solicitud.referencias.refComercial.ref1.nombre}}</span></p>
+      <p> <span class="m-2">Empresa:
+          {{solicitud.referencias.refComercial.ref1.empresa}}</span></p>
+      <p><span class="m-2">Celular:
+          {{solicitud.referencias.refComercial.ref1.celular}}</span></p>
+      <p><span class="m-2">Direccion:
+          {{solicitud.referencias.refComercial.ref1.direccion}}</span></p>
+      <p><span class="mb-4">Referencia 2:</span></p>
+      <p><span class="m-2">Nombre:
+          {{solicitud.referencias.refComercial.ref2.nombre}}</span></p>
+      <p> <span class="m-2">Empresa:
+          {{solicitud.referencias.refComercial.ref2.empresa}}</span></p>
+      <p><span class="m-2">Celular:
+          {{solicitud.referencias.refComercial.ref2.celular}}</span></p>
+      <p><span class="m-2">Direccion:
+          {{solicitud.referencias.refComercial.ref2.direccion}}</span></p>
+      <p><span class="mb-4">Referencia 3:</span></p>
+      <p><span class="m-2">Nombre:
+          {{solicitud.referencias.refComercial.ref3.nombre}}</span></p>
+      <p> <span class="m-2">Empresa:
+          {{solicitud.referencias.refComercial.ref3.empresa}}</span></p>
+      <p><span class="m-2">Celular:
+          {{solicitud.referencias.refComercial.ref3.celular}}</span></p>
+      <p><span class="m-2">Direccion:
+          {{solicitud.referencias.refComercial.ref3.direccion}}</span></p>
+    </div>
+    <!-- Datos De Trabajo Empleado-->
+    <div class="borderx" *ngIf="solicitud.trabajoEmpleado">
+      <p><span class="m-2">Cargo Actual:
+          {{solicitud.trabajoEmpleado.cargoActual}}</span></p>
+      <p> <span class="m-2">Ingreso Mensual:
+          {{solicitud.trabajoEmpleado.ingresoMensual}}</span></p>
+      <p><span class="m-2">Telefono: {{solicitud.trabajoEmpleado.telefono}}</span></p>
+      <p><span class="m-2">Direccion: {{solicitud.trabajoEmpleado.direccion}}</span></p>
+      <p><span class="m-2">Tiempo Trabajando:
+          {{solicitud.trabajoEmpleado.tiempoTrabajando}}</span></p>
+    </div>
+
+    <!-- Datos De Trabajo Independiente-->
+    <div class="borderx" *ngIf="solicitud.trabajoIndependiente">
+      <p><span class="m-2">Actividad Comercial:
+          {{solicitud.trabajoIndependiente.actividadComercial}}</span></p>
+      <p> <span class="m-2">Ingreso Mensual:
+          {{solicitud.trabajoIndependiente.ingresoMensual}}</span></p>
+      <p><span class="m-2">Telefono: {{solicitud.trabajoIndependiente.telefono}}</span></p>
+      <p><span class="m-2">Direccion:
+          {{solicitud.trabajoIndependiente.direccion}}</span></p>
+      <p><span class="m-2">Tiempo Trabajando:
+          {{solicitud.trabajoIndependiente.tiempoTrabajando}}</span></p>
+    </div>
+
+    <!-- Datos De Trabajo Empresa-->
+    <div class="borderx" *ngIf="solicitud.trabajoEmpresa">
+      <p><span class="m-2">NIT: {{solicitud.trabajoEmpresa.nit}}</span></p>
+      <p><span class="m-2">Actividad Comercial:
+          {{solicitud.trabajoEmpresa.actividadComercial}}</span></p>
+      <p> <span class="m-2">Ingreso Mensual:
+          {{solicitud.trabajoEmpresa.ingresoMensual}}</span></p>
+      <p><span class="m-2">Telefono: {{solicitud.trabajoEmpresa.telefono}}</span></p>
+      <p><span class="m-2">Direccion: {{solicitud.trabajoEmpresa.direccion}}</span></p>
+    </div>

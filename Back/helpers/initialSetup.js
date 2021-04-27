@@ -48,6 +48,33 @@ const createAdmin = async function() {
     }
 };
 
+const createModerator = async function () {
+    try {
+        const count = await User.estimatedDocumentCount();
+
+        if (count > 1) return;
+        // Create user with model
+        const newUser = new User({
+            name: 'Moderator',
+            surname: 'Moderator',
+            email: 'moderator@admin.com',
+        });
+        // hashear the password and assign it to the password of the new user
+        const salt = bcrypt.genSaltSync(10);
+        newUser.password = bcrypt.hashSync('adminadmin', salt);
+        // We check if they sent roles and if so, we check if it exists
+        const roles = ['user', 'moderator']
+        const foundRoles = await Role.find({ name: { $in: roles } })
+        newUser.roles = foundRoles.map(role => role._id)
+        // Save user in Database
+        await newUser.save();
+        console.log('Analista creado');
+    } catch (error) {
+        console.log(error);
+        throw new Error('Error Creando Analista');
+    }
+};
+
 const createProducts = async function() {
     try {
         const count = await Product.estimatedDocumentCount();
@@ -153,5 +180,6 @@ const createProducts = async function() {
 module.exports = {
     createRoles,
     createAdmin,
+    createModerator,
     createProducts
 }

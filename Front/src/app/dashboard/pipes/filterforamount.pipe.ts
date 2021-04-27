@@ -12,9 +12,16 @@ export class FilterforamountPipe implements PipeTransform {
 
 
 
-  transform(solicitudes: Requestx[], page: number = 0, search: string = ''): Requestx[] {
+  transform(solicitudes: Requestx[], page: number = 0, search: string = '', tiposearch: string = 'prod'): Requestx[] {
+    // console.log(search, tiposearch)
     if (search.length === 0) { return solicitudes.slice(page, page + 5); }
-    const filterSolicitudes = solicitudes.filter(soli => soli.idProduct.includes(search));
+    let filterSolicitudes: Requestx[] = [];
+    if (tiposearch === 'prod') {
+      filterSolicitudes = solicitudes.filter(soli => soli.idProduct.includes(search));
+    } else {
+      filterSolicitudes = solicitudes.filter(soli => soli.numdoc.includes(search));
+    }
+
     return filterSolicitudes.slice(page, page + 5);
   }
 

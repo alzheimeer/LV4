@@ -1,11 +1,12 @@
 export interface User {
-  personal:  Personal;
-  banca:     Banca;
-  roles:     string[];
-  _id:       string;
-  name:      string;
-  surname:   string;
-  email:     string;
+  personal: Personal;
+  banca: Banca;
+  roles: string[];
+  _id: string;
+  solicitud: string;
+  name: string;
+  surname: string;
+  email: string;
   avatarPath: string;
   cedulaPath: string;
   pasaportePath: string;
@@ -14,25 +15,71 @@ export interface User {
 }
 
 export interface Banca {
-  banco:       string;
+  banco: string;
   tipocuenta?: string;
-  numcuenta?:  number;
+  numcuenta?: number;
 }
 
 export interface Personal {
-  tipodoc:      string;
+  tipodoc: string;
   fechaNac: Date;
   fechaExp: Date;
-  pais:         string;
+  pais: string;
   departamento: string;
-  ciudad:       string;
-  barrio:       string;
-  direccion:    string;
-  numdoc?:      number;
-  celular1?:    number;
-  celular2?:    number;
+  ciudad: string;
+  barrio: string;
+  direccion: string;
+  numdoc?: number;
+  celular1?: number;
+  celular2?: number;
 }
+export class UsuarioIni implements User {
+  personal: Personal;
+  banca: Banca;
+  roles: string[];
+  _id: string;
+  solicitud: string;
+  name: string;
+  surname: string;
+  email: string;
+  avatarPath: string;
+  cedulaPath: string;
+  pasaportePath: string;
+  createdAt: Date;
+  updatedAt: Date;
 
+  constructor() {
+    this.roles = [],
+      this.banca = {
+        banco: '',
+        tipocuenta: '',
+        numcuenta: 0,
+      },
+      this.personal = {
+        tipodoc: '',
+        fechaNac: new Date(),
+        fechaExp: new Date(),
+        pais: '',
+        departamento: '',
+        ciudad: '',
+        barrio: '',
+        direccion: '',
+        numdoc: 0,
+        celular1: 0,
+        celular2: 0,
+      };
+    this._id = '';
+    this.solicitud = '',
+      this.name = '',
+      this.surname = '',
+      this.email = '',
+      this.avatarPath = '',
+      this.cedulaPath = '',
+      this.pasaportePath = '',
+      this.createdAt = new Date(),
+      this.updatedAt = new Date();
+  }
+}
 // export class pepe {
 //   constructor(
 //           id: string,

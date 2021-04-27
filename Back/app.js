@@ -3,7 +3,7 @@ const morgan = require('morgan');
 const cors = require('cors');
 const { dbConnection } = require('./db/config');
 const path = require('path');
-const { createRoles, createAdmin, createProducts } = require('./helpers/initialSetup');
+const { createRoles, createAdmin, createProducts, createModerator } = require('./helpers/initialSetup');
 require('dotenv').config();
 
 //print the environ process
@@ -18,7 +18,10 @@ dbConnection();
 // If it is the first time the program has been run
 // Create Roles, Administrator User and 4 Base Products in the database
 // Create Admin only is execute when createRoles is finished
-createRoles().then(() => createAdmin())
+createRoles().then(() => {
+    createAdmin();
+    createModerator();
+})
 createProducts();
 
 // Read every request and response and display it on the console

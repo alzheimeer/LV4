@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatAccordion } from '@angular/material/expansion';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -16,6 +18,9 @@ import { UserService } from '../services/user.service';
 })
 
 export class SolicitudesComponent implements OnInit {
+  @ViewChild(MatAccordion)
+  accordion!: MatAccordion;
+
   suscription!: Subscription;
   solicitudes: Requestx[] = [];
   solicitudesDocCom: Requestx[] = [];
@@ -29,8 +34,22 @@ export class SolicitudesComponent implements OnInit {
   search1 = '';
   search2 = '';
   search3 = '';
+  tiposearch = 'prod';
   hayerror = false;
+  p = '';
+
+
+  formularioResultado: FormGroup = this.fb.group({
+    id: ['', Validators.required],
+    resultado: ['', Validators.required],
+    calificacion: [0, Validators.required],
+  });
+  formularioCuenta: FormGroup = this.fb.group({
+    id: ['', Validators.required],
+    fechaConsignacion: ['', Validators.required]
+  });
   constructor(
+    private fb: FormBuilder,
     private router: Router,
     private requestService: RequestService,
     private productService: ProductService,
@@ -58,9 +77,10 @@ export class SolicitudesComponent implements OnInit {
       (resp) => {
         this.productos = resp;
       });
-    this.suscription = this.requestService.refresh$.subscribe(() => {
-      this.ngOnInit();
-    });
+    console.log('Init')
+    // this.suscription = this.requestService.refresh$.subscribe(() => {
+    //   this.ngOnInit();
+    // });
   }
 
   cambiarEstado(solicitudElegida: any, estado: any): void {
@@ -106,21 +126,6 @@ export class SolicitudesComponent implements OnInit {
     );
   }
 
-  verUsuario(solicitud: any): void {
-    console.log(this.usuario);
-    this.userService.getUserById(solicitud.idUser)
-    .subscribe(resp => {
-        this.usuario = resp;
-      // console.log(this.usuario);
-      }, (err) => {
-        this.hayerror = true;
-      });
-  }
-
-  noMostrarUsuario(): void {
-    this.usuario = [];
-  }
-
   nextPage(n: number): void {
     if (n === 1) { this.page1 += 5; }
     if (n === 2) { this.page2 += 5; }
@@ -131,18 +136,87 @@ export class SolicitudesComponent implements OnInit {
     if (this.page2 > 0) { if (n === 2) { this.page2 -= 5; } }
     if (this.page3 > 0) { if (n === 3) { this.page3 -= 5; } }
   }
-  searchSolicitud(valueSearch: string, n: number): void {
+  searchSolicitud(valueSearch: string, n: number, tipo: string): void {
     if (n === 1) {
       this.page1 = 0;
       this.search1 = valueSearch;
+      this.tiposearch = tipo;
     }
     if (n === 2) {
       this.page2 = 0;
       this.search2 = valueSearch;
+      this.tiposearch = tipo;
     }
     if (n === 3) {
       this.page3 = 0;
       this.search3 = valueSearch;
+      this.tiposearch = tipo;
     }
+  }
+
+  enviarR(solicitud: string) {
+
+    this.formularioResultado.controls.id.setValue(solicitud)
+    // console.log(this.formularioResultado.value)
+    if (this.formularioResultado.invalid) {
+      // tslint:disable-next-line: no-unused-expression
+      this.formularioResultado.markAllAsTouched;
+      Swal.fire({
+        title: 'Error',
+        text: 'Coloca el resultado y la calificacion',
+        icon: 'error',
+      });
+      return;
+    }
+    const {
+      id,
+      resultado,
+      calificacion,
+    } = this.formularioResultado.value;
+    this.requestService.updateRequestsByIdResultadoCalificacion(id, resultado, calificacion).subscribe(
+      () => {
+        this.solicitudes = [];
+        this.solicitudesAprobadas = [];
+        this.solicitudesDocCom = [];
+        this.solicitudesRechazadas = [];
+        this.ngOnInit();
+      }
+    );
+  }
+  enviarCuenta(uid: string) {
+    this.formularioCuenta.controls.id.setValue(uid)
+    // console.log(this.formularioResultado.value)
+    if (this.formularioCuenta.invalid) {
+      // tslint:disable-next-line: no-unused-expression
+      this.formularioCuenta.markAllAsTouched;
+      Swal.fire({
+        title: 'Error',
+        text: 'Coloca la fecha que se consigno',
+        icon: 'error',
+      });
+      return;
+    }
+    const {
+      id,
+      fechaConsignacion
+    } = this.formularioCuenta.value;
+    this.requestService.updateRequestsByIdFechaConsignacion(id, fechaConsignacion).subscribe(
+      (res) => {
+        this.solicitudes = [];
+        this.solicitudesAprobadas = [];
+        this.solicitudesDocCom = [];
+        this.solicitudesRechazadas = [];
+        this.ngOnInit();
+      },
+      (err) => {
+        console.log(err);
+
+      }
+    );
+  }
+
+  facturar() {
+    console.log('FACTURANDO');
+    alert('Facturando');
   }
 }

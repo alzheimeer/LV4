@@ -31,13 +31,15 @@ export class RegisterComponent implements OnInit {
   register() {
 
     const { name, surname, email, password } = this.miFormulario.value;
-
+    Swal.fire({
+      title: 'Espere',
+      text: 'Registrando',
+      allowOutsideClick: false
+    });
+    Swal.showLoading();
     this.authService.register(name, surname, email, password).subscribe((resp) => {
-      Swal.fire({
-        title: 'Espere',
-        text: 'Registrando',
-        allowOutsideClick: false
-      });
+
+      Swal.close();
       // console.log(ok);
       if (resp === 'user') {
         this.router.navigateByUrl('/dashboard/misolicitud');

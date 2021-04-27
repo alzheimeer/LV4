@@ -125,8 +125,8 @@ export class DatosreferenciasComponent implements OnInit, AfterViewInit {
       parentezco3,
       direccion3,
       celular3,
-
     } = this.miFormulario.value;
+
     if (this.requests._id) {
       this.requestService
         .updateRequestsByIdRefFam(

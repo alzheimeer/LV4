@@ -1,0 +1,263 @@
+<div class="example-card row">
+
+  <!-- columna 1 -->
+  <div class="col-md-6">
+
+    <!-- Datos Basicos -->
+    <img mat-card-sm-image *ngIf="usuario.avatarPath !== undefined"
+      [src]="baseUrlN+usuario.avatarPath" alt="Foto usuario">
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{usuario.name}} {{usuario.surname}}</mat-card-title>
+    <mat-card-subtitle>{{usuario.email}}</mat-card-subtitle>
+    <mat-card-subtitle>Plazo: {{solicitud.time}}</mat-card-subtitle>
+    <mat-card-subtitle>Solicitud: {{usuario.solicitud}}</mat-card-subtitle>
+
+    <!-- Datos Personales -->
+    <div class="borderx p-2">
+      <p>{{usuario.personal.tipodoc}}: {{usuario.personal.numdoc | number:
+        "1.0-0"}} </p>
+      <p>{{usuario.personal.pais}}-{{usuario.personal.departamento}}-{{usuario.personal.ciudad}}-{{usuario.personal.barrio}}</p>
+      <p>Direccion: {{usuario.personal.direccion}} </p>
+      <p>Celular: {{usuario.personal.celular1}} </p>
+      <p>Celular Opc: {{usuario.personal.celular2}} </p>
+    </div>
+
+    <!-- Datos Banco -->
+    <div class="borderx p-2">
+      <p><span>Banco: {{usuario.banca.banco}}</span></p>
+      <p> <span>Tipo De Cuenta: {{usuario.banca.tipocuenta}}</span></p>
+      <p><span>Numero: {{usuario.banca.numcuenta}}</span></p>
+    </div>
+
+    <!-- Comentarios -->
+    <div class="borderx p-2">
+      <p><span>Comentarios: {{solicitud.description}}</span></p>
+    </div>
+    <div class="borderx p-2" *ngIf="solicitud.resultado">
+    <p><span>Resultados: {{solicitud.resultado}}</span></p>
+    <p><span>Calificacion: {{solicitud.calificacion}}</span></p>
+  </div>
+    <!-- Imagenes o PDF Documentos -->
+    <div class="borderx p-2" *ngIf="usuario.cedulaPath !== undefined">
+      <a class="mr-2 ml-2"
+        [href]="baseUrlN+usuario.cedulaPath" target="_blank">Ver Cedula</a>
+    </div>
+    <div class="borderx p-2" *ngIf="usuario.pasaportePath !== undefined">
+      <a class="mr-2 ml-2"
+        [href]="baseUrlN+usuario.pasaportePath" target="_blank">Ver Pasaporte</a>
+    </div>
+    <div class="borderx p-2" *ngIf="solicitud.matriculaPath !== undefined">
+      <a class="mr-2 ml-2"
+        [href]="baseUrlN+solicitud.matriculaPath" target="_blank">Ver Matricula
+        Inmobiliaria</a>
+    </div>
+    <div class="borderx p-2" *ngIf="solicitud.tarjetavPath !== undefined">
+      <a class="mr-2 ml-2"
+        [href]="baseUrlN+solicitud.tarjetavPath" target="_blank">Ver Tarjeta De
+        Propiedad</a>
+    </div>
+    <div class="borderx p-2" *ngIf="solicitud.extractoPath !== undefined">
+      <a class="mr-2 ml-2"
+        [href]="baseUrlN+solicitud.extractoPath" target="_blank">Ver Extractos
+        Bancarios</a>
+    </div>
+  </div>
+
+  <!-- columna 2 -->
+  <div class="col-md-6">
+
+    <!-- Datos Del Inmueble -->
+    <div class="borderx" *ngIf="solicitud.inmueble">
+      <p><span class="mb-4">Inmueble:</span></p>
+      <p><span class="m-2">Tipo: {{solicitud.inmueble.tipo}}</span></p>
+      <p> <span class="m-2"># de Matricula: {{solicitud.inmueble.matricula}}</span></p>
+      <p><span class="m-2">Uso: {{solicitud.inmueble.uso}}</span></p>
+      <p><span class="m-2">Estrato: {{solicitud.inmueble.estrato}}</span></p>
+      <p><span class="m-2">Antiguedad: {{solicitud.inmueble.antiguedad}} años</span></p>
+      <p><span class="m-2">Area: {{solicitud.inmueble.area}} m2</span></p>
+      <p><span class="m-2">Valor Comercial: ${{solicitud.inmueble.valorComercial
+          | number: "1.0-0"}}</span></p>
+      <p><span class="m-2">Departamento: {{solicitud.inmueble.departamento}}</span></p>
+      <p><span class="m-2">Ciudad: {{solicitud.inmueble.ciudad}}</span></p>
+      <p><span class="m-2">Barrio: {{solicitud.inmueble.barrio}}</span></p>
+      <p><span class="m-2">Direccion: {{solicitud.inmueble.direccion}}</span></p>
+    </div>
+
+    <!-- Datos Del Vehiculo -->
+    <div class="borderx" *ngIf="solicitud.vehiculo">
+      <p><span class="mb-4">Vehiculo:</span></p>
+      <p><span class="m-2">Tipo: {{solicitud.vehiculo.tipo}}</span></p>
+      <p> <span class="m-2"># de Placa: {{solicitud.vehiculo.placa}}</span></p>
+      <p><span class="m-2">Modelo: {{solicitud.vehiculo.modelo}}</span></p>
+      <p><span class="m-2">Marca: {{solicitud.vehiculo.marca}}</span></p>
+      <p><span class="m-2">Linea: {{solicitud.vehiculo.linea}}</span></p>
+      <p><span class="m-2">Kilometraje: {{solicitud.vehiculo.kilometraje}}</span></p>
+      <p><span class="m-2">Caja: {{solicitud.vehiculo.tipoCaja}}</span></p>
+      <p><span class="m-2">Servicio: {{solicitud.vehiculo.tipoPlaca}}</span></p>
+      <p><span class="m-2">Unico Dueño: {{solicitud.vehiculo.unicoDueno}}</span></p>
+    </div>
+
+
+
+    <div class="accordion" id="accordionExample">
+
+      <!-- Card Datos Trabajo -->
+      <div class="card" *ngIf="solicitud.regTrabajoOk">
+        <div class="card-header" id="headingOne">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left" type="button"
+              data-toggle="collapse" data-target="#collapseOne"
+              aria-expanded="true" aria-controls="collapseOne">
+              Datos Trabajo
+            </button>
+          </h2>
+        </div>
+        <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+          data-parent="#accordionExample">
+          <div class="card-body">
+            <!-- Datos De Trabajo Empleado-->
+            <div class="borderx" *ngIf="solicitud.trabajoEmpleado">
+              <p><span class="m-2">Cargo Actual:
+                  {{solicitud.trabajoEmpleado.cargoActual}}</span></p>
+              <p> <span class="m-2">Ingreso Mensual:
+                  {{solicitud.trabajoEmpleado.ingresoMensual}}</span></p>
+              <p><span class="m-2">Telefono:
+                  {{solicitud.trabajoEmpleado.telefono}}</span></p>
+              <p><span class="m-2">Direccion:
+                  {{solicitud.trabajoEmpleado.direccion}}</span></p>
+              <p><span class="m-2">Tiempo Trabajando:
+                  {{solicitud.trabajoEmpleado.tiempoTrabajando}}</span></p>
+            </div>
+
+            <!-- Datos De Trabajo Independiente-->
+            <div class="borderx" *ngIf="solicitud.trabajoIndependiente">
+              <p><span class="m-2">Actividad Comercial:
+                  {{solicitud.trabajoIndependiente.actividadComercial}}</span></p>
+              <p> <span class="m-2">Ingreso Mensual:
+                  {{solicitud.trabajoIndependiente.ingresoMensual}}</span></p>
+              <p><span class="m-2">Telefono:
+                  {{solicitud.trabajoIndependiente.telefono}}</span></p>
+              <p><span class="m-2">Direccion:
+                  {{solicitud.trabajoIndependiente.direccion}}</span></p>
+              <p><span class="m-2">Tiempo Trabajando:
+                  {{solicitud.trabajoIndependiente.tiempoTrabajando}}</span></p>
+            </div>
+
+            <!-- Datos De Trabajo Empresa-->
+            <div class="borderx" *ngIf="solicitud.trabajoEmpresa">
+              <p><span class="m-2">NIT: {{solicitud.trabajoEmpresa.nit}}</span></p>
+              <p><span class="m-2">Actividad Comercial:
+                  {{solicitud.trabajoEmpresa.actividadComercial}}</span></p>
+              <p> <span class="m-2">Ingreso Mensual:
+                  {{solicitud.trabajoEmpresa.ingresoMensual}}</span></p>
+              <p><span class="m-2">Telefono:
+                  {{solicitud.trabajoEmpresa.telefono}}</span></p>
+              <p><span class="m-2">Direccion:
+                  {{solicitud.trabajoEmpresa.direccion}}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Card Referencias Familiares -->
+      <div class="card" *ngIf="solicitud.regReferenciasOk">
+        <div class="card-header" id="headingTwo">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left collapsed"
+              type="button" data-toggle="collapse" data-target="#collapseTwo"
+              aria-expanded="false" aria-controls="collapseTwo">
+              Referencias Familiares
+            </button>
+          </h2>
+        </div>
+        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo"
+          data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="borderx" *ngIf="solicitud.refFamiliar1">
+              <p><span class="mb-4">Referencias Familiares:</span></p>
+              <p><span class="mb-4">Referencia 1:</span></p>
+              <p><span class="m-2">Nombre:
+                  {{solicitud.refFamiliar1.nombre}}</span></p>
+              <p> <span class="m-2">Parentezco:
+                  {{solicitud.refFamiliar1.parentezco}}</span></p>
+              <p><span class="m-2">Celular:
+                  {{solicitud.refFamiliar1.celular}}</span></p>
+              <p><span class="m-2">Direccion:
+                  {{solicitud.refFamiliar1.direccion}}</span></p>
+              <p><span class="mb-4">Referencia 2:</span></p>
+              <p><span class="m-2">Nombre:
+                  {{solicitud.refFamiliar2.nombre}}</span></p>
+              <p> <span class="m-2">Parentezco:
+                  {{solicitud.refFamiliar2.parentezco}}</span></p>
+              <p><span class="m-2">Celular:
+                  {{solicitud.refFamiliar2.celular}}</span></p>
+              <p><span class="m-2">Direccion:
+                  {{solicitud.refFamiliar2.direccion}}</span></p>
+              <p><span class="mb-4">Referencia 3:</span></p>
+              <p><span class="m-2">Nombre:
+                  {{solicitud.refFamiliar3.nombre}}</span></p>
+              <p> <span class="m-2">Parentezco:
+                  {{solicitud.refFamiliar3.parentezco}}</span></p>
+              <p><span class="m-2">Celular:
+                  {{solicitud.refFamiliar3.celular}}</span></p>
+              <p><span class="m-2">Direccion:
+                  {{solicitud.refFamiliar3.direccion}}</span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Card Referencias Comerciales -->
+      <div class="card" *ngIf="solicitud.regReferenciasComOk">
+        <div class="card-header" id="headingThree">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left collapsed"
+              type="button" data-toggle="collapse" data-target="#collapseThree"
+              aria-expanded="false" aria-controls="collapseThree">
+              Referencias Comerciales
+            </button>
+          </h2>
+        </div>
+        <div id="collapseThree" class="collapse" aria-labelledby="headingThree"
+          data-parent="#accordionExample">
+          <div class="card-body">
+
+            <!-- Datos De Referencias Comerciales-->
+            <div class="borderx" *ngIf="solicitud.refComercial1">
+              <p><span class="mb-4">Referencias Comerciales:</span></p>
+              <p><span class="mb-4">Referencia 1:</span></p>
+              <p><span class="m-2">Nombre:
+                  {{solicitud.refComercial1.nombre}}</span></p>
+              <p> <span class="m-2">Empresa:
+                  {{solicitud.refComercial1.empresa}}</span></p>
+              <p><span class="m-2">Celular:
+                  {{solicitud.refComercial1.celular}}</span></p>
+              <p><span class="m-2">Direccion:
+                  {{solicitud.refComercial1.direccion}}</span></p>
+              <p><span class="mb-4">Referencia 2:</span></p>
+              <p><span class="m-2">Nombre:
+                  {{solicitud.refComercial2.nombre}}</span></p>
+              <p> <span class="m-2">Empresa:
+                  {{solicitud.refComercial2.empresa}}</span></p>
+              <p><span class="m-2">Celular:
+                  {{solicitud.refComercial2.celular}}</span></p>
+              <p><span class="m-2">Direccion:
+                  {{solicitud.refComercial2.direccion}}</span></p>
+              <p><span class="mb-4">Referencia 3:</span></p>
+              <p><span class="m-2">Nombre:
+                  {{solicitud.refComercial3.nombre}}</span></p>
+              <p> <span class="m-2">Empresa:
+                  {{solicitud.refComercial3.empresa}}</span></p>
+              <p><span class="m-2">Celular:
+                  {{solicitud.refComercial3.celular}}</span></p>
+              <p><span class="m-2">Direccion:
+                  {{solicitud.refComercial3.direccion}}</span></p>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+</div>

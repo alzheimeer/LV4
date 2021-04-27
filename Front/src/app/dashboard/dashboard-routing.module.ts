@@ -13,6 +13,7 @@ import { DatosreferenciasComponent } from './datosreferencias/datosreferencias.c
 import { DatostrabajoComponent } from './datostrabajo/datostrabajo.component';
 import { DatosvehiculoComponent } from './datosvehiculo/datosvehiculo.component';
 import { EstadocuentaComponent } from './estadocuenta/estadocuenta.component';
+import { EstudioComponent } from './estudio/estudio.component';
 import { MisdatosComponent } from './misdatos/misdatos.component';
 import { MisolicitudComponent } from './misolicitud/misolicitud.component';
 import { ProductoComponent } from './producto/producto.component';
@@ -42,6 +43,7 @@ const routes: Routes = [
       { path: 'usuarios', component: UsuariosComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['admin'] } },
       { path: 'misdatos', component: MisdatosComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user', 'moderator', 'admin'] } },
       { path: 'about', component: AboutComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user', 'moderator', 'admin'] } },
+      { path: 'estudio', component: EstudioComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['moderator', 'admin'] } },
 
       { path: '**', redirectTo: 'misolicitud' },
     ],

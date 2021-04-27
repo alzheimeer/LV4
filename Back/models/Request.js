@@ -6,10 +6,18 @@ var RequestSchema = Schema({
         type: Schema.Types.ObjectId,
         required: true
     },
+    fechaConsignacion: {
+        type: Date,
+        required: false
+    },
     idProduct: {
         ref: "Product",
         type: Schema.Types.ObjectId,
         required: true
+    },
+    numdoc: {
+        type: String,
+        required: false
     },
     tarjetavPath: {
         type: String,
@@ -33,6 +41,14 @@ var RequestSchema = Schema({
     },
     description: {
         type: String,
+        required: false,
+    },
+    resultado: {
+        type: String,
+        required: false,
+    },
+    calificacion: {
+        type: Number,
         required: false,
     },
     estate: {
@@ -250,71 +266,58 @@ var RequestSchema = Schema({
         tipoPlaca: {
             type: String,
             required: false,
-
         },
         unicoDueno: {
             type: String,
             required: false,
-
         },
     },
     trabajoEmpleado: {
         tiempoTrabajando: {
             type: Number,
             required: false,
-
         },
         ingresoMensual: {
             type: Number,
             required: false,
-
         },
         direccion: {
             type: String,
             required: false,
-
         },
         telefono: {
             type: Number,
             required: false,
-
         },
         jefeInmediato: {
             type: String,
             required: false,
-
         },
         cargoActual: {
             type: String,
             required: false,
-
         },
     },
     trabajoIndependiente: {
         tiempoTrabajando: {
             type: Number,
             required: false,
-
         },
         ingresoMensual: {
             type: Number,
             required: false,
-
         },
         direccion: {
             type: String,
             required: false,
-
         },
         telefono: {
             type: Number,
             required: false,
-
         },
         actividadComercial: {
             type: String,
             required: false,
-
         },
     },
     trabajoEmpresa: {
@@ -329,147 +332,129 @@ var RequestSchema = Schema({
         ingresoMensual: {
             type: Number,
             required: false,
-
         },
         direccion: {
             type: String,
             required: false,
-
         },
         telefono: {
             type: Number,
             required: false,
-
         },
         actividadComercial: {
             type: String,
             required: false,
-
         },
     },
-    referencias: {
-        refFamiliar: {
-            ref1: {
-                nombre: {
-                    type: String,
-                    required: false,
-                },
-                parentezco: {
-                    type: String,
-                    required: false,
-                },
-                direccion: {
-                    type: String,
-                    required: false,
-                },
-                celular: {
-                    type: Number,
-                    required: false,
 
-                }
-            },
-            ref2: {
-                nombre: {
-                    type: String,
-                    required: false,
-                },
-                parentezco: {
-                    type: String,
-                    required: false,
-                },
-                direccion: {
-                    type: String,
-                    required: false,
-                },
-                celular: {
-                    type: Number,
-                    required: false,
-
-                }
-            },
-            ref3: {
-                nombre: {
-                    type: String,
-                    required: false,
-                },
-                parentezco: {
-                    type: String,
-                    required: false,
-                },
-                direccion: {
-                    type: String,
-                    required: false,
-                },
-                celular: {
-                    type: Number,
-                    required: false,
-
-                }
-            }
-
+    refFamiliar1: {
+        nombre: {
+            type: String,
+            required: false,
         },
-        refComercial: {
-            ref1: {
-                nombre: {
-                    type: String,
-                    required: false,
-                },
-                empresa: {
-                    type: String,
-                    required: false,
-                },
-                direccion: {
-                    type: String,
-                    required: false,
-                },
-                celular: {
-                    type: Number,
-                    required: false,
-
-                }
-            },
-            ref2: {
-                nombre: {
-                    type: String,
-                    required: false,
-                },
-                empresa: {
-                    type: String,
-                    required: false,
-                },
-                direccion: {
-                    type: String,
-                    required: false,
-                },
-                celular: {
-                    type: Number,
-                    required: false,
-
-                }
-            },
-            ref3: {
-                nombre: {
-                    type: String,
-                    required: false,
-                },
-                empresa: {
-                    type: String,
-                    required: false,
-                },
-                direccion: {
-                    type: String,
-                    required: false,
-                },
-                celular: {
-                    type: Number,
-                    required: false,
-
-                }
-            }
-
+        parentezco: {
+            type: String,
+            required: false,
         },
-
+        direccion: {
+            type: String,
+            required: false,
+        },
+        celular: {
+            type: Number,
+            required: false,
+        }
     },
+    refFamiliar2: {
+        nombre: {
+            type: String,
+            required: false,
+        },
+        parentezco: {
+            type: String,
+            required: false,
+        },
+        direccion: {
+            type: String,
+            required: false,
+        },
+        celular: {
+            type: Number,
+            required: false,
+        }
+    },
+    refFamiliar3: {
+        nombre: {
+            type: String,
+            required: false,
+        },
+        parentezco: {
+            type: String,
+            required: false,
+        },
+        direccion: {
+            type: String,
+            required: false,
+        },
+        celular: {
+            type: Number,
+            required: false,
+        }
+    },
+    refComercial1: {
+        nombre: {
+            type: String,
+            required: false,
+        },
+        empresa: {
+            type: String,
+            required: false,
+        },
+        direccion: {
+            type: String,
+            required: false,
+        },
+        celular: {
+            type: Number,
+            required: false,
+        }
+    },
+    refComercial2: {
+        nombre: {
+            type: String,
+            required: false,
+        },
+        empresa: {
+            type: String,
+            required: false,
+        },
+        direccion: {
+            type: String,
+            required: false,
+        },
+        celular: {
+            type: Number,
+            required: false,
+        }
+    },
+    refComercial3: {
+        nombre: {
+            type: String,
+            required: false,
+        },
+        empresa: {
+            type: String,
+            required: false,
+        },
+        direccion: {
+            type: String,
+            required: false,
+        },
+        celular: {
+            type: Number,
+            required: false,
+        }
+    }
 }, {
     timestamps: true,
     versionkey: false

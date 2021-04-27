@@ -10,35 +10,46 @@
     <mat-card class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h2 class="title" >Solicitudes Para Estudio </h2>
-          <select type="text" class="form-control mb-2" placeholder="Buscar ..." #txtSearch (change)="searchSolicitud(txtSearch.value, 1)">
-            <option selected disabled value="">Escoge...</option>
+          <h2 class="title">Solicitudes Para Estudio </h2>
 
-            <option *ngFor="let producto of productos" [value]="producto._id">{{producto.name}}</option>
-
-          </select>
-          <button (click)="prevPage(1)" mat-icon-button color="primary"><i class="far fa-arrow-alt-circle-left fa-2x"></i></button>
-          <button (click)="nextPage(1)" mat-icon-button color="primary" ><i class="far fa-arrow-alt-circle-right fa-2x"></i></button>
-          <!-- [disabled]="!(solicitudesDocCom | filterforamount:page1:search1)" -->
+          <div class="form-inline">
+            <select type="text" class="form-control mb-2" #txtSearch1
+              (change)="searchSolicitud(txtSearch1.value, 1, 'prod')">
+              <option selected disabled value="">Buscar por tipo de prestamo...</option>
+              <option *ngFor="let producto of productos" [value]="producto._id">{{producto.name}}</option>
+            </select>
+            <label class="ml-2 mr-2">Buscar Por Identificacion:</label>
+            <input type="number" placeholder="Digita #" class="form-control
+              mb-2" #txtSearchNum1 (keyup)="searchSolicitud(txtSearchNum1.value,
+              1, 'num')">
+          </div>
+          <button (click)="prevPage(1)" mat-icon-button color="primary"><i
+              class="far fa-arrow-alt-circle-left fa-2x"></i></button>
+          <button (click)="nextPage(1)" mat-icon-button color="primary"><i
+              class="far fa-arrow-alt-circle-right fa-2x"></i></button>
         </div>
+
         <div class="card-body">
+          <div class="example-action-buttons mb-2">
+            <button mat-button (click)="accordion.openAll()">Expandir Todos</button>
+            <button mat-button (click)="accordion.closeAll()">Contraer Todos</button>
+          </div>
           <div class="accordion_display">
             <div class="accordion_size">
               <mat-accordion multi="true" *ngIf="solicitudes.length">
-                <mat-expansion-panel *ngFor="let solicitud of solicitudesDocCom | filterforamount:page1:search1"
+                <mat-expansion-panel *ngFor="let solicitud of solicitudesDocCom
+                  | filterforamount:page1:search1:tiposearch ; index as i"
                   hiddenToggle="false">
                   <mat-expansion-panel-header>
                     <mat-panel-title>
                       <span class="text_center" *ngFor="let producto of
-                        productos | searchnameproduct: solicitud.idProduct"> {{
+                        productos | searchnameproduct: solicitud.idProduct;
+                        index as i"> {{
                         producto.name }}</span>
                       <span class="spacer"></span>
                       <span class="text_center"> Monto: ${{ solicitud.value |
                         number: '1.0-0' }} </span>
-                      <span class="text_center"> Plazo: {{ solicitud.time }}
-                        meses</span>
                       <span class="spacer"></span>
-                      <!-- <button class="btDone" *ngIf="solicitud.estate == 'Pendiente'" mat-raised-button>{{solicitud.estate }}</button> -->
                       <button class="btInProgress" *ngIf="solicitud.estate ==
                         'Completo'" mat-raised-button>En Estudio</button>
                       <button class="btToDo" *ngIf="solicitud.estate ==
@@ -47,38 +58,15 @@
                         'Rechazada'" mat-raised-button>{{solicitud.estate }}</button>
                     </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <mat-panel-description>{{ solicitud.description }}</mat-panel-description>
-                  <mat-action-row *ngIf="usuario._id">
-                    <div class="col table-responsive">
-                      <table class="table table-write table-bordered
-                        table-hover">
-                        <thead class="thead-white">
-                          <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Celular</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr scope="row">
-                            <td>{{usuario.name}} {{usuario.surname}}</td>
-                            <td>{{usuario.email}}</td>
-                            <td>{{usuario.personal.celular1}}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </mat-action-row>
+
+
+
+                  <mat-panel-title>
+                    <app-estudio [idUser]="solicitud.idUser"
+                      [idSolicitud]="solicitud._id"></app-estudio>
+                  </mat-panel-title>
 
                   <mat-action-row>
-                    <button *ngIf="!usuario._id" class="btSelectTodo" mat-button
-                      (click)="verUsuario(solicitud)">Mostrar Usuario</button>
-                    <button *ngIf="usuario._id" class="btSelectTodo" mat-button
-                      (click)="noMostrarUsuario()">Esconder Usuario</button>
-                  </mat-action-row>
-
-                  <mat-action-row>
-                    <!-- <button class="btSelectTodo" mat-button (click)="cambiarEstado(solicitud, 'Pendiente')">Pendiente</button> -->
                     <button class="btSelectInProgress" mat-button
                       (click)="cambiarEstado(solicitud, 'Completo')">En Estudio</button>
                     <button class="btSelectDone" mat-button
@@ -86,8 +74,30 @@
                     <button class="btSelectErr" mat-button
                       (click)="cambiarEstado(solicitud, 'Rechazada')">Rechazada</button>
                     <span class="spacer"></span>
-                    <!-- <mat-icon color="primary" (click)="deleteRequest(solicitud._id)" arial-Label="delete_forever">delete_forever</mat-icon> -->
                   </mat-action-row>
+
+                  <form class="form" (ngSubmit)="enviarR(solicitud._id)"
+                    [formGroup]="formularioResultado" #f="ngForm">
+                    <mat-action-row>
+
+                      <mat-form-field class="form-group col-md-8 pl-1">
+                        <mat-label>Resultados:</mat-label>
+                        <textarea matInput formControlName="resultado"
+                          placeholder="Escriba los resultados del estudio y una
+                          calificacion" required>
+                        </textarea>
+                      </mat-form-field>
+                      <mat-form-field appearance="fill" class="form-group col-md-2">
+                        <mat-select formControlName="calificacion" required>
+                          <mat-option *ngFor="let item of [].constructor(11);let
+                            i= index" [value]="i">{{i}}</mat-option>
+                        </mat-select>
+                        <mat-label>Calificacion</mat-label>
+                      </mat-form-field>
+                      <button matbutton class="btn btn-sm" type="submit">Enviar</button>
+                    </mat-action-row>
+                  </form>
+
 
                 </mat-expansion-panel>
               </mat-accordion>
@@ -98,19 +108,27 @@
     </mat-card>
 
 
-    <mat-card class="col-md-6">
+    <mat-card class="col-md-12">
 
       <div class="card">
         <div class="card-header">
           <h2 class="title">Solicitudes Aprobadas</h2>
-          <select type="text" class="form-control mb-2" placeholder="Buscar ..." #txtSearch2 (change)="searchSolicitud(txtSearch2.value, 2)">
-            <option selected disabled value="">Escoge...</option>
-
-            <option *ngFor="let producto of productos" [value]="producto._id">{{producto.name}}</option>
-
-          </select>
-          <button (click)="prevPage(2)" mat-icon-button color="primary"><i class="far fa-arrow-alt-circle-left fa-2x"></i></button>
-          <button (click)="nextPage(2)" mat-icon-button color="primary" ><i class="far fa-arrow-alt-circle-right fa-2x"></i></button>
+          <div class="form-inline">
+            <select type="text" class="form-control mb-2" placeholder="Buscar
+              ..." #txtSearch2 (change)="searchSolicitud(txtSearch2.value, 2,
+              'prod')">
+              <option selected disabled value="">Buscar por tipo de prestamo...</option>
+              <option *ngFor="let producto of productos" [value]="producto._id">{{producto.name}}</option>
+            </select>
+            <label class="ml-2 mr-2">Buscar Por Identificacion:</label>
+            <input type="number" placeholder="Digite #" class="form-control
+              mb-2" #txtSearchNum2 (keyup)="searchSolicitud(txtSearchNum2.value,
+              2, 'num')">
+          </div>
+          <button (click)="prevPage(2)" mat-icon-button color="primary"><i
+              class="far fa-arrow-alt-circle-left fa-2x"></i></button>
+          <button (click)="nextPage(2)" mat-icon-button color="primary"><i
+              class="far fa-arrow-alt-circle-right fa-2x"></i></button>
         </div>
 
         <div class="card-body">
@@ -118,7 +136,9 @@
           <div class="accordion_display">
             <div class="accordion_size">
               <mat-accordion multi="true" *ngIf="solicitudes.length">
-                <mat-expansion-panel *ngFor="let solicitud of solicitudesAprobadas | filterforamount:page2:search2"
+                <mat-expansion-panel *ngFor="let solicitud of
+                  solicitudesAprobadas |
+                  filterforamount:page2:search2:tiposearch"
                   hiddenToggle="false">
                   <mat-expansion-panel-header>
                     <mat-panel-title>
@@ -127,10 +147,10 @@
                         productos | searchnameproduct: solicitud.idProduct"> {{
                         producto.name }}</span>
                       <span class="spacer"></span>
+
                       <span class="text_center"> Monto: ${{ solicitud.value |
                         number: '1.0-0' }} </span>
-                      <span class="text_center"> Plazo: {{ solicitud.time }}
-                        meses</span>
+
 
                       <span class="spacer"></span>
                       <!-- <button class="btDone" *ngIf="solicitud.estate == 'Pendiente'" mat-raised-button>{{solicitud.estate }}</button> -->
@@ -142,35 +162,33 @@
                         'Rechazada'" mat-raised-button>{{solicitud.estate }}</button>
                     </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <mat-panel-description>{{ solicitud.description }}</mat-panel-description>
-                  <mat-action-row *ngIf="usuario._id">
-                    <div class="col table-responsive">
-                      <table class="table table-write table-bordered
-                        table-hover">
-                        <thead class="thead-white">
-                          <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Celular</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr scope="row">
-                            <td>{{usuario.name}} {{usuario.surname}}</td>
-                            <td>{{usuario.email}}</td>
-                            <td>{{usuario.personal.celular1}}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </mat-action-row>
 
+
+                  <mat-panel-title>
+                    <app-estudio [idUser]="solicitud.idUser"
+                      [idSolicitud]="solicitud._id"></app-estudio>
+                  </mat-panel-title>
+
+
+
+                  <form class="form cuenta" (ngSubmit)="enviarCuenta(solicitud._id)"
+                  [formGroup]="formularioCuenta" #f="ngForm" *ngIf="!solicitud.fechaConsignacion">
                   <mat-action-row>
-                    <button *ngIf="!usuario._id" class="btSelectTodo" mat-button
-                      (click)="verUsuario(solicitud)">Mostrar Usuario</button>
-                    <button *ngIf="usuario._id" class="btSelectTodo" mat-button
-                      (click)="noMostrarUsuario()">Esconder Usuario</button>
+
+                    <mat-form-field class="form-group col-md-2 pl-1">
+                      <mat-label>Fecha De Consignacion</mat-label>
+                      <input type="date" matInput formControlName="fechaConsignacion"
+                        required>
+
+                    </mat-form-field>
+
+                    <button matbutton class="btn btn-sm btn-primary" type="submit">Enviar</button>
                   </mat-action-row>
+                </form>
+
+                <mat-action-row *ngIf="solicitud.fechaConsignacion">
+                  <button (click)="facturar()" class="btn btn-sm btn-primary" >Generar Facturacion</button>
+                </mat-action-row>
 
                   <mat-action-row>
                     <!-- <button class="btSelectTodo" mat-button (click)="cambiarEstado(solicitud, 'Pendiente')">Pendiente</button> -->
@@ -181,6 +199,8 @@
                     <button class="btSelectErr" mat-button
                       (click)="cambiarEstado(solicitud, 'Rechazada')">Rechazada</button>
                     <span class="spacer"></span>
+                    <p>Fecha De Consignacion:  </p>
+                    {{solicitud.fechaConsignacion}}
                     <!-- <mat-icon color="primary" (click)="deleteRequest(solicitud._id)" arial-Label="delete_forever">delete_forever</mat-icon> -->
                   </mat-action-row>
 
@@ -193,19 +213,27 @@
     </mat-card>
 
 
-    <mat-card class="col-md-6">
+    <mat-card class="col-md-12">
 
       <div class="card">
         <div class="card-header">
           <h2 class="title">Solicitudes Rechazadas</h2>
-          <select type="text" class="form-control mb-2" placeholder="Buscar ..." #txtSearch3 (change)="searchSolicitud(txtSearch3.value, 3)">
-            <option selected disabled value="">Escoge...</option>
-
-            <option *ngFor="let producto of productos" [value]="producto._id">{{producto.name}}</option>
-
-          </select>
-          <button (click)="prevPage(3)" mat-icon-button color="primary"><i class="far fa-arrow-alt-circle-left fa-2x"></i></button>
-          <button (click)="nextPage(3)" mat-icon-button color="primary" ><i class="far fa-arrow-alt-circle-right fa-2x"></i></button>
+          <div class="form-inline">
+            <select type="text" class="form-control mb-2" placeholder="Buscar
+              ..." #txtSearch3 (change)="searchSolicitud(txtSearch3.value, 3,
+              'prod')">
+              <option selected disabled value="">Buscar por tipo de prestamo...</option>
+              <option *ngFor="let producto of productos" [value]="producto._id">{{producto.name}}</option>
+            </select>
+            <label class="ml-2 mr-2">Buscar Por Identificacion:</label>
+            <input type="number" placeholder="Digite #" class="form-control
+              mb-2" #txtSearchNum3 (keyup)="searchSolicitud(txtSearchNum3.value,
+              3, 'num')">
+          </div>
+          <button (click)="prevPage(3)" mat-icon-button color="primary"><i
+              class="far fa-arrow-alt-circle-left fa-2x"></i></button>
+          <button (click)="nextPage(3)" mat-icon-button color="primary"><i
+              class="far fa-arrow-alt-circle-right fa-2x"></i></button>
         </div>
         <!-- {{(solicitudesRechazadas | filterforamount:page3:search3).length}} -->
         <div class="card-body">
@@ -213,7 +241,9 @@
           <div class="accordion_display">
             <div class="accordion_size">
               <mat-accordion multi="true" *ngIf="solicitudes.length">
-                <mat-expansion-panel *ngFor="let solicitud of solicitudesRechazadas  | filterforamount:page3:search3"
+                <mat-expansion-panel *ngFor="let solicitud of
+                  solicitudesRechazadas |
+                  filterforamount:page3:search3:tiposearch"
                   hiddenToggle="false">
                   <mat-expansion-panel-header>
                     <mat-panel-title>
@@ -224,8 +254,7 @@
                       <span class="spacer"></span>
                       <span class="text_center"> Monto: ${{ solicitud.value |
                         number: '1.0-0' }} </span>
-                      <span class="text_center"> Plazo: {{ solicitud.time }}
-                        meses</span>
+
 
                       <span class="spacer"></span>
                       <!-- <button class="btDone" *ngIf="solicitud.estate == 'Pendiente'" mat-raised-button>{{solicitud.estate }}</button> -->
@@ -237,38 +266,14 @@
                         'Rechazada'" mat-raised-button>{{solicitud.estate }}</button>
                     </mat-panel-title>
                   </mat-expansion-panel-header>
-                  <mat-panel-description>{{ solicitud.description }}</mat-panel-description>
-                  <mat-action-row *ngIf="usuario._id">
-                    <div class="col table-responsive">
-                      <table class="table table-write table-bordered
-                        table-hover">
-                        <thead class="thead-white">
-                          <tr>
-                            <th scope="col">Nombre</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Celular</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr scope="row">
-                            <td>{{usuario.name}} {{usuario.surname}}</td>
-                            <td>{{usuario.email}}</td>
-                            <td>{{usuario.personal.celular1}}</td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </mat-action-row>
+
+
+                  <mat-panel-title>
+                    <app-estudio [idUser]="solicitud.idUser"
+                      [idSolicitud]="solicitud._id"></app-estudio>
+                  </mat-panel-title>
 
                   <mat-action-row>
-                    <button *ngIf="!usuario._id" class="btSelectTodo" mat-button
-                      (click)="verUsuario(solicitud)">Mostrar Usuario</button>
-                    <button *ngIf="usuario._id" class="btSelectTodo" mat-button
-                      (click)="noMostrarUsuario()">Esconder Usuario</button>
-                  </mat-action-row>
-
-                  <mat-action-row>
-                    <!-- <button class="btSelectTodo" mat-button (click)="cambiarEstado(solicitud, 'Pendiente')">Pendiente</button> -->
                     <button class="btSelectInProgress" mat-button
                       (click)="cambiarEstado(solicitud, 'Completo')">En Estudio</button>
                     <button class="btSelectDone" mat-button
@@ -276,7 +281,7 @@
                     <button class="btSelectErr" mat-button
                       (click)="cambiarEstado(solicitud, 'Rechazada')">Rechazada</button>
                     <span class="spacer"></span>
-                    <!-- <mat-icon color="primary" (click)="deleteRequest(solicitud._id)" arial-Label="delete_forever">delete_forever</mat-icon> -->
+
                   </mat-action-row>
 
                 </mat-expansion-panel>
@@ -289,3 +294,9 @@
 
   </div>
 </div>
+
+
+
+<!-- <h3>Formulario:</h3>
+<pre>Valid:{{formularioResultado.valid}}</pre>
+<pre>{{formularioResultado.value | json}}</pre> -->
