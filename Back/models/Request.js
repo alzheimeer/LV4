@@ -10,6 +10,14 @@ var RequestSchema = Schema({
         type: Date,
         required: false
     },
+    fechasFacturacion: {
+        type: [Date],
+        required: false
+    },
+    estadosFacturacion: {
+        type: [String],
+        required: false
+    },
     idProduct: {
         ref: "Product",
         type: Schema.Types.ObjectId,

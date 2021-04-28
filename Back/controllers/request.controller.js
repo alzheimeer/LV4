@@ -40,8 +40,8 @@ const getRequestByIdUser = async(req, res) => {
 const updateRequestById = async(req, res) => {
     try {
         console.log('params:', req.params, 'body', req.body);
-        const udRequest = await Request.findByIdAndUpdate(req.params.requestId, req.body, { new: true });
-        return res.status(200).json(udRequest);
+        const upRequest = await Request.findByIdAndUpdate(req.params.requestId, req.body, { new: true });
+        return res.status(200).json(upRequest);
     } catch (error) {
         return res.status(500).json({ msg: 'Id Del Request No Existe' });
     }

@@ -205,6 +205,43 @@
           </div>
         </div>
       </div>
+      <!-- Card Fechas De Facturacion -->
+      <div class="card" *ngIf="solicitud.fechasFacturacion.length > 1">
+        <div class="card-header" id="headingTwo">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left collapsed"
+              type="button" data-toggle="collapse" data-target="#collapseFac"
+              aria-expanded="false" aria-controls="collapseFac">
+              Fechas De Facturacion
+            </button>
+          </h2>
+        </div>
+        <div id="collapseFac" class="collapse" aria-labelledby="headingTwo"
+          data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="borderx" *ngIf="solicitud.fechasFacturacion">
+              <table class="table">
+                <thead class="thead-dark">
+                  <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Fecha</th>
+                      <th scope="col">Estado</th>
+                  </tr>
+              </thead>
+                <tbody>
+                  <tr scope="row" *ngFor="let fechax of solicitud.fechasFacturacion; index as i">
+                    <td>{{i+1}}</td>
+                    <td>{{fechax |  date:'d/M/y'}}</td>
+                    <td>{{solicitud.estadosFacturacion[i]}}</td>
+                  </tr>
+                </tbody>
+              </table>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
       <!-- Card Referencias Comerciales -->
       <div class="card" *ngIf="solicitud.regReferenciasComOk">
         <div class="card-header" id="headingThree">

@@ -11,6 +11,8 @@ import { ProductService } from '../services/product.service';
 import { RequestService } from '../services/request.service';
 import { UserService } from '../services/user.service';
 
+
+
 @Component({
   selector: 'app-solicitudes',
   templateUrl: './solicitudes.component.html',
@@ -40,7 +42,7 @@ export class SolicitudesComponent implements OnInit {
 
 
   formularioResultado: FormGroup = this.fb.group({
-    id: ['', Validators.required],
+    id: ['0', Validators.required],
     resultado: ['', Validators.required],
     calificacion: [0, Validators.required],
   });
@@ -77,7 +79,7 @@ export class SolicitudesComponent implements OnInit {
       (resp) => {
         this.productos = resp;
       });
-    console.log('Init')
+
     // this.suscription = this.requestService.refresh$.subscribe(() => {
     //   this.ngOnInit();
     // });
@@ -157,9 +159,7 @@ export class SolicitudesComponent implements OnInit {
   enviarR(solicitud: string) {
 
     this.formularioResultado.controls.id.setValue(solicitud)
-    // console.log(this.formularioResultado.value)
     if (this.formularioResultado.invalid) {
-      // tslint:disable-next-line: no-unused-expression
       this.formularioResultado.markAllAsTouched;
       Swal.fire({
         title: 'Error',
@@ -183,11 +183,10 @@ export class SolicitudesComponent implements OnInit {
       }
     );
   }
-  enviarCuenta(uid: string) {
+  enviarCuenta(solicitud: Requestx) {
+    let uid = solicitud._id;
     this.formularioCuenta.controls.id.setValue(uid)
-    // console.log(this.formularioResultado.value)
     if (this.formularioCuenta.invalid) {
-      // tslint:disable-next-line: no-unused-expression
       this.formularioCuenta.markAllAsTouched;
       Swal.fire({
         title: 'Error',
@@ -206,7 +205,10 @@ export class SolicitudesComponent implements OnInit {
         this.solicitudesAprobadas = [];
         this.solicitudesDocCom = [];
         this.solicitudesRechazadas = [];
-        this.ngOnInit();
+        // this.ngOnInit();
+        this.facturar(res);
+
+
       },
       (err) => {
         console.log(err);
@@ -215,8 +217,53 @@ export class SolicitudesComponent implements OnInit {
     );
   }
 
-  facturar() {
-    console.log('FACTURANDO');
-    alert('Facturando');
+  facturar(solicitud: Requestx) {
+    // console.log('facturar', solicitud)
+    let fecha: Date = solicitud.fechaConsignacion;
+    let plazo: number = solicitud.time
+    // console.log('FACTURANDO');
+    // alert('Facturando');
+
+    let dia: number = +((fecha.toString()).slice(8, 10));
+    dia = dia;
+    let mes: number = +(fecha.toString()).slice(5, 7);
+    mes = mes;
+    let año: number = +(fecha.toString()).slice(0, 4);
+
+    if (dia > 28) {
+      dia = 1;
+      mes = mes + 1;
+    }
+
+    // let fechaArmada: string = `${año}-${mes < 10 ? '0' + mes : mes}-${dia < 10 ? '0' + dia : dia}T00:00:00`
+    let fec = new Date(año, (mes - 1), dia, 0, 0, 0);
+    // console.log('Fecha:', fecha);
+    // console.log('Fecha Procesada', fechaArmada)
+    // console.log('Nueva Fecha Generada', fec)
+
+    let fechas = [];
+    let estados = [];
+
+    for (let i = 0; i < plazo; i++) {
+      fec.setMonth(fec.getMonth() + 1)
+      fechas.push(fec.toDateString());
+      estados.push('Pendiente');
+    }
+
+    // console.log('Array Fechas:', fechas, fechas.length)
+    // console.log('Plazo:', solicitud.time)
+    this.requestService.updateRequestsByIdfechasFacturacion(solicitud._id, fechas, estados)
+      .subscribe(() => {
+        Swal.fire({
+          title: 'OK',
+          text: 'Fechas De Facturacion Generadas',
+          icon: 'success',
+        });
+        this.ngOnInit();
+        // this.cambiarEstado(solicitud, 'Facturacion');
+      }, (error) => {
+        console.log('Error:', error)
+      })
+
   }
 }

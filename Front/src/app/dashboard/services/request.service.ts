@@ -160,10 +160,19 @@ export class RequestService {
     return this.http.put(`${url}/${id}`, body, { headers });
   }
 
-  public updateRequestsByIdFechaConsignacion(id: string, fechaConsignacion: Date) {
+  public updateRequestsByIdFechaConsignacion(id: string, fechaConsignacion: Date): Observable<Requestx> {
     const url = `${this.baseUrl}/request`;
     const body = {
       fechaConsignacion
+    };
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return this.http.put<Requestx>(`${url}/${id}`, body, { headers });
+  }
+  public updateRequestsByIdfechasFacturacion(id: string, fechasFacturacion: string[], estadosFacturacion: string[]) {
+    const url = `${this.baseUrl}/request`;
+    const body = {
+      fechasFacturacion,
+      estadosFacturacion
     };
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, body, { headers });
