@@ -11,23 +11,20 @@ import { ProductService } from '../services/product.service';
 import { RequestService } from '../services/request.service';
 import { UserService } from '../services/user.service';
 
-
-
 @Component({
-  selector: 'app-solicitudes',
-  templateUrl: './solicitudes.component.html',
-  styleUrls: ['./solicitudes.component.scss'],
+  selector: 'app-cartera',
+  templateUrl: './cartera.component.html',
+  styleUrls: ['./cartera.component.scss']
 })
+export class CarteraComponent implements OnInit {
 
-export class SolicitudesComponent implements OnInit {
   @ViewChild(MatAccordion)
   accordion!: MatAccordion;
 
   suscription!: Subscription;
   solicitudes: Requestx[] = [];
-  solicitudesDocCom: Requestx[] = [];
-  // solicitudesAprobadas: Requestx[] = [];
-  // solicitudesRechazadas: Requestx[] = [];
+  // solicitudesDocCom: Requestx[] = [];
+  solicitudesEnCobro: Requestx[] = [];
   productos: Product[] = [];
   usuario: any = [];
   page1 = 0;
@@ -56,19 +53,19 @@ export class SolicitudesComponent implements OnInit {
     private requestService: RequestService,
     private productService: ProductService,
     private userService: UserService,
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.requestService.getRequests().subscribe(
       (resp) => {
         this.solicitudes = resp;
         this.solicitudes.forEach(solicitud => {
-          if (solicitud.estate === 'Completo') {
-            this.solicitudesDocCom.push(solicitud);
-          }
-          // if (solicitud.estate === 'Aprobada') {
-          //   this.solicitudesAprobadas.push(solicitud);
+          // if (solicitud.estate === 'Completo') {
+          //   this.solicitudesDocCom.push(solicitud);
           // }
+          if (solicitud.estate === 'Facturacion') {
+            this.solicitudesEnCobro.push(solicitud);
+          }
           // if (solicitud.estate === 'Rechazada') {
           //   this.solicitudesRechazadas.push(solicitud);
           // }
@@ -92,8 +89,8 @@ export class SolicitudesComponent implements OnInit {
       (res) => {
         solicitudElegida.estate = estado;
         this.solicitudes = [];
-        // this.solicitudesAprobadas = [];
-        this.solicitudesDocCom = [];
+        this.solicitudesEnCobro = [];
+        // this.solicitudesDocCom = [];
         // this.solicitudesRechazadas = [];
         this.ngOnInit();
       },
@@ -176,8 +173,8 @@ export class SolicitudesComponent implements OnInit {
     this.requestService.updateRequestsByIdResultadoCalificacion(id, resultado, calificacion).subscribe(
       () => {
         this.solicitudes = [];
-        // this.solicitudesAprobadas = [];
-        this.solicitudesDocCom = [];
+        this.solicitudesEnCobro = [];
+        // this.solicitudesDocCom = [];
         // this.solicitudesRechazadas = [];
         this.ngOnInit();
       }
@@ -202,8 +199,8 @@ export class SolicitudesComponent implements OnInit {
     this.requestService.updateRequestsByIdFechaConsignacion(id, fechaConsignacion).subscribe(
       (res) => {
         this.solicitudes = [];
-        // this.solicitudesAprobadas = [];
-        this.solicitudesDocCom = [];
+        this.solicitudesEnCobro = [];
+        // this.solicitudesDocCom = [];
         // this.solicitudesRechazadas = [];
         // this.ngOnInit();
         this.facturar(res);

@@ -1,0 +1,134 @@
+<div class="panel-header">
+  <div class="header text-center">
+    <h2 class="title">CARTERA</h2>
+  </div>
+</div>
+
+<div class="main-content">
+  <div class="row">
+
+    <mat-card class="col-md-12">
+
+      <div class="card">
+        <div class="card-header">
+          <h2 class="title">Prestamos A Cobrar</h2>
+          <div class="form-inline">
+            <select type="text" class="form-control mb-2" placeholder="Buscar
+              ..." #txtSearch2 (change)="searchSolicitud(txtSearch2.value, 2,
+              'prod')">
+              <option selected disabled value="">Buscar por tipo de prestamo...</option>
+              <option *ngFor="let producto of productos" [value]="producto._id">{{producto.name}}</option>
+            </select>
+            <label class="ml-2 mr-2">Buscar Por Identificacion:</label>
+            <input type="number" placeholder="Digite #" class="form-control
+              mb-2" #txtSearchNum2 (keyup)="searchSolicitud(txtSearchNum2.value,
+              2, 'num')">
+          </div>
+          <button (click)="prevPage(2)" mat-icon-button color="primary"><i
+              class="far fa-arrow-alt-circle-left fa-2x"></i></button>
+          <button (click)="nextPage(2)" mat-icon-button color="primary"><i
+              class="far fa-arrow-alt-circle-right fa-2x"></i></button>
+        </div>
+
+        <div class="card-body">
+
+          <div class="accordion_display">
+            <div class="accordion_size">
+              <mat-accordion multi="true" *ngIf="solicitudes.length">
+                <mat-expansion-panel *ngFor="let solicitud of
+                solicitudesEnCobro |
+                  filterforamount:page2:search2:tiposearch"
+                  hiddenToggle="false">
+                  <mat-expansion-panel-header class="mb-2">
+                    <mat-panel-title >
+
+
+                        <div class="col-12 col-sm-4 col-md-4  col-lg-4 col-xl-4" >
+                          <span class="text_center"> Monto: ${{ solicitud.value |
+                            number: '1.0-0' }} </span>
+                        </div>
+                        <div class="col-12 col-sm-5 col-md-6  col-lg-6 col-xl-6">
+                          <span class="text_center" *ngFor="let producto of
+                          productos | searchnameproduct: solicitud.idProduct"> {{
+                          producto.name }}</span>
+                        <span class="spacer"></span>
+                        </div>
+                        <div class="col-12 col-sm-3 col-md-2  col-lg-2 col-xl-2">
+                          <span class="spacer"></span>
+                          <button class="btInProgress" *ngIf="solicitud.estate ==
+                            'Completo'" mat-raised-button>En Estudio</button>
+                          <button class="btInProgress" *ngIf="solicitud.estate ==
+                            'Facturacion'" mat-raised-button>En Facturacion</button>
+                          <button class="btToDo" *ngIf="solicitud.estate ==
+                            'Aprobada'" mat-raised-button>{{solicitud.estate }}</button>
+                          <button class="btErr" *ngIf="solicitud.estate ==
+                            'Rechazada'" mat-raised-button>{{solicitud.estate }}</button>
+                        </div>
+
+
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+
+
+                  <mat-panel-title>
+                    <app-estudio [idUser]="solicitud.idUser"
+                      [idSolicitud]="solicitud._id"></app-estudio>
+                  </mat-panel-title>
+
+
+
+                <form class="form" (ngSubmit)="enviarCuenta(solicitud)" [formGroup]="formularioCuenta" #f="ngForm" *ngIf="!solicitud.fechaConsignacion">
+                  <mat-action-row class="cuenta row">
+                    <p class="mr-md-5 col-md-6">Nota: Los Dias 29 al 31 Del Mes Se Facturaran Desde El 1 Del Siguiente Mes</p>
+                    <mat-form-field class="form-group col-md-4 mr-md-5">
+                      <mat-label>Fecha De Consignacion</mat-label>
+                      <input type="date" matInput formControlName="fechaConsignacion" required>
+                   </mat-form-field>
+
+                    <button matbutton class="btn  btn-cuenta" type="submit" >Enviar</button>
+                  </mat-action-row>
+                </form>
+
+                <!-- <mat-action-row class="col-md-2" *ngIf="solicitud.fechaConsignacion">
+                  <button (click)="facturar(solicitud)" class="btn btn-sm btn-primary" >Generar Facturacion</button>
+                </mat-action-row> -->
+
+
+                    <div class="row">
+                      <div class="col-md-2">
+                        <button class="btSelectInProgress btn-block" mat-button (click)="cambiarEstado(solicitud, 'Completo')">En Estudio</button>
+                      </div>
+                      <div class="col-md-2">
+                        <button class="btSelectDone btn-block" mat-button (click)="cambiarEstado(solicitud, 'Aprobada')">Aprobada</button>
+                      </div>
+                      <!-- <div class="col-md-2">
+                        <button class="btSelectErr btn-block" mat-button (click)="cambiarEstado(solicitud, 'Mora')">Mora</button>
+                      </div> -->
+                      <div class="col-md-6" *ngIf="solicitud.fechaConsignacion">
+                        <p class="mt-2">Fecha De Consignacion:
+                        {{ solicitud.fechaConsignacion | date:'d/M/y'}} </p>
+                      </div>
+                      <div class="col-md-6" *ngIf="!solicitud.fechaConsignacion">
+                        <p class="mt-2">Aun Sin Fecha De Consignacion!!!</p>
+
+                      </div>
+                    </div>
+
+
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+
+
+  </div>
+</div>
+
+
+<!-- <h3>Formulario:</h3>
+<pre>Valid:{{formularioResultado.valid}}</pre>
+<pre>{{formularioResultado.value | json}}</pre> -->

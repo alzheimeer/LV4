@@ -7,41 +7,41 @@
 <div class="main-content">
   <div class="row">
 
-    <mat-card class="col-md-12">
+   <mat-card class="col-md-12">
+
       <div class="card">
         <div class="card-header">
-          <h2 class="title">Solicitudes Para Estudio </h2>
-
+          <h2 class="title">Solicitudes Rechazadas</h2>
           <div class="form-inline">
-            <select type="text" class="form-control mb-2" #txtSearch1
-              (change)="searchSolicitud(txtSearch1.value, 1, 'prod')">
+            <select type="text" class="form-control mb-2" placeholder="Buscar
+              ..." #txtSearch3 (change)="searchSolicitud(txtSearch3.value, 3,
+              'prod')">
               <option selected disabled value="">Buscar por tipo de prestamo...</option>
               <option *ngFor="let producto of productos" [value]="producto._id">{{producto.name}}</option>
             </select>
             <label class="ml-2 mr-2">Buscar Por Identificacion:</label>
-            <input type="number" placeholder="Digita #" class="form-control
-              mb-2" #txtSearchNum1 (keyup)="searchSolicitud(txtSearchNum1.value,
-              1, 'num')">
+            <input type="number" placeholder="Digite #" class="form-control
+              mb-2" #txtSearchNum3 (keyup)="searchSolicitud(txtSearchNum3.value,
+              3, 'num')">
           </div>
-          <button (click)="prevPage(1)" mat-icon-button color="primary"><i
+          <button (click)="prevPage(3)" mat-icon-button color="primary"><i
               class="far fa-arrow-alt-circle-left fa-2x"></i></button>
-          <button (click)="nextPage(1)" mat-icon-button color="primary"><i
+          <button (click)="nextPage(3)" mat-icon-button color="primary"><i
               class="far fa-arrow-alt-circle-right fa-2x"></i></button>
         </div>
-
+        <!-- {{(solicitudesRechazadas | filterforamount:page3:search3).length}} -->
         <div class="card-body">
-          <div class="example-action-buttons mb-2">
-            <button mat-button (click)="accordion.openAll()">Expandir Todos</button>
-            <button mat-button (click)="accordion.closeAll()">Contraer Todos</button>
-          </div>
+
           <div class="accordion_display">
             <div class="accordion_size">
               <mat-accordion multi="true" *ngIf="solicitudes.length">
-                <mat-expansion-panel *ngFor="let solicitud of solicitudesDocCom
-                  | filterforamount:page1:search1:tiposearch ; index as i"
+                <mat-expansion-panel *ngFor="let solicitud of
+                  solicitudesRechazadas |
+                  filterforamount:page3:search3:tiposearch"
                   hiddenToggle="false">
                   <mat-expansion-panel-header>
                     <mat-panel-title>
+
                       <div class="col-12 col-sm-4 col-md-4  col-lg-4 col-xl-4" >
                         <span class="text_center"> Monto: ${{ solicitud.value |
                           number: '1.0-0' }} </span>
@@ -63,9 +63,10 @@
                         <button class="btErr" *ngIf="solicitud.estate ==
                           'Rechazada'" mat-raised-button>{{solicitud.estate }}</button>
                       </div>
+
+
                     </mat-panel-title>
                   </mat-expansion-panel-header>
-
 
 
                   <mat-panel-title>
@@ -74,46 +75,19 @@
                   </mat-panel-title>
 
 
-
-                  <form class="form" (ngSubmit)="enviarR(solicitud._id)" [formGroup]="formularioResultado" #f1="ngForm">
-                      <div class="row resultados">
-
-                        <div class="col-md-5 mt-2">
-                          <div  class="form-group  pt-1">
-                            <mat-label>Resultados:</mat-label>
-                            <textarea  class="textA" matInput formControlName="resultado"
-                              placeholder="Escriba los resultados del estudio y una
-                              calificacion" required>
-                            </textarea>
-                          </div>
-                        </div>
-
-                        <div class="col-md-3 mt-2">
-                          <mat-label>Calificacion:</mat-label>
-                          <div  class="form-group pt-1">
-                            <mat-select class="calificacion" formControlName="calificacion" required>
-                              <mat-option *ngFor="let item of [].constructor(11);let
-                                i= index" [value]="i">{{i}}</mat-option>
-                            </mat-select>
-
-                          </div>
-                        </div>
-
-                        <div class="col-md-4 mt-3">
-
-                            <div class="row">
-                              <div class="col-12 col-sm-12 col-md-6 p-2">
-                                <button type="submit" class="btSelectDone btn-block " mat-button [disabled]="!formularioResultado.valid" (click)="cambiarEstado(solicitud, 'Aprobada')">Aprobada</button>
-                              </div>
-                              <div class="col-12 col-sm-12 col-md-6 p-2">
-                                <button type="submit" class="btSelectErr btn-block" mat-button [disabled]="!formularioResultado.valid" (click)="cambiarEstado(solicitud, 'Rechazada')">Rechazada</button>
-                              </div>
-                            </div>
-
-                        </div>
-
+                    <div class="row mt-3">
+                      <div class="col-md-6">
+                        <button class="btSelectInProgress btn-block" mat-button (click)="cambiarEstado(solicitud, 'Completo')">En Estudio</button>
                       </div>
-                  </form>
+                      <div class="col-md-6">
+                        <button class="btSelectDone btn-block" mat-button (click)="cambiarEstado(solicitud, 'Aprobada')">Aprobada</button>
+                      </div>
+                      <!-- <div class="col-md-4">
+                        <button class="btSelectErr" mat-button (click)="cambiarEstado(solicitud, 'Rechazada')">Rechazada</button>
+                      </div> -->
+                    <span class="spacer"></span>
+                    </div>
+
 
 
                 </mat-expansion-panel>

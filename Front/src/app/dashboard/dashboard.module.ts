@@ -24,6 +24,9 @@ import { ProductoComponent } from './producto/producto.component';
 import { SolicitudComponent } from './solicitud/solicitud.component';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
+import { AprobadosComponent } from './aprobados/aprobados.component';
+import { RechazadosComponent } from './rechazados/rechazados.component';
+import { CarteraComponent } from './cartera/cartera.component';
 
 
 
@@ -48,6 +51,9 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     DatosreferenciacomComponent,
     FilterforamountPipe,
     EstudioComponent,
+    AprobadosComponent,
+    RechazadosComponent,
+    CarteraComponent,
   ],
   imports: [
     CommonModule,

@@ -48,7 +48,19 @@
                     </mat-list-item>
                     <mat-list-item *ngIf="role === 'moderator' || role === 'admin'" routerLinkActive="active" routerLink="/dashboard/solicitudes" class="x aa">
                         <mat-icon mat-list-icon>space_dashboard</mat-icon>
-                        <p mat-line> Solicitudes </p>
+                        <p mat-line> Para Estudio </p>
+                    </mat-list-item>
+                    <mat-list-item *ngIf="role === 'moderator' || role === 'admin'" routerLinkActive="active" routerLink="/dashboard/aprobados" class="x aa">
+                        <mat-icon mat-list-icon>space_dashboard</mat-icon>
+                        <p mat-line> Aprobados </p>
+                    </mat-list-item>
+                    <mat-list-item *ngIf="role === 'moderator' || role === 'admin'" routerLinkActive="active" routerLink="/dashboard/rechazados" class="x aa">
+                        <mat-icon mat-list-icon>space_dashboard</mat-icon>
+                        <p mat-line> Rechazados </p>
+                    </mat-list-item>
+                    <mat-list-item *ngIf="role === 'moderator' || role === 'admin'" routerLinkActive="active" routerLink="/dashboard/cartera" class="x aa">
+                        <mat-icon mat-list-icon>space_dashboard</mat-icon>
+                        <p mat-line> Cartera </p>
                     </mat-list-item>
                     <mat-list-item *ngIf="role === 'admin'" routerLinkActive="active" routerLink="/dashboard/productos" class="x aa">
                         <mat-icon mat-list-icon>space_dashboard</mat-icon>
