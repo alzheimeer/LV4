@@ -25,7 +25,7 @@ export class DatosvehiculoComponent implements OnInit {
     placa: ['', [Validators.required, Validators.minLength(6)]],
     modelo: ['', [Validators.required, Validators.max(3000)]],
     tipoCaja: ['', [Validators.required]],
-    linea: ['', [Validators.required, Validators.minLength(5)]],
+    linea: ['', [Validators.required, Validators.minLength(2)]],
     marca: ['', [Validators.required, Validators.minLength(5)]],
     kilometraje: ['', [Validators.required]],
     tipoPlaca: ['', [Validators.required, Validators.minLength(3)]],

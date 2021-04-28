@@ -228,11 +228,11 @@ export class DatospersonalesComponent implements OnInit {
           (resp) => {
             Swal.fire({
               title: 'OK',
-              text: 'Datos De Inmueble Enviados',
+              text: 'Datos Enviados',
               icon: 'success',
             });
-            this.router.navigateByUrl('/dashboard/misolicitud');
             this.requestService.updateRequestsByIdNumdoc(this.usuarioauth.solicitud as string, numdoc as string).subscribe(x => console.log('ok'));
+            this.router.navigateByUrl('/dashboard/misolicitud');
           },
           (err) => {
             Swal.fire({
