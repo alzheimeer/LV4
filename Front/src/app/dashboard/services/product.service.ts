@@ -1,6 +1,7 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 import { environment } from '../../../environments/environment';
 import { Product } from './../../models/product.models';
 
@@ -35,7 +36,8 @@ export class ProductService {
 
   public updateProductsById( producto: Product ){
     const url = `${this.baseUrl}/products`;
-    return this.http.put(`${ url }/${ producto._id }`, producto);
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return this.http.put(`${url}/${producto._id}`, producto, { headers });
   }
 
   public deleteProductById( id: any ){

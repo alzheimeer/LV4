@@ -19,35 +19,180 @@
                                 <!-- <caption>List of users</caption> -->
                                 <thead class="thead-dark">
                                     <tr>
-                                        <th scope="col">#</th>
+                                        <th scope="col">Editar</th>
                                         <!-- <th scope="col">id Producto</th> -->
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Valor Minimo</th>
                                         <th scope="col">Valor Maximo</th>
-                                        <th scope="col">Interes Minimo</th>
-                                        <th scope="col">Interes Maximo</th>
-                                        <th scope="col">Termino Minimo</th>
-                                        <th scope="col">Termino Maximo</th>
-                                        <th scope="col">Fecha Creacion</th>
-                                        <th scope="col">Fecha Actualizacion</th>
+                                        <th scope="col">%Interes Mes Vencido</th>
+                                        <th scope="col">%Interes EA Maximo</th>
+                                        <th scope="col">Plazo Minimo "Meses"</th>
+                                        <th scope="col">Plazo Maximo "Meses"</th>
+
+                                        <th scope="col">Costo Admin</th>
+                                        <th scope="col">%Iva Admin</th>
+                                        <!-- SOLO PRESTAMO PERSONAL -->
+                                        <th scope="col">%Aval</th>
+                                        <!-- SOLO PRESTAMO SOBRE HIPOTECA -->
+                                        <th scope="col">Comision Admin Hipoteca</th>
+                                        <th scope="col">Excedente Admin Hipoteca > 50M</th>
+                                        <th scope="col">Valor Registro Hipoteca</th>
+                                        <th scope="col">%Intereses Anticipados Hipoteca</th>
+                                        <!-- PRESTAMO SOBRE VEHICULO -->
+                                        <th scope="col">Parqueadero</th>
+                                        <th scope="col">Peritaje</th>
+                                        <th scope="col">Registro Simit</th>
+                                        <th scope="col">GMF 4xMil</th>
+
+                                        <th scope="col">Editar</th>
+                                        <!-- <th *ngIf="!element" scope="col">Fecha Creacion</th>
+                                        <th *ngIf="!element" scope="col">Fecha Actualizacion</th> -->
 
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <tr scope="row" *ngFor="let producto of productos; index as i">
-                                        <td><button [routerLink]="['/dashboard/solicitud']" type="button">{{i+1}}</button></td>
+                                        <td (click)="element = !element"><span class="material-icons">edit</span></td>
+                                        <!-- <td><button [routerLink]="['/dashboard/solicitud']" type="button">{{i+1}}</button></td> -->
                                         <!-- <td>{{producto._id}}</td> -->
-                                        <td>{{producto.name}}</td>
-                                        <td>{{producto.valuemin | currency}}</td>
-                                        <td>{{producto.valuemax | currency}}</td>
-                                        <td>{{producto.imin}}%</td>
-                                        <td>{{producto.imax}}%</td>
-                                        <td>{{producto.termmin}} meses</td>
-                                        <td>{{producto.termmax}} meses</td>
-                                        <td>{{producto.createdAt | date}}</td>
-                                        <td>{{producto.updatedAt | date}}</td>
+                                        <td  *ngIf="!element">{{producto.name}}</td>
+                                        <td  *ngIf="!element">${{producto.valuemin | number:'1.0-0'}}</td>
+                                        <td  *ngIf="!element">${{producto.valuemax | number:'1.0-0'}}</td>
+                                        <td  *ngIf="!element">{{producto.iMesVencido}}%</td>
+                                        <td  *ngIf="!element">{{producto.iEfectivoAnualMax}}%</td>
+                                        <td  *ngIf="!element">{{producto.termmin}} meses</td>
+                                        <td  *ngIf="!element">{{producto.termmax}} meses</td>
+
+                                        <td  *ngIf="!element">${{producto.administracion}} </td>
+                                        <td  *ngIf="!element">{{producto.iva}} %</td>
+
+                                        <td  *ngIf="!element">{{producto.aval}} %</td>
+
+                                        <td  *ngIf="!element">${{producto.comisionAdminHipo}} </td>
+                                        <td  *ngIf="!element">${{producto.excedenteComisionAdminHipo}} meses</td>
+                                        <td  *ngIf="!element">${{producto.registroHipoteca}}</td>
+                                        <td  *ngIf="!element">{{producto.interesesAnticipados}} %</td>
+
+                                        <td  *ngIf="!element">${{producto.parqueadero}}</td>
+                                        <td  *ngIf="!element">${{producto.peritaje}}</td>
+                                        <td  *ngIf="!element">${{producto.registroSimit}}</td>
+                                        <td  *ngIf="!element">${{producto.gmfCuatroxMil}}</td>
 
 
+
+                                        <!-- <td  *ngIf="!element">{{producto.createdAt | date:'d/M/y'}}</td>
+                                        <td  *ngIf="!element">{{producto.updatedAt | date:'d/M/y'}}</td> -->
+
+                                        <!-- campo de nombre del producto -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input  #name (change)="save(producto, name.value, 'name')" (keyup)="save(producto, name.value, 'name')" matInput value={{producto.name}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo de valor minimo -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #valuemin (change)="save(producto, valuemin.value, 'valuemin')" (keyup)="save(producto, valuemin.value, 'valuemin')" matInput value={{producto.valuemin}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo de valor maximo -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #valuemax (change)="save(producto, valuemax.value, 'valuemax')" (keyup)="save(producto, valuemax.value, 'valuemax')" matInput value={{producto.valuemax}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo de interes Mes Vencido -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input step="0.01" type="number" #iMesVencido (change)="save(producto, iMesVencido.value, 'iMesVencido')" (keyup)="save(producto, iMesVencido.value, 'iMesVencido')" matInput value={{producto.iMesVencido}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo de interes maximo EA-->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input step="0.01" type="number" #iEfectivoAnualMax (change)="save(producto, iEfectivoAnualMax.value, 'iEfectivoAnualMax')" (keyup)="save(producto, iEfectivoAnualMax.value, 'iEfectivoAnualMax')" matInput value={{producto.iEfectivoAnualMax}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo de plazo minimo -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #termmin (change)="save(producto, termmin.value, 'termmin')" (keyup)="save(producto, termmin.value, 'termmin')" matInput value={{producto.termmin}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo de plazo maximo -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #termmax (change)="save(producto, termmax.value, 'termmax')" (keyup)="save(producto, termmax.value, 'termmax')" matInput value={{producto.termmax}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo valor administracion -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #administracion (change)="save(producto, administracion.value, 'administracion')" (keyup)="save(producto, administracion.value, 'administracion')" matInput value={{producto.administracion}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo valor IVA -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #iva (change)="save(producto, iva.value, 'iva')" (keyup)="save(producto, iva.value, 'iva')" matInput value={{producto.iva}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo valor Aval -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #aval (change)="save(producto, aval.value, 'aval')" (keyup)="save(producto, aval.value, 'aval')" matInput value={{producto.aval}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo Comision Admin Hipotecas -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #comisionAdminHipo (change)="save(producto, comisionAdminHipo.value, 'comisionAdminHipo')" (keyup)="save(producto, comisionAdminHipo.value, 'comisionAdminHipo')" matInput value={{producto.comisionAdminHipo}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo Excedente Comision Admin Hipotecas -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #excedenteComisionAdminHipo (change)="save(producto, excedenteComisionAdminHipo.value, 'excedenteComisionAdminHipo')" (keyup)="save(producto, excedenteComisionAdminHipo.value, 'excedenteComisionAdminHipo')" matInput value={{producto.excedenteComisionAdminHipo}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo Valor Reistro Hipoteca -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #registroHipoteca (change)="save(producto, registroHipoteca.value, 'registroHipoteca')" (keyup)="save(producto, registroHipoteca.value, 'registroHipoteca')" matInput value={{producto.registroHipoteca}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo % interesesAnticipados -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #interesesAnticipados (change)="save(producto, interesesAnticipados.value, 'interesesAnticipados')" (keyup)="save(producto, interesesAnticipados.value, 'interesesAnticipados')" matInput value={{producto.interesesAnticipados}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo cvalor Parqueadero -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #parqueadero (change)="save(producto, parqueadero.value, 'parqueadero')" (keyup)="save(producto, parqueadero.value, 'parqueadero')" matInput value={{producto.parqueadero}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo valor Peritaje -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #peritaje (change)="save(producto, peritaje.value, 'peritaje')" (keyup)="save(producto, peritaje.value, 'peritaje')" matInput value={{producto.peritaje}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo valor registroSimit -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #registroSimit (change)="save(producto, registroSimit.value, 'registroSimit')" (keyup)="save(producto, registroSimit.value, 'registroSimit')" matInput value={{producto.registroSimit}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo valor GMF -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #gmfCuatroxMil (change)="save(producto, gmfCuatroxMil.value, 'gmfCuatroxMil')" (keyup)="save(producto, gmfCuatroxMil.value, 'gmfCuatroxMil')" matInput value={{producto.gmfCuatroxMil}}>
+                                        </mat-form-field>
+                                        </td>
+
+                                        <td (click)="element = !element"><span class="material-icons">edit</span></td>
                                     </tr>
                                 </tbody>
                             </table>

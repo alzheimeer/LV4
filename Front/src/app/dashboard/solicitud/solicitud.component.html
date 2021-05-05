@@ -39,17 +39,23 @@
                       </mat-form-field>
                     </mat-grid-tile>
                   </mat-grid-list>
-                  <mat-grid-list *ngIf="valor" cols="1" rowHeight="120px">
+
+
+
+
+                  <mat-grid-list *ngIf="valorSolicitado" cols="1" rowHeight="120px">
                     <mat-grid-tile>
                       <div>
+                        <!-- <h4 class="">Prestamos Hasta el 50% Del Avaluo Del Vehiculo?</h4> -->
                         <h4 class="">Cuanto Dinero Necesitas?</h4>
+
                         <!-- <input  formControlName="value" matInput placeholder="" required /> -->
                         <mat-slider formControlName="value" class="min"
                           thumbLabel step="50000" [min]=valuemin [max]=valuemax
-                          name="valor">
+                          name="valorSolicitado">
                         </mat-slider>
                         <p>
-                          <span *ngIf="valor> 1" class="">$ {{ valor | number:
+                          <span *ngIf="valorSolicitado> 1" class="">$ {{ valorSolicitado | number:
                             "1.0-0" }} pesos</span>
                         </p>
                       </div>
@@ -58,13 +64,13 @@
                       <div>
                         <h4 class="">Que Plazo Deseas?</h4>
                         <!-- <input formControlName="time" type="number" matInput placeholder="" required /> -->
-                        <mat-slider formControlName="time" name="meses"
+                        <mat-slider formControlName="time" name="plazo"
                           class="max" thumbLabel tickInterval="1" [min]=termmin
                           [max]=termmax>
                         </mat-slider>
                         <p>
-                          <span *ngIf="meses> 1" class="">{{ meses }} meses</span>
-                          <span *ngIf="meses <= 1" class="">{{ meses }} mes</span>
+                          <span *ngIf="plazo> 1" class="">{{ plazo }} meses</span>
+                          <span *ngIf="plazo <= 1" class="">{{ plazo }} mes</span>
                         </p>
                       </div>
                     </mat-grid-tile>
@@ -79,7 +85,7 @@
                 </div>
               </mat-card-content>
               <mat-card-actions>
-                <button type="submit" class="button col">
+                <button type="submit" class="button col" [disabled]="formularioSolicitud.invalid">
                   Empezar La Solicitud
                 </button>
               </mat-card-actions>
@@ -96,12 +102,12 @@
       </mat-card-header> -->
       <div mat-card-avatar class="example-header-image"></div>
       <!-- <mat-card-title>Calculadora: </mat-card-title> -->
-      <mat-card-subtitle>Intereses: $ {{ interes | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle>Intereses: $ {{ iMesVencido | number: "1.0-0" }}</mat-card-subtitle>
       <mat-card-subtitle>Iva: $ {{ iva | number: "1.0-0" }}</mat-card-subtitle>
       <mat-card-subtitle>Aval: $ {{ aval | number: "1.0-0" }}</mat-card-subtitle>
-      <mat-card-subtitle>Tecno: $ {{ tecno | number: "1.0-0" }}</mat-card-subtitle>
-      <mat-card-title>Total Prestamo: $ {{ total | number: "1.0-0" }}</mat-card-title>
-      <mat-card-title>Valor Cuota Mensual: {{ emi | number: "1.0-0" }}</mat-card-title>
+      <mat-card-subtitle>administracion: $ {{ administracion | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-title>Valor Cuota Prestamo: $ {{ valorCuotaTotal | number: "1.0-0" }}</mat-card-title>
+      <!-- <mat-card-title>Valor Cuota Mensual: {{ emi | number: "1.0-0" }}</mat-card-title> -->
       <mat-card-content>
         <!-- <mat-card-title>Requisitos: </mat-card-title>
         <mat-card-subtitle>Datos Personales</mat-card-subtitle>
@@ -120,12 +126,16 @@
   </div>
 </div>
 
-<!--
-<h3>Formulario:</h3>
+
+<!-- <h3>Formulario:</h3>
 <pre>Valid:{{formularioSolicitud.valid}}</pre>
-<pre>{{tasa}}</pre>
-<pre>{{formularioSolicitud.value | json}}</pre>
-<pre>{{producto.regInmueble}}</pre>
+
+<pre>{{iMesVencido}}</pre>
+<pre>{{valorSolicitado}}</pre>
+
+<pre>{{formularioSolicitud.value | json}}</pre> -->
+
+<!-- <pre>{{producto.regInmueble}}</pre>
 <pre>{{producto.regPersonales}}</pre>
 <pre>{{producto.regVehiculo}}</pre>
 <pre>{{producto.regTrabajo}}</pre>

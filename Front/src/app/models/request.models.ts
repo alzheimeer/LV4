@@ -47,6 +47,9 @@ export interface Requestx {
   resultado: string;
   calificacion: number;
   fechaConsignacion: Date;
+  valorDeConsignacion: number;
+  valorCuotaBase: number;
+  valorCuotaTotal: number;
   fechasFacturacion: [Date];
   estadosFacturacion: [string];
   estate: string;
@@ -182,6 +185,9 @@ export class RequestIni implements Requestx {
   resultado: string;
   calificacion: number;
   fechaConsignacion: Date;
+  valorDeConsignacion: number;
+  valorCuotaBase: number;
+  valorCuotaTotal: number;
   fechasFacturacion: [Date];
   estadosFacturacion: [string];
   estate: string;
@@ -252,6 +258,9 @@ export class RequestIni implements Requestx {
       this.calificacion = 0,
       this.updatedAt = new Date(),
       this.fechaConsignacion = new Date(),
+      this.valorDeConsignacion = 0,
+      this.valorCuotaBase = 0,
+      this.valorCuotaTotal = 0,
       this.fechasFacturacion = [new Date()],
       this.estadosFacturacion = [''],
       this.createdAt = new Date(),

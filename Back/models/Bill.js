@@ -5,9 +5,17 @@ var BillSchema = Schema({
         type: String,
         required: true
     },
-    datepay: {
-        type: Date,
+    idProducto: {
+        type: String,
         required: true
+    },
+    value: {
+        type: Number,
+        required: true,
+    },
+    plazo: {
+        type: Number,
+        required: true,
     },
     numcuota: {
         type: Number,

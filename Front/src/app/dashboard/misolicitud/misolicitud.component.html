@@ -29,7 +29,7 @@
             <p>Estado</p>
             <button class="btDone" *ngIf="request.estate == 'Pendiente'"
               mat-raised-button>{{request.estate }}</button>
-            <button class="btInProgress" *ngIf="request.estate == 'Asignada'"
+            <button class="btInProgress" *ngIf="request.estate == 'Facturacion'"
               mat-raised-button>{{request.estate }}</button>
             <button class="btToDo" *ngIf="request.estate == 'Aprobada'"
               mat-raised-button>{{request.estate }}</button>
@@ -44,6 +44,22 @@
               <p>Apenas Tengamos Respuesta Te Enviaremos Un Email Con La Respuesta A Tu Solicitud</p>
             </div>
 
+            <div *ngIf="request.estate == 'Aprobada'">
+              <p>Felicidades Tu Solicitud A Sido Aprobada</p>
+              <p>Te Consignaremos En Tu Cuenta Lo Antes Posible</p>
+            </div>
+
+            <div *ngIf="request.estate == 'Facturacion'">
+              <p>Ya Consignamos El Dinero En Tu Cuenta El Dia: {{requests[0].fechaConsignacion | date: 'dd' }} de {{requests[0].fechaConsignacion | date: 'MM/yyyy' }}</p>
+              <p>Aca Puedes Consultar El Estado De Tu Prestamo</p>
+              <p>Y 10 Dias Antes De Cada Fecha De Pago Encontraras</p>
+              <p>El Recibo Mensual De Tu Cuota.</p>
+              <!-- <p *ngFor="let fechax of requests[0].fechasFacturacion">
+                <span *ngIf="fechax > dateToday">{{fechax | date:"dd/MM/yyyy"}}</span>
+                <span>Hoy:{{dateToday}}</span>
+                <span>Fecha:{{fechax}}</span>
+              </p> -->
+            </div>
 
 
             <div *ngIf="!regAllOk">

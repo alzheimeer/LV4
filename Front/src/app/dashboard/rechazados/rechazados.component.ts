@@ -197,31 +197,9 @@ export class RechazadosComponent implements OnInit {
       id,
       fechaConsignacion
     } = this.formularioCuenta.value;
-    this.requestService.updateRequestsByIdFechaConsignacion(id, fechaConsignacion).subscribe(
-      (res) => {
-        this.solicitudes = [];
-        // this.solicitudesAprobadas = [];
-        // this.solicitudesDocCom = [];
-        this.solicitudesRechazadas = [];
-        // this.ngOnInit();
-        this.facturar(res);
 
-
-      },
-      (err) => {
-        console.log(err);
-
-      }
-    );
-  }
-
-  facturar(solicitud: Requestx) {
-    // console.log('facturar', solicitud)
-    let fecha: Date = solicitud.fechaConsignacion;
+    let fecha: Date = fechaConsignacion;
     let plazo: number = solicitud.time
-    // console.log('FACTURANDO');
-    // alert('Facturando');
-
     let dia: number = +((fecha.toString()).slice(8, 10));
     dia = dia;
     let mes: number = +(fecha.toString()).slice(5, 7);
@@ -232,13 +210,7 @@ export class RechazadosComponent implements OnInit {
       dia = 1;
       mes = mes + 1;
     }
-
-    // let fechaArmada: string = `${año}-${mes < 10 ? '0' + mes : mes}-${dia < 10 ? '0' + dia : dia}T00:00:00`
     let fec = new Date(año, (mes - 1), dia, 0, 0, 0);
-    // console.log('Fecha:', fecha);
-    // console.log('Fecha Procesada', fechaArmada)
-    // console.log('Nueva Fecha Generada', fec)
-
     let fechas = [];
     let estados = [];
 
@@ -248,20 +220,29 @@ export class RechazadosComponent implements OnInit {
       estados.push('Pendiente');
     }
 
-    // console.log('Array Fechas:', fechas, fechas.length)
-    // console.log('Plazo:', solicitud.time)
-    this.requestService.updateRequestsByIdfechasFacturacion(solicitud._id, fechas, estados)
-      .subscribe(() => {
-        Swal.fire({
-          title: 'OK',
-          text: 'Fechas De Facturacion Generadas',
-          icon: 'success',
-        });
-        this.ngOnInit();
-        // this.cambiarEstado(solicitud, 'Facturacion');
-      }, (error) => {
-        console.log('Error:', error)
-      })
 
+    this.requestService.updateRequestsByIdFechaConsignacion(id, fechaConsignacion, fechas, estados).subscribe(
+      (rta) => {
+        this.solicitudes = [];
+        // this.solicitudesAprobadas = [];
+        // this.facturar(res);
+        if (rta.fechasFacturacion.length >= 1) {
+          Swal.fire({
+            title: 'OK',
+            text: 'Fechas De Facturacion Generadas',
+            icon: 'success',
+          });
+          this.cambiarEstado(rta, 'Facturacion');
+          this.ngOnInit();
+        } else {
+          alert('Fallo Grabando Fechas');
+        }
+
+      },
+      (err) => {
+        console.log(err);
+
+      }
+    );
   }
 }

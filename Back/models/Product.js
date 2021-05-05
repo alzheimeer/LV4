@@ -13,6 +13,14 @@ var ProductSchema = Schema({
         type: Number,
         required: true,
     },
+    iMesVencido: {
+        type: Number,
+        required: false,
+    },
+    iEfectivoAnualMax: {
+        type: Number,
+        required: false,
+    },
     imin: {
         type: Number,
         required: true,
@@ -88,6 +96,51 @@ var ProductSchema = Schema({
         required: false,
         default: false
     },
+    administracion: {
+        type: Number,
+        required: false,
+    },
+    iva: {
+        type: Number,
+        required: false,
+    },
+    aval: {
+        type: Number,
+        required: false,
+    },
+    parqueadero: {
+        type: Number,
+        required: false,
+    },
+    peritaje: {
+        type: Number,
+        required: false,
+    },
+    registroSimit: {
+        type: Number,
+        required: false,
+    },
+    gmfCuatroxMil: {
+        type: Number,
+        required: false,
+    },
+    comisionAdminHipo: {
+        type: Number,
+        required: false,
+    },
+    excedenteComisionAdminHipo: {
+        type: Number,
+        required: false,
+    },
+    registroHipoteca: {
+        type: Number,
+        required: false,
+    },
+    interesesAnticipados: {
+        type: Number,
+        required: false,
+    },
+
 }, {
     timestamps: true,
     versionkey: false

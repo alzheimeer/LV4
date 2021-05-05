@@ -102,26 +102,6 @@ export class MisdatosComponent implements OnInit {
       allowOutsideClick: false
     });
     Swal.showLoading();
-  //   var params = {
-  //     param1: this.id,
-  //     param2: this.email,
-  //     param3: this.nombre,
-  //     param4: this.apellido,
-  //     param5: this.tipodoc,
-  //     param6: this.fechaNac,
-  //     param7: this.fechaExp,
-  //     param8: this.numdoc,
-  //     param9: this.pais,
-  //     param10: this.departamento,
-  //     param11: this.ciudad,
-  //     param12: this.barrio,
-  //     param13: this.direccion,
-  //     param14: this.celular1,
-  //     param15: this.celular2,
-  //     param16: this.bbanco,
-  //     param17: this.btipocuenta,
-  //     param18: this.bnumcuenta,
-  // };
     this.usuario._id = this.id;
     this.usuario.email = this.email;
     this.usuario.name = this.nombre;

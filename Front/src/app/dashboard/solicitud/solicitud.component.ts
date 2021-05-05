@@ -4,7 +4,8 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import { AuthService } from '../../auth/services/auth.service';
-import { Product } from '../../models/product.models';
+import { Product, ProductIni } from '../../models/product.models';
+import { Requestx } from '../../models/request.models';
 import { ProductService } from '../services/product.service';
 import { RequestService } from '../services/request.service';
 
@@ -14,16 +15,28 @@ import { RequestService } from '../services/request.service';
   styleUrls: ['./solicitud.component.scss'],
 })
 export class SolicitudComponent implements OnInit {
-  valor = 0;
-  meses = 1;
-  tasa = 1.8778;
-  interes: number = (this.valor / 100) * this.tasa;
-  tasaIva = 3762;
-  iva: number = this.tasaIva;
-  aval: number = (this.valor / 100) * 9.9;
-  tecno: number = this.meses * 19800;
-  total: number = this.valor + this.interes + this.iva + this.aval + this.tecno;
-  emi: number = this.total / this.meses;
+
+  valorSolicitado = 0;
+  plazo = 1;
+  iMesVencido = 1.5;
+  valorCuotaBase = '';
+  administracion: number = this.plazo * 20000;
+  iva = 0;
+  aval = (this.valorSolicitado / 100) * 10;
+
+  parqueadero = 0;
+  peritaje = 0;
+  registroSimit = 0;
+  gmfCuatroxMil = 0;
+
+  comisionAdminHipo = 0;
+  excedenteComisionAdminHipo = 0;
+  registroHipoteca = 0;
+  interesesAnticipados = 0;
+
+
+  valorCuotaTotal = this.valorCuotaBase + this.iva + this.aval + this.administracion;
+  // emi: number = this.valorCuotaTotal / this.plazo;
   valuemin = 50000;
   valuemax = 500000;
   termmin = 1;
@@ -53,9 +66,9 @@ export class SolicitudComponent implements OnInit {
     regExtracto: [false],
   });
 
-  public productos: Product[] = [];
-  public producto: any = [];
-  request: any = [];
+  productos: Product[] = [];
+  producto: Product = new ProductIni();
+  request: Requestx[] = [];
   hayerror = false;
 
   constructor(
@@ -65,16 +78,23 @@ export class SolicitudComponent implements OnInit {
     private authService: AuthService,
     private requestService: RequestService
   ) {
+
+    // VERIFICAMOS SI EL USUARIO TIENE SOLICITUDES SI ES ASI LO ENVIAMOS A MISOLICITUD
     this.requestService.getRequestByIdUser(this.usuario.uid).subscribe((resp) => {
       if (resp.length > 0) {
         this.router.navigate(['/dashboard/misolicitud']);
+      } else {
+        console.log('Usuario no  tiene solicitudes')
       }
+
       this.request = resp;
     });
 
     this.productService.getProducts().subscribe((resp) => {
       this.productos = resp;
     });
+
+
   }
 
   ngOnInit(): void {
@@ -82,43 +102,93 @@ export class SolicitudComponent implements OnInit {
     this.formularioSolicitud.get('idProduct')?.valueChanges.subscribe((id) => {
       this.productService.getProductById(id).subscribe((producto) => {
         this.producto = producto;
-        this.tasa = producto.imin;
-        this.valuemin = this.producto.valuemin;
-        this.valuemax = this.producto.valuemax;
-        this.termmin = this.producto.termmin;
-        this.termmax = this.producto.termmax;
-        this.valor = this.producto.valuemin;
-        this.meses = this.producto.termmin;
+        this.iMesVencido = producto.iMesVencido;
+        this.valuemin = producto.valuemin;
+        this.valuemax = producto.valuemax;
+        this.termmin = producto.termmin;
+        this.termmax = producto.termmax;
+        this.valorSolicitado = producto.valuemin;
+        this.plazo = producto.termmin;
+
+        this.administracion = producto.administracion;
+        this.iva = producto.iva;
+        if (producto.aval) { this.aval = producto.aval; }
+        if (producto.parqueadero) { this.parqueadero = producto.parqueadero; }
+        if (producto.peritaje) { this.peritaje = producto.peritaje; }
+        if (producto.registroSimit) { this.registroSimit = producto.registroSimit; }
+        if (producto.gmfCuatroxMil) { this.gmfCuatroxMil = producto.gmfCuatroxMil; }
+
+        if (producto.comisionAdminHipo) { this.comisionAdminHipo = producto.comisionAdminHipo; }
+        if (producto.excedenteComisionAdminHipo) { this.excedenteComisionAdminHipo = producto.excedenteComisionAdminHipo; }
+        if (producto.registroHipoteca) { this.registroHipoteca = producto.registroHipoteca; }
+        if (producto.interesesAnticipados) { this.interesesAnticipados = producto.interesesAnticipados; }
+
+        this.formularioSolicitud.patchValue({ value: producto.valuemin });
+        this.formularioSolicitud.patchValue({ time: producto.termmin });
+
+
       });
     });
+
+
+
     this.formularioSolicitud.get('value')?.valueChanges.subscribe((value) => {
-      this.valor = value;
-      this.iva = this.tasaIva * this.meses;
-      this.aval = (this.valor / 100) * 9.9;
-      this.tecno = this.meses * 19800;
-      this.interes = (this.valor / 100) * this.tasa;
-      this.total =
-        this.valor + this.interes + this.iva + this.aval + this.tecno;
-      this.emi = this.total / this.meses;
+      this.valorSolicitado = value;
+      var im = this.iMesVencido / 100;
+      var im2 = Math.pow((1 + im), -(this.plazo));
+      let a = (this.valorSolicitado * im) / (1 - im2);
+      this.valorCuotaBase = a.toFixed(2);
+
+      console.log("Cuota + Interes: " + this.valorCuotaBase, 'Valor: $', this.valorSolicitado, 'Interes:', this.iMesVencido, '%', 'Plazo:', this.plazo);
+
+
+
+      // this.valorSolicitado = value;
+      // this.iva = this.tasaIva * this.plazo;
+      // this.aval = (this.valorSolicitado / 100) * 9.9;
+      // this.administracion = this.plazo * 19800;
+      // this.interes = (this.valorSolicitado / 100) * this.iMesVencido;
+      // this.valorCuotaTotal =
+      //   this.valorSolicitado + this.interes + this.iva + this.aval + this.administracion;
+      // this.emi = this.valorCuotaTotal / this.plazo;
     });
+
+
+
     this.formularioSolicitud.get('time')?.valueChanges.subscribe((time) => {
-      this.meses = time;
-      if (this.meses === 1) { this.tasa = 1.8778; }
-      if (this.meses === 2) { this.tasa = 2.8243; }
-      if (this.meses === 3) { this.tasa = 3.77715; }
-      if (this.meses === 4) { this.tasa = 4.73595; }
-      if (this.meses === 5) { this.tasa = 5.70065; }
-      if (this.meses === 6) { this.tasa = 6.67105; }
-      this.iva = this.tasaIva * this.meses;
-      this.aval = (this.valor / 100) * 9.9;
-      this.tecno = this.meses * 19800;
-      this.interes = (this.valor / 100) * this.tasa;
-      this.total =
-        this.valor + this.interes + this.iva + this.aval + this.tecno;
-      this.emi = this.total / this.meses;
+      this.plazo = time;
+      var im = this.iMesVencido / 100;
+      var im2 = Math.pow((1 + im), -(this.plazo));
+      let a = (this.valorSolicitado * im) / (1 - im2);
+      this.valorCuotaBase = a.toFixed(2);
+      console.log("Cuota + Interes: " + this.valorCuotaBase, 'Valor: $', this.valorSolicitado, 'Interes:', this.iMesVencido, '%', 'Plazo:', this.plazo);
+
+
+
+      // this.plazo = time;
+      // if (this.plazo === 1) { this.iMesVencido = 1.8778; }
+      // if (this.plazo === 2) { this.iMesVencido = 2.8243; }
+      // if (this.plazo === 3) { this.iMesVencido = 3.77715; }
+      // if (this.plazo === 4) { this.iMesVencido = 4.73595; }
+      // if (this.plazo === 5) { this.iMesVencido = 5.70065; }
+      // if (this.plazo === 6) { this.iMesVencido = 6.67105; }
+      // this.iva = this.tasaIva * this.plazo;
+      // this.aval = (this.valorSolicitado / 100) * 9.9;
+      // this.administracion = this.plazo * 19800;
+      // this.interes = (this.valorSolicitado / 100) * this.iMesVencido;
+      // this.valorCuotaTotal =
+      //   this.valorSolicitado + this.interes + this.iva + this.aval + this.administracion;
+      // this.emi = this.valorCuotaTotal / this.plazo;
     });
+
+
     this.formularioSolicitud.get('idUser')?.disable();
   }
+
+
+
+
+
 
   campoEsValido(campo: string): any {
     return (

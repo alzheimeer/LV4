@@ -58,7 +58,7 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
   seguro = 0;
   seguro1 = 0;
   isScrolled = false;
-
+  dateToday = new Date();
 
   get usuario(): any {
     return this.authService.usuario;
@@ -225,7 +225,7 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.flaq === 0 && solicitud.regExtracto === true && solicitud.regExtractoOk === false) { this.allOk = 0; this.flaq = 1; }
       //  console.log('Verifica todoOk');
       // Si cumple Cambiamos la bandera principal
-      if (this.allOk === 1) {
+      if (this.allOk === 1 && solicitud.estate !== 'Facturacion' && solicitud.estate !== 'Aprobada' && solicitud.estate !== 'Rechazada') {
         const body: any = { _id: solicitud._id, regOk: true, estate: 'Completo' };
         this.requestService.updateRequestsByIdMiSolicitud(body).subscribe(() => {
           this.ngOnInit();

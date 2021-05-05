@@ -10,6 +10,18 @@ var RequestSchema = Schema({
         type: Date,
         required: false
     },
+    valorDeConsignacion: {
+        type: Number,
+        required: false
+    },
+    valorCuotaBase: {
+        type: Number,
+        required: false
+    },
+    valorCuotaTotal: {
+        type: Number,
+        required: false
+    },
     fechasFacturacion: {
         type: [Date],
         required: false

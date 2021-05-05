@@ -31,7 +31,7 @@ const getRequestByIdUser = async(req, res) => {
     try {
         const request = await Request.find({ idUser: req.params.userId });
         if (request.length === 0)
-            return res.status(500).json(request);
+            return res.status(200).json(request);
         return res.status(200).json(request);
     } catch (error) {
         return res.status(500).json({ msg: 'Formato de Id Erroneo' });
@@ -39,8 +39,9 @@ const getRequestByIdUser = async(req, res) => {
 }
 const updateRequestById = async(req, res) => {
     try {
-        console.log('params:', req.params, 'body', req.body);
+        console.log('ID:', req.params, 'BODY:', req.body);
         const upRequest = await Request.findByIdAndUpdate(req.params.requestId, req.body, { new: true });
+        console.log('rta', upRequest)
         return res.status(200).json(upRequest);
     } catch (error) {
         return res.status(500).json({ msg: 'Id Del Request No Existe' });
