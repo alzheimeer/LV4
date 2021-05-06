@@ -140,6 +140,10 @@ var ProductSchema = Schema({
         type: Number,
         required: false,
     },
+    step: {
+        type: Number,
+        required: false,
+    },
 
 }, {
     timestamps: true,

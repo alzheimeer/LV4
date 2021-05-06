@@ -106,7 +106,8 @@ const createProducts = async function() {
                 iEfectivoAnualMax: "25.83",
                 administracion: "20000",
                 iva: "19",
-                aval: "10"
+                aval: "9.9",
+                step: "50000"
 
             }).save(),
             new Product({
@@ -137,6 +138,7 @@ const createProducts = async function() {
                 excedenteComisionAdminHipo: "40000",
                 registroHipoteca: "650000",
                 interesesAnticipados: "1.3",
+                step: "1000000"
 
             }).save(),
             new Product({
@@ -163,10 +165,11 @@ const createProducts = async function() {
                 iEfectivoAnualMax: "25.83",
                 administracion: "114000",
                 iva: "19",
-                parqueadero: "150000",
+                parqueadero: "7000",
                 peritaje: "190000",
                 registroSimit: "440000",
                 gmfCuatroxMil: "4",
+                step: "500000"
 
             }).save(),
             new Product({
@@ -196,7 +199,8 @@ const createProducts = async function() {
                 comisionAdminHipo: "2000000",
                 excedenteComisionAdminHipo: "40000",
                 registroHipoteca: "650000",
-                interesesAnticipados: "1.3"
+                interesesAnticipados: "1.3",
+                step: "1000000"
 
             }).save()
         ]);
