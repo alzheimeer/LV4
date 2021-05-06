@@ -34,6 +34,7 @@ export interface Product {
   comisionAdminHipo: number;
   excedenteComisionAdminHipo: number;
   registroHipoteca: number;
+  step: number;
   interesesAnticipados: number;
 
 }
@@ -74,6 +75,7 @@ export class ProductIni implements Product {
   comisionAdminHipo: number;
   excedenteComisionAdminHipo: number;
   registroHipoteca: number;
+  step: number;
   interesesAnticipados: number;
 
   constructor() {
@@ -112,6 +114,7 @@ export class ProductIni implements Product {
       this.comisionAdminHipo = 0,
       this.excedenteComisionAdminHipo = 0,
       this.registroHipoteca = 0,
+      this.step = 0,
       this.interesesAnticipados = 0
   }
 

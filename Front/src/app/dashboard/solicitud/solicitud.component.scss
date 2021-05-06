@@ -1,39 +1,60 @@
-.sliderx{
-    width: 100%;
-}
 
+.dd{
+  width: 100%;
+}
+.dd1{
+  background-color: rgb(21,84,154);
+  border-radius: 10px;
+}
 
 mat-slider {
 
   background-color: rgba(187, 181, 181, 0.233);
-  width: 100%;
+  width: 200px;
 
 }
+.ui-slider-horizontal {
+  height: .8em;
+}
+/* ::ng-deep .mat-slider-wrapper {
+
+  .mat-slider-thumb-container {
+    .mat-slider-thumb-label {
+      width: 50px;
+      height: 50px;
+      top: -60px;
+      right: -25px;
+
+    }
+  }
+} */
+
+
 
 
 :host ::ng-deep .min .mat-slider-thumb {
-  background-color: blue;
+  background-color: orange;
 
 }
 
 :host ::ng-deep .min .mat-slider-thumb-label {
-  background-color: blue;
+  background-color: orange;
 }
 
 :host ::ng-deep .min .mat-slider-track-fill {
-  background-color: blue;
+  background-color: orange;
 }
 
 :host ::ng-deep .max .mat-slider-thumb {
-  background-color: orange;
+  background-color: blue;
 }
 
 :host ::ng-deep .max .mat-slider-thumb-label {
-  background-color: orange;
+  background-color: blue;
 }
 
 :host ::ng-deep .max .mat-slider-track-fill {
-  background-color: orange;
+  background-color: blue;
 }
 
 

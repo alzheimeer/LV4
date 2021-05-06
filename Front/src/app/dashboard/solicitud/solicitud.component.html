@@ -14,80 +14,71 @@
         <div class="card-body">
           <form class="form" (ngSubmit)="guardar()"
             [formGroup]="formularioSolicitud" #f="ngForm">
+
+
             <mat-card class="card">
-              <mat-card-title>Crear Solicitud</mat-card-title>
+              <h3>Crear Solicitud</h3>
               <mat-card-content>
+
                 <div class="container">
                   <mat-grid-list cols="1" rowHeight="80px">
+
                     <mat-grid-tile>
-                      <mat-form-field>
-                        <input formControlName="idUser" type="text" matInput
-                          placeholder="Id Usuario" />
-                        <!-- <small class="form-text text-muted">Este campo es autogenerado</small> -->
-                      </mat-form-field>
+                      <mat-form-field><input formControlName="idUser" type="text" matInput placeholder="Id Usuario"/></mat-form-field>
                     </mat-grid-tile>
+
                     <mat-grid-tile>
-                      <mat-form-field>
-                        <mat-select class="sliderx" #x placeholder="Tipo De
-                          Prestamo?" formControlName="idProduct">
-                          <mat-option [value]="producto._id" *ngFor="let
-                            producto of productos">{{ producto.name }}</mat-option>
+                      <mat-form-field class="dd">
+                        <mat-select class="sliderx dd" #x placeholder="Tipo De Prestamo?" formControlName="idProduct">
+                          <mat-option [value]="producto._id" *ngFor="let producto of productos">{{ producto.name }}</mat-option>
                         </mat-select>
-                        <span class="form-text text-danger"
-                          *ngIf="campoEsValido('idProduct')">Debe Seleccionar Un
-                          Tipo De Prestamo</span>
+                        <span class="form-text text-danger" *ngIf="campoEsValido('idProduct')">Debe Seleccionar Un Tipo De Prestamo</span>
                       </mat-form-field>
                     </mat-grid-tile>
                   </mat-grid-list>
 
 
 
-
-                  <mat-grid-list *ngIf="valorSolicitado" cols="1" rowHeight="120px">
-                    <mat-grid-tile>
-                      <div>
+                  <mat-grid-list *ngIf="valorSolicitado" cols="1" rowHeight="160px" >
+                    <mat-grid-tile >
+                      <div class="dd dd1">
                         <!-- <h4 class="">Prestamos Hasta el 50% Del Avaluo Del Vehiculo?</h4> -->
-                        <h4 class="">Cuanto Dinero Necesitas?</h4>
+                        <h3 class="text-white">Cuanto Dinero Necesitas?</h3>
 
                         <!-- <input  formControlName="value" matInput placeholder="" required /> -->
-                        <mat-slider formControlName="value" class="min"
-                          thumbLabel step="50000" [min]=valuemin [max]=valuemax
-                          name="valorSolicitado">
-                        </mat-slider>
-                        <p>
-                          <span *ngIf="valorSolicitado> 1" class="">$ {{ valorSolicitado | number:
-                            "1.0-0" }} pesos</span>
-                        </p>
+                        <mat-slider formControlName="value" class="min dd dd1" thumbLabel [displayWith]="formatThumbLabel" tickInterval="5"
+                           [step]="step" [min]=valuemin [max]=valuemax name="valorSolicitado"> </mat-slider>
+                        <h3 class="text-white"><span *ngIf="valorSolicitado > 1 && valorSolicitado < 1000000" >$ {{ valorSolicitado | number: "1.0-0" }} pesos</span></h3>
+                        <h3 class="text-white"><span *ngIf="valorSolicitado >= 1000000" >$ {{ valorSolicitado | number: "1.0-0" }} millones</span></h3>
                       </div>
                     </mat-grid-tile>
+
+
                     <mat-grid-tile>
-                      <div>
-                        <h4 class="">Que Plazo Deseas?</h4>
+                      <div class="dd">
+                        <h3>Que Plazo Deseas?</h3>
                         <!-- <input formControlName="time" type="number" matInput placeholder="" required /> -->
                         <mat-slider formControlName="time" name="plazo"
-                          class="max" thumbLabel tickInterval="1" [min]=termmin
+                          class="max dd" thumbLabel tickInterval="1" [min]=termmin
                           [max]=termmax>
                         </mat-slider>
-                        <p>
+                        <h3>
                           <span *ngIf="plazo> 1" class="">{{ plazo }} meses</span>
                           <span *ngIf="plazo <= 1" class="">{{ plazo }} mes</span>
-                        </p>
+                        </h3>
                       </div>
                     </mat-grid-tile>
                     <mat-grid-tile>
-                      <mat-form-field appearance="outline" class="sliderx">
+                      <mat-form-field class="dd" appearance="outline" >
                         <mat-label>Comentarios</mat-label>
-                        <textarea matInput formControlName="description"
-                          placeholder="Opcional" required></textarea>
+                        <textarea class="dd" matInput formControlName="description" placeholder="Opcional" required></textarea>
                       </mat-form-field>
                     </mat-grid-tile>
                   </mat-grid-list>
                 </div>
               </mat-card-content>
               <mat-card-actions>
-                <button type="submit" class="button col" [disabled]="formularioSolicitud.invalid">
-                  Empezar La Solicitud
-                </button>
+                <button type="submit" class="button col" [disabled]="formularioSolicitud.invalid">Empezar La Solicitud</button>
               </mat-card-actions>
             </mat-card>
           </form>
@@ -102,11 +93,43 @@
       </mat-card-header> -->
       <div mat-card-avatar class="example-header-image"></div>
       <!-- <mat-card-title>Calculadora: </mat-card-title> -->
-      <mat-card-subtitle>Intereses: $ {{ iMesVencido | number: "1.0-0" }}</mat-card-subtitle>
+
+
+      <!-- VALORES COMUNES -->
+
+      <mat-card-subtitle>Valor Solicitado: $ {{ valorSolicitado | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="plazo > 1">Plazo Solicitado: $ {{ plazo }} meses</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="plazo <= 1">Plazo Solicitado: $ {{ plazo }} mes</mat-card-subtitle>
+      <mat-card-subtitle>Tasa De Interes M.A: $ {{ iMesVencido }} %</mat-card-subtitle>
+      <mat-card-subtitle>Tasa Max Efectiva Anual E.A: $ {{ iEfectivoAnualMax }} %</mat-card-subtitle>
+      <!-- VALORES A RESTAR -->
+      <hr>
+      <mat-card-title>Valores Que Se Descuentan Al Valor Solicitado</mat-card-title>
+      <hr>
+      <mat-card-subtitle>Comision Por Administracion: $ {{ comisionAdminHipo1 | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle>Registro Hipoteca: $ {{ registroHipoteca | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle>Intereses Anticipados: $ {{ interesesAnticipados | number: "1.0-0" }}</mat-card-subtitle>
+
+      <mat-card-subtitle>Parqueadero: $ {{ parqueadero | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle>Peritaje: $ {{ peritaje | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle>Registro Simit: $ {{ registroSimit | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle>GMF: $ {{ gmfCuatroxMil | number: "1.0-0" }}</mat-card-subtitle>
+
+
+      <hr>
+      <!-- VALOR QUE SE CONSIGNARA -->
+      <mat-card-subtitle>Valor Neto Que Se Te Consignara: $ {{ valorConsignar | number: "1.0-0" }}</mat-card-subtitle>
+      <hr>
+      <mat-card-title>Composicion De La Cuota</mat-card-title>
+      <hr>
+      <!-- VALORES A SUMAR -->
+      <mat-card-subtitle>Cuota <small>(Capital + Interes)</small>: $ {{ valorCuotaBase | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle>Administracion: $ {{ administracion | number: "1.0-0" }}</mat-card-subtitle>
       <mat-card-subtitle>Iva: $ {{ iva | number: "1.0-0" }}</mat-card-subtitle>
       <mat-card-subtitle>Aval: $ {{ aval | number: "1.0-0" }}</mat-card-subtitle>
-      <mat-card-subtitle>administracion: $ {{ administracion | number: "1.0-0" }}</mat-card-subtitle>
-      <mat-card-title>Valor Cuota Prestamo: $ {{ valorCuotaTotal | number: "1.0-0" }}</mat-card-title>
+
+
+      <mat-card-title>Valor Cuota Mensual: $ {{ valorCuotaTotal | number: "1.0-0" }}</mat-card-title>
       <!-- <mat-card-title>Valor Cuota Mensual: {{ emi | number: "1.0-0" }}</mat-card-title> -->
       <mat-card-content>
         <!-- <mat-card-title>Requisitos: </mat-card-title>
@@ -127,13 +150,13 @@
 </div>
 
 
-<!-- <h3>Formulario:</h3>
+<h3>Formulario:</h3>
 <pre>Valid:{{formularioSolicitud.valid}}</pre>
 
 <pre>{{iMesVencido}}</pre>
 <pre>{{valorSolicitado}}</pre>
 
-<pre>{{formularioSolicitud.value | json}}</pre> -->
+<pre>{{formularioSolicitud.value | json}}</pre>
 
 <!-- <pre>{{producto.regInmueble}}</pre>
 <pre>{{producto.regPersonales}}</pre>

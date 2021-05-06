@@ -83,8 +83,9 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
     this.requestService.getRequestByIdUser(this.usuario.uid).subscribe((resp) => {
       //  console.log('OBTIENE SOLICITUD CONSTRUCTOR');
       this.requests = resp;
-    }, (err) => {
-      this.router.navigate(['/dashboard/solicitud']);
+      if (resp.length < 1) {
+        this.router.navigate(['/dashboard/solicitud']);
+      }
     });
     this.userService.getUserById(this.usuario.uid).subscribe((usuario) => {
       //  console.log('OBTIENE USUARIO CONSTRUCTOR');

@@ -17,30 +17,37 @@ import { RequestService } from '../services/request.service';
 export class SolicitudComponent implements OnInit {
 
   valorSolicitado = 0;
-  plazo = 1;
-  iMesVencido = 1.5;
-  valorCuotaBase = '';
-  administracion: number = this.plazo * 20000;
+  plazo = 0;
+  iMesVencido = 0;
+  iEfectivoAnualMax = 0;
+  valorCuotaBase = 0;
+  administracion = 0;
   iva = 0;
-  aval = (this.valorSolicitado / 100) * 10;
-
+  ivap = 0;
+  aval = 0;
+  avalp = 0;
   parqueadero = 0;
   peritaje = 0;
   registroSimit = 0;
   gmfCuatroxMil = 0;
+  step = 0;
 
   comisionAdminHipo = 0;
+  comisionAdminHipo1 = 0;
   excedenteComisionAdminHipo = 0;
   registroHipoteca = 0;
+
+  interesesAnticipadosp = 0;
   interesesAnticipados = 0;
 
+  valorConsignar = 0;
 
-  valorCuotaTotal = this.valorCuotaBase + this.iva + this.aval + this.administracion;
+  valorCuotaTotal = 0;
   // emi: number = this.valorCuotaTotal / this.plazo;
-  valuemin = 50000;
-  valuemax = 500000;
-  termmin = 1;
-  termmax = 6;
+  valuemin = 0;
+  valuemax = 0;
+  termmin = 0;
+  termmax = 0;
 
   get usuario(): any {
     return this.authService.usuario;
@@ -96,6 +103,13 @@ export class SolicitudComponent implements OnInit {
 
 
   }
+  formatThumbLabel(value: number) {
+    if (value >= 1000) {
+      this.valorSolicitado = value;
+      return Math.round(value / 1000) + 'k';
+    }
+    return value;
+  }
 
   ngOnInit(): void {
 
@@ -103,16 +117,21 @@ export class SolicitudComponent implements OnInit {
       this.productService.getProductById(id).subscribe((producto) => {
         this.producto = producto;
         this.iMesVencido = producto.iMesVencido;
+        this.iEfectivoAnualMax = producto.iEfectivoAnualMax;
         this.valuemin = producto.valuemin;
         this.valuemax = producto.valuemax;
         this.termmin = producto.termmin;
         this.termmax = producto.termmax;
         this.valorSolicitado = producto.valuemin;
         this.plazo = producto.termmin;
-
+        this.step = producto.step;
         this.administracion = producto.administracion;
-        this.iva = producto.iva;
-        if (producto.aval) { this.aval = producto.aval; }
+        this.ivap = producto.iva;
+        this.iva = (this.administracion / 100) * this.ivap;
+        if (producto.aval) {
+          this.avalp = producto.aval;
+          this.aval = (this.valorSolicitado / 100) * this.avalp;
+        }
         if (producto.parqueadero) { this.parqueadero = producto.parqueadero; }
         if (producto.peritaje) { this.peritaje = producto.peritaje; }
         if (producto.registroSimit) { this.registroSimit = producto.registroSimit; }
@@ -121,12 +140,17 @@ export class SolicitudComponent implements OnInit {
         if (producto.comisionAdminHipo) { this.comisionAdminHipo = producto.comisionAdminHipo; }
         if (producto.excedenteComisionAdminHipo) { this.excedenteComisionAdminHipo = producto.excedenteComisionAdminHipo; }
         if (producto.registroHipoteca) { this.registroHipoteca = producto.registroHipoteca; }
-        if (producto.interesesAnticipados) { this.interesesAnticipados = producto.interesesAnticipados; }
+        if (producto.interesesAnticipados) {
+          this.interesesAnticipadosp = producto.interesesAnticipados;
+          this.interesesAnticipados = (this.valorSolicitado / 100) * this.interesesAnticipadosp;
+        }
+
 
         this.formularioSolicitud.patchValue({ value: producto.valuemin });
         this.formularioSolicitud.patchValue({ time: producto.termmin });
 
-
+        this.valorConsignar = this.valorSolicitado - this.registroSimit - this.peritaje - this.parqueadero - this.comisionAdminHipo1 - this.registroHipoteca - this.interesesAnticipados;
+        this.valorCuotaTotal = this.valorCuotaBase as number + this.iva + this.aval + this.administracion;
       });
     });
 
@@ -136,10 +160,27 @@ export class SolicitudComponent implements OnInit {
       this.valorSolicitado = value;
       var im = this.iMesVencido / 100;
       var im2 = Math.pow((1 + im), -(this.plazo));
-      let a = (this.valorSolicitado * im) / (1 - im2);
-      this.valorCuotaBase = a.toFixed(2);
-
-      console.log("Cuota + Interes: " + this.valorCuotaBase, 'Valor: $', this.valorSolicitado, 'Interes:', this.iMesVencido, '%', 'Plazo:', this.plazo);
+      const a = (this.valorSolicitado * im) / (1 - im2);
+      this.valorCuotaBase = a;
+      // this.valorCuotaBase = a.toFixed(2);
+      if (this.comisionAdminHipo !== 0 && this.valorSolicitado > 50000000 && this.comisionAdminHipo !== 0) {
+        let diferencia = ((this.valorSolicitado - 50000000) / 1000000) * this.excedenteComisionAdminHipo;
+        this.comisionAdminHipo1 = this.comisionAdminHipo + diferencia;
+      } else if (this.comisionAdminHipo !== 0) {
+        this.comisionAdminHipo1 = 2000000;
+      }
+      this.aval = (this.valorSolicitado / 100) * this.avalp;
+      this.interesesAnticipados = (this.valorSolicitado / 100) * this.interesesAnticipadosp;
+      this.valorConsignar =
+        this.valorSolicitado -
+        (this.registroSimit +
+          this.peritaje +
+          this.parqueadero +
+          this.comisionAdminHipo1 +
+          this.registroHipoteca +
+          this.interesesAnticipados);
+      /* console.log(this.valorSolicitado, this.registroSimit, this.peritaje, this.parqueadero, this.comisionAdminHipo1, this.registroHipoteca, this.interesesAnticipados);
+      console.log("Cuota + Interes: " + this.valorCuotaBase, 'Valor: $', this.valorSolicitado, 'Interes:', this.iMesVencido, '%', 'Plazo:', this.plazo); */
 
 
 
@@ -160,7 +201,8 @@ export class SolicitudComponent implements OnInit {
       var im = this.iMesVencido / 100;
       var im2 = Math.pow((1 + im), -(this.plazo));
       let a = (this.valorSolicitado * im) / (1 - im2);
-      this.valorCuotaBase = a.toFixed(2);
+      // this.valorCuotaBase = a.toFixed(2);
+      this.valorCuotaBase = a;
       console.log("Cuota + Interes: " + this.valorCuotaBase, 'Valor: $', this.valorSolicitado, 'Interes:', this.iMesVencido, '%', 'Plazo:', this.plazo);
 
 
