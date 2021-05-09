@@ -22,8 +22,9 @@ export interface Product {
   createdAt: Date;
   updatedAt: Date;
   __v: number;
-  iMesVencido: number;
+  iEfectivoAnual: number;
   iEfectivoAnualMax: number;
+  iMoraEfectivoAnual: number;
   administracion: number;
   iva: number;
   aval: number;
@@ -63,8 +64,9 @@ export class ProductIni implements Product {
   createdAt: Date;
   updatedAt: Date;
   __v: number;
-  iMesVencido: number;
+  iEfectivoAnual: number;
   iEfectivoAnualMax: number;
+  iMoraEfectivoAnual: number;
   administracion: number;
   iva: number;
   aval: number;
@@ -102,8 +104,9 @@ export class ProductIni implements Product {
       this.createdAt = new Date(),
       this.updatedAt = new Date(),
       this.__v = 0,
-      this.iMesVencido = 0,
+      this.iEfectivoAnual = 0,
       this.iEfectivoAnualMax = 0,
+      this.iMoraEfectivoAnual = 0,
       this.administracion = 0,
       this.iva = 0,
       this.aval = 0,

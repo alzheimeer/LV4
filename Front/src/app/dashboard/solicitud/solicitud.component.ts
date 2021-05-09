@@ -16,38 +16,42 @@ import { RequestService } from '../services/request.service';
 })
 export class SolicitudComponent implements OnInit {
 
+  nombre = '';
   valorSolicitado = 0;
   plazo = 0;
   iMesVencido = 0;
+  iEfectivoAnual = 0;
   iEfectivoAnualMax = 0;
+  iMoraEfectivoAnual = 0;
+  soloInteres = 0;
   valorCuotaBase = 0;
   administracion = 0;
+  administracionp = 0;
   iva = 0;
   ivap = 0;
   aval = 0;
   avalp = 0;
+  valuemin = 0;
+  valuemax = 0;
+  termmin = 0;
+  termmax = 0;
+  totalCredito = 0;
+  totalPersonal = 0;
   parqueadero = 0;
   peritaje = 0;
   registroSimit = 0;
   gmfCuatroxMil = 0;
   step = 0;
-
   comisionAdminHipo = 0;
   comisionAdminHipo1 = 0;
   excedenteComisionAdminHipo = 0;
   registroHipoteca = 0;
-
   interesesAnticipadosp = 0;
   interesesAnticipados = 0;
 
   valorConsignar = 0;
-
   valorCuotaTotal = 0;
-  // emi: number = this.valorCuotaTotal / this.plazo;
-  valuemin = 0;
-  valuemax = 0;
-  termmin = 0;
-  termmax = 0;
+
 
   get usuario(): any {
     return this.authService.usuario;
@@ -115,9 +119,33 @@ export class SolicitudComponent implements OnInit {
 
     this.formularioSolicitud.get('idProduct')?.valueChanges.subscribe((id) => {
       this.productService.getProductById(id).subscribe((producto) => {
+        // Reset Valores
+        this.parqueadero = 0;
+        this.peritaje = 0;
+        this.registroSimit = 0;
+        this.gmfCuatroxMil = 0;
+        this.totalPersonal = 0;
+        this.comisionAdminHipo = 0;
+        this.comisionAdminHipo1 = 0;
+        this.excedenteComisionAdminHipo = 0;
+        this.registroHipoteca = 0;
+        this.interesesAnticipados = 0;
+        this.interesesAnticipadosp = 0;
+        this.administracion = 0;
+        this.administracionp = 0;
+        this.aval = 0;
+        this.avalp = 0;
+        this.totalCredito = 0;
+        this.soloInteres = 0;
+        this.valorCuotaTotal = 0;
+        // Fin Reset Valores
+
         this.producto = producto;
-        this.iMesVencido = producto.iMesVencido;
+        this.nombre = producto.name;
+        this.iEfectivoAnual = producto.iEfectivoAnual;
+        this.iMesVencido = ((((Math.pow((1 + (producto.iEfectivoAnual / 100)), (1 / 12))) - 1) * 12) * 100) / 12;
         this.iEfectivoAnualMax = producto.iEfectivoAnualMax;
+        this.iMoraEfectivoAnual = producto.iMoraEfectivoAnual;
         this.valuemin = producto.valuemin;
         this.valuemax = producto.valuemax;
         this.termmin = producto.termmin;
@@ -126,6 +154,7 @@ export class SolicitudComponent implements OnInit {
         this.plazo = producto.termmin;
         this.step = producto.step;
         this.administracion = producto.administracion;
+        this.administracionp = producto.administracion;
         this.ivap = producto.iva;
         this.iva = (this.administracion / 100) * this.ivap;
         if (producto.aval) {
@@ -146,11 +175,25 @@ export class SolicitudComponent implements OnInit {
         }
 
 
+
         this.formularioSolicitud.patchValue({ value: producto.valuemin });
         this.formularioSolicitud.patchValue({ time: producto.termmin });
 
+
         this.valorConsignar = this.valorSolicitado - this.registroSimit - this.peritaje - this.parqueadero - this.comisionAdminHipo1 - this.registroHipoteca - this.interesesAnticipados;
-        this.valorCuotaTotal = this.valorCuotaBase as number + this.iva + this.aval + this.administracion;
+
+        if (this.nombre === 'Prestamo Personal') {
+          this.totalPersonal = ((this.aval + this.administracion + this.iva) / this.plazo);
+          this.soloInteres = (this.valorCuotaBase as number * this.plazo) - this.valorSolicitado;
+          this.valorCuotaTotal = this.valorCuotaBase as number + this.totalPersonal;
+          this.totalCredito = this.valorCuotaBase as number + this.administracion + this.iva + this.aval;
+        } else {
+          this.soloInteres = 0;
+          this.valorCuotaTotal = this.valorCuotaBase as number + this.iva + this.aval + this.administracion;
+          this.totalCredito = 0;
+        }
+
+
       });
     });
 
@@ -179,48 +222,49 @@ export class SolicitudComponent implements OnInit {
           this.comisionAdminHipo1 +
           this.registroHipoteca +
           this.interesesAnticipados);
-      /* console.log(this.valorSolicitado, this.registroSimit, this.peritaje, this.parqueadero, this.comisionAdminHipo1, this.registroHipoteca, this.interesesAnticipados);
-      console.log("Cuota + Interes: " + this.valorCuotaBase, 'Valor: $', this.valorSolicitado, 'Interes:', this.iMesVencido, '%', 'Plazo:', this.plazo); */
 
 
+      if (this.nombre === 'Prestamo Personal') {
+        this.totalPersonal = ((this.aval + this.administracion + this.iva) / this.plazo);
+        this.soloInteres = (this.valorCuotaBase as number * this.plazo) - this.valorSolicitado;
+        this.valorCuotaTotal = this.valorCuotaBase as number + this.totalPersonal;
+        this.totalCredito = this.valorSolicitado + this.soloInteres + this.administracion + this.iva + this.aval;
+      } else {
+        this.soloInteres = 0;
+        this.totalCredito = 0;
+        this.valorCuotaTotal = this.valorCuotaBase as number + this.iva + this.aval + this.administracion;
+      }
 
-      // this.valorSolicitado = value;
-      // this.iva = this.tasaIva * this.plazo;
-      // this.aval = (this.valorSolicitado / 100) * 9.9;
-      // this.administracion = this.plazo * 19800;
-      // this.interes = (this.valorSolicitado / 100) * this.iMesVencido;
-      // this.valorCuotaTotal =
-      //   this.valorSolicitado + this.interes + this.iva + this.aval + this.administracion;
-      // this.emi = this.valorCuotaTotal / this.plazo;
     });
 
 
 
     this.formularioSolicitud.get('time')?.valueChanges.subscribe((time) => {
       this.plazo = time;
+      this.administracion = this.administracionp;
+      if (this.nombre === 'Prestamo Personal') {
+        this.administracion = this.administracion * this.plazo;
+        this.iva = (this.administracion / 100) * this.ivap;
+
+      }
       var im = this.iMesVencido / 100;
       var im2 = Math.pow((1 + im), -(this.plazo));
       let a = (this.valorSolicitado * im) / (1 - im2);
-      // this.valorCuotaBase = a.toFixed(2);
       this.valorCuotaBase = a;
-      console.log("Cuota + Interes: " + this.valorCuotaBase, 'Valor: $', this.valorSolicitado, 'Interes:', this.iMesVencido, '%', 'Plazo:', this.plazo);
+      // console.log("Cuota + Interes: " + this.valorCuotaBase, 'Valor: $', this.valorSolicitado, 'Interes:', this.iMesVencido, '%', 'Plazo:', this.plazo);
+
+      if (this.nombre === 'Prestamo Personal') {
+        this.totalPersonal = ((this.aval + this.administracion + this.iva) / this.plazo);
+        this.soloInteres = (this.valorCuotaBase as number * this.plazo) - this.valorSolicitado;
+        this.valorCuotaTotal = this.valorCuotaBase as number + this.totalPersonal;
+        this.totalCredito = this.valorSolicitado + this.soloInteres + this.administracion + this.iva + this.aval;
+      } else {
+        this.valorCuotaTotal = this.valorCuotaBase as number + this.iva + this.aval + this.administracion;
+        this.soloInteres = 0;
+        this.totalCredito = 0;
+      }
 
 
-
-      // this.plazo = time;
-      // if (this.plazo === 1) { this.iMesVencido = 1.8778; }
-      // if (this.plazo === 2) { this.iMesVencido = 2.8243; }
-      // if (this.plazo === 3) { this.iMesVencido = 3.77715; }
-      // if (this.plazo === 4) { this.iMesVencido = 4.73595; }
-      // if (this.plazo === 5) { this.iMesVencido = 5.70065; }
-      // if (this.plazo === 6) { this.iMesVencido = 6.67105; }
-      // this.iva = this.tasaIva * this.plazo;
-      // this.aval = (this.valorSolicitado / 100) * 9.9;
-      // this.administracion = this.plazo * 19800;
-      // this.interes = (this.valorSolicitado / 100) * this.iMesVencido;
-      // this.valorCuotaTotal =
-      //   this.valorSolicitado + this.interes + this.iva + this.aval + this.administracion;
-      // this.emi = this.valorCuotaTotal / this.plazo;
     });
 
 

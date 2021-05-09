@@ -13,11 +13,15 @@ var ProductSchema = Schema({
         type: Number,
         required: true,
     },
-    iMesVencido: {
+    iEfectivoAnual: {
         type: Number,
         required: false,
     },
     iEfectivoAnualMax: {
+        type: Number,
+        required: false,
+    },
+    iMoraEfectivoAnual: {
         type: Number,
         required: false,
     },

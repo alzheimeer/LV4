@@ -24,8 +24,9 @@
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Valor Minimo</th>
                                         <th scope="col">Valor Maximo</th>
-                                        <th scope="col">%Interes Mes Vencido</th>
+                                        <th scope="col">%Interes Efectivo Anual</th>
                                         <th scope="col">%Interes EA Maximo</th>
+                                        <th scope="col">%Interes De Mora EA</th>
                                         <th scope="col">Plazo Minimo "Meses"</th>
                                         <th scope="col">Plazo Maximo "Meses"</th>
 
@@ -39,10 +40,10 @@
                                         <th scope="col">Valor Registro Hipoteca</th>
                                         <th scope="col">%Intereses Anticipados Hipoteca</th>
                                         <!-- PRESTAMO SOBRE VEHICULO -->
-                                        <th scope="col">Parqueadero</th>
+                                        <th scope="col">Parqueadero Dia</th>
                                         <th scope="col">Peritaje</th>
                                         <th scope="col">Registro Simit</th>
-                                        <th scope="col">GMF 4xMil</th>
+                                        <th scope="col">GMF ?xMil</th>
 
                                         <th scope="col">Editar</th>
                                         <!-- <th *ngIf="!element" scope="col">Fecha Creacion</th>
@@ -58,24 +59,25 @@
                                         <td  *ngIf="!element">{{producto.name}}</td>
                                         <td  *ngIf="!element">${{producto.valuemin | number:'1.0-0'}}</td>
                                         <td  *ngIf="!element">${{producto.valuemax | number:'1.0-0'}}</td>
-                                        <td  *ngIf="!element">{{producto.iMesVencido}}%</td>
+                                        <td  *ngIf="!element">{{producto.iEfectivoAnual}}%</td>
                                         <td  *ngIf="!element">{{producto.iEfectivoAnualMax}}%</td>
+                                        <td  *ngIf="!element">{{producto.iMoraEfectivoAnual}}%</td>
                                         <td  *ngIf="!element">{{producto.termmin}} meses</td>
                                         <td  *ngIf="!element">{{producto.termmax}} meses</td>
 
-                                        <td  *ngIf="!element">${{producto.administracion}} </td>
+                                        <td  *ngIf="!element">${{producto.administracion | number:'1.0-0'}} </td>
                                         <td  *ngIf="!element">{{producto.iva}} %</td>
 
                                         <td  *ngIf="!element">{{producto.aval}} %</td>
 
-                                        <td  *ngIf="!element">${{producto.comisionAdminHipo}} </td>
-                                        <td  *ngIf="!element">${{producto.excedenteComisionAdminHipo}} meses</td>
-                                        <td  *ngIf="!element">${{producto.registroHipoteca}}</td>
-                                        <td  *ngIf="!element">{{producto.interesesAnticipados}} %</td>
+                                        <td  *ngIf="!element">${{producto.comisionAdminHipo| number:'1.0-0'}} </td>
+                                        <td  *ngIf="!element">${{producto.excedenteComisionAdminHipo| number:'1.0-0'}}</td>
+                                        <td  *ngIf="!element">${{producto.registroHipoteca| number:'1.0-0'}}</td>
+                                        <td  *ngIf="!element">{{producto.interesesAnticipados| number:'1.0-0'}} %</td>
 
-                                        <td  *ngIf="!element">${{producto.parqueadero}}</td>
-                                        <td  *ngIf="!element">${{producto.peritaje}}</td>
-                                        <td  *ngIf="!element">${{producto.registroSimit}}</td>
+                                        <td  *ngIf="!element">${{producto.parqueadero| number:'1.0-0'}}</td>
+                                        <td  *ngIf="!element">${{producto.peritaje| number:'1.0-0'}}</td>
+                                        <td  *ngIf="!element">${{producto.registroSimit| number:'1.0-0'}}</td>
                                         <td  *ngIf="!element">${{producto.gmfCuatroxMil}}</td>
 
 
@@ -101,16 +103,22 @@
                                         <input type="number" #valuemax (change)="save(producto, valuemax.value, 'valuemax')" (keyup)="save(producto, valuemax.value, 'valuemax')" matInput value={{producto.valuemax}}>
                                         </mat-form-field>
                                         </td>
-                                        <!-- campo de interes Mes Vencido -->
+                                        <!-- campo de interes EA -->
                                         <td *ngIf="element">
                                         <mat-form-field class="example-full-width">
-                                        <input step="0.01" type="number" #iMesVencido (change)="save(producto, iMesVencido.value, 'iMesVencido')" (keyup)="save(producto, iMesVencido.value, 'iMesVencido')" matInput value={{producto.iMesVencido}}>
+                                        <input step="0.01" type="number" #iEfectivoAnual (change)="save(producto, iEfectivoAnual.value, 'iEfectivoAnual')" (keyup)="save(producto, iEfectivoAnual.value, 'iEfectivoAnual')" matInput value={{producto.iEfectivoAnual}}>
                                         </mat-form-field>
                                         </td>
                                         <!-- campo de interes maximo EA-->
                                         <td *ngIf="element">
                                         <mat-form-field class="example-full-width">
                                         <input step="0.01" type="number" #iEfectivoAnualMax (change)="save(producto, iEfectivoAnualMax.value, 'iEfectivoAnualMax')" (keyup)="save(producto, iEfectivoAnualMax.value, 'iEfectivoAnualMax')" matInput value={{producto.iEfectivoAnualMax}}>
+                                        </mat-form-field>
+                                        </td>
+                                        <!-- campo de interes Mora EA-->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input step="0.01" type="number" #iMoraEfectivoAnual (change)="save(producto, iMoraEfectivoAnual.value, 'iMoraEfectivoAnual')" (keyup)="save(producto, iMoraEfectivoAnual.value, 'iMoraEfectivoAnual')" matInput value={{producto.iMoraEfectivoAnual}}>
                                         </mat-form-field>
                                         </td>
                                         <!-- campo de plazo minimo -->
@@ -155,7 +163,7 @@
                                         <input type="number" #excedenteComisionAdminHipo (change)="save(producto, excedenteComisionAdminHipo.value, 'excedenteComisionAdminHipo')" (keyup)="save(producto, excedenteComisionAdminHipo.value, 'excedenteComisionAdminHipo')" matInput value={{producto.excedenteComisionAdminHipo}}>
                                         </mat-form-field>
                                         </td>
-                                        <!-- campo Valor Reistro Hipoteca -->
+                                        <!-- campo Valor Registro Hipoteca -->
                                         <td *ngIf="element">
                                         <mat-form-field class="example-full-width">
                                         <input type="number" #registroHipoteca (change)="save(producto, registroHipoteca.value, 'registroHipoteca')" (keyup)="save(producto, registroHipoteca.value, 'registroHipoteca')" matInput value={{producto.registroHipoteca}}>

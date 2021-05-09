@@ -97,23 +97,28 @@
 
       <!-- VALORES COMUNES -->
 
-      <mat-card-subtitle>Valor Solicitado: $ {{ valorSolicitado | number: "1.0-0" }}</mat-card-subtitle>
-      <mat-card-subtitle *ngIf="plazo > 1">Plazo Solicitado: $ {{ plazo }} meses</mat-card-subtitle>
-      <mat-card-subtitle *ngIf="plazo <= 1">Plazo Solicitado: $ {{ plazo }} mes</mat-card-subtitle>
-      <mat-card-subtitle>Tasa De Interes M.A: $ {{ iMesVencido }} %</mat-card-subtitle>
-      <mat-card-subtitle>Tasa Max Efectiva Anual E.A: $ {{ iEfectivoAnualMax }} %</mat-card-subtitle>
-      <!-- VALORES A RESTAR -->
-      <hr>
-      <mat-card-title>Valores Que Se Descuentan Al Valor Solicitado</mat-card-title>
-      <hr>
-      <mat-card-subtitle>Comision Por Administracion: $ {{ comisionAdminHipo1 | number: "1.0-0" }}</mat-card-subtitle>
-      <mat-card-subtitle>Registro Hipoteca: $ {{ registroHipoteca | number: "1.0-0" }}</mat-card-subtitle>
-      <mat-card-subtitle>Intereses Anticipados: $ {{ interesesAnticipados | number: "1.0-0" }}</mat-card-subtitle>
 
-      <mat-card-subtitle>Parqueadero: $ {{ parqueadero | number: "1.0-0" }}</mat-card-subtitle>
-      <mat-card-subtitle>Peritaje: $ {{ peritaje | number: "1.0-0" }}</mat-card-subtitle>
-      <mat-card-subtitle>Registro Simit: $ {{ registroSimit | number: "1.0-0" }}</mat-card-subtitle>
-      <mat-card-subtitle>GMF: $ {{ gmfCuatroxMil | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-title>{{ nombre}}</mat-card-title>
+      <mat-card-subtitle>Tasa Efectiva Mes MV: {{ iMesVencido | number:'1.4'}} %</mat-card-subtitle>
+      <mat-card-subtitle>Tasa Efectiva Anual E.A: {{ iEfectivoAnual | number:'1.2'}} %</mat-card-subtitle>
+      <mat-card-subtitle>E.A Maxima 2021: {{ iEfectivoAnualMax | number:'1.2'}} %</mat-card-subtitle>
+      <hr>
+      <mat-card-title>Valor Solicitado: $ {{ valorSolicitado | number: "1.0-0" }}</mat-card-title>
+      <mat-card-title *ngIf="plazo > 1">Plazo Solicitado: $ {{ plazo }} meses</mat-card-title>
+      <mat-card-title *ngIf="plazo <= 1">Plazo Solicitado: $ {{ plazo }} mes</mat-card-title>
+
+      <!-- VALORES A RESTAR -->
+      <hr *ngIf="comisionAdminHipo1 > 0 && registroHipoteca > 0 &&  interesesAnticipados > 0 && parqueadero > 0 && peritaje > 0 && registroSimit > 0 && gmfCuatroxMil > 0">
+      <mat-card-title *ngIf="comisionAdminHipo1 > 0 && registroHipoteca > 0 &&  interesesAnticipados > 0 && parqueadero > 0 && peritaje > 0 && registroSimit > 0 && gmfCuatroxMil > 0">Valores Que Se Descuentan Al Valor Solicitado</mat-card-title>
+      <hr >
+      <mat-card-subtitle *ngIf="comisionAdminHipo1 > 0">Comision Por Administracion: $ {{ comisionAdminHipo1 | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="registroHipoteca > 0">Registro Hipoteca: $ {{ registroHipoteca | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="interesesAnticipados > 0">Intereses Anticipados: $ {{ interesesAnticipados | number: "1.0-0" }}</mat-card-subtitle>
+
+      <mat-card-subtitle *ngIf="parqueadero > 0">Parqueadero: $ {{ parqueadero | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="peritaje > 0">Peritaje: $ {{ peritaje | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="registroSimit > 0">Registro Simit: $ {{ registroSimit | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="gmfCuatroxMil > 0">GMF: $ {{ gmfCuatroxMil | number: "1.0-0" }}</mat-card-subtitle>
 
 
       <hr>
@@ -124,11 +129,15 @@
       <hr>
       <!-- VALORES A SUMAR -->
       <mat-card-subtitle>Cuota <small>(Capital + Interes)</small>: $ {{ valorCuotaBase | number: "1.0-0" }}</mat-card-subtitle>
+
       <mat-card-subtitle>Administracion: $ {{ administracion | number: "1.0-0" }}</mat-card-subtitle>
       <mat-card-subtitle>Iva: $ {{ iva | number: "1.0-0" }}</mat-card-subtitle>
-      <mat-card-subtitle>Aval: $ {{ aval | number: "1.0-0" }}</mat-card-subtitle>
+      <!-- <mat-card-subtitle>Intereses: $ {{ soloInteres | number: "1.0-0" }}</mat-card-subtitle> -->
+      <mat-card-subtitle *ngIf="aval > 0">Aval: $ {{ aval | number: "1.0-0" }}</mat-card-subtitle>
+      <!-- <mat-card-subtitle >totalpersonal: $ {{ totalPersonal | number: "1.0-0" }}</mat-card-subtitle> -->
 
 
+      <mat-card-title *ngIf="totalCredito > 0">Total Credito: $ {{ totalCredito | number: "1.0-0" }}</mat-card-title>
       <mat-card-title>Valor Cuota Mensual: $ {{ valorCuotaTotal | number: "1.0-0" }}</mat-card-title>
       <!-- <mat-card-title>Valor Cuota Mensual: {{ emi | number: "1.0-0" }}</mat-card-title> -->
       <mat-card-content>

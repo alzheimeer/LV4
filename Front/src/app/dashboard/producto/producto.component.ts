@@ -43,11 +43,14 @@ export class ProductoComponent implements OnInit {
     if (campo === 'valuemax') {
       producto.valuemax = valorinput;
     }
-    if (campo === 'imin') {
-      producto.imin = valorinput;
+    if (campo === 'iEfectivoAnual') {
+      producto.iEfectivoAnual = valorinput;
     }
-    if (campo === 'imax') {
-      producto.imax = valorinput;
+    if (campo === 'iEfectivoAnualMax') {
+      producto.iEfectivoAnualMax = valorinput;
+    }
+    if (campo === 'iMoraEfectivoAnual') {
+      producto.iMoraEfectivoAnual = valorinput;
     }
     if (campo === 'termmin') {
       producto.termmin = valorinput;
