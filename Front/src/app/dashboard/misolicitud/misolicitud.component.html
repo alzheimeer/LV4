@@ -21,11 +21,13 @@
         <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
         <mat-card-content>
           <div class="text-black" *ngFor="let request of requests">
-            <p> {{ request.createdAt | date: 'shortDate' }}</p>
-            <p *ngFor="let producto of productos | searchnameproduct:
-              request.idProduct"> {{ producto.name }}</p>
-            <p> Monto: ${{ request.value | number: '1.0-0' }} </p>
-            <p> Plazo: {{ request.time }} meses</p>
+            <h3> {{ request.createdAt | date: 'shortDate' }}</h3>
+            <h3 *ngFor="let producto of productos | searchnameproduct:
+              request.idProduct"> {{ producto.name }}</h3>
+            <h3> Monto: ${{ request.value | number: '1.0-0' }} </h3>
+            <h3> Plazo: {{ request.time }} meses</h3>
+            <p> Tasa E.A: {{ requests[0].tasaEfectivaAnual | number:'0.1-4' }} %</p>
+            <p> Tasa M.V: {{ requests[0].tasaEfectivaMes | number:'0.1-4' }} %</p>
             <p>Estado</p>
             <button class="btDone" *ngIf="request.estate == 'Pendiente'"
               mat-raised-button>{{request.estate }}</button>

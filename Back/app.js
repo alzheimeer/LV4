@@ -45,6 +45,7 @@ app.use('/api/request', require('./routes/request.router'));
 app.use('/api/roles', require('./routes/roles.router'));
 app.use('/api/bills', require('./routes/bills.router'));
 app.use('/api/emails', require('./routes/emails.router'));
+app.use('/api/marcas', require('./routes/marcas.router'));
 
 // Handle other angular routes
 app.get('*', (req, res) => {

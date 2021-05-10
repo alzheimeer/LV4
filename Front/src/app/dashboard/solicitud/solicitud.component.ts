@@ -41,6 +41,7 @@ export class SolicitudComponent implements OnInit {
   peritaje = 0;
   registroSimit = 0;
   gmfCuatroxMil = 0;
+  valorgmf = 0;
   step = 0;
   comisionAdminHipo = 0;
   comisionAdminHipo1 = 0;
@@ -75,6 +76,26 @@ export class SolicitudComponent implements OnInit {
     regTarjetav: [false],
     regMatricula: [false],
     regExtracto: [false],
+    nombreProducto: [this.nombre],
+    tasaEfectivaMes: [this.iMesVencido],
+    tasaEfectivaAnual: [this.iEfectivoAnual],
+    tasaEfectivaAnualMax: [this.iEfectivoAnualMax],
+    tasaMoraEA: [this.iMoraEfectivoAnual],
+    rcomisionAdminHipo: [this.comisionAdminHipo1],
+    rregistroHipoteca: [this.registroHipoteca],
+    rinteresesAnticipados: [this.interesesAnticipados],
+    rparqueadero: [this.parqueadero],
+    rperitaje: [this.peritaje],
+    rregistroSimit: [this.registroSimit],
+    rgmf: [this.valorgmf],
+    valorConsignar: [this.valorConsignar],
+    valorCuotaBase: [this.valorCuotaBase],
+    administracion: [this.administracion],
+    iva: [this.iva],
+    soloInteres: [this.soloInteres],
+    aval: [this.aval],
+    totalCredito: [this.totalCredito],
+    valorCuotaTotal: [this.valorCuotaTotal]
   });
 
   productos: Product[] = [];
@@ -138,6 +159,7 @@ export class SolicitudComponent implements OnInit {
         this.totalCredito = 0;
         this.soloInteres = 0;
         this.valorCuotaTotal = 0;
+        this.valorgmf = 0;
         // Fin Reset Valores
 
         this.producto = producto;
@@ -164,7 +186,10 @@ export class SolicitudComponent implements OnInit {
         if (producto.parqueadero) { this.parqueadero = producto.parqueadero; }
         if (producto.peritaje) { this.peritaje = producto.peritaje; }
         if (producto.registroSimit) { this.registroSimit = producto.registroSimit; }
-        if (producto.gmfCuatroxMil) { this.gmfCuatroxMil = producto.gmfCuatroxMil; }
+        if (producto.gmfCuatroxMil) {
+          this.gmfCuatroxMil = producto.gmfCuatroxMil;
+          this.valorgmf = (this.valorSolicitado / 1000) * this.gmfCuatroxMil;
+        }
 
         if (producto.comisionAdminHipo) { this.comisionAdminHipo = producto.comisionAdminHipo; }
         if (producto.excedenteComisionAdminHipo) { this.excedenteComisionAdminHipo = producto.excedenteComisionAdminHipo; }
@@ -173,14 +198,8 @@ export class SolicitudComponent implements OnInit {
           this.interesesAnticipadosp = producto.interesesAnticipados;
           this.interesesAnticipados = (this.valorSolicitado / 100) * this.interesesAnticipadosp;
         }
-
-
-
         this.formularioSolicitud.patchValue({ value: producto.valuemin });
         this.formularioSolicitud.patchValue({ time: producto.termmin });
-
-
-        this.valorConsignar = this.valorSolicitado - this.registroSimit - this.peritaje - this.parqueadero - this.comisionAdminHipo1 - this.registroHipoteca - this.interesesAnticipados;
 
         if (this.nombre === 'Prestamo Personal') {
           this.totalPersonal = ((this.aval + this.administracion + this.iva) / this.plazo);
@@ -193,6 +212,14 @@ export class SolicitudComponent implements OnInit {
           this.totalCredito = 0;
         }
 
+        this.valorConsignar =
+          this.valorSolicitado -
+          (this.valorgmf +
+            this.registroSimit +
+            this.peritaje +
+            this.comisionAdminHipo1 +
+            this.registroHipoteca +
+            this.interesesAnticipados);
 
       });
     });
@@ -214,26 +241,26 @@ export class SolicitudComponent implements OnInit {
       }
       this.aval = (this.valorSolicitado / 100) * this.avalp;
       this.interesesAnticipados = (this.valorSolicitado / 100) * this.interesesAnticipadosp;
-      this.valorConsignar =
-        this.valorSolicitado -
-        (this.registroSimit +
-          this.peritaje +
-          this.parqueadero +
-          this.comisionAdminHipo1 +
-          this.registroHipoteca +
-          this.interesesAnticipados);
-
-
       if (this.nombre === 'Prestamo Personal') {
         this.totalPersonal = ((this.aval + this.administracion + this.iva) / this.plazo);
         this.soloInteres = (this.valorCuotaBase as number * this.plazo) - this.valorSolicitado;
         this.valorCuotaTotal = this.valorCuotaBase as number + this.totalPersonal;
         this.totalCredito = this.valorSolicitado + this.soloInteres + this.administracion + this.iva + this.aval;
+        this.valorgmf = (this.valorSolicitado / 1000) * this.gmfCuatroxMil;
       } else {
         this.soloInteres = 0;
         this.totalCredito = 0;
         this.valorCuotaTotal = this.valorCuotaBase as number + this.iva + this.aval + this.administracion;
       }
+
+      this.valorConsignar =
+        this.valorSolicitado -
+        (this.registroSimit +
+          this.peritaje +
+          this.valorgmf +
+          this.comisionAdminHipo1 +
+          this.registroHipoteca +
+          this.interesesAnticipados);
 
     });
 
@@ -296,6 +323,7 @@ export class SolicitudComponent implements OnInit {
     }
     const idP = this.formularioSolicitud.controls.idProduct.value;
     this.productService.getProductById(idP).subscribe((resp) => {
+      // Establecemos los requisitos que debe aportar el usuario segun tipo prestamo
       if (resp.regInmueble === true) { this.formularioSolicitud.controls.regInmueble.setValue(true); }
       if (resp.regPersonales === true) { this.formularioSolicitud.controls.regPersonales.setValue(true); }
       if (resp.regTrabajo === true) { this.formularioSolicitud.controls.regTrabajo.setValue(true); }
@@ -307,10 +335,35 @@ export class SolicitudComponent implements OnInit {
       if (resp.regTarjetav === true) { this.formularioSolicitud.controls.regTarjetav.setValue(true); }
       if (resp.regMatricula === true) { this.formularioSolicitud.controls.regMatricula.setValue(true); }
       if (resp.regExtracto === true) { this.formularioSolicitud.controls.regExtracto.setValue(true); }
+      // Fin requisitos
+      // Metemos la info faltante del formulario que esta en variables
+      this.formularioSolicitud.controls.nombreProducto.setValue(this.nombre);
+      this.formularioSolicitud.controls.tasaEfectivaMes.setValue(this.iMesVencido);
+      this.formularioSolicitud.controls.tasaEfectivaAnual.setValue(this.iEfectivoAnual);
+      this.formularioSolicitud.controls.tasaEfectivaAnualMax.setValue(this.iEfectivoAnualMax);
+      this.formularioSolicitud.controls.tasaMoraEA.setValue(this.iMoraEfectivoAnual);
+      this.formularioSolicitud.controls.rcomisionAdminHipo.setValue(this.comisionAdminHipo1);
+      this.formularioSolicitud.controls.rregistroHipoteca.setValue(this.registroHipoteca);
+      this.formularioSolicitud.controls.rinteresesAnticipados.setValue(this.interesesAnticipados);
+      this.formularioSolicitud.controls.rparqueadero.setValue(this.parqueadero);
+      this.formularioSolicitud.controls.rperitaje.setValue(this.peritaje);
+      this.formularioSolicitud.controls.rregistroSimit.setValue(this.registroSimit);
+      this.formularioSolicitud.controls.rgmf.setValue(this.valorgmf);
+      this.formularioSolicitud.controls.valorConsignar.setValue(this.valorConsignar);
+      this.formularioSolicitud.controls.valorCuotaBase.setValue(this.valorCuotaBase);
+      this.formularioSolicitud.controls.administracion.setValue(this.administracion);
+      this.formularioSolicitud.controls.iva.setValue(this.iva);
+      this.formularioSolicitud.controls.soloInteres.setValue(this.soloInteres);
+      this.formularioSolicitud.controls.aval.setValue(this.aval);
+      this.formularioSolicitud.controls.totalCredito.setValue(this.totalCredito);
+      this.formularioSolicitud.controls.valorCuotaTotal.setValue(this.valorCuotaTotal);
+      // Habilitamos el campo idUser para que lo tome al enviarlo
       this.formularioSolicitud.get('idUser')?.enable();
+      // Llamamos a CreateRequest Con una creacion inicial de la solicitud
       this.requestService.createRequest(this.formularioSolicitud.value).subscribe(
         (resp2) => {
           this.formularioSolicitud.reset();
+          // Actualizamos en Usuario el numero de solicitud que se acaba de crear
           this.authService.updateSolicitudUserById(resp2.idUser, resp2._id).subscribe();
           if (this.productos) {
             this.router.navigate(['/dashboard/misolicitud']);

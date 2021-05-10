@@ -1,6 +1,7 @@
 <!--Card-->
 <div class="card x">
   <!--Card content-->
+  <form class="form" [formGroup]="formularioSolicitud" #f="ngForm">
   <div class="card-body">
     <div class="row">
       <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb10">
@@ -11,11 +12,19 @@
 
           <div id="pricipal-slide1"></div>
           <div>
-            <mat-slider class="min" thumbLabel [displayWith]="formatLabel1" step="50000" min="1000000"
-              max="50000000" name="valor" [(ngModel)]="valor" (input)="changeValueValor($event)">
+            <mat-slider class="min" thumbLabel
+            [displayWith]="formatLabel1"
+            tickInterval="5"
+            [step]="step"
+            [min]=valuemin
+            [max]=valuemax
+            name="valorSolicitado"
+            formControlName="value" >
             </mat-slider>
             <p>
-              <span *ngIf="valor > 1" class="text-white">$  {{valor | number: '1.0-0'}} pesos</span>
+              <span class="text-white" *ngIf="valorSolicitado > 1 && valorSolicitado < 1000000" >$ {{ valorSolicitado | number: "1.0-0" }} pesos</span>
+              <span class="text-white" *ngIf="valorSolicitado >= 1000000" >$ {{ valorSolicitado | number: "1.0-0" }} millones</span>
+              <!-- <span *ngIf="valorSolicitado > 1" class="text-white">$  {{valorSolicitado | number: '1.0-0'}} pesos</span> -->
 
             </p>
 
@@ -25,20 +34,46 @@
           <h4 class="text-white">A Cuantos Meses Deseas El Prestamo?</h4>
           <div id="totalyear-slide"></div>
           <div>
-            <mat-slider name="meses" class="max" thumbLabel [displayWith]="formatLabel" tickInterval="1" min="1" max="12"
-              [(ngModel)]="meses" (input)="changeValueMeses($event)"></mat-slider>
+            <mat-slider
+            formControlName="time"
+            name="plazo"
+            class="max" thumbLabel
+            [displayWith]="formatLabel"
+            tickInterval="1"
+            [min]=termmin
+            [max]=termmax
+            >
+            </mat-slider>
             <p>
-              <span *ngIf="meses > 1" class="text-white">{{meses}} meses</span>
-              <span *ngIf="meses <= 1" class="text-white">{{meses}} mes</span>
+              <span *ngIf="plazo > 1" class="text-white">{{plazo}} meses</span>
+              <span *ngIf="plazo <= 1" class="text-white">{{plazo}} mes</span>
             </p>
           </div>
         </div>
 
       </div>
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+      <div *ngIf="soloInteres > 0" class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
         <div class="single-total">
           <h4 class="text-white lead-cal-small-text">Interés </h4>
-          <h5  class="text-white emi-price" id="emi">$ {{interes | number: '1.0-0'}}</h5>
+          <h5  class="text-white emi-price" id="emi">$ {{soloInteres | number: '1.0-0'}}</h5>
+        </div>
+      </div>
+      <div *ngIf="iEfectivoAnual > 0" class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+        <div class="single-total">
+          <h4 class="text-white lead-cal-small-text">Tasa E.A </h4>
+          <h5  class="text-white emi-price" > {{iEfectivoAnual | number: '0.1-4' }} %</h5>
+        </div>
+      </div>
+      <div *ngIf="iMesVencido > 0" class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+        <div class="single-total">
+          <h4 class="text-white lead-cal-small-text">Tasa Mes</h4>
+          <h5  class="text-white emi-price" > {{iMesVencido | number: '0.1-4'}} %</h5>
+        </div>
+      </div>
+      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+        <div class="single-total">
+          <h4 class="text-white lead-cal-small-text">Admin</h4>
+          <h5 class="text-white" id="tbl_la">$ {{administracion | number: '1.0-0'}}</h5>
         </div>
       </div>
       <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 ">
@@ -47,28 +82,23 @@
           <h5 class="text-white" id="tbl_emi">$ {{iva | number: '1.0-0'}}</h5>
         </div>
       </div>
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
+      <div  *ngIf="aval > 0" class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
         <div class="single-total">
           <h4 class="text-white lead-cal-small-text">Aval</h4>
           <h5 class="text-white" id="tbl_la">$ {{aval | number: '1.0-0'}}</h5>
         </div>
       </div>
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-        <div class="single-total">
-          <h4 class="text-white lead-cal-small-text">Tecno</h4>
-          <h5 class="text-white" id="tbl_la">$ {{tecno | number: '1.0-0'}}</h5>
-        </div>
-      </div>
-      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
+
+      <div  *ngIf="totalCredito > 0" class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
         <div class="single-total">
           <h4 class="text-white lead-cal-small-text">Total:</h4>
-          <h5 class="text-white" id="tbl_la">$ {{total | number: '1.0-0'}}</h5>
+          <h5 class="text-white" id="tbl_la">$ {{totalCredito | number: '1.0-0'}}</h5>
         </div>
       </div>
       <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
         <div class="single-total">
           <h4 class="text-white lead-cal-small-text">Cuota Mensual: </h4>
-          <h5 class="text-white" id="tbl_la">$ {{emi | number: '1.0-0'}} pesos</h5>
+          <h5 class="text-white" id="tbl_la">$ {{valorCuotaTotal | number: '1.0-0'}} pesos</h5>
         </div>
       </div>
       <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
@@ -76,6 +106,7 @@
       </div> -->
     </div>
   </div>
+</form>
 </div>
 
 <!--/.Card-->

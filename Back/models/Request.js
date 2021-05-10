@@ -190,6 +190,78 @@ var RequestSchema = Schema({
         required: false,
         default: false
     },
+    nombreProducto: {
+        type: String,
+        required: false
+    },
+    tasaEfectivaMes: {
+        type: Number,
+        required: false
+    },
+    tasaEfectivaAnual: {
+        type: Number,
+        required: false
+    },
+    tasaEfectivaAnualMax: {
+        type: Number,
+        required: false
+    },
+    tasaMoraEA: {
+        type: Number,
+        required: false
+    },
+    rcomisionAdminHipo: {
+        type: Number,
+        required: false
+    },
+    rregistroHipoteca: {
+        type: Number,
+        required: false
+    },
+    rinteresesAnticipados: {
+        type: Number,
+        required: false
+    },
+    rparqueadero: {
+        type: Number,
+        required: false
+    },
+    rperitaje: {
+        type: Number,
+        required: false
+    },
+    rregistroSimit: {
+        type: Number,
+        required: false
+    },
+    rgmf: {
+        type: Number,
+        required: false
+    },
+    valorConsignar: {
+        type: Number,
+        required: false
+    },
+    administracion: {
+        type: Number,
+        required: false
+    },
+    iva: {
+        type: Number,
+        required: false
+    },
+    soloInteres: {
+        type: Number,
+        required: false
+    },
+    aval: {
+        type: Number,
+        required: false
+    },
+    totalCredito: {
+        type: Number,
+        required: false
+    },
     inmueble: {
         tipo: {
             type: String,

@@ -7,15 +7,14 @@
     <img mat-card-sm-image *ngIf="usuario.avatarPath !== undefined"
       [src]="baseUrlN+usuario.avatarPath" alt="Foto usuario">
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{usuario.name}} {{usuario.surname}}</mat-card-title>
+    <mat-card-title>{{usuario.name | uppercase}} {{usuario.surname | uppercase}}</mat-card-title>
     <mat-card-subtitle>{{usuario.email}}</mat-card-subtitle>
-    <mat-card-subtitle>Plazo: {{solicitud.time}} meses</mat-card-subtitle>
+    <mat-card-title>Plazo: {{solicitud.time}} meses</mat-card-title>
     <mat-card-subtitle>Solicitud: {{usuario.solicitud}}</mat-card-subtitle>
 
     <!-- Datos Personales -->
     <div class="borderx p-2">
-      <p>{{usuario.personal.tipodoc}}: {{usuario.personal.numdoc | number:
-        "1.0-0"}} </p>
+      <p>{{usuario.personal.tipodoc}}: {{usuario.personal.numdoc}} </p>
       <p>{{usuario.personal.pais}}-{{usuario.personal.departamento}}-{{usuario.personal.ciudad}}-{{usuario.personal.barrio}}</p>
       <p>Direccion: {{usuario.personal.direccion}} </p>
       <p>Celular: {{usuario.personal.celular1}} </p>
@@ -293,6 +292,52 @@
             </div>
           </div>
         </div>
+
+         <!-- Card Info Intereses Y Cobros -->
+         <div class="card">
+          <div class="card-header" id="headingTwo">
+            <h2 class="mb-0">
+              <button class="btn btn-link btn-block text-left collapsed"
+                type="button" data-toggle="collapse" data-target="#collapseFac"
+                aria-expanded="false" aria-controls="collapseFac">
+                Calculos Del Prestamo
+              </button>
+            </h2>
+          </div>
+          <div id="collapseFac" class="collapse" aria-labelledby="headingTwo"
+            data-parent="#accordionExample">
+            <div class="card-body">
+              <div class="borderx" >
+
+                <p><span class="m-2">Tasa E.MV: {{solicitud.tasaEfectivaMes | number:'0.1-4'}} %</span></p>
+                <p><span class="m-2">Tasa E.A: {{solicitud.tasaEfectivaAnual| number:'0.1-4'}} %</span></p>
+                <p><span class="m-2">Tasa E.A Max: {{solicitud.tasaEfectivaAnualMax| number:'0.1-4'}} %</span></p>
+                <p><span class="m-2">Tasa Mora E.A: {{solicitud.tasaMoraEA| number:'0.1-4'}} %</span></p>
+                <p><span class="m-2">Valor Solicitado: ${{solicitud.value | number:'0.0-0'}}</span></p>
+                <p><span *ngIf="solicitud.rcomisionAdminHipo > 0" class="m-2">Comision Admin: -${{solicitud.rcomisionAdminHipo | number:'0.0-0'}}</span></p>
+                <p><span *ngIf="solicitud.rregistroHipoteca > 0" class="m-2">Registro Hipoteca: -${{solicitud.rregistroHipoteca | number:'0.0-0'}}</span></p>
+                <p><span *ngIf="solicitud.rinteresesAnticipados > 0" class="m-2">Intereses Anticipados: -${{solicitud.rinteresesAnticipados | number:'0.0-0'}}</span></p>
+                <p><span *ngIf="solicitud.rparqueadero > 0" class="m-2">Parqueadero: -${{solicitud.rparqueadero | number:'0.0-0'}}</span></p>
+                <p><span *ngIf="solicitud.rperitaje > 0" class="m-2">Peritaje: -${{solicitud.rperitaje | number:'0.0-0'}}</span></p>
+                <p><span *ngIf="solicitud.rregistroSimit > 0" class="m-2">Registro Simit: -${{solicitud.rregistroSimit | number:'0.0-0'}}</span></p>
+                <p><span *ngIf="solicitud.rgmf > 0" class="m-2">4 x Mil: -${{solicitud.rgmf | number:'0.0-0'}}</span></p>
+                <p><span *ngIf="solicitud.aval > 0" class="m-2">Aval: -${{solicitud.aval | number:'0.0-0'}}</span></p>
+
+                <p><span class="m-2">Valor A Consignar: ${{solicitud.valorConsignar | number:'0.0-0'}}</span></p>
+                <p><span class="m-2">Cuota(Capital+Interes): ${{solicitud.valorCuotaBase | number:'0.0-0'}}</span></p>
+
+                <p><span class="m-2">Administracion: ${{solicitud.administracion | number:'0.0-0'}}</span></p>
+                <p><span class="m-2">Iva: ${{solicitud.iva | number:'0.0-0'}}</span></p>
+                <p><span *ngIf="solicitud.totalCredito > 0" class="m-2">Total Credito: ${{solicitud.totalCredito | number:'0.0-0'}}</span></p>
+                <p><span class="m-2">Valor Cuota Total: ${{solicitud.valorCuotaTotal | number:'0.0-0'}}</span></p>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
     </div>
   </div>
 

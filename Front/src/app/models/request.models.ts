@@ -55,6 +55,24 @@ export interface Requestx {
   estate: string;
   createdAt: Date;
   updatedAt: Date;
+  nombreProducto: string;
+  tasaEfectivaMes: number;
+  tasaEfectivaAnual: number;
+  tasaEfectivaAnualMax: number;
+  tasaMoraEA: number;
+  rcomisionAdminHipo: number;
+  rregistroHipoteca: number;
+  rinteresesAnticipados: number;
+  rparqueadero: number;
+  rperitaje: number;
+  rregistroSimit: number;
+  rgmf: number;
+  valorConsignar: number;
+  administracion: number;
+  iva: number;
+  soloInteres: number;
+  aval: number;
+  totalCredito: number;
 }
 
 export interface Inmueble {
@@ -155,9 +173,87 @@ export interface CreateRequest {
   description: string;
   estate: string;
   _id: string;
+  nombreProducto: string;
+  tasaEfectivaMes: number;
+  tasaEfectivaAnual: number;
+  tasaEfectivaAnualMax: number;
+  tasaMoraEA: number;
+  rcomisionAdminHipo: number;
+  rregistroHipoteca: number;
+  rinteresesAnticipados: number;
+  rparqueadero: number;
+  rperitaje: number;
+  rregistroSimit: number;
+  rgmf: number;
+  valorConsignar: number;
+  valorCuotaBase: number;
+  administracion: number;
+  iva: number;
+  soloInteres: number;
+  aval: number;
+  totalCredito: number;
+  valorCuotaTotal: number;
 }
 
+export class CreateIniReq implements CreateRequest {
+  idUser: any;
+  idProduct: string;
+  value: number;
+  time: number;
+  description: string;
+  estate: string;
+  _id: string;
+  nombreProducto: string;
+  tasaEfectivaMes: number;
+  tasaEfectivaAnual: number;
+  tasaEfectivaAnualMax: number;
+  tasaMoraEA: number;
+  rcomisionAdminHipo: number;
+  rregistroHipoteca: number;
+  rinteresesAnticipados: number;
+  rparqueadero: number;
+  rperitaje: number;
+  rregistroSimit: number;
+  rgmf: number;
+  valorConsignar: number;
+  valorCuotaBase: number;
+  administracion: number;
+  iva: number;
+  soloInteres: number;
+  aval: number;
+  totalCredito: number;
+  valorCuotaTotal: number;
 
+  constructor() {
+    this.idUser = '',
+      this.idProduct = '',
+      this.value = 0,
+      this.time = 0,
+      this.description = '',
+      this.estate = '',
+      this._id = '',
+      this.nombreProducto = '',
+      this.tasaEfectivaMes = 0,
+      this.tasaEfectivaAnual = 0,
+      this.tasaEfectivaAnualMax = 0,
+      this.tasaMoraEA = 0,
+      this.rcomisionAdminHipo = 0,
+      this.rregistroHipoteca = 0,
+      this.rinteresesAnticipados = 0,
+      this.rparqueadero = 0,
+      this.rperitaje = 0,
+      this.rregistroSimit = 0,
+      this.rgmf = 0,
+      this.valorConsignar = 0,
+      this.administracion = 0,
+      this.iva = 0,
+      this.soloInteres = 0,
+      this.aval = 0,
+      this.totalCredito = 0,
+      this.valorCuotaTotal = 0,
+      this.valorCuotaBase = 0
+  }
+}
 
 export class RequestIni implements Requestx {
   inmueble: Inmueble;
@@ -216,7 +312,24 @@ export class RequestIni implements Requestx {
   regExtracto: boolean;
   regExtractoOk: boolean;
   regOk: boolean;
-
+  nombreProducto: string;
+  tasaEfectivaMes: number;
+  tasaEfectivaAnual: number;
+  tasaEfectivaAnualMax: number;
+  tasaMoraEA: number;
+  rcomisionAdminHipo: number;
+  rregistroHipoteca: number;
+  rinteresesAnticipados: number;
+  rparqueadero: number;
+  rperitaje: number;
+  rregistroSimit: number;
+  rgmf: number;
+  valorConsignar: number;
+  administracion: number;
+  iva: number;
+  soloInteres: number;
+  aval: number;
+  totalCredito: number;
 
   constructor() {
     this._id = '',
@@ -259,11 +372,30 @@ export class RequestIni implements Requestx {
       this.updatedAt = new Date(),
       this.fechaConsignacion = new Date(),
       this.valorDeConsignacion = 0,
-      this.valorCuotaBase = 0,
-      this.valorCuotaTotal = 0,
       this.fechasFacturacion = [new Date()],
       this.estadosFacturacion = [''],
       this.createdAt = new Date(),
+
+      this.nombreProducto = '',
+      this.tasaEfectivaMes = 0,
+      this.tasaEfectivaAnual = 0,
+      this.tasaEfectivaAnualMax = 0,
+      this.tasaMoraEA = 0,
+      this.rcomisionAdminHipo = 0,
+      this.rregistroHipoteca = 0,
+      this.rinteresesAnticipados = 0,
+      this.rparqueadero = 0,
+      this.rperitaje = 0,
+      this.rregistroSimit = 0,
+      this.rgmf = 0,
+      this.valorConsignar = 0,
+      this.administracion = 0,
+      this.iva = 0,
+      this.soloInteres = 0,
+      this.aval = 0,
+      this.totalCredito = 0,
+      this.valorCuotaTotal = 0,
+      this.valorCuotaBase = 0,
 
       this.vehiculo = {
         tipo: '',

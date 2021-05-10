@@ -35,6 +35,7 @@
                                         <th scope="col">Banco</th>
                                         <th scope="col">Tipo</th>
                                         <th scope="col"># Cuenta</th>
+                                        <th scope="col"># Solicitud</th>
                                         <th scope="col">Permisos</th>
                                         <th scope="col"></th>
                                         <th *ngIf="element" scope="col"></th>
@@ -60,6 +61,7 @@
                                         <td *ngIf="!element">{{usuario.banca.banco}}</td>
                                         <td *ngIf="!element">{{usuario.banca.tipocuenta}}</td>
                                         <td *ngIf="!element">{{usuario.banca.numcuenta}}</td>
+                                        <td *ngIf="!element">{{usuario.solicitud}}</td>
                                         <td *ngIf="!element">
                                             <span *ngFor="let i of [0,1,2]">
 
@@ -142,6 +144,11 @@
                                         <td *ngIf="element">
                                             <mat-form-field class="example-full-width">
                                                 <input #numcuenta (keyup)="save(usuario, numcuenta.value, 'numcuenta')" matInput value={{usuario.banca.numcuenta}} type="number">
+                                            </mat-form-field>
+                                        </td>
+                                        <td *ngIf="element">
+                                            <mat-form-field class="example-full-width">
+                                                <input #solicitud (keyup)="save(usuario, solicitud.value, 'solicitud')" matInput value={{usuario.solicitud}} type="string">
                                             </mat-form-field>
                                         </td>
                                         <td *ngIf="element">

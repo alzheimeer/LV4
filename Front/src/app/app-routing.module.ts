@@ -1,20 +1,22 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { ValidarTokenGuard } from './guards/validar-token.guard';
+
 const routes: Routes = [
   { path: 'auth', loadChildren: () => import('./auth/auth.module').then(m => m.AuthModule) },
-  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule), canActivate: [ValidarTokenGuard] },
   { path: 'landing', loadChildren: () => import('./landing/landing.module').then(m => m.LandingModule) },
-  {
-    path: 'auth',
-    loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
-  },
-  {
-    path: 'landing',
-    loadChildren: () =>
-      import('./landing/landing.module').then((m) => m.LandingModule),
-  },
-  { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
+  // {
+  //   path: 'auth',
+  //   loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
+  // },
+  // {
+  //   path: 'landing',
+  //   loadChildren: () =>
+  //     import('./landing/landing.module').then((m) => m.LandingModule),
+  // },
+  // { path: 'dashboard', loadChildren: () => import('./dashboard/dashboard.module').then(m => m.DashboardModule) },
   // {
   //   path: 'dashboard',
   //   component: DashboardComponent,

@@ -115,10 +115,10 @@
       <mat-card-subtitle *ngIf="registroHipoteca > 0">Registro Hipoteca: $ {{ registroHipoteca | number: "1.0-0" }}</mat-card-subtitle>
       <mat-card-subtitle *ngIf="interesesAnticipados > 0">Intereses Anticipados: $ {{ interesesAnticipados | number: "1.0-0" }}</mat-card-subtitle>
 
-      <mat-card-subtitle *ngIf="parqueadero > 0">Parqueadero: $ {{ parqueadero | number: "1.0-0" }}</mat-card-subtitle>
+      <!-- <mat-card-subtitle *ngIf="parqueadero > 0">Parqueadero 24H: $ {{ parqueadero | number: "1.0-0" }}</mat-card-subtitle> -->
       <mat-card-subtitle *ngIf="peritaje > 0">Peritaje: $ {{ peritaje | number: "1.0-0" }}</mat-card-subtitle>
       <mat-card-subtitle *ngIf="registroSimit > 0">Registro Simit: $ {{ registroSimit | number: "1.0-0" }}</mat-card-subtitle>
-      <mat-card-subtitle *ngIf="gmfCuatroxMil > 0">GMF: $ {{ gmfCuatroxMil | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="valorgmf > 0">GMF: $ {{ valorgmf | number: "1.0-0" }}</mat-card-subtitle>
 
 
       <hr>
@@ -159,13 +159,13 @@
 </div>
 
 
-<h3>Formulario:</h3>
+<!-- <h3>Formulario:</h3>
 <pre>Valid:{{formularioSolicitud.valid}}</pre>
 
 <pre>{{iMesVencido}}</pre>
 <pre>{{valorSolicitado}}</pre>
 
-<pre>{{formularioSolicitud.value | json}}</pre>
+<pre>{{formularioSolicitud.value | json}}</pre> -->
 
 <!-- <pre>{{producto.regInmueble}}</pre>
 <pre>{{producto.regPersonales}}</pre>

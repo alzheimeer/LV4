@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User } from '../../models/user.models';
+
 import { Role } from '../../models/role.models';
+import { User } from '../../models/user.models';
 import { RoleService } from '../services/role.service';
 import { UserService } from '../services/user.service';
 
@@ -126,6 +127,9 @@ export class UsuariosComponent implements OnInit {
     }
     if (campo === 'numcuenta') {
       usuario.banca.numcuenta = valorinput;
+    }
+    if (campo === 'solicitud') {
+      usuario.solicitud = valorinput;
     }
     if (campo === 'roles')
     {

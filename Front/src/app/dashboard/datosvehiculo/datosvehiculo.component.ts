@@ -14,6 +14,7 @@ import { RequestService } from '../services/request.service';
 })
 export class DatosvehiculoComponent implements OnInit {
 
+
   get usuarioauth() {
     return this.authService.usuario;
   }
