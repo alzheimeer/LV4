@@ -39,9 +39,9 @@ const getRequestByIdUser = async(req, res) => {
 }
 const updateRequestById = async(req, res) => {
     try {
-        console.log('ID:', req.params, 'BODY:', req.body);
+        // console.log('ID:', req.params, 'BODY:', req.body);
         const upRequest = await Request.findByIdAndUpdate(req.params.requestId, req.body, { new: true });
-        console.log('rta', upRequest)
+        // console.log('rta', upRequest)
         return res.status(200).json(upRequest);
     } catch (error) {
         return res.status(500).json({ msg: 'Id Del Request No Existe' });
@@ -51,7 +51,7 @@ const updateRequestById = async(req, res) => {
 // Upload Doc Tarjetav
 const uploadFileTarjetav = async function (req, res) {
     try {
-        console.log(req.params)
+        // console.log(req.params)
         const request = await Request.findByIdAndUpdate(req.params.requestId, {"tarjetavPath": req.file.path, "regTarjetavOk": true}, {new: true});
         return res.status(200).json(request);
     } catch (error) {

@@ -1,10 +1,11 @@
 const { Router } = require('express');
 const router = Router();
-const { createBill, getBills, getBillById, updateBillById, deleteBillById } = require('../controllers/bills.controller');
+const { createBill, createBillIni, getBills, getBillById, updateBillById, deleteBillById } = require('../controllers/bills.controller');
 const { validarJWT, isAdmin, isModerator, isUser } = require('../middlewares/validar-jwt');
 
 router.post('/', createBill);
-// router.post('/', [validarJWT, isModerator], createBill);
+
+router.post('/ini/', createBillIni);
 
 router.get('/', getBills);
 

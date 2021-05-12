@@ -12,15 +12,71 @@
       <div class="card">
         <div class="card-body">
 
+          <h2>MIS FACTURAS</h2>
 
 
+          <!-- A1 DEBE IR FOR MULTIPLICANDO LAS CARD SEGUN NUM DE FACTURAS QUE ALLA -->
+          <div class="card" *ngFor="let s of solicitud.fechasFacturacion">
+            <div class="card-body" *ngIf="s.estado != 'Pendiente'">
 
+              <div class="accordion_display">
+                <div class="accordion_size">
+                  <mat-accordion multi="true">
+                    <mat-expansion-panel [expanded]="false" hiddenToggle="false">
+                      <mat-expansion-panel-header class="s">
+                        <mat-panel-title class="row ">
+
+                          <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <span class="text_center"> FECHA LIMITE</span></div>
+
+                          <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                            <span class="spacer"></span>
+                            <button  class="btDone " *ngIf="s.estado === 'Creada'" mat-raised-button>POR PAGAR</button>
+                            <button class="btPagado" *ngIf="s.estado === 'Pagada'" mat-raised-button>PAGADO</button>
+                            <button class="btErr" *ngIf="s.estado === 'Mora'" mat-raised-button>EN MORA</button>
+                          </div>
+                          <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <span class="text_center"> {{s.fecha | date:'d/M/y'}}</span>
+                          </div>
+                          <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                            <span class="text_center"> Total a pagar</span></div>
+
+                          <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                            <span class="spacer"></span> $ {{s.valor | number:'0.0-0'}}</div>
+
+
+                          </mat-panel-title>
+                      </mat-expansion-panel-header>
+                      <hr>
+                      <!-- <mat-panel-title class="row">
+                        <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
+                          <span class="text_center"> Total a pagar</span></div>
+
+                        <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                          <span class="spacer"></span> <button (click)="verFactura(s.idRecibo)">Ver Detalles</button></div>
+
+                          <div class="card col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <span class="spacer"></span>Id:{{bill._id}}
+                            <span class="spacer"></span>Total A Pagar: ${{bill.totalaPagar | number:'0.0-0'}}
+                          </div>
+                      </mat-panel-title> -->
+                    </mat-expansion-panel>
+                  </mat-accordion>
+                </div>
+              </div>
+
+
+          </div>
         </div>
+        <!-- A1 ACABA -->
+
+
       </div>
     </div>
+  </div>
 
 
-<div class="col-md-4">
-  <app-datosconstruccion></app-datosconstruccion>
-</div>
+  <div class="col-md-4">
+    <app-datosconstruccion></app-datosconstruccion>
+  </div>
 </div>

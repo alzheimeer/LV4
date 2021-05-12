@@ -1,75 +1,170 @@
 const Bill = require('../models/Bill');
 const Request = require('../models/Request');
 const Product = require('../models/Product');
+const User = require('../models/User');
 
 const createBill = async(req, res) => {
     try {
         let now = new Date();
-        console.log('La fecha actual es:', now);
+        let dateCompare = new Date();
+        dateCompare.setDate(dateCompare.getDate() + 30);
+        // console.log('La fecha actual + X dias:', dateCompare);
         const requests = await Request.find();
 
         for (let i = 0; i < requests.length; i++) {
+            let requestx = await Request.findById(requests[i]._id);
+
+
+            // console.log(requestx.fechasFacturacion[i].fecha.getTime());
+
+
+            if (requestx.estate === 'Facturacion') {
+                console.log("Es facturacion Seccion Comp Mora");
+                for (let j = 0; j < requestx.fechasFacturacion.length; j++) {
+                    console.log('2 For Factu #j', j, requestx.fechasFacturacion[j].fecha, requestx.fechasFacturacion[j].estado);
+                    console.log('fecha y now', requestx.fechasFacturacion[j].fecha, now);
+
+                    if (requestx.fechasFacturacion[j].estado === 'Creada' && now.getTime() > requestx.fechasFacturacion[j].fecha.getTime()) {
+                        console.log('Entro A Creada 1')
+                        // SI LA FECHA E HOY ES MAYOR A LA FECHA LIMITE DE PAGO PASE A ESTADO MORA
+                        requestx.fechasFacturacion[j].estado = 'Mora';
+
+                        // CALCULA NUMERO DE DIAS DE MORA Y ACTUALIZA
+                        let dias = now.getTime() - requestx.fechasFacturacion[j].fecha.getTime();
+                        dias = dias / (1000 * 60 * 60 * 24);
+                        console.log('Dias En Mora 1', dias);
+                        requestx.fechasFacturacion[j].diasMora = dias;
+
+                    }
+                    if (requestx.estadosFacturacion[j] === 'Mora') {
+                        console.log('Entro A Mora 2')
+                        // SI YA ESTA EN MORA CADA DIA re-CALCULA NUMERO DE DIAS DE MORA Y ACTUALIZA
+                        let dias = now.getTime() - requestx.fechasFacturacion[j].fecha.getTime();
+                        dias = dias / (1000 * 60 * 60 * 24);
+                        console.log('Dias En Mora 2', dias);
+                        requestx.fechasFacturacion[j].diasMora = dias;
+                    }
+                    await Request.findByIdAndUpdate(requestx._id, requestx, { new: true });
+                }
+
+            }
+
+        }
+
+
+        // PROCESO PARA CREAR RECIBO
+        for (let i = 0; i < requests.length; i++) {
             if (requests[i].estate === 'Facturacion') {
-                for (let j = 0; j < requests[i].estadosFacturacion.length; j++) {
-                    if (requests[i].estadosFacturacion[j] === 'Pendiente') {
-                        let fechaFacturar = requests[i].fechasFacturacion[j];
-                        console.log('Fecha A Facturar:', fechaFacturar);
-                        now.setDate(now.getDate() + 32);
-                        console.log('Fecha Actual Mas 10 Dias:', now);
+                // console.log('Empieza Seccion Factura');
+                const product = await Product.findById(requests[i].idProduct);
+                const user = await User.findById(requests[i].idUser);
+                let request = await Request.findById(requests[i]._id);
 
-                        const product = await Product.findById(requests[i].idProduct);
-                        if (now.getTime() > fechaFacturar.getTime()) {
-                            // Si Entra Se Debe Crear La Factura
-                            console.log('Hora de facturar');
-                            // const bodyBill = {
-                            //     "idUser": requests[i].idUser,
-                            //     "idProducto": requests[i].idProduct,
-                            //     "imin": product.imin,
-                            //     "imax": product.imax,
-                            //     "value": requests[i].value,
-                            //     "plazo": requests[i].time,
-                            //     "numcuota": j + 1,
-                            //     "servicio": 20000,
-                            //     "ivaServicio": 19,
-                            //     "aval": 0,
-                            //     "parqueadero": 0,  
+                for (let j = 0; j < requests[i].fechasFacturacion.length; j++) {
+                    if (dateCompare.getTime() > requests[i].fechasFacturacion[j].fecha.getTime() && requests[i].fechasFacturacion[j].estado === 'Pendiente') {
+                        // console.log('Hora de facturar');
 
-                            // }
-                            // const newbill = new Bill(bodyBill);
-                            // const billSave = await newbill.save();
-
-                            // res.status(201).json(billSave);
-
-                            console.log('Id Solicitud Facturada', requests[i]._id)
-
-                            // Monto
-                            var valorPrestado = 1000000;
-                            // Plazo Meses
-                            var plazoMeses = 1;
-                            // Tasa Interes
-                            var iMesVencido = 1.8779;
-                            // Tipo de interés fraccionado (pasamos a porcentaje)
-                            var im = iMesVencido / 100;
-                            //Math.pow(base, exponente)
-                            var im2 = Math.pow((1 + im), -(plazoMeses));
-
-                            // Cuota Cap. + Int.
-                            let a = (valorPrestado * im) / (1 - im2);
-
-                            console.log("Cuota + Interes: " + a.toFixed(2));
-                            return res.status(201).json({ cuota: a.toFixed(2) });
+                        const bodyBill = {
+                            "idUser": request.idUser,
+                            "Producto": request.nombreProducto,
+                            "fechaLimitePago": requests[i].fechasFacturacion[j].fecha,
+                            "name": user.name,
+                            "surname": user.surname,
+                            "tipodoc": user.personal.tipodoc,
+                            "numdoc": user.personal.numdoc,
+                            "ciudad": user.personal.ciudad,
+                            "direccion": user.personal.direccion,
+                            "telefono": user.personal.celular1,
+                            "totalCuotas": requests[i].fechasFacturacion.length,
+                            "cuotaActual": i + 1,
+                            "cuotasPendientes": requests[i].fechasFacturacion.length - (i + 1),
+                            "cuotasEnMora": 0,
+                            "diasMora": request.diasMora,
+                            "interesMora": request.interesMora,
+                            "saldoVencido": request.saldoVencido,
+                            "administracion": request.administracion,
+                            "iva": request.iva,
+                            "valorCuotaBase": request.valorCuotaBase,
+                            "valorCuotaTotal": request.valorCuotaTotal,
+                            "totalaPagar": request.valorCuotaTotal + request.interesMora + request.saldoVencido,
+                            "fechaDePago": '',
+                            "valorPagado": 0,
                         }
+                        // console.log('Antes de grabar');
+                        const newbill = new Bill(bodyBill);
+                        const billSave = await newbill.save();
+                        // console.log('Factura grabada');
+                        // Añade Un Elemento A Un Array En Mongo
+                        //const prequest = await Request.findByIdAndUpdate(requests[i]._id, { "$push": { "estadosFacturacion": 'Creada' } }, { new: true });
 
-                        break;
+                        request.fechasFacturacion[j].estado = 'Creada';
+                        request.fechasFacturacion[j].idRecibo = billSave._id;
+                        request.fechasFacturacion[j].valor = billSave.valorCuotaTotal;
+                        console.log('cambio de estado', request.fechasFacturacion[j].estado);
                     }
                 }
+                // ACTUALIZACION DEL ESTADO DE LA FECHA EN LA SOLICITUD
+                const xx = await Request.findByIdAndUpdate(requests[i]._id, request, { new: true });
             }
         }
+        return res.status(201).json({ msg: 'Verificacion Completa' });
 
     } catch (error) {
         return res.status(500).json({ msg: 'Por favor hable con el administrador' });
     }
 }
+
+// CREA FACTURA CON IDREQUEST IDUSER Y IDPRODUCT
+const createBillIni = async (req, res) => {
+
+    try {
+        let request = await Request.findById(req.body.idRequest);
+        const user = await User.findById(req.body.idUser);
+        const product = await Product.findById(req.body.idProduct);
+        const numCuota = req.body.numCuota;
+        const bodyBill = {
+            "idUser": request.idUser,
+            "Producto": request.nombreProducto,
+            "fechaLimitePago": request.fechasFacturacion[numCuota].fecha,
+            "name": user.name,
+            "surname": user.surname,
+            "tipodoc": user.personal.tipodoc,
+            "numdoc": user.personal.numdoc,
+            "ciudad": user.personal.ciudad,
+            "direccion": user.personal.direccion,
+            "telefono": user.personal.celular1,
+            "totalCuotas": request.fechasFacturacion.length,
+            "cuotaActual": numCuota + 1,
+            "cuotasPendientes": request.fechasFacturacion.length - 1,
+            "cuotasEnMora": 0,
+            "diasMora": request.diasMora,
+            "interesMora": request.interesMora,
+            "saldoVencido": request.saldoVencido,
+            "administracion": request.administracion,
+            "iva": request.iva,
+            "valorCuotaBase": request.valorCuotaBase,
+            "valorCuotaTotal": request.valorCuotaTotal,
+            "totalaPagar": request.valorCuotaTotal + request.interesMora + request.saldoVencido,
+            "fechaDePago": '',
+            "valorPagado": 0,
+        }
+        const newbill = new Bill(bodyBill);
+        const billSave = await newbill.save();
+        // console.log('Recibo Creado', billSave);
+
+        request.fechasFacturacion[numCuota].estado = 'Creada';
+        request.fechasFacturacion[numCuota].idRecibo = billSave._id;
+        request.fechasFacturacion[numCuota].valor = billSave.valorCuotaTotal;
+        request.estate = 'Facturacion';
+        // ACTUALIZACION DEL ESTADO Y GRABAMOS ID DEL RECIBO EN LA SOLICITUD
+        const xx = await Request.findByIdAndUpdate(request._id, request, { new: true });
+        return res.status(201).json({ msg: 'Recibo Creado' });
+
+    } catch (error) {
+        return res.status(500).json({ msg: 'Por favor hable con el administrador' });
+    }
+}
+
 const getBills = async(req, res) => {
     try {
         const bills = await Bill.find();
@@ -83,7 +178,7 @@ const getBillById = async(req, res) => {
         const bill = await Bill.findById(req.params.billId);
         return res.status(200).json(bill);
     } catch (error) {
-        return res.status(500).json({ msg: 'Id Del Billo No Existe' });
+        return res.status(500).json({ msg: 'Id Del Bill No Existe' });
     }
 }
 const updateBillById = async(req, res) => {
@@ -105,6 +200,7 @@ const deleteBillById = async(req, res) => {
 }
 
 module.exports = {
+    createBillIni,
     createBill,
     getBills,
     getBillById,

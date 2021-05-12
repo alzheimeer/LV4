@@ -5,22 +5,99 @@ var BillSchema = Schema({
         type: String,
         required: true
     },
-    idProducto: {
+    Producto: {
         type: String,
         required: true
     },
-    value: {
+    fechaLimitePago: {
+        type: Date,
+        required: true,
+    },
+    name: {
+        type: String,
+        required: true,
+    },
+    surname: {
+        type: String,
+        required: true,
+    },
+    tipodoc: {
+        type: String,
+        required: true,
+    },
+    numdoc: {
         type: Number,
         required: true,
     },
-    plazo: {
+    ciudad: {
+        type: String,
+        required: true,
+    },
+    direccion: {
+        type: String,
+        required: true,
+    },
+    telefono: {
         type: Number,
         required: true,
     },
-    numcuota: {
+    cuotaActual: {
         type: Number,
         required: true,
     },
+    totalCuotas: {
+        type: Number,
+        required: true,
+    },
+    cuotasPendientes: {
+        type: Number,
+        required: true,
+    },
+    cuotasEnMora: {
+        type: Number,
+        required: true,
+    },
+    interesMora: {
+        type: Number,
+        required: true,
+    },
+    diasMora: {
+        type: Number,
+        required: true,
+    },
+    saldoVencido: {
+        type: Number,
+        required: true,
+    },
+    administracion: {
+        type: Number,
+        required: true,
+    },
+    iva: {
+        type: Number,
+        required: true,
+    },
+    valorCuotaBase: {
+        type: Number,
+        required: true,
+    },
+    valorCuotaTotal: {
+        type: Number,
+        required: true,
+    },
+    totalaPagar: {
+        type: Number,
+        required: true,
+    },
+    fechaDePago: {
+        type: Date,
+        required: false,
+    },
+    valorPagado: {
+        type: Number,
+        required: false,
+    },
+
 }, {
     timestamps: true,
     versionkey: false

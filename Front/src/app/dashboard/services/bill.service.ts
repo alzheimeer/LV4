@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+
 import { environment } from '../../../environments/environment';
 import { Bill } from '../../models/bill.models';
 
@@ -17,9 +18,15 @@ export class BillService {
 
   constructor(private http: HttpClient) { }
 
-  public createBill( bill: Bill) {
-    const url = `${this.baseUrl}/bills`;
-    return this.http.post<Bill>(url, bill);
+  public createBill(idRequest: string, idUser: string, idProduct: string, numCuota: number): Observable<Bill> {
+    const url = `${this.baseUrl}/bills/ini`;
+    const body = {
+      idRequest,
+      idUser,
+      idProduct,
+      numCuota
+    }
+    return this.http.post<Bill>(url, body);
   }
 
   public getBills(): Observable<Bill[]> {

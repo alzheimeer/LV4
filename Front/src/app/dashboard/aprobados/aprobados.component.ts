@@ -7,6 +7,7 @@ import Swal from 'sweetalert2';
 
 import { Product } from '../../models/product.models';
 import { Requestx } from '../../models/request.models';
+import { BillService } from '../services/bill.service';
 import { ProductService } from '../services/product.service';
 import { RequestService } from '../services/request.service';
 import { UserService } from '../services/user.service';
@@ -52,6 +53,7 @@ export class AprobadosComponent implements OnInit {
     private fb: FormBuilder,
     private router: Router,
     private requestService: RequestService,
+    private billService: BillService,
     private productService: ProductService,
     private userService: UserService,
   ) { }
@@ -211,19 +213,22 @@ export class AprobadosComponent implements OnInit {
     }
     let fec = new Date(año, (mes - 1), dia, 0, 0, 0);
     let fechas = [];
-    let estados = [];
+    // let estados = [];
 
     for (let i = 0; i < plazo; i++) {
       fec.setMonth(fec.getMonth() + 1)
-      fechas.push(fec.toDateString());
-      estados.push('Pendiente');
+      let x = fec.toDateString();
+      fechas.push({ estado: 'Pendiente', fecha: x, cuota: i + 1, diasMora: 0, idRecibo: '' });
+      // estados.push('Pendiente');
     }
 
 
-    this.requestService.updateRequestsByIdFechaConsignacion(id, fechaConsignacion, fechas, estados).subscribe(
+
+    this.requestService.updateRequestsByIdFechaConsignacion(id, fechaConsignacion, fechas).subscribe(
       (rta) => {
-        this.solicitudes = [];
-        this.solicitudesAprobadas = [];
+
+        // this.solicitudes = [];
+        // this.solicitudesAprobadas = [];
         // this.facturar(res);
         if (rta.fechasFacturacion.length >= 1) {
           Swal.fire({
@@ -231,8 +236,13 @@ export class AprobadosComponent implements OnInit {
             text: 'Fechas De Facturacion Generadas',
             icon: 'success',
           });
-          this.cambiarEstado(rta, 'Facturacion');
-          this.ngOnInit();
+
+          this.billService.createBill(rta._id, rta.idUser, rta.idProduct, 0).subscribe();
+          this.solicitudes = [];
+          this.solicitudesAprobadas = [];
+          this.ngOnInit;
+
+
         } else {
           alert('Fallo Grabando Fechas');
         }

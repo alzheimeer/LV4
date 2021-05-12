@@ -357,14 +357,12 @@ export class RequestService {
   public updateRequestsByIdFechaConsignacion(
     id: string,
     fechaConsignacion: Date,
-    fechasFacturacion: string[],
-    estadosFacturacion: string[]
+    fechasFacturacion: object[]
   ): Observable<Requestx> {
     const url = `${this.baseUrl}/request`;
     const body = {
       fechaConsignacion,
-      fechasFacturacion,
-      estadosFacturacion,
+      fechasFacturacion
     };
     const headers = new HttpHeaders().set(
       'x-token',

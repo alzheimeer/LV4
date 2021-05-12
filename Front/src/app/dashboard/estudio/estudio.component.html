@@ -33,9 +33,9 @@
       <p><span>Comentarios: {{solicitud.description}}</span></p>
     </div>
     <div class="borderx p-2" *ngIf="solicitud.resultado">
-    <p><span>Resultados: {{solicitud.resultado}}</span></p>
-    <p><span>Calificacion: {{solicitud.calificacion}}</span></p>
-  </div>
+      <p><span>Resultados: {{solicitud.resultado}}</span></p>
+      <p><span>Calificacion: {{solicitud.calificacion}}</span></p>
+    </div>
     <!-- Imagenes o PDF Documentos -->
     <div class="borderx p-2" *ngIf="usuario.cedulaPath !== undefined">
       <a class="mr-2 ml-2"
@@ -255,86 +255,133 @@
           </div>
         </div>
       </div>
-        <!-- Card Fechas De Facturacion -->
-        <div class="card" *ngIf="solicitud.fechasFacturacion.length > 1">
-          <div class="card-header" id="headingTwo">
-            <h2 class="mb-0">
-              <button class="btn btn-link btn-block text-left collapsed"
-                type="button" data-toggle="collapse" data-target="#collapseFac"
-                aria-expanded="false" aria-controls="collapseFac">
-                Fechas De Facturacion
-              </button>
-            </h2>
+      <!-- Card Fechas De Facturacion -->
+      <div class="card" *ngIf="solicitud.fechasFacturacion.length> 1">
+        <div class="card-header" id="headingTwo">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left collapsed"
+              type="button" data-toggle="collapse" data-target="#collapseFac"
+              aria-expanded="false" aria-controls="collapseFac">
+              Fechas De Facturacion
+            </button>
+          </h2>
+        </div>
+        <div id="collapseFac" class="collapse" aria-labelledby="headingTwo"
+          data-parent="#accordionExample">
+          <!-- <div class="card-body"> -->
+          <div class="borderx" *ngIf="solicitud.fechasFacturacion">
+            <!-- <div class="row" *ngFor="let fechax of solicitud.fechasFacturacion index as i">
+                  <p>Cuota:{{fechax.cuota}} - Fecha:{{fechax.fecha | date:'d/M/y'}} - Estado:{{fechax.estado}}</p>
+                </div> -->
+            <table mat-table
+              [dataSource]="dataSource" multiTemplateDataRows
+              class="mat-elevation-z8">
+              <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+                <th mat-header-cell *matHeaderCellDef> {{column | uppercase}} </th>
+                <div *ngIf="column === 'fecha'">
+                  <td mat-cell *matCellDef="let element"> {{element[column] |
+                    date:'d/M/y'}} </td>
+                </div>
+                <div *ngIf="column != 'fecha'">
+                  <td mat-cell *matCellDef="let element"> {{element[column]}}
+                  </td>
+                </div>
+              </ng-container>
+
+              <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+              <ng-container matColumnDef="expandedDetail">
+                <td mat-cell *matCellDef="let element"
+                  [attr.colspan]="columnsToDisplay.length">
+                  <div class="example-element-detail"
+                    [@detailExpand]="element == expandedElement ? 'expanded' :
+                    'collapsed'">
+                    <div class="example-element-diagram">
+                      <div class="example-element-symbol"> Dias De Mora: {{element.diasMora}} </div>
+
+                    </div>
+                    <div class="example-element-description">{{element.idRecibo}}<span
+                        class="example-element-description-attribution"> Id De
+                        Recibo </span>
+                    </div>
+                  </div>
+                </td>
+              </ng-container>
+
+              <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+              <tr mat-row *matRowDef="let element; columns: columnsToDisplay;"
+                class="example-element-row"
+                [class.example-expanded-row]="expandedElement === element"
+                (click)="expandedElement= expandedElement === element ? null :
+                element">
+              </tr>
+              <tr mat-row *matRowDef="let row; columns: ['expandedDetail']"
+                class="example-detail-row"></tr>
+            </table>
           </div>
-          <div id="collapseFac" class="collapse" aria-labelledby="headingTwo"
-            data-parent="#accordionExample">
-            <div class="card-body">
-              <div class="borderx" *ngIf="solicitud.fechasFacturacion">
-                <table class="table">
-                  <thead class="thead-dark">
-                    <tr>
-                        <th scope="col">#</th>
-                        <th scope="col">Fecha</th>
-                        <th scope="col">Estado</th>
-                    </tr>
-                </thead>
-                  <tbody>
-                    <tr scope="row" *ngFor="let fechax of solicitud.fechasFacturacion; index as i">
-                      <td>{{i+1}}</td>
-                      <td>{{fechax |  date:'d/M/y'}}</td>
-                      <td>{{solicitud.estadosFacturacion[i]}}</td>
-                    </tr>
-                  </tbody>
-                </table>
+          <!-- </div> -->
+        </div>
+      </div>
 
+      <!-- Card Info Intereses Y Cobros -->
+      <div class="card">
+        <div class="card-header" id="headingTwo">
+          <h2 class="mb-0">
+            <button class="btn btn-link btn-block text-left collapsed"
+              type="button" data-toggle="collapse" data-target="#collapsedatos"
+              aria-expanded="false" aria-controls="collapsedatos">
+              Datos Del Prestamo
+            </button>
+          </h2>
+        </div>
+        <div id="collapsedatos" class="collapse" aria-labelledby="headingTwo"
+          data-parent="#accordionExample">
+          <div class="card-body">
+            <div class="borderx">
 
-              </div>
+              <p><span class="m-2">Tasa E.MV: {{solicitud.tasaEfectivaMes |
+                  number:'0.1-4'}} %</span></p>
+              <p><span class="m-2">Tasa E.A: {{solicitud.tasaEfectivaAnual|
+                  number:'0.1-4'}} %</span></p>
+              <p><span class="m-2">Tasa E.A Max:
+                  {{solicitud.tasaEfectivaAnualMax| number:'0.1-4'}} %</span></p>
+              <p><span class="m-2">Tasa Mora E.A: {{solicitud.tasaMoraEA|
+                  number:'0.1-4'}} %</span></p>
+              <p><span class="m-2">Valor Solicitado: ${{solicitud.value |
+                  number:'0.0-0'}}</span></p>
+              <p><span *ngIf="solicitud.rcomisionAdminHipo> 0" class="m-2">Comision
+                  Admin: -${{solicitud.rcomisionAdminHipo | number:'0.0-0'}}</span></p>
+              <p><span *ngIf="solicitud.rregistroHipoteca> 0" class="m-2">Registro
+                  Hipoteca: -${{solicitud.rregistroHipoteca | number:'0.0-0'}}</span></p>
+              <p><span *ngIf="solicitud.rinteresesAnticipados> 0" class="m-2">Intereses
+                  Anticipados: -${{solicitud.rinteresesAnticipados |
+                  number:'0.0-0'}}</span></p>
+              <p><span *ngIf="solicitud.rparqueadero> 0" class="m-2">Parqueadero:
+                  -${{solicitud.rparqueadero | number:'0.0-0'}}</span></p>
+              <p><span *ngIf="solicitud.rperitaje> 0" class="m-2">Peritaje:
+                  -${{solicitud.rperitaje | number:'0.0-0'}}</span></p>
+              <p><span *ngIf="solicitud.rregistroSimit> 0" class="m-2">Registro
+                  Simit: -${{solicitud.rregistroSimit | number:'0.0-0'}}</span></p>
+              <p><span *ngIf="solicitud.rgmf> 0" class="m-2">4 x Mil:
+                  -${{solicitud.rgmf | number:'0.0-0'}}</span></p>
+              <p><span *ngIf="solicitud.aval> 0" class="m-2">Aval:
+                  -${{solicitud.aval | number:'0.0-0'}}</span></p>
+
+              <p><span class="m-2">Valor A Consignar:
+                  ${{solicitud.valorConsignar | number:'0.0-0'}}</span></p>
+              <p><span class="m-2">Cuota(Capital+Interes):
+                  ${{solicitud.valorCuotaBase | number:'0.0-0'}}</span></p>
+
+              <p><span class="m-2">Administracion: ${{solicitud.administracion |
+                  number:'0.0-0'}}</span></p>
+              <p><span class="m-2">Iva: ${{solicitud.iva | number:'0.0-0'}}</span></p>
+              <p><span *ngIf="solicitud.totalCredito> 0" class="m-2">Total
+                  Credito: ${{solicitud.totalCredito | number:'0.0-0'}}</span></p>
+              <p><span class="m-2">Valor Cuota Total:
+                  ${{solicitud.valorCuotaTotal | number:'0.0-0'}}</span></p>
             </div>
           </div>
         </div>
-
-         <!-- Card Info Intereses Y Cobros -->
-         <div class="card">
-          <div class="card-header" id="headingTwo">
-            <h2 class="mb-0">
-              <button class="btn btn-link btn-block text-left collapsed"
-                type="button" data-toggle="collapse" data-target="#collapseFac"
-                aria-expanded="false" aria-controls="collapseFac">
-                Calculos Del Prestamo
-              </button>
-            </h2>
-          </div>
-          <div id="collapseFac" class="collapse" aria-labelledby="headingTwo"
-            data-parent="#accordionExample">
-            <div class="card-body">
-              <div class="borderx" >
-
-                <p><span class="m-2">Tasa E.MV: {{solicitud.tasaEfectivaMes | number:'0.1-4'}} %</span></p>
-                <p><span class="m-2">Tasa E.A: {{solicitud.tasaEfectivaAnual| number:'0.1-4'}} %</span></p>
-                <p><span class="m-2">Tasa E.A Max: {{solicitud.tasaEfectivaAnualMax| number:'0.1-4'}} %</span></p>
-                <p><span class="m-2">Tasa Mora E.A: {{solicitud.tasaMoraEA| number:'0.1-4'}} %</span></p>
-                <p><span class="m-2">Valor Solicitado: ${{solicitud.value | number:'0.0-0'}}</span></p>
-                <p><span *ngIf="solicitud.rcomisionAdminHipo > 0" class="m-2">Comision Admin: -${{solicitud.rcomisionAdminHipo | number:'0.0-0'}}</span></p>
-                <p><span *ngIf="solicitud.rregistroHipoteca > 0" class="m-2">Registro Hipoteca: -${{solicitud.rregistroHipoteca | number:'0.0-0'}}</span></p>
-                <p><span *ngIf="solicitud.rinteresesAnticipados > 0" class="m-2">Intereses Anticipados: -${{solicitud.rinteresesAnticipados | number:'0.0-0'}}</span></p>
-                <p><span *ngIf="solicitud.rparqueadero > 0" class="m-2">Parqueadero: -${{solicitud.rparqueadero | number:'0.0-0'}}</span></p>
-                <p><span *ngIf="solicitud.rperitaje > 0" class="m-2">Peritaje: -${{solicitud.rperitaje | number:'0.0-0'}}</span></p>
-                <p><span *ngIf="solicitud.rregistroSimit > 0" class="m-2">Registro Simit: -${{solicitud.rregistroSimit | number:'0.0-0'}}</span></p>
-                <p><span *ngIf="solicitud.rgmf > 0" class="m-2">4 x Mil: -${{solicitud.rgmf | number:'0.0-0'}}</span></p>
-                <p><span *ngIf="solicitud.aval > 0" class="m-2">Aval: -${{solicitud.aval | number:'0.0-0'}}</span></p>
-
-                <p><span class="m-2">Valor A Consignar: ${{solicitud.valorConsignar | number:'0.0-0'}}</span></p>
-                <p><span class="m-2">Cuota(Capital+Interes): ${{solicitud.valorCuotaBase | number:'0.0-0'}}</span></p>
-
-                <p><span class="m-2">Administracion: ${{solicitud.administracion | number:'0.0-0'}}</span></p>
-                <p><span class="m-2">Iva: ${{solicitud.iva | number:'0.0-0'}}</span></p>
-                <p><span *ngIf="solicitud.totalCredito > 0" class="m-2">Total Credito: ${{solicitud.totalCredito | number:'0.0-0'}}</span></p>
-                <p><span class="m-2">Valor Cuota Total: ${{solicitud.valorCuotaTotal | number:'0.0-0'}}</span></p>
-
-              </div>
-            </div>
-          </div>
-        </div>
+      </div>
 
 
 

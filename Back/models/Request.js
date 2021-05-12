@@ -23,11 +23,26 @@ var RequestSchema = Schema({
         required: false
     },
     fechasFacturacion: {
-        type: [Date],
-        required: false
-    },
-    estadosFacturacion: {
-        type: [String],
+        type: [{
+            estado: String,
+            fecha: Date,
+            cuota: Number,
+            diasMora: {
+                type: Number,
+                require: false,
+                default: 0
+            },
+            idRecibo: {
+                type: String,
+                require: false,
+                default: ''
+            },
+            valor: {
+                type: Number,
+                require: false,
+                default: 0
+            }
+        }],
         required: false
     },
     idProduct: {
@@ -209,6 +224,21 @@ var RequestSchema = Schema({
     tasaMoraEA: {
         type: Number,
         required: false
+    },
+    interesMora: {
+        type: Number,
+        required: false,
+        default: 0
+    },
+    diasMora: {
+        type: Number,
+        required: false,
+        default: 0
+    },
+    saldoVencido: {
+        type: Number,
+        required: false,
+        default: 0
     },
     rcomisionAdminHipo: {
         type: Number,

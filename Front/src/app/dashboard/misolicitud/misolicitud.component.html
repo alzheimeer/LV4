@@ -53,15 +53,9 @@
 
             <div *ngIf="request.estate == 'Facturacion'">
               <p>Ya Consignamos El Dinero En Tu Cuenta El Dia: {{requests[0].fechaConsignacion | date: 'dd' }} de {{requests[0].fechaConsignacion | date: 'MM/yyyy' }}</p>
-              <p>Aca Puedes Consultar El Estado De Tu Prestamo</p>
-              <p>Y 10 Dias Antes De Cada Fecha De Pago Encontraras</p>
-              <p>El Recibo Mensual De Tu Cuota.</p>
-              <!-- <p *ngFor="let fechax of requests[0].fechasFacturacion">
-                <span *ngIf="fechax > dateToday">{{fechax | date:"dd/MM/yyyy"}}</span>
-                <span>Hoy:{{dateToday}}</span>
-                <span>Fecha:{{fechax}}</span>
-              </p> -->
+              <p>En El Menu Escoge La Opcion "Mi Prestamo"</p>
             </div>
+
 
 
             <div *ngIf="!regAllOk">
@@ -206,6 +200,8 @@
     <div class="col-md-4">
       <app-datosconstruccion></app-datosconstruccion>
     </div>
+
+
   </div>
 
 

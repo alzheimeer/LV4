@@ -215,13 +215,14 @@ export class RechazadosComponent implements OnInit {
     let estados = [];
 
     for (let i = 0; i < plazo; i++) {
-      fec.setMonth(fec.getMonth() + 1)
-      fechas.push(fec.toDateString());
+      fec.setMonth(fec.getMonth() + 1);
+      let x = fec.toDateString();
+      fechas.push({ x: 'Pendiente' });
       estados.push('Pendiente');
     }
 
 
-    this.requestService.updateRequestsByIdFechaConsignacion(id, fechaConsignacion, fechas, estados).subscribe(
+    this.requestService.updateRequestsByIdFechaConsignacion(id, fechaConsignacion, fechas).subscribe(
       (rta) => {
         this.solicitudes = [];
         // this.solicitudesAprobadas = [];

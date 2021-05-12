@@ -213,12 +213,13 @@ export class CarteraComponent implements OnInit {
 
     for (let i = 0; i < plazo; i++) {
       fec.setMonth(fec.getMonth() + 1);
-      fechas.push(fec.toDateString());
+      let x = fec.toDateString();
+      fechas.push({ x: 'Pendiente' });
       estados.push('Pendiente');
     }
 
 
-    this.requestService.updateRequestsByIdFechaConsignacion(id, fechaConsignacion, fechas, estados).subscribe(
+    this.requestService.updateRequestsByIdFechaConsignacion(id, fechaConsignacion, fechas).subscribe(
       (rta) => {
         this.solicitudes = [];
         // this.solicitudesAprobadas = [];
