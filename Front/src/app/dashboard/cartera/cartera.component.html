@@ -122,6 +122,57 @@
         </div>
       </div>
     </mat-card>
+    <mat-card class="col-md-12">
+
+      <div class="card" >
+        <div class="card-header">
+          <h2 class="title">Seccion De Verificacion De Pagos</h2>
+        </div>
+
+        <div class="card-body">
+
+          <div class="accordion_display">
+            <div class="accordion_size">
+              <mat-accordion multi="true">
+                <mat-expansion-panel *ngFor="let recibo of pendientesComprobar" hiddenToggle="false">
+                  <mat-expansion-panel-header class="mb-2">
+                    <mat-panel-title class="row">
+
+                        <div class="col-6 col-sm-6 col-md-6  col-lg-6 col-xl-6" >
+                          <span class="text_center"> Envio De: {{ recibo.name | uppercase}} {{recibo.surname | uppercase}} </span>
+                        </div>
+                        <div class="col-6 col-sm-6 col-md-6  col-lg-6 col-xl-6" *ngIf="recibo.comprobantePath">
+                          <a [href]="baseUrlN+recibo.comprobantePath" class="btn-indigo text-white" mat-raised-button target="_blank">Ver El Comprobante</a>
+                        </div>
+                    </mat-panel-title>
+                  </mat-expansion-panel-header>
+                  <mat-panel-title>
+
+                  </mat-panel-title>
+                <form class="form" (ngSubmit)="enviarConfRecibo(recibo._id)" [formGroup]="formularioRecibo" #frec="ngForm" >
+                  <mat-action-row class="cuenta row">
+                    <mat-form-field class="form-group col-md-4 mr-md-5">
+                      <mat-label>Fecha De Pago</mat-label>
+                      <input type="date" matInput formControlName="fechaDePago" required>
+                   </mat-form-field>
+                    <mat-form-field class="form-group col-md-4 mr-md-5">
+                      <mat-label>Valor Pagado</mat-label>
+                      <input type="number" matInput formControlName="valorPagado" required>
+                   </mat-form-field>
+
+                    <button matbutton class="btn  btn-cuenta" type="button" >Enviar</button>
+                  </mat-action-row>
+                </form>
+                <p><small>Luego de comparar el recibo enviado contra el Banco, Ingrese la fecha y valor</small></p>
+
+                </mat-expansion-panel>
+              </mat-accordion>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
 
 
 

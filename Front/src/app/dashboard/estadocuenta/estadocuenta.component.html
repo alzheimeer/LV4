@@ -11,12 +11,17 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-body">
-
-          <h2>MIS FACTURAS</h2>
+          <div class="pb-5 m-2">
+            <img src="../../../assets/images/facturacion.png" alt=""
+              class="imgregistradora">
+            <h2>MIS FACTURAS</h2>
+          </div>
+          <!--
+<br><br><br><br><br> -->
 
 
           <!-- A1 DEBE IR FOR MULTIPLICANDO LAS CARD SEGUN NUM DE FACTURAS QUE ALLA -->
-          <div class="card" *ngFor="let s of solicitud.fechasFacturacion">
+          <div class="card" *ngFor="let s of solicitud.fechasFacturacion index as i">
             <div class="card-body" *ngIf="s.estado != 'Pendiente'">
 
               <div class="accordion_display">
@@ -24,59 +29,91 @@
                   <mat-accordion multi="true">
                     <mat-expansion-panel [expanded]="false" hiddenToggle="false">
                       <mat-expansion-panel-header class="s">
-                        <mat-panel-title class="row ">
+                        <mat-panel-title class="row">
 
-                          <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <span class="text_center"> FECHA LIMITE</span></div>
+                          <div class="col-6 col-sm-6 col-md-8 col-lg-8 col-xl-8">
+                            <span class="text_center font1"> FECHA LIMITE</span></div>
 
-                          <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
+                          <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
                             <span class="spacer"></span>
-                            <button  class="btDone " *ngIf="s.estado === 'Creada'" mat-raised-button>POR PAGAR</button>
-                            <button class="btPagado" *ngIf="s.estado === 'Pagada'" mat-raised-button>PAGADO</button>
-                            <button class="btErr" *ngIf="s.estado === 'Mora'" mat-raised-button>EN MORA</button>
+                            <button class="btDone font1"*ngIf="s.estado === 'Creada'" mat-raised-button>POR PAGAR</button>
+                            <button class="btPagado font1" *ngIf="s.estado === 'Pagada'" mat-raised-button>PAGADO</button>
+                            <button class="btErr font1" *ngIf="s.estado === 'Mora'" mat-raised-button>EN MORA</button>
                           </div>
-                          <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <span class="text_center"> {{s.fecha | date:'d/M/y'}}</span>
+
+                          <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                            <span class="text_center font1"> {{s.fecha | date:'d/M/y'}}</span>
                           </div>
-                          <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                            <span class="text_center"> Total a pagar</span></div>
+                          <div class="col-6 col-sm-6 col-md-8 col-lg-8 col-xl-8">
+                            <span class="text_center font1"> Total:</span>
+                          </div>
+                          <div class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4">
+                            <span class="text_center font1"> $ {{s.valor | number:'0.0-0'}}</span>
+                          </div>
 
-                          <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                            <span class="spacer"></span> $ {{s.valor | number:'0.0-0'}}</div>
 
-
-                          </mat-panel-title>
+                        </mat-panel-title>
                       </mat-expansion-panel-header>
                       <hr>
-                      <!-- <mat-panel-title class="row">
-                        <div class="col-8 col-sm-8 col-md-8 col-lg-8 col-xl-8">
-                          <span class="text_center"> Total a pagar</span></div>
+                      <h2 *ngIf="!bills[i].comprobantePath">Envianos El Comprobante De Pago</h2>
+                       <mat-panel-title class="row  font1 p-2">
 
-                        <div class="col-4 col-sm-4 col-md-4 col-lg-4 col-xl-4">
-                          <span class="spacer"></span> <button (click)="verFactura(s.idRecibo)">Ver Detalles</button></div>
-
-                          <div class="card col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
-                            <span class="spacer"></span>Id:{{bill._id}}
-                            <span class="spacer"></span>Total A Pagar: ${{bill.totalaPagar | number:'0.0-0'}}
-                          </div>
-                      </mat-panel-title> -->
+                        <div class="borderenv" *ngIf="!bills[i].comprobantePath">
+                          <input  type="file" class="custom-file-upload font1 col-md-8 col-12"accept=".doc,.docx,.pdf,image/x-png,
+                            image/gif, image/jpeg, image/jpg"
+                            (change)="onDocSelected($event, 'comprobante')" #comprobanteInput>
+                          <button class="bg m-3 font1 col-md-4 col-12"   (click)="uploadComprobante(s.idRecibo,'comprobante')" mat-mini-fab><mat-icon>backup</mat-icon>Subir Comprobante</button>
+                        </div>
+                        <a class="m-2" *ngIf="!bills[i].comprobantePath" href="https://api.whatsapp.com/send?phone=3174237229"><strong>O Puedes Enviarlo A Nuestro  </strong>  <i  class="fab fa-whatsapp fa-2x"></i></a>
+                        <div class="m-2" *ngIf="bills[i].comprobantePath">
+                          <a [href]="baseUrlN+bills[i].comprobantePath"mat-raised-button target="_blank">Ver Comprobante Enviado</a>
+                        </div>
+                    </mat-panel-title>
                     </mat-expansion-panel>
                   </mat-accordion>
                 </div>
               </div>
 
 
+            </div>
           </div>
-        </div>
-        <!-- A1 ACABA -->
+          <!-- A1 ACABA -->
 
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="col-md-4">
+      <!-- <app-datosconstruccion></app-datosconstruccion> -->
+      <div class="card p-2">
+        <h2>DATOS DE PAGO</h2>
+        <p>
+          Puedes Realizar Tus Pagos O Trasferencias En:
+        </p>
+        <div class="card m-2 p-2">
+          <p>BANCO CAJA SOCIAL</p>
+          <p>CUENTA CORRIENTE</p>
+          <p>Numero: 123456789-0</p>
+          <p>A Nombre De: LENDIUP S.A.S</p>
+          <p>NIT: 51478695</p>
+        </div>
+        <div class="card m-2 p-2">
+          <p>BANCOLOMBIA</p>
+          <p>CUENTA CORRIENTE</p>
+          <p>Numero: 65857745-9</p>
+          <p>A Nombre De: LENDIUP S.A.S</p>
+          <p>NIT: 51478695</p>
+        </div>
+        <div class="card m-2 p-2">
+          <p>NEQUI</p>
+          <p>TELEFONO</p>
+          <p>Numero: 3152478541</p>
+          <p>A Nombre De: LENDIUP S.A.S</p>
+          <p>NIT: 51478695</p>
+        </div>
 
       </div>
     </div>
   </div>
-
-
-  <div class="col-md-4">
-    <app-datosconstruccion></app-datosconstruccion>
-  </div>
-</div>

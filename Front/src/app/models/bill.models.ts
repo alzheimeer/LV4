@@ -1,6 +1,7 @@
 export interface Bill {
   _id: string;
   idUser: string;
+  idRequest: string;
   Producto: string;
   fechaLimitePago: Date;
   name: string;
@@ -24,6 +25,7 @@ export interface Bill {
   totalaPagar: number;
   fechaDePago: null;
   valorPagado: number;
+  comprobantePath: string;
   createdAt: Date;
   updatedAt: Date;
   __v: number;
@@ -32,6 +34,7 @@ export interface Bill {
 export class BillIni implements Bill {
   _id!: string;
   idUser!: string;
+  idRequest!: string;
   Producto!: string;
   fechaLimitePago!: Date;
   name!: string;
@@ -55,6 +58,7 @@ export class BillIni implements Bill {
   totalaPagar!: number;
   fechaDePago!: null;
   valorPagado!: number;
+  comprobantePath!: string;
   createdAt!: Date;
   updatedAt!: Date;
   __v!: number;

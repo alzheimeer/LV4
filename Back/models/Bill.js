@@ -5,6 +5,10 @@ var BillSchema = Schema({
         type: String,
         required: true
     },
+    idRequest: {
+        type: String,
+        required: true
+    },
     Producto: {
         type: String,
         required: true
@@ -97,6 +101,11 @@ var BillSchema = Schema({
         type: Number,
         required: false,
     },
+    comprobantePath: {
+        type: String,
+        required: false,
+    }
+
 
 }, {
     timestamps: true,

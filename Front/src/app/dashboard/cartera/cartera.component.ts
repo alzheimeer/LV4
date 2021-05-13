@@ -5,8 +5,11 @@ import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 
+import { environment } from '../../../environments/environment';
+import { Bill } from '../../models/bill.models';
 import { Product } from '../../models/product.models';
 import { Requestx } from '../../models/request.models';
+import { BillService } from '../services/bill.service';
 import { ProductService } from '../services/product.service';
 import { RequestService } from '../services/request.service';
 import { UserService } from '../services/user.service';
@@ -24,9 +27,11 @@ export class CarteraComponent implements OnInit {
   suscription!: Subscription;
   solicitudes: Requestx[] = [];
   // solicitudesDocCom: Requestx[] = [];
+  baseUrlN: string = environment.baseUrlN;
   solicitudesEnCobro: Requestx[] = [];
   productos: Product[] = [];
   usuario: any = [];
+  pendientesComprobar: Bill[] = [];
   page1 = 0;
   page2 = 0;
   page3 = 0;
@@ -47,11 +52,17 @@ export class CarteraComponent implements OnInit {
     id: ['', Validators.required],
     fechaConsignacion: ['', Validators.required]
   });
+  formularioRecibo: FormGroup = this.fb.group({
+    id: ['', Validators.required],
+    fechaDePago: ['', Validators.required],
+    valorPagado: [0, Validators.required]
+  });
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private requestService: RequestService,
     private productService: ProductService,
+    private billService: BillService,
     private userService: UserService,
   ) { }
 
@@ -60,26 +71,26 @@ export class CarteraComponent implements OnInit {
       (resp) => {
         this.solicitudes = resp;
         this.solicitudes.forEach(solicitud => {
-          // if (solicitud.estate === 'Completo') {
-          //   this.solicitudesDocCom.push(solicitud);
-          // }
           if (solicitud.estate === 'Facturacion') {
             this.solicitudesEnCobro.push(solicitud);
           }
-          // if (solicitud.estate === 'Rechazada') {
-          //   this.solicitudesRechazadas.push(solicitud);
-          // }
         });
+        for (let i = 0; i < this.solicitudesEnCobro.length; i++) {
+          for (let j = 0; j < this.solicitudesEnCobro[i].fechasFacturacion.length; j++) {
+
+            this.billService.getBillById(this.solicitudesEnCobro[i].fechasFacturacion[j].idRecibo).subscribe((bill) => {
+              if (bill.comprobantePath && !bill.fechaDePago && !bill.valorPagado) {
+                this.pendientesComprobar.push(bill)
+              }
+            })
+          }
+        }
       });
 
     this.productService.getProducts().subscribe(
       (resp) => {
         this.productos = resp;
       });
-
-    // this.suscription = this.requestService.refresh$.subscribe(() => {
-    //   this.ngOnInit();
-    // });
   }
 
   cambiarEstado(solicitudElegida: any, estado: any): void {
@@ -242,5 +253,40 @@ export class CarteraComponent implements OnInit {
 
       }
     );
+  }
+  enviarConfRecibo(reciboId: string) {
+
+    this.formularioRecibo.controls.id.setValue(reciboId)
+    if (this.formularioRecibo.invalid) {
+      this.formularioRecibo.markAllAsTouched;
+      Swal.fire({
+        title: 'Error',
+        text: 'Coloca la fecha y el valor que se consigno',
+        icon: 'error',
+      });
+      return;
+    }
+    const {
+      id,
+      fechaDePago,
+      valorPagado
+    } = this.formularioRecibo.value;
+    this.billService.updateBillByIdConfRecibo(id, fechaDePago, valorPagado).subscribe((bill) => {
+      Swal.fire({
+        title: 'OK',
+        text: 'Fecha, Valor Y Estado Actualizado',
+        icon: 'success',
+      });
+      this.pendientesComprobar = []
+
+
+      this.requestService.getRequestById(bill.idRequest).subscribe((req) => {
+        req.fechasFacturacion[bill.cuotaActual - 1].estado = 'Pagada';
+        this, this.requestService.updateRequestsById(req).subscribe((x) => { this.ngOnInit() });
+      })
+
+
+
+    })
   }
 }

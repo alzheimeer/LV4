@@ -124,6 +124,7 @@ const createBillIni = async (req, res) => {
         const numCuota = req.body.numCuota;
         const bodyBill = {
             "idUser": request.idUser,
+            "idRequest": request._id,
             "Producto": request.nombreProducto,
             "fechaLimitePago": request.fechasFacturacion[numCuota].fecha,
             "name": user.name,
@@ -189,6 +190,14 @@ const updateBillById = async(req, res) => {
         return res.status(500).json({ msg: 'Id Del Billo No Existe' });
     }
 }
+const updateBillComprobante = async (req, res) => {
+    try {
+        const udBill = await Bill.findByIdAndUpdate(req.params.billId, req.body, { new: true });
+        return res.status(200).json(udBill);
+    } catch (error) {
+        return res.status(500).json({ msg: 'Id Del Billo No Existe' });
+    }
+}
 const deleteBillById = async(req, res) => {
     const { billId } = req.params;
     try {
@@ -198,6 +207,18 @@ const deleteBillById = async(req, res) => {
         return res.status(500).json({ msg: 'Id Del Billo No Existe' });
     }
 }
+const uploadFileComprobante = async (req, res) => {
+    try {
+        //console.log(req.params)
+        const bill = await Bill.findByIdAndUpdate(req.params.billId, { "comprobantePath": req.file.path }, { new: true });
+        //console.log('Bill:', bill)
+
+        // const request = await Request.findByIdAndUpdate(bill.idRequest, {`fechasFacturacion[bill.cuotaActual - 1].comprobantePath`: req.file.path }, { new: true });
+        return res.status(200).json(bill);
+    } catch (error) {
+        return res.status(500).json({ msg: 'Id De Recibo No Existe' });
+    }
+}
 
 module.exports = {
     createBillIni,
@@ -205,5 +226,7 @@ module.exports = {
     getBills,
     getBillById,
     updateBillById,
-    deleteBillById
+    deleteBillById,
+    uploadFileComprobante,
+    updateBillComprobante
 }

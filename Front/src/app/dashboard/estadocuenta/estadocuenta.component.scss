@@ -119,3 +119,32 @@ mat-form-field {
   margin-right: auto;
   max-width: 450px;
 }
+
+
+
+.imgregistradora{
+  width: 20%;
+  float: right;
+}
+
+.bg {
+  background-color: rgb(21,84,154);
+  color: rgb(7, 7, 7);
+}
+.borderenv{
+  border-color: black;
+  border-style: double;
+  width: 100%;
+}
+@media screen and (min-width: 601px) {
+  .font1 {
+    font-size: 18px;
+  }
+}
+
+/* If the screen size is 600px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 600px) {
+  .font1 {
+    font-size: 7px;
+  }
+}

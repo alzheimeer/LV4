@@ -27,6 +27,7 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
 import { AprobadosComponent } from './aprobados/aprobados.component';
 import { RechazadosComponent } from './rechazados/rechazados.component';
 import { CarteraComponent } from './cartera/cartera.component';
+import { ConfcomprobanteComponent } from './confcomprobante/confcomprobante.component';
 
 
 
@@ -54,6 +55,7 @@ import { CarteraComponent } from './cartera/cartera.component';
     AprobadosComponent,
     RechazadosComponent,
     CarteraComponent,
+    ConfcomprobanteComponent,
   ],
   imports: [
     CommonModule,

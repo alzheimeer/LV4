@@ -58,6 +58,15 @@ const storageExtracto = multer.diskStorage({
         // cb(null,'cedula'+ '-' + Date.now() + file.originalname + '-'+ path.extname(file.originalname));
     }
 });
+const storageComprobante = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads');
+    },
+    filename: function (req, file, cb) {
+        cb(null, 'Id-' + req.params.billId + '-' + 'comprobante' + '-' + Date.now() + path.extname(file.originalname));
+        // cb(null,'cedula'+ '-' + Date.now() + file.originalname + '-'+ path.extname(file.originalname));
+    }
+});
 
 const uploadAvatar = multer({ storage: storage });
 const uploadCedula = multer({ storage: storageCedula });
@@ -65,6 +74,7 @@ const uploadPasaporte = multer({ storage: storagePasaporte });
 const uploadTarjetav = multer({ storage: storageTarjetav });
 const uploadMatricula = multer({ storage: storageMatricula });
 const uploadExtracto = multer({ storage: storageExtracto });
+const uploadComprobante = multer({ storage: storageComprobante });
 
 exports.uploadAvatar = uploadAvatar.single('avatar');
 exports.uploadCedula = uploadCedula.single('cedula');
@@ -72,4 +82,5 @@ exports.uploadPasaporte = uploadPasaporte.single('pasaporte');
 exports.uploadTarjetav = uploadTarjetav.single('tarjetav');
 exports.uploadMatricula = uploadMatricula.single('matricula');
 exports.uploadExtracto = uploadExtracto.single('extracto');
+exports.uploadComprobante = uploadComprobante.single('comprobante');
 

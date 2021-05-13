@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
@@ -41,7 +41,33 @@ export class BillService {
 
   public updateBillById( bill: Bill ){
     const url = `${this.baseUrl}/bills`;
-    return this.http.put(`${ url }/${ bill._id }`, bill);
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+    return this.http.put(`${url}/${bill._id}`, bill, { headers });
+  }
+
+  public updateBillByIdConfRecibo(id: string, fechaDePago: string, valorPagado: string): Observable<Bill> {
+    const url = `${this.baseUrl}/bills/comprobar`;
+    const body = {
+      fechaDePago,
+      valorPagado
+    };
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return this.http.put<Bill>(`${url}/${id}`, body, { headers });
+  }
+
+
+  public updateBillByIdComprobante(id: string, docComprobante: File) {
+    const url = `${this.baseUrl}/bills/comprobante`;
+    const fd = new FormData();
+    fd.append('comprobante', docComprobante);
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+    return this.http.put(`${url}/${id}`, fd, { headers });
   }
 
   public deleteBillById( id: any ){

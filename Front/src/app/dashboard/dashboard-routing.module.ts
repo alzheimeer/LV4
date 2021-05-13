@@ -6,6 +6,7 @@ import { ValidarTokenGuard } from '../guards/validar-token.guard';
 import { AboutComponent } from './about/about.component';
 import { AprobadosComponent } from './aprobados/aprobados.component';
 import { CarteraComponent } from './cartera/cartera.component';
+import { ConfcomprobanteComponent } from './confcomprobante/confcomprobante.component';
 import { DashboardComponent } from './dashboard.component';
 import { DatosconstruccionComponent } from './datosconstruccion/datosconstruccion.component';
 import { DatosinmuebleComponent } from './datosinmueble/datosinmueble.component';
@@ -50,6 +51,7 @@ const routes: Routes = [
       { path: 'misdatos', component: MisdatosComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user', 'moderator', 'admin'] } },
       { path: 'about', component: AboutComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user', 'moderator', 'admin'] } },
       { path: 'estudio', component: EstudioComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['moderator', 'admin'] } },
+      { path: 'comprobantesOk', component: ConfcomprobanteComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['moderator', 'admin'] } },
 
       { path: '**', redirectTo: 'misolicitud' },
     ],
