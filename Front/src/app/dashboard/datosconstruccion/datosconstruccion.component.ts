@@ -43,12 +43,24 @@ export class DatosconstruccionComponent implements OnInit {
   regTarjetav = false;
   regMatricula = false;
   regExtracto = false;
+  regCamaraCom = false;
+  regRut = false;
+  regEstudioObra = false;
+  regProgramaObra = false;
+  regCuraduria = false;
+  regLicenciaConst = false;
   avatar = '';
   cedula = '';
   pasaporte = '';
   tarjetav = '';
   matricula = '';
   extracto = '';
+  CamaraCom = '';
+  Rut = '';
+  EstudioObra = '';
+  ProgramaObra = '';
+  Curaduria = '';
+  LicenciaConst = '';
   buttonSelect = false;
   MAXIMO_TAMANIO_BYTES = 2000000; // 1MB = 1 millón de bytes
   seguro = 0;
@@ -79,6 +91,12 @@ export class DatosconstruccionComponent implements OnInit {
         this.tarjetav = res[0].tarjetavPath;
         this.matricula = res[0].matriculaPath;
         this.extracto = res[0].extractoPath;
+        this.CamaraCom = res[0].CamaraComPath;
+        this.Rut = res[0].RutPath;
+        this.EstudioObra = res[0].EstudioObraPath;
+        this.ProgramaObra = res[0].ProgramaObraPath;
+        this.Curaduria = res[0].CuraduriaPath;
+        this.LicenciaConst = res[0].LicenciaConstPath;
         this.numrequests = this.requests.length;
         this.productService.getProducts().subscribe((r) => {
           this.productos = r;
@@ -94,6 +112,12 @@ export class DatosconstruccionComponent implements OnInit {
             if (resp.regTarjetav === true) { this.regTarjetav = true; }
             if (resp.regMatricula === true) { this.regMatricula = true; }
             if (resp.regExtracto === true) { this.regExtracto = true; }
+            if (resp.regCamaraCom === true) { this.regCamaraCom = true; }
+            if (resp.regRut === true) { this.regRut = true; }
+            if (resp.regEstudioObra === true) { this.regEstudioObra = true; }
+            if (resp.regProgramaObra === true) { this.regProgramaObra = true; }
+            if (resp.regCuraduria === true) { this.regCuraduria = true; }
+            if (resp.regLicenciaConst === true) { this.regLicenciaConst = true; }
         });
       });
     });

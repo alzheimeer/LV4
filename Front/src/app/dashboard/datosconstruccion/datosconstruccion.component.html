@@ -36,3 +36,21 @@
 <div *ngIf="this.requests[0]?.extractoPath">
   <a [href]="baseUrlN+extracto"mat-raised-button target="_blank">Ver Mi Extracto Bancario</a>
  </div>
+<div *ngIf="this.requests[0]?.CamaraComPath">
+  <a [href]="baseUrlN+CamaraCom"mat-raised-button target="_blank">Ver Mi Camara Y Comercio</a>
+ </div>
+<div *ngIf="this.requests[0]?.RutPath">
+  <a [href]="baseUrlN+Rut"mat-raised-button target="_blank">Ver Mi Rut</a>
+ </div>
+<div *ngIf="this.requests[0]?.extractoPath">
+  <a [href]="baseUrlN+EstudioObra"mat-raised-button target="_blank">Ver Mi Estudio De Obra</a>
+ </div>
+<div *ngIf="this.requests[0]?.ProgramaObraPath">
+  <a [href]="baseUrlN+ProgramaObra"mat-raised-button target="_blank">Ver Mi Programa De Obra</a>
+ </div>
+<div *ngIf="this.requests[0]?.CuraduriaPath">
+  <a [href]="baseUrlN+Curaduria"mat-raised-button target="_blank">Ver Mi Curaduria</a>
+ </div>
+<div *ngIf="this.requests[0]?.LicenciaConstPath">
+  <a [href]="baseUrlN+LicenciaConst"mat-raised-button target="_blank">Ver Mi Licencia De Construccion</a>
+ </div>

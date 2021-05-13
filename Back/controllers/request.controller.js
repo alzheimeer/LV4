@@ -75,6 +75,66 @@ const uploadFileExtracto = async function (req, res) {
     } catch (error) {
         return res.status(500).json({ msg: 'Id De Usuario No Existe'});}
 };
+// Upload Doc CamaraCom
+const uploadFileCamaraCom = async function (req, res) {
+    try {
+        //  console.log(req.params)
+        const request = await Request.findByIdAndUpdate(req.params.requestId, { "CamaraComPath": req.file.path, "regCamaraComOk": true }, { new: true });
+        return res.status(200).json(request);
+    } catch (error) {
+        return res.status(500).json({ msg: 'Id De Usuario No Existe' });
+    }
+};
+// Upload Doc Rut
+const uploadFileRut = async function (req, res) {
+    try {
+        //  console.log(req.params)
+        const request = await Request.findByIdAndUpdate(req.params.requestId, { "RutPath": req.file.path, "regRutOk": true }, { new: true });
+        return res.status(200).json(request);
+    } catch (error) {
+        return res.status(500).json({ msg: 'Id De Usuario No Existe' });
+    }
+};
+// Upload Doc EstudioObra
+const uploadFileEstudioObra = async function (req, res) {
+    try {
+        //  console.log(req.params)
+        const request = await Request.findByIdAndUpdate(req.params.requestId, { "EstudioObraPath": req.file.path, "regEstudioObraOk": true }, { new: true });
+        return res.status(200).json(request);
+    } catch (error) {
+        return res.status(500).json({ msg: 'Id De Usuario No Existe' });
+    }
+};
+// Upload Doc ProgramaObra
+const uploadFileProgramaObra = async function (req, res) {
+    try {
+        //  console.log(req.params)
+        const request = await Request.findByIdAndUpdate(req.params.requestId, { "ProgramaObraPath": req.file.path, "regProgramaObraOk": true }, { new: true });
+        return res.status(200).json(request);
+    } catch (error) {
+        return res.status(500).json({ msg: 'Id De Usuario No Existe' });
+    }
+};
+// Upload Doc Curaduria
+const uploadFileCuraduria = async function (req, res) {
+    try {
+        //  console.log(req.params)
+        const request = await Request.findByIdAndUpdate(req.params.requestId, { "CuraduriaPath": req.file.path, "regCuraduriaOk": true }, { new: true });
+        return res.status(200).json(request);
+    } catch (error) {
+        return res.status(500).json({ msg: 'Id De Usuario No Existe' });
+    }
+};
+// Upload Doc LicenciaConst
+const uploadFileLicenciaConst = async function (req, res) {
+    try {
+        //  console.log(req.params)
+        const request = await Request.findByIdAndUpdate(req.params.requestId, { "LicenciaConstPath": req.file.path, "regLicenciaConstOk": true }, { new: true });
+        return res.status(200).json(request);
+    } catch (error) {
+        return res.status(500).json({ msg: 'Id De Usuario No Existe' });
+    }
+};
 
 
 const deleteRequestById = async(req, res) => {
@@ -100,5 +160,11 @@ module.exports = {
     deleteRequestById,
     uploadFileTarjetav,
     uploadFileMatricula,
-    uploadFileExtracto
+    uploadFileExtracto,
+    uploadFileCamaraCom,
+    uploadFileRut,
+    uploadFileEstudioObra,
+    uploadFileProgramaObra,
+    uploadFileCuraduria,
+    uploadFileLicenciaConst
 }

@@ -60,6 +60,30 @@
         [href]="baseUrlN+solicitud.extractoPath" target="_blank">Ver Extractos
         Bancarios</a>
     </div>
+    <div class="borderx p-2" *ngIf="solicitud.CamaraComPath !== undefined">
+      <a class="mr-2 ml-2"
+        [href]="baseUrlN+solicitud.CamaraComPath" target="_blank">Ver Camara Y Comercio</a>
+    </div>
+    <div class="borderx p-2" *ngIf="solicitud.RutPath !== undefined">
+      <a class="mr-2 ml-2"
+        [href]="baseUrlN+solicitud.RutPath" target="_blank">Rut</a>
+    </div>
+    <div class="borderx p-2" *ngIf="solicitud.EstudioObraPath !== undefined">
+      <a class="mr-2 ml-2"
+        [href]="baseUrlN+solicitud.EstudioObraPath" target="_blank">Estudio De Obra</a>
+    </div>
+    <div class="borderx p-2" *ngIf="solicitud.ProgramaObraPath !== undefined">
+      <a class="mr-2 ml-2"
+        [href]="baseUrlN+solicitud.ProgramaObraPath" target="_blank">Programa De Obra</a>
+    </div>
+    <div class="borderx p-2" *ngIf="solicitud.CuraduriaPath !== undefined">
+      <a class="mr-2 ml-2"
+        [href]="baseUrlN+solicitud.CuraduriaPath" target="_blank">Curaduria</a>
+    </div>
+    <div class="borderx p-2" *ngIf="solicitud.LicenciaConstPath !== undefined">
+      <a class="mr-2 ml-2"
+        [href]="baseUrlN+solicitud.LicenciaConstPath" target="_blank">LicenciaConst</a>
+    </div>
   </div>
 
   <!-- columna 2 -->

@@ -46,6 +46,12 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
   regTarjetav = false;
   regMatricula = false;
   regExtracto = false;
+  regCamaraCom = false;
+  regRut = false;
+  regEstudioObra = false;
+  regProgramaObra = false;
+  regCuraduria = false;
+  regLicenciaConst = false;
   flaq = 0;
   allOk = 0;
   regAllOk = false;
@@ -54,6 +60,12 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
   buttonSelect2 = false;
   buttonSelect3 = false;
   buttonSelect4 = false;
+  buttonSelect5 = false;
+  buttonSelect6 = false;
+  buttonSelect7 = false;
+  buttonSelect8 = false;
+  buttonSelect9 = false;
+  buttonSelect10 = false;
   MAXIMO_TAMANIO_BYTES = 4000000; // 1MB = 1 millón de bytes
   seguro = 0;
   seguro1 = 0;
@@ -192,6 +204,12 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
     this.regTarjetav = solicitud.regTarjetav;
     this.regMatricula = solicitud.regMatricula;
     this.regExtracto = solicitud.regExtracto;
+    this.regCamaraCom = solicitud.regCamaraCom;
+    this.regRut = solicitud.regRut;
+    this.regEstudioObra = solicitud.regEstudioObra;
+    this.regProgramaObra = solicitud.regProgramaObra;
+    this.regCuraduria = solicitud.regCuraduria;
+    this.regLicenciaConst = solicitud.regLicenciaConst;
   }
 
 
@@ -224,6 +242,18 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.flaq === 0 && solicitud.regMatricula === true && solicitud.regMatriculaOk === false) { this.allOk = 0; this.flaq = 1; }
       if (this.flaq === 0 && solicitud.regExtracto === true && solicitud.regExtractoOk === true) { this.allOk = 1; }
       if (this.flaq === 0 && solicitud.regExtracto === true && solicitud.regExtractoOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regCamaraCom === true && solicitud.regCamaraComOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regCamaraCom === true && solicitud.regCamaraComOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regRut === true && solicitud.regRutOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regRut === true && solicitud.regRutOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regEstudioObra === true && solicitud.regEstudioObraOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regEstudioObra === true && solicitud.regEstudioObraOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regProgramaObra === true && solicitud.regProgramaObraOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regProgramaObra === true && solicitud.regProgramaObraOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regCuraduria === true && solicitud.regCuraduriaOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regCuraduria === true && solicitud.regCuraduriaOk === false) { this.allOk = 0; this.flaq = 1; }
+      if (this.flaq === 0 && solicitud.regLicenciaConst === true && solicitud.regLicenciaConstOk === true) { this.allOk = 1; }
+      if (this.flaq === 0 && solicitud.regLicenciaConst === true && solicitud.regLicenciaConstOk === false) { this.allOk = 0; this.flaq = 1; }
       //  console.log('Verifica todoOk');
       // Si cumple Cambiamos la bandera principal
       if (this.allOk === 1 && solicitud.estate !== 'Facturacion' && solicitud.estate !== 'Aprobada' && solicitud.estate !== 'Rechazada') {
@@ -338,6 +368,114 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       }
     }
+    if (tipo === 'CamaraCom') {
+      if (event.target.files && event.target.files[0]) {
+        this.file = (event.target.files[0] as File);
+        if (this.file.size > this.MAXIMO_TAMANIO_BYTES) {
+          const tamanioEnMb = this.MAXIMO_TAMANIO_BYTES / 1000000;
+          alert(`El tamaño máximo es ${tamanioEnMb} MB`);
+          // Limpiar
+          this.buttonSelect5 = false;
+          return;
+        }
+        if (!this.file) {
+          this.buttonSelect5 = false;
+        }
+        else {
+          this.buttonSelect5 = true;
+        }
+      }
+    }
+    if (tipo === 'Rut') {
+      if (event.target.files && event.target.files[0]) {
+        this.file = (event.target.files[0] as File);
+        if (this.file.size > this.MAXIMO_TAMANIO_BYTES) {
+          const tamanioEnMb = this.MAXIMO_TAMANIO_BYTES / 1000000;
+          alert(`El tamaño máximo es ${tamanioEnMb} MB`);
+          // Limpiar
+          this.buttonSelect6 = false;
+          return;
+        }
+        if (!this.file) {
+          this.buttonSelect6 = false;
+        }
+        else {
+          this.buttonSelect6 = true;
+        }
+      }
+    }
+    if (tipo === 'EstudioObra') {
+      if (event.target.files && event.target.files[0]) {
+        this.file = (event.target.files[0] as File);
+        if (this.file.size > this.MAXIMO_TAMANIO_BYTES) {
+          const tamanioEnMb = this.MAXIMO_TAMANIO_BYTES / 1000000;
+          alert(`El tamaño máximo es ${tamanioEnMb} MB`);
+          // Limpiar
+          this.buttonSelect7 = false;
+          return;
+        }
+        if (!this.file) {
+          this.buttonSelect7 = false;
+        }
+        else {
+          this.buttonSelect7 = true;
+        }
+      }
+    }
+    if (tipo === 'ProgramaObra') {
+      if (event.target.files && event.target.files[0]) {
+        this.file = (event.target.files[0] as File);
+        if (this.file.size > this.MAXIMO_TAMANIO_BYTES) {
+          const tamanioEnMb = this.MAXIMO_TAMANIO_BYTES / 1000000;
+          alert(`El tamaño máximo es ${tamanioEnMb} MB`);
+          // Limpiar
+          this.buttonSelect8 = false;
+          return;
+        }
+        if (!this.file) {
+          this.buttonSelect8 = false;
+        }
+        else {
+          this.buttonSelect8 = true;
+        }
+      }
+    }
+    if (tipo === 'Curaduria') {
+      if (event.target.files && event.target.files[0]) {
+        this.file = (event.target.files[0] as File);
+        if (this.file.size > this.MAXIMO_TAMANIO_BYTES) {
+          const tamanioEnMb = this.MAXIMO_TAMANIO_BYTES / 1000000;
+          alert(`El tamaño máximo es ${tamanioEnMb} MB`);
+          // Limpiar
+          this.buttonSelect9 = false;
+          return;
+        }
+        if (!this.file) {
+          this.buttonSelect9 = false;
+        }
+        else {
+          this.buttonSelect9 = true;
+        }
+      }
+    }
+    if (tipo === 'LicenciaConst') {
+      if (event.target.files && event.target.files[0]) {
+        this.file = (event.target.files[0] as File);
+        if (this.file.size > this.MAXIMO_TAMANIO_BYTES) {
+          const tamanioEnMb = this.MAXIMO_TAMANIO_BYTES / 1000000;
+          alert(`El tamaño máximo es ${tamanioEnMb} MB`);
+          // Limpiar
+          this.buttonSelect10 = false;
+          return;
+        }
+        if (!this.file) {
+          this.buttonSelect10 = false;
+        }
+        else {
+          this.buttonSelect10 = true;
+        }
+      }
+    }
   }
 
   uploadPhoto(): void {
@@ -398,6 +536,54 @@ export class MisolicitudComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (tipo === 'extracto') {
       this.requestService.updateRequestsByIdExtracto(this.requests[0]._id as string, this.file).subscribe(() => {
+
+        this.docOk();
+        this.ngOnInit();
+
+      });
+    }
+    if (tipo === 'CamaraCom') {
+      this.requestService.updateRequestsByIdCamaraCom(this.requests[0]._id as string, this.file).subscribe(() => {
+
+        this.docOk();
+        this.ngOnInit();
+
+      });
+    }
+    if (tipo === 'Rut') {
+      this.requestService.updateRequestsByIdRut(this.requests[0]._id as string, this.file).subscribe(() => {
+
+        this.docOk();
+        this.ngOnInit();
+
+      });
+    }
+    if (tipo === 'EstudioObra') {
+      this.requestService.updateRequestsByIdEstudioObra(this.requests[0]._id as string, this.file).subscribe(() => {
+
+        this.docOk();
+        this.ngOnInit();
+
+      });
+    }
+    if (tipo === 'ProgramaObra') {
+      this.requestService.updateRequestsByIdProgramaObra(this.requests[0]._id as string, this.file).subscribe(() => {
+
+        this.docOk();
+        this.ngOnInit();
+
+      });
+    }
+    if (tipo === 'Curaduria') {
+      this.requestService.updateRequestsByIdCuraduria(this.requests[0]._id as string, this.file).subscribe(() => {
+
+        this.docOk();
+        this.ngOnInit();
+
+      });
+    }
+    if (tipo === 'LicenciaConst') {
+      this.requestService.updateRequestsByIdLicenciaConst(this.requests[0]._id as string, this.file).subscribe(() => {
 
         this.docOk();
         this.ngOnInit();

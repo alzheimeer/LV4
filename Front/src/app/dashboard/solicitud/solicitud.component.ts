@@ -76,6 +76,12 @@ export class SolicitudComponent implements OnInit {
     regTarjetav: [false],
     regMatricula: [false],
     regExtracto: [false],
+    regCamaraCom: [false],
+    regRut: [false],
+    regEstudioObra: [false],
+    regProgramaObra: [false],
+    regCuraduria: [false],
+    regLicenciaConst: [false],
     nombreProducto: [this.nombre],
     tasaEfectivaMes: [this.iMesVencido],
     tasaEfectivaAnual: [this.iEfectivoAnual],
@@ -335,6 +341,12 @@ export class SolicitudComponent implements OnInit {
       if (resp.regTarjetav === true) { this.formularioSolicitud.controls.regTarjetav.setValue(true); }
       if (resp.regMatricula === true) { this.formularioSolicitud.controls.regMatricula.setValue(true); }
       if (resp.regExtracto === true) { this.formularioSolicitud.controls.regExtracto.setValue(true); }
+      if (resp.regCamaraCom === true) { this.formularioSolicitud.controls.regCamaraCom.setValue(true); }
+      if (resp.regRut === true) { this.formularioSolicitud.controls.regRut.setValue(true); }
+      if (resp.regEstudioObra === true) { this.formularioSolicitud.controls.regEstudioObra.setValue(true); }
+      if (resp.regProgramaObra === true) { this.formularioSolicitud.controls.regProgramaObra.setValue(true); }
+      if (resp.regCuraduria === true) { this.formularioSolicitud.controls.regCuraduria.setValue(true); }
+      if (resp.regLicenciaConst === true) { this.formularioSolicitud.controls.regLicenciaConst.setValue(true); }
       // Fin requisitos
       // Metemos la info faltante del formulario que esta en variables
       this.formularioSolicitud.controls.nombreProducto.setValue(this.nombre);

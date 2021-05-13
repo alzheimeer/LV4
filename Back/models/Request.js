@@ -66,6 +66,30 @@ var RequestSchema = Schema({
         type: String,
         required: false
     },
+    CamaraComPath: {
+        type: String,
+        required: false
+    },
+    RutPath: {
+        type: String,
+        required: false
+    },
+    EstudioObraPath: {
+        type: String,
+        required: false
+    },
+    ProgramaObraPath: {
+        type: String,
+        required: false
+    },
+    CuraduriaPath: {
+        type: String,
+        required: false
+    },
+    LicenciaConstPath: {
+        type: String,
+        required: false
+    },
     value: {
         type: Number,
         required: true,
@@ -196,6 +220,66 @@ var RequestSchema = Schema({
         default: false
     },
     regExtractoOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regCamaraCom: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regCamaraComOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regRut: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regRutOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regEstudioObra: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regEstudioObraOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regProgramaObra: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regProgramaObraOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regCuraduria: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regCuraduriaOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regLicenciaConst: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regLicenciaConstOk: {
         type: Boolean,
         required: false,
         default: false

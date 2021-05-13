@@ -20,11 +20,19 @@ export class RegisterComponent implements OnInit {
     surname: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
+    terminos: [false, Validators.requiredTrue],
+    politicas: [false, Validators.requiredTrue],
+    habeas: [false, Validators.requiredTrue],
   });
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.miFormulario.reset({
+      condiciones: false,
+      politicas: false,
+      habeas: false
+    });
   }
 
 

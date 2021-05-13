@@ -100,6 +100,36 @@ var ProductSchema = Schema({
         required: false,
         default: false
     },
+    regCamaraCom: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regRut: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regEstudioObra: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regProgramaObra: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regCuraduria: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regLicenciaConst: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
     administracion: {
         type: Number,
         required: false,

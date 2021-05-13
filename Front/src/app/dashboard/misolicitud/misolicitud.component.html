@@ -160,7 +160,7 @@
                 </div>
               </div>
               <hr *ngIf="regMatricula && !request.matriculaPath">
-
+              <!-- extracto -->
               <div class="row" *ngIf="regExtracto && !request.extractoPath">
                 <div class="col-md-2">
                   <p class="text-center">Extractos Bancarios</p>
@@ -177,9 +177,126 @@
                   <p><small> Ultimos 3 Meses</small></p>
                 </div>
               </div>
+              <hr *ngIf="regExtracto && !request.extractoPath">
+              <!-- fin extracto -->
+              <!-- CamaraCom -->
+              <div class="row" *ngIf="regCamaraCom && !request.CamaraComPath">
+                <div class="col-md-2">
+                  <p class="text-center">Camara Y Comercio</p>
+                  <img [src]="'../../../assets/img/camaraycomercio.jpg'"
+                    class="photo"
+                    alt="Sin Imagen" (click)="CamaraComInput.click()">
+                </div>
+                <div class="col-md-10">
+                  <input type="file" class="custom-file-upload"accept=".doc,.docx,.pdf,image/x-png,
+                    image/gif, image/jpeg, image/jpg"
+                    (change)="onDocSelected($event, 'CamaraCom')" #CamaraComInput>
+                  <button *ngIf="buttonSelect5 == true" (click)="uploadExtracto('CamaraCom')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    Documento</button>
+                  <!-- <p><small> Ultimos 3 Meses</small></p> -->
+                </div>
+              </div>
+              <hr *ngIf="regCamaraCom && !request.CamaraComPath">
+              <!-- fin CamaraCom -->
+              <!-- extracto -->
+              <div class="row" *ngIf="regRut && !request.RutPath">
+                <div class="col-md-2">
+                  <p class="text-center">Rut</p>
+                  <img [src]="'../../../assets/img/Rut.jpg'"
+                    class="photo"
+                    alt="Sin Imagen" (click)="RutInput.click()">
+                </div>
+                <div class="col-md-10">
+                  <input type="file" class="custom-file-upload"accept=".doc,.docx,.pdf,image/x-png,
+                    image/gif, image/jpeg, image/jpg"
+                    (change)="onDocSelected($event, 'Rut')" #RutInput>
+                  <button *ngIf="buttonSelect6 == true" (click)="uploadExtracto('Rut')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    Documento</button>
+                  <p><small> Maximo De Hace 3 Meses</small></p>
+                </div>
+              </div>
+              <hr *ngIf="regRut && !request.RutPath">
+              <!-- fin Rut -->
+              <!-- EstudioObra -->
+              <div class="row" *ngIf="regEstudioObra && !request.EstudioObraPath">
+                <div class="col-md-2">
+                  <p class="text-center">Estudio De Obra</p>
+                  <img [src]="'../../../assets/img/EstudioObra.jpg'"
+                    class="photo"
+                    alt="Sin Imagen" (click)="EstudioObraInput.click()">
+                </div>
+                <div class="col-md-10">
+                  <input type="file" class="custom-file-upload"accept=".doc,.docx,.pdf,image/x-png,
+                    image/gif, image/jpeg, image/jpg"
+                    (change)="onDocSelected($event, 'EstudioObra')" #EstudioObraInput>
+                  <button *ngIf="buttonSelect7 == true" (click)="uploadExtracto('EstudioObra')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    Documento</button>
+                  <!-- <p><small> Ultimos 3 Meses</small></p> -->
+                </div>
+              </div>
+              <hr *ngIf="regEstudioObra && !request.EstudioObraPath">
+              <!-- fin EstudioObra -->
+              <!-- ProgramaObra -->
+              <div class="row" *ngIf="regProgramaObra && !request.ProgramaObraPath">
+                <div class="col-md-2">
+                  <p class="text-center">Programa De Obra</p>
+                  <img [src]="'../../../assets/img/ProgramaObra.jpg'"
+                    class="photo"
+                    alt="ProgramaObra" (click)="ProgramaObraInput.click()">
+                </div>
+                <div class="col-md-10">
+                  <input type="file" class="custom-file-upload"accept=".doc,.docx,.pdf,image/x-png,
+                    image/gif, image/jpeg, image/jpg"
+                    (change)="onDocSelected($event, 'ProgramaObra')" #ProgramaObraInput>
+                  <button *ngIf="buttonSelect8 == true" (click)="uploadExtracto('ProgramaObra')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    Documento</button>
+                  <!-- <p><small> Ultimos 3 Meses</small></p> -->
+                </div>
+              </div>
+              <hr *ngIf="regProgramaObra && !request.ProgramaObraPath">
+              <!-- fin ProgramaObra -->
+              <!-- Curaduria -->
+              <div class="row" *ngIf="regCuraduria && !request.CuraduriaPath">
+                <div class="col-md-2">
+                  <p class="text-center">Curaduria</p>
+                  <img [src]="'../../../assets/img/Curaduria.jpg'"
+                    class="photo"
+                    alt="Sin Imagen" (click)="CuraduriaInput.click()">
+                </div>
+                <div class="col-md-10">
+                  <input type="file" class="custom-file-upload"accept=".doc,.docx,.pdf,image/x-png,
+                    image/gif, image/jpeg, image/jpg"
+                    (change)="onDocSelected($event, 'Curaduria')" #CuraduriaInput>
+                  <button *ngIf="buttonSelect9 == true" (click)="uploadExtracto('Curaduria')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    Documento</button>
+                  <!-- <p><small> Ultimos 3 Meses</small></p> -->
+                </div>
+              </div>
+              <hr *ngIf="regCuraduria && !request.CuraduriaPath">
+              <!-- fin Curaduria   -->
+              <!-- LicenciaConst -->
+              <div class="row" *ngIf="regLicenciaConst && !request.LicenciaConstPath">
+                <div class="col-md-2">
+                  <p class="text-center">Licencia De Construccion</p>
+                  <img [src]="'../../../assets/img/LicenciaConst.jpg'"
+                    class="photo"
+                    alt="Sin Imagen" (click)="LicenciaConstInput.click()">
+                </div>
+                <div class="col-md-10">
+                  <input type="file" class="custom-file-upload"accept=".doc,.docx,.pdf,image/x-png,
+                    image/gif, image/jpeg, image/jpg"
+                    (change)="onDocSelected($event, 'LicenciaConst')" #LicenciaConstInput>
+                  <button *ngIf="buttonSelect10 == true" (click)="uploadExtracto('LicenciaConst')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
+                    Documento</button>
+                  <!-- <p><small> Ultimos 3 Meses</small></p> -->
+                </div>
+              </div>
+              <hr *ngIf="regLicenciaConst && !request.LicenciaConstPath">
+              <!-- fin LicenciaConst -->
+
             </div>
 
-            <hr *ngIf="regExtracto && !request.extractoPath">
+
           </div>
 
 

@@ -4,6 +4,12 @@ export interface Requestx {
   tarjetavPath: string;
   matriculaPath: string;
   extractoPath: string;
+  CamaraComPath: string;
+  RutPath: string;
+  EstudioObraPath: string;
+  ProgramaObraPath: string;
+  CuraduriaPath: string;
+  LicenciaConstPath: string;
   inmueble: Inmueble;
   vehiculo: Vehiculo;
   trabajoEmpleado: TrabajoEmpleado;
@@ -38,6 +44,18 @@ export interface Requestx {
   regMatriculaOk: boolean;
   regExtracto: boolean;
   regExtractoOk: boolean;
+  regCamaraCom: boolean;
+  regCamaraComOk: boolean;
+  regRut: boolean;
+  regRutOk: boolean;
+  regEstudioObra: boolean;
+  regEstudioObraOk: boolean;
+  regProgramaObra: boolean;
+  regProgramaObraOk: boolean;
+  regCuraduria: boolean;
+  regCuraduriaOk: boolean;
+  regLicenciaConst: boolean;
+  regLicenciaConstOk: boolean;
   regOk: boolean;
   idUser: string;
   idProduct: string;
@@ -292,6 +310,12 @@ export class RequestIni implements Requestx {
   tarjetavPath: string;
   matriculaPath: string;
   extractoPath: string;
+  CamaraComPath: string;
+  RutPath: string;
+  EstudioObraPath: string;
+  ProgramaObraPath: string;
+  CuraduriaPath: string;
+  LicenciaConstPath: string;
   idUser: string;
   idProduct: string;
   value: number;
@@ -337,6 +361,18 @@ export class RequestIni implements Requestx {
   regMatriculaOk: boolean;
   regExtracto: boolean;
   regExtractoOk: boolean;
+  regCamaraCom: boolean;
+  regCamaraComOk: boolean;
+  regRut: boolean;
+  regRutOk: boolean;
+  regEstudioObra: boolean;
+  regEstudioObraOk: boolean;
+  regProgramaObra: boolean;
+  regProgramaObraOk: boolean;
+  regCuraduria: boolean;
+  regCuraduriaOk: boolean;
+  regLicenciaConst: boolean;
+  regLicenciaConstOk: boolean;
   regOk: boolean;
   nombreProducto: string;
   tasaEfectivaMes: number;
@@ -364,6 +400,12 @@ export class RequestIni implements Requestx {
     this._id = '',
       this.estate = '',
       this.extractoPath = '',
+      this.CamaraComPath = '',
+      this.RutPath = '',
+      this.EstudioObraPath = '',
+      this.ProgramaObraPath = '',
+      this.CuraduriaPath = '',
+      this.LicenciaConstPath = '',
       this.idProduct = '',
       this.idUser = '',
       this.matriculaPath = '',
@@ -373,6 +415,18 @@ export class RequestIni implements Requestx {
       this.regCedulaOk = false,
       this.regExtracto = false,
       this.regExtractoOk = false,
+      this.regCamaraCom = false,
+      this.regCamaraComOk = false,
+      this.regRut = false,
+      this.regRutOk = false,
+      this.regEstudioObra = false,
+      this.regEstudioObraOk = false,
+      this.regProgramaObra = false,
+      this.regProgramaObraOk = false,
+      this.regCuraduria = false,
+      this.regCuraduriaOk = false,
+      this.regLicenciaConst = false,
+      this.regLicenciaConstOk = false,
       this.regInmueble = false,
       this.regInmuebleOk = false,
       this.regMatricula = false,
@@ -531,6 +585,12 @@ export class RequestMao implements Requestx {
   tarjetavPath: string;
   matriculaPath: string;
   extractoPath: string;
+  CamaraComPath: string;
+  RutPath: string;
+  EstudioObraPath: string;
+  ProgramaObraPath: string;
+  CuraduriaPath: string;
+  LicenciaConstPath: string;
   inmueble: Inmueble;
   vehiculo: Vehiculo;
   trabajoEmpleado: TrabajoEmpleado;
@@ -565,6 +625,18 @@ export class RequestMao implements Requestx {
   regMatriculaOk: boolean;
   regExtracto: boolean;
   regExtractoOk: boolean;
+  regCamaraCom: boolean;
+  regCamaraComOk: boolean;
+  regRut: boolean;
+  regRutOk: boolean;
+  regEstudioObra: boolean;
+  regEstudioObraOk: boolean;
+  regProgramaObra: boolean;
+  regProgramaObraOk: boolean;
+  regCuraduria: boolean;
+  regCuraduriaOk: boolean;
+  regLicenciaConst: boolean;
+  regLicenciaConstOk: boolean;
   regOk: boolean;
   idUser: string;
   idProduct: string;
@@ -606,6 +678,12 @@ export class RequestMao implements Requestx {
     this._id = '',
       this.estate = '',
       this.extractoPath = '',
+      this.CamaraComPath = '',
+      this.RutPath = '',
+      this.EstudioObraPath = '',
+      this.ProgramaObraPath = '',
+      this.CuraduriaPath = '',
+      this.LicenciaConstPath = '',
       this.idProduct = '',
       this.idUser = '',
       this.matriculaPath = '',
@@ -615,6 +693,18 @@ export class RequestMao implements Requestx {
       this.regCedulaOk = false,
       this.regExtracto = false,
       this.regExtractoOk = false,
+      this.regCamaraCom = false,
+      this.regCamaraComOk = false,
+      this.regRut = false,
+      this.regRutOk = false,
+      this.regEstudioObra = false,
+      this.regEstudioObraOk = false,
+      this.regProgramaObra = false,
+      this.regProgramaObraOk = false,
+      this.regCuraduria = false,
+      this.regCuraduriaOk = false,
+      this.regLicenciaConst = false,
+      this.regLicenciaConstOk = false,
       this.regInmueble = false,
       this.regInmuebleOk = false,
       this.regMatricula = false,
@@ -634,6 +724,18 @@ export class RequestMao implements Requestx {
       this.regTrabajoOk = false,
       this.regVehiculo = false,
       this.regVehiculoOk = false,
+      this.regCamaraCom = false,
+      this.regCamaraComOk = false,
+      this.regRut = false,
+      this.regRutOk = false,
+      this.regEstudioObra = false,
+      this.regEstudioObraOk = false,
+      this.regProgramaObra = false,
+      this.regProgramaObraOk = false,
+      this.regCuraduria = false,
+      this.regCuraduriaOk = false,
+      this.regLicenciaConst = false,
+      this.regLicenciaConstOk = false,
       this.tarjetavPath = '',
       this.time = 0,
       this.value = 0,

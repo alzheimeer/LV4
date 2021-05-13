@@ -404,6 +404,66 @@ export class RequestService {
     );
     return this.http.put(`${url}/${id}`, fd, { headers });
   }
+  public updateRequestsByIdCamaraCom(id: string, docCamaraCom: File) {
+    const url = `${this.baseUrl}/request/CamaraCom`;
+    const fd = new FormData();
+    fd.append('CamaraCom', docCamaraCom);
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+    return this.http.put(`${url}/${id}`, fd, { headers });
+  }
+  public updateRequestsByIdRut(id: string, docRut: File) {
+    const url = `${this.baseUrl}/request/Rut`;
+    const fd = new FormData();
+    fd.append('Rut', docRut);
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+    return this.http.put(`${url}/${id}`, fd, { headers });
+  }
+  public updateRequestsByIdEstudioObra(id: string, docEstudioObra: File) {
+    const url = `${this.baseUrl}/request/EstudioObra`;
+    const fd = new FormData();
+    fd.append('EstudioObra', docEstudioObra);
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+    return this.http.put(`${url}/${id}`, fd, { headers });
+  }
+  public updateRequestsByIdProgramaObra(id: string, docProgramaObra: File) {
+    const url = `${this.baseUrl}/request/ProgramaObra`;
+    const fd = new FormData();
+    fd.append('ProgramaObra', docProgramaObra);
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+    return this.http.put(`${url}/${id}`, fd, { headers });
+  }
+  public updateRequestsByIdCuraduria(id: string, docCuraduria: File) {
+    const url = `${this.baseUrl}/request/Curaduria`;
+    const fd = new FormData();
+    fd.append('Curaduria', docCuraduria);
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+    return this.http.put(`${url}/${id}`, fd, { headers });
+  }
+  public updateRequestsByIdLicenciaConst(id: string, docLicenciaConst: File) {
+    const url = `${this.baseUrl}/request/LicenciaConst`;
+    const fd = new FormData();
+    fd.append('LicenciaConst', docLicenciaConst);
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+    return this.http.put(`${url}/${id}`, fd, { headers });
+  }
 
   public deleteRequestById(id: any) {
     const url = `${this.baseUrl}/request/${id}`;

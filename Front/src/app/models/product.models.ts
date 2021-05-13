@@ -10,6 +10,12 @@ export interface Product {
   regTarjetav: boolean;
   regMatricula: boolean;
   regExtracto: boolean;
+  regCamaraCom: boolean;
+  regRut: boolean;
+  regEstudioObra: boolean;
+  regProgramaObra: boolean;
+  regCuraduria: boolean;
+  regLicenciaConst: boolean;
   _id: string;
   name: string;
   valuemin: number;
@@ -52,6 +58,12 @@ export class ProductIni implements Product {
   regTarjetav: boolean;
   regMatricula: boolean;
   regExtracto: boolean;
+  regCamaraCom: boolean;
+  regRut: boolean;
+  regEstudioObra: boolean;
+  regProgramaObra: boolean;
+  regCuraduria: boolean;
+  regLicenciaConst: boolean;
   _id: string;
   name: string;
   valuemin: number;
@@ -92,6 +104,12 @@ export class ProductIni implements Product {
       this.regTarjetav = false,
       this.regMatricula = false,
       this.regExtracto = false,
+      this.regCamaraCom = false,
+      this.regRut = false,
+      this.regEstudioObra = false,
+      this.regProgramaObra = false,
+      this.regCuraduria = false,
+      this.regLicenciaConst = false,
       this._id = '',
       this.name = '',
       this.valuemin = 0,
