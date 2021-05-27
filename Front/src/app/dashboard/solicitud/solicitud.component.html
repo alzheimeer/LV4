@@ -30,7 +30,8 @@
                     <mat-grid-tile>
                       <mat-form-field class="dd">
                         <mat-select class="sliderx dd" #x placeholder="Tipo De Prestamo?" formControlName="idProduct">
-                          <mat-option [value]="producto._id" *ngFor="let producto of productos">{{ producto.name }}</mat-option>
+                          <span *ngFor="let producto of productos">
+                          <mat-option [value]="producto._id" *ngIf="producto.activo === true">{{ producto.name }}</mat-option></span>
                         </mat-select>
                         <span class="form-text text-danger" *ngIf="campoEsValido('idProduct')">Debe Seleccionar Un Tipo De Prestamo</span>
                       </mat-form-field>
@@ -108,8 +109,8 @@
       <mat-card-title *ngIf="plazo <= 1">Plazo Solicitado: $ {{ plazo }} mes</mat-card-title>
 
       <!-- VALORES A RESTAR -->
-      <hr *ngIf="comisionAdminHipo1 > 0 && registroHipoteca > 0 &&  interesesAnticipados > 0 && parqueadero > 0 && peritaje > 0 && registroSimit > 0 && gmfCuatroxMil > 0">
-      <mat-card-title *ngIf="comisionAdminHipo1 > 0 && registroHipoteca > 0 &&  interesesAnticipados > 0 && parqueadero > 0 && peritaje > 0 && registroSimit > 0 && gmfCuatroxMil > 0">Valores Que Se Descuentan Al Valor Solicitado</mat-card-title>
+      <hr *ngIf="comisionAdminHipo1 > 0 && registroHipoteca > 0 &&  interesesAnticipados > 0 && parqueadero > 0 && peritaje > 0 && registroSimit > 0 && gmfCuatroxMil > 0 && auditorObra > 0">
+      <mat-card-title *ngIf="comisionAdminHipo1 > 0 && registroHipoteca > 0 &&  interesesAnticipados > 0 && parqueadero > 0 && peritaje > 0 && registroSimit > 0 && gmfCuatroxMil > 0 && auditorObra > 0">Valores Que Se Descuentan Al Valor Solicitado</mat-card-title>
       <hr >
       <mat-card-subtitle *ngIf="comisionAdminHipo1 > 0">Comision Por Administracion: $ {{ comisionAdminHipo1 | number: "1.0-0" }}</mat-card-subtitle>
       <mat-card-subtitle *ngIf="registroHipoteca > 0">Registro Hipoteca: $ {{ registroHipoteca | number: "1.0-0" }}</mat-card-subtitle>
@@ -119,6 +120,7 @@
       <mat-card-subtitle *ngIf="peritaje > 0">Peritaje: $ {{ peritaje | number: "1.0-0" }}</mat-card-subtitle>
       <mat-card-subtitle *ngIf="registroSimit > 0">Registro Simit: $ {{ registroSimit | number: "1.0-0" }}</mat-card-subtitle>
       <mat-card-subtitle *ngIf="valorgmf > 0">GMF: $ {{ valorgmf | number: "1.0-0" }}</mat-card-subtitle>
+      <mat-card-subtitle *ngIf="valorauditorObra > 0">Auditor Obra: $ {{ valorauditorObra | number: "1.0-0" }}</mat-card-subtitle>
 
 
       <hr>

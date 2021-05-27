@@ -101,6 +101,7 @@ export interface Requestx {
   soloInteres: number;
   aval: number;
   totalCredito: number;
+  auditorObra: number;
 }
 
 export interface Inmueble {
@@ -224,6 +225,7 @@ export interface CreateRequest {
   aval: number;
   totalCredito: number;
   valorCuotaTotal: number;
+  auditorObra: number;
 }
 
 export class CreateIniReq implements CreateRequest {
@@ -257,6 +259,7 @@ export class CreateIniReq implements CreateRequest {
   aval: number;
   totalCredito: number;
   valorCuotaTotal: number;
+  auditorObra: number;
 
   constructor() {
     this.idUser = '',
@@ -288,7 +291,8 @@ export class CreateIniReq implements CreateRequest {
       this.aval = 0,
       this.totalCredito = 0,
       this.valorCuotaTotal = 0,
-      this.valorCuotaBase = 0
+      this.valorCuotaBase = 0,
+      this.auditorObra = 0
   }
 }
 
@@ -395,6 +399,8 @@ export class RequestIni implements Requestx {
   soloInteres: number;
   aval: number;
   totalCredito: number;
+  auditorObra: number;
+
 
   constructor() {
     this._id = '',
@@ -489,6 +495,7 @@ export class RequestIni implements Requestx {
       this.totalCredito = 0,
       this.valorCuotaTotal = 0,
       this.valorCuotaBase = 0,
+      this.auditorObra = 0,
 
       this.vehiculo = {
         tipo: '',
@@ -674,6 +681,8 @@ export class RequestMao implements Requestx {
   soloInteres: number;
   aval: number;
   totalCredito: number;
+  auditorObra: number;
+
   constructor() {
     this._id = '',
       this.estate = '',
@@ -779,6 +788,7 @@ export class RequestMao implements Requestx {
       this.totalCredito = 0,
       this.valorCuotaTotal = 0,
       this.valorCuotaBase = 0,
+      this.auditorObra = 0,
 
       this.vehiculo = {
         tipo: '',

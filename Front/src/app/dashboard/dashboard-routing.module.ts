@@ -7,6 +7,7 @@ import { AboutComponent } from './about/about.component';
 import { AprobadosComponent } from './aprobados/aprobados.component';
 import { CarteraComponent } from './cartera/cartera.component';
 import { ConfcomprobanteComponent } from './confcomprobante/confcomprobante.component';
+import { CrearproductoComponent } from './crearproducto/crearproducto.component';
 import { DashboardComponent } from './dashboard.component';
 import { DatosconstruccionComponent } from './datosconstruccion/datosconstruccion.component';
 import { DatosinmuebleComponent } from './datosinmueble/datosinmueble.component';
@@ -47,6 +48,7 @@ const routes: Routes = [
       { path: 'rechazados', component: RechazadosComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['moderator'] } },
       { path: 'cartera', component: CarteraComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['moderator', 'admin'] } },
       { path: 'productos', component: ProductoComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['admin'] } },
+      { path: 'crearproducto', component: CrearproductoComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['admin'] } },
       { path: 'usuarios', component: UsuariosComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['admin'] } },
       { path: 'misdatos', component: MisdatosComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user', 'moderator', 'admin'] } },
       { path: 'about', component: AboutComponent, canActivate: [ValidarTokenGuard, RolesGuard], data: { roles: ['user', 'moderator', 'admin'] } },

@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
+import { ProductCreate } from '../../models/product.models';
 import { Product } from './../../models/product.models';
 
 @Injectable({
@@ -19,9 +20,10 @@ export class ProductService {
 
   constructor(private http: HttpClient) { }
 
-  public createProduct( producto: Product) {
+  public createProduct(producto: ProductCreate): Observable<Product> {
     const url = `${this.baseUrl}/products`;
-    return this.http.post<Product>(url, producto);
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return this.http.post<Product>(url, producto, { headers });
   }
 
   public getProducts(): Observable<Product[]> {

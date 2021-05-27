@@ -1,6 +1,10 @@
 var { Schema, model } = require('mongoose');
 
 var ProductSchema = Schema({
+    activo: {
+        type: Boolean,
+        required: true
+    },
     name: {
         type: String,
         required: true
@@ -155,6 +159,10 @@ var ProductSchema = Schema({
         required: false,
     },
     gmfCuatroxMil: {
+        type: Number,
+        required: false,
+    },
+    auditorObra: {
         type: Number,
         required: false,
     },

@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import Swal from 'sweetalert2';
+
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -13,7 +14,9 @@ export class RegisterComponent implements OnInit {
 
   miFormulario: FormGroup = this.fb.group({
     name:     ['', [Validators.required]],
+    secondname: ['', [Validators.required]],
     surname:  ['', [Validators.required]],
+    secondsurname: ['', [Validators.required]],
     email:    ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
@@ -23,9 +26,9 @@ export class RegisterComponent implements OnInit {
   register() {
 
     // Extract email and password the miFormulario
-    const { name, surname, email, password } = this.miFormulario.value;
+    const { name, secondname, surname, secondsurname, email, password } = this.miFormulario.value;
 
-    this.authService.register(name, surname, email, password).subscribe((ok) => {
+    this.authService.register(name, secondname, surname, secondsurname, email, password).subscribe((ok) => {
       Swal.fire({
         title: 'Espere',
         text: 'Registrando',

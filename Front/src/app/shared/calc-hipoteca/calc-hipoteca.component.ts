@@ -43,7 +43,9 @@ export class CalcHipotecaComponent implements OnInit {
   peritaje = 0;
   registroSimit = 0;
   gmfCuatroxMil = 0;
+  auditorObra = 0;
   valorgmf = 0;
+  valorauditorObra = 0;
   step = 0;
   comisionAdminHipo = 0;
   comisionAdminHipo1 = 0;
@@ -131,6 +133,7 @@ export class CalcHipotecaComponent implements OnInit {
             this.soloInteres = 0;
             this.valorCuotaTotal = 0;
             this.valorgmf = 0;
+            this.auditorObra = 0;
             // Fin Reset Valores
 
             // this.producto = producto;
@@ -161,6 +164,10 @@ export class CalcHipotecaComponent implements OnInit {
               this.gmfCuatroxMil = producto.gmfCuatroxMil;
               this.valorgmf = (this.valorSolicitado / 1000) * this.gmfCuatroxMil;
             }
+            if (producto.auditorObra) {
+              this.auditorObra = producto.auditorObra;
+              this.valorauditorObra = (this.valorSolicitado / 1000) * this.auditorObra;
+            }
 
             if (producto.comisionAdminHipo) { this.comisionAdminHipo = producto.comisionAdminHipo; }
             if (producto.excedenteComisionAdminHipo) { this.excedenteComisionAdminHipo = producto.excedenteComisionAdminHipo; }
@@ -190,7 +197,8 @@ export class CalcHipotecaComponent implements OnInit {
                 this.peritaje +
                 this.comisionAdminHipo1 +
                 this.registroHipoteca +
-                this.interesesAnticipados);
+                this.interesesAnticipados +
+                this.valorauditorObra);
           });
         }
       });

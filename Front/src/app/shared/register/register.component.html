@@ -7,19 +7,48 @@
     <!-- Form -->
     <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="register()" class=" text-white text-center">
       <h1>Crear Cuenta</h1>
+      <div class="row">
+        <div class="col-md-6">
+          <p>Primer Nombre:</p>
+          <input  type="text" formControlName="name" placeholder="Primer nombre">
+        </div>
 
-      <p>Nombre:</p>
-        <input  type="text" formControlName="name" placeholder="Primer nombre">
-<hr>
-      <p>Apellido: </p>
+        <div class="col-md-6">
+          <p>Segundo Nombre:</p>
+          <input  type="text" formControlName="secondname" placeholder="Segundo nombre">
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-md-6">
+          <p>Primer Apellido:</p>
         <input type="text" formControlName="surname" placeholder="Primer apellido">
+        </div>
+
+        <div class="col-md-6">
+          <p>Segundo Apellido:</p>
+          <input type="text" formControlName="secondsurname" placeholder="Segundo apellido">
+        </div>
+      </div>
+
         <hr>
-      <p>Email: </p>
-        <input type="email" formControlName="email" placeholder="Ingrese su email">
+
+        <div class="row">
+          <div class="col-md-6">
+            <p>Email: </p>
+            <input type="email" formControlName="email" placeholder="Ingrese su email">
+          </div>
+
+          <div class="col-md-6">
+            <p>Contraseña: </p>
+            <input type="password" formControlName="password" placeholder="Ingrese su contraseña">
+          </div>
+        </div>
+
         <hr>
-      <p>Contraseña: </p>
-        <input type="password" formControlName="password" placeholder="Ingrese su contraseña">
-        <hr>
+
       <p> </p>
       <fieldset class="form-check mb-3">
         <input type="checkbox" class="form-check-input" id="checkbox1" formControlName="terminos">

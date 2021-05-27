@@ -48,7 +48,7 @@ const crearUsuario = async function(req, res) {
 
             html: `<b>Bienvenido A Lendiup</b>
             <h3> Nombre:</h3>
-            <p >${name} </p>
+            <p >${name} ${surname}</p>
             <h3> Email:</h3>
             <p >${email} </p>
             <p>Solo Escoge El Valor De Tu Prestamo, Completa Los Requisitos Y Te Consignaremos A Tu Cuenta Bancaria En Poco Tiempo</p>`
@@ -59,7 +59,9 @@ const crearUsuario = async function(req, res) {
             ok: true,
             uid: newUser._id,
             name: newUser.name,
+            secondname: newUser.secondname,
             surname: newUser.surname,
+            secondsurname: newUser.secondsurname,
             email: newUser.email,
             roles: newUser.roles,
             solicitud: newUser.solicitud,
@@ -88,7 +90,9 @@ const loginUsuario = async function(req, res) {
             uid: userfound._id,
             roles: userfound.roles,
             name: userfound.name,
+            secondname: userfound.name,
             surname: userfound.surname,
+            secondsurname: userfound.surname,
             email: userfound.email,
             solicitud: userfound.solicitud,
             token
@@ -106,7 +110,9 @@ const revalidarToken = async function(req, res) {
     const dbUser = await User.findById(uid);
     if (dbUser) {
         name = dbUser.name;
+        secondname = dbUser.secondname;
         surname = dbUser.surname;
+        secondsurname = dbUser.secondsurname;
         email = dbUser.email;
         roles = dbUser.roles;
         solicitud = dbUser.solicitud;
@@ -121,7 +127,9 @@ const revalidarToken = async function(req, res) {
         ok: true,
         uid,
         name,
+        secondname,
         surname,
+        secondsurname,
         email,
         roles,
         solicitud,

@@ -29,11 +29,18 @@ export class ProductoComponent implements OnInit {
   }
 
 
-
-
+  crearP() {
+    console.log("Crear");
+    this.router.navigateByUrl('/dashboard/crearproducto');
+  }
 
   save(producto: any, valorinput: any, campo: string) {
+
     const productoTemp = producto.campo;
+    if (campo === 'activo') {
+      console.log("valorinput", valorinput);
+      producto.activo = valorinput;
+    }
     if (campo === 'name') {
       producto.name = valorinput;
     }
@@ -90,6 +97,9 @@ export class ProductoComponent implements OnInit {
     }
     if (campo === 'gmfCuatroxMil') {
       producto.gmfCuatroxMil = valorinput;
+    }
+    if (campo === 'auditorObra') {
+      producto.auditorObra = valorinput;
     }
     this.productService.updateProductsById(producto).subscribe(
       (res) => {

@@ -6,9 +6,10 @@
 
       <form autocomplete="off" [formGroup]="miFormulario1" (ngSubmit)="register()">
         <h1>Crear Cuenta</h1>
-
         <input type="text" formControlName="name" placeholder="Ingrese su primer nombre">
+        <input type="text" formControlName="secondname" placeholder="Ingrese su segundo nombre">
         <input type="text" formControlName="surname" placeholder="Ingrese su primer apellido">
+        <input type="text" formControlName="secondsurname" placeholder="Ingrese su segundo apellido">
         <input type="email" formControlName="email" placeholder="Ingrese su email">
         <input type="password" formControlName="password" placeholder="Ingrese su contraseña">
         <button data-dismiss="modal" (click)="hideModel()" #closeModal1 type="submit"  [disabled]="miFormulario1.invalid" >Continuar</button>

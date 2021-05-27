@@ -5,9 +5,17 @@ var UserSchema = Schema({
         type: String,
         required: true,
     },
+    secondname: {
+        type: String,
+        required: false,
+    },
     surname: {
         type: String,
         required: true,
+    },
+    secondsurname: {
+        type: String,
+        required: false,
     },
     email: {
         type: String,

@@ -32,10 +32,10 @@ export class DatosreferenciasComponent implements OnInit, AfterViewInit {
     parentezco2: ['', [Validators.required, Validators.minLength(3)]],
     direccion2: ['', [Validators.required, Validators.minLength(3)]],
     celular2: ['', [Validators.required]],
-    nombre3: ['', [Validators.required, Validators.minLength(3)]],
-    parentezco3: ['', [Validators.required, Validators.minLength(3)]],
-    direccion3: ['', [Validators.required, Validators.minLength(3)]],
-    celular3: ['', [Validators.required]],
+    nombre3: '',
+    parentezco3: '',
+    direccion3: '',
+    celular3: '',
 
   });
 

@@ -1,7 +1,7 @@
 <div class="panel-header">
   <div class="header text-center">
     <h2 class="title">MIS PRESTAMOS, SOLICITUDES Y PAGOS</h2>
-    <button (click)=(pepe())></button>
+    <h6>"EL DESEMBOLSO DE LOS RECURSOS DEPENDE DE LA DISPONIBILIDAD DE LOS MISMOS"</h6>
   </div>
 </div>
 
@@ -88,7 +88,7 @@
               <hr>
 
               <div class="row" *ngIf="(regPasaporte &&
-                !usuarioTest.pasaportePath) && (regCedula &&
+                !usuarioTest.pasaportePath) || (regCedula &&
                 !usuarioTest.cedulaPath)">
                 <div class="col-md-2">
                   <p class="text-center">Cedula</p>

@@ -36,7 +36,9 @@ export class MisdatosComponent implements OnInit {
   id!: string;
   email!: string;
   nombre!: string;
+  secondname!: string;
   apellido!: string;
+  secondsurname!: string;
   tipodoc!: string;
   fechaNac!: Date;
   fechaExp!: Date;
@@ -66,7 +68,9 @@ export class MisdatosComponent implements OnInit {
         this.id = resp._id;
         this.email = resp.email;
         this.nombre = resp.name;
+        this.secondname = resp.secondname;
         this.apellido = resp.surname;
+        this.secondsurname = resp.secondsurname;
         this.tipodoc = resp.personal.tipodoc;
         this.fechaNac = resp.personal.fechaNac;
         this.fechaExp = resp.personal.fechaExp;
@@ -105,7 +109,9 @@ export class MisdatosComponent implements OnInit {
     this.usuario._id = this.id;
     this.usuario.email = this.email;
     this.usuario.name = this.nombre;
+    this.usuario.secondname = this.secondname;
     this.usuario.surname = this.apellido;
+    this.usuario.secondsurname = this.secondsurname;
     this.usuario.personal.tipodoc = this.tipodoc;
     this.usuario.personal.fechaNac = this.fechaNac;
     this.usuario.personal.fechaExp = this.fechaExp;

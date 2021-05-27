@@ -1,0 +1,520 @@
+<div class="panel-header">
+  <div class="header text-center">
+    <h2 class="title">Creacion De Productos</h2>
+  </div>
+</div>
+
+
+<div class="main-content">
+  <div class="row">
+
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="title">Ingrese Los Datos Del Nuevo Producto</h5>
+        </div>
+        <div class="card-body">
+
+
+          <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="guardar()">
+
+            <!-- Primera 1 Fila -->
+            <div class="row">
+
+              <!-- Activo -->
+              <mat-form-field appearance="fill" class="form-group col-md-6">
+                <mat-select formControlName="activo">
+                  <mat-option selected disabled value="">Escoge...</mat-option>
+                  <mat-option [value]="true">Si</mat-option>
+                  <mat-option [value]="false">No</mat-option>
+
+                </mat-select>
+                <mat-label><mat-icon>description</mat-icon> <b> Activo </b></mat-label>
+              </mat-form-field>
+
+              <!-- Nombre Del Producto -->
+              <mat-form-field class="form-group col-md-6 pl-1">
+                <mat-label>Nombre Del Producto</mat-label>
+                <input matInput formControlName="name" type="text"
+                  class="form-control" >
+                <mat-error *ngIf="campoEsValido('name')">
+                  {{getError('name')}}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+          <!-- Primera 2 Fila -->
+          <div class="row">
+
+             <!-- valuemin -->
+             <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>$Valor Minimo</mat-label>
+              <input matInput formControlName="valuemin" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('valuemin')">
+                {{getError('valuemin')}}
+              </mat-error>
+            </mat-form-field>
+
+            <!-- valuemax -->
+            <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>$Valor Maximo</mat-label>
+              <input matInput formControlName="valuemax" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('valuemax')">
+                {{getError('valuemax')}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+
+          <!-- Primera 3 Fila -->
+          <div class="row">
+
+             <!-- imin -->
+             <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>%Interes Minimo</mat-label>
+              <input matInput formControlName="imin" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('imin')">
+                {{getError('imin')}}
+              </mat-error>
+            </mat-form-field>
+
+            <!-- imax -->
+            <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>%Interes Maximo</mat-label>
+              <input matInput formControlName="imax" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('imax')">
+                {{getError('imax')}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- Primera 4 Fila -->
+          <div class="row">
+
+             <!-- termmin -->
+             <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>Plazo Minimo(meses)</mat-label>
+              <input matInput formControlName="termmin" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('termmin')">
+                {{getError('termmin')}}
+              </mat-error>
+            </mat-form-field>
+
+            <!-- termmax -->
+            <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>Plazo Maximo(meses)</mat-label>
+              <input matInput formControlName="termmax" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('termmax')">
+                {{getError('termmax')}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- Primera 5 Fila -->
+          <div class="row">
+
+            <!-- iEfectivoAnual -->
+             <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>%Interes Efectivo Anual</mat-label>
+              <input matInput formControlName="iEfectivoAnual" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('iEfectivoAnual')">
+                {{getError('iEfectivoAnual')}}
+              </mat-error>
+            </mat-form-field>
+
+            <!--  iEfectivoAnualMax -->
+            <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>%Interes Efectivo Anual Maximo</mat-label>
+              <input matInput formControlName="iEfectivoAnualMax" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('iEfectivoAnualMax')">
+                {{getError('iEfectivoAnualMax')}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- Primera 6 Fila -->
+          <div class="row">
+
+            <!-- iMoraEfectivoAnual -->
+             <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>%Interes Efectivo Anual Mora</mat-label>
+              <input matInput formControlName="iMoraEfectivoAnual" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('iMoraEfectivoAnual')">
+                {{getError('iMoraEfectivoAnual')}}
+              </mat-error>
+            </mat-form-field>
+
+            <!--  administracion -->
+            <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>$Administracion</mat-label>
+              <input matInput formControlName="administracion" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('administracion')">
+                {{getError('administracion')}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- Primera 7 Fila -->
+          <div class="row">
+
+            <!-- gmfCuatroxMil -->
+             <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>?xMil</mat-label>
+              <input matInput formControlName="gmfCuatroxMil" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('gmfCuatroxMil')">
+                {{getError('gmfCuatroxMil')}}
+              </mat-error>
+            </mat-form-field>
+
+            <!--  auditorObra -->
+            <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>%Auditor Obra</mat-label>
+              <input matInput formControlName="auditorObra" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('auditorObra')">
+                {{getError('auditorObra')}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- Primera 8 Fila -->
+          <div class="row">
+
+            <!-- comisionAdminHipo -->
+             <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>$Comision Admin Hipoteca</mat-label>
+              <input matInput formControlName="comisionAdminHipo" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('comisionAdminHipo')">
+                {{getError('comisionAdminHipo')}}
+              </mat-error>
+            </mat-form-field>
+
+            <!--  excedenteComisionAdminHipo -->
+            <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>$Valor Excedente Comision Admin Hipoteca</mat-label>
+              <input matInput formControlName="excedenteComisionAdminHipo" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('excedenteComisionAdminHipo')">
+                {{getError('excedenteComisionAdminHipo')}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- Primera 9 Fila -->
+          <div class="row">
+
+            <!-- registroHipoteca -->
+             <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>$Valor Registro Hipoteca</mat-label>
+              <input matInput formControlName="registroHipoteca" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('registroHipoteca')">
+                {{getError('registroHipoteca')}}
+              </mat-error>
+            </mat-form-field>
+
+            <!--  interesesAnticipados -->
+            <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>%Intereses Anticipados</mat-label>
+              <input matInput formControlName="interesesAnticipados" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('interesesAnticipados')">
+                {{getError('interesesAnticipados')}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- Primera 10 Fila -->
+          <div class="row">
+
+            <!-- parqueadero -->
+             <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>$Valor Parqueadero</mat-label>
+              <input matInput formControlName="parqueadero" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('parqueadero')">
+                {{getError('parqueadero')}}
+              </mat-error>
+            </mat-form-field>
+
+            <!--  peritaje -->
+            <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>$ Valor Peritaje</mat-label>
+              <input matInput formControlName="peritaje" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('peritaje')">
+                {{getError('peritaje')}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- Primera 11 Fila -->
+          <div class="row">
+
+            <!-- parqueadero -->
+             <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>$Valor Parqueadero</mat-label>
+              <input matInput formControlName="parqueadero" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('parqueadero')">
+                {{getError('parqueadero')}}
+              </mat-error>
+            </mat-form-field>
+
+            <!--  peritaje -->
+            <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>$ Valor Peritaje</mat-label>
+              <input matInput formControlName="peritaje" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('peritaje')">
+                {{getError('peritaje')}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- Primera 12 Fila -->
+          <div class="row">
+
+            <!-- registroSimit -->
+             <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>$Valor Registro Simit</mat-label>
+              <input matInput formControlName="registroSimit" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('registroSimit')">
+                {{getError('registroSimit')}}
+              </mat-error>
+            </mat-form-field>
+
+            <!--  iva -->
+            <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>%IVA</mat-label>
+              <input matInput formControlName="iva" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('iva')">
+                {{getError('iva')}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <!-- Primera 13 Fila -->
+          <div class="row">
+
+            <!-- aval -->
+             <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>% Aval</mat-label>
+              <input matInput formControlName="aval" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('aval')">
+                {{getError('aval')}}
+              </mat-error>
+            </mat-form-field>
+
+            <!--  step -->
+            <mat-form-field class="form-group col-md-6 pl-1">
+              <mat-label>Salto Valor Calculadora</mat-label>
+              <input matInput formControlName="step" type="number"
+                class="form-control" >
+              <mat-error *ngIf="campoEsValido('step')">
+                {{getError('step')}}
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="row">
+            <h2 class="col-md-12 text-center"> <b>REQUISITOS A SOLICITAR PARA ESTE PRODUCTO</b></h2>
+
+          </div>
+          <!-- Primera 14 Fila -->
+          <div class="row">
+
+            <!-- Formulario Datos Inmueble -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regInmueble">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon> <b>F Inmueble</b></mat-label>
+            </mat-form-field>
+            <!-- Formulario Datos Personales -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regPersonales">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon><b>F Datos Personales</b></mat-label>
+            </mat-form-field>
+            <!-- Formulario Datos Vehiculo -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regVehiculo">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon><b>F Vehiculo </b></mat-label>
+            </mat-form-field>
+            <!-- Formulario Datos Trabajo -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regTrabajo">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon> <b> F Trabajo </b></mat-label>
+            </mat-form-field>
+            <!-- Formulario Referencias -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regReferencias">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon> <b>F Referencias</b></mat-label>
+            </mat-form-field>
+            <!-- Formulario Referencias Comerciales -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regReferenciasCom">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon> <b>F RefComerciales</b></mat-label>
+            </mat-form-field>
+            <!-- regCedula -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regCedula">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon> <b>Cedula</b></mat-label>
+            </mat-form-field>
+            <!-- regPasaporte -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regPasaporte">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon> <b> Pasaporte </b></mat-label>
+            </mat-form-field>
+            <!-- regTarjetav -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regTarjetav">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon><b>TarjetaVehiculo</b></mat-label>
+            </mat-form-field>
+            <!-- regMatricula -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regMatricula">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon><b>MatriculaInmobiliaria </b></mat-label>
+            </mat-form-field>
+            <!-- regExtracto -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regExtracto">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon><b>ExtractosB</b></mat-label>
+            </mat-form-field>
+            <!-- regCamaraCom -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regCamaraCom">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon><b>CamaraComercio</b></mat-label>
+            </mat-form-field>
+            <!-- Rut -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regRut">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon> <b>Rut</b></mat-label>
+            </mat-form-field>
+            <!-- regEstudioObra -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regEstudioObra">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon><b>EstudioObra</b></mat-label>
+            </mat-form-field>
+            <!-- regProgramaObra -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regProgramaObra">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon><b>ProgramaObra </b></mat-label>
+            </mat-form-field>
+            <!-- regCuraduria -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regCuraduria">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon> <b>Curaduria </b></mat-label>
+            </mat-form-field>
+            <!--  regLicenciaConst -->
+            <mat-form-field appearance="fill" class="form-group col-md-3">
+              <mat-select formControlName="regLicenciaConst">
+                <mat-option selected disabled value="">Escoge...</mat-option>
+                <mat-option [value]="true">Si</mat-option>
+                <mat-option [value]="false">No</mat-option>
+              </mat-select>
+              <mat-label><mat-icon>description</mat-icon><b>L.Construccion</b></mat-label>
+            </mat-form-field>
+
+
+          </div>
+
+            <!-- Boton De Enviar Formulario -->
+            <div class="form-group d-flex h-100">
+              <div class="align-self-end ml-auto">
+                <button type="submit" class="btn btn-primary btn-block"
+                  [disabled]="miFormulario.invalid">
+                  <i class="fa fa-save"></i>
+                  Siguiente
+                </button>
+              </div>
+            </div>
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+
+<!--
+    <div class="col-md-4">
+      <app-datosconstruccion></app-datosconstruccion>
+    </div> -->
+  </div>
+
+
+
+
+
+<!-- <span>Valid</span>
+<pre>{{ miFormulario.valid }}</pre>
+<br>
+
+<span>Value</span>
+<pre>{{ miFormulario.value | json }}</pre>
+<br> -->

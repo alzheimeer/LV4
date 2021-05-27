@@ -17,6 +17,7 @@ export interface Product {
   regCuraduria: boolean;
   regLicenciaConst: boolean;
   _id: string;
+  activo: boolean;
   name: string;
   valuemin: number;
   valuemax: number;
@@ -38,12 +39,56 @@ export interface Product {
   peritaje: number;
   registroSimit: number;
   gmfCuatroxMil: number;
+  auditorObra: number;
   comisionAdminHipo: number;
   excedenteComisionAdminHipo: number;
   registroHipoteca: number;
   step: number;
   interesesAnticipados: number;
-
+}
+export interface ProductCreate {
+  regInmueble: boolean;
+  regPersonales: boolean;
+  regVehiculo: boolean;
+  regTrabajo: boolean;
+  regReferencias: boolean;
+  regReferenciasCom: boolean;
+  regCedula: boolean;
+  regPasaporte: boolean;
+  regTarjetav: boolean;
+  regMatricula: boolean;
+  regExtracto: boolean;
+  regCamaraCom: boolean;
+  regRut: boolean;
+  regEstudioObra: boolean;
+  regProgramaObra: boolean;
+  regCuraduria: boolean;
+  regLicenciaConst: boolean;
+  activo: boolean;
+  name: string;
+  valuemin: number;
+  valuemax: number;
+  imin: number;
+  imax: number;
+  termmin: number;
+  termmax: number;
+  imageUrl: string;
+  iEfectivoAnual: number;
+  iEfectivoAnualMax: number;
+  iMoraEfectivoAnual: number;
+  administracion: number;
+  iva: number;
+  aval: number;
+  parqueadero: number;
+  peritaje: number;
+  registroSimit: number;
+  gmfCuatroxMil: number;
+  auditorObra: number;
+  comisionAdminHipo: number;
+  excedenteComisionAdminHipo: number;
+  registroHipoteca: number;
+  step: number;
+  interesesAnticipados: number;
 }
 
 export class ProductIni implements Product {
@@ -66,6 +111,7 @@ export class ProductIni implements Product {
   regLicenciaConst: boolean;
   _id: string;
   name: string;
+  activo: boolean;
   valuemin: number;
   valuemax: number;
   imin: number;
@@ -86,6 +132,7 @@ export class ProductIni implements Product {
   peritaje: number;
   registroSimit: number;
   gmfCuatroxMil: number;
+  auditorObra: number;
   comisionAdminHipo: number;
   excedenteComisionAdminHipo: number;
   registroHipoteca: number;
@@ -111,6 +158,7 @@ export class ProductIni implements Product {
       this.regCuraduria = false,
       this.regLicenciaConst = false,
       this._id = '',
+      this.activo = true,
       this.name = '',
       this.valuemin = 0,
       this.valuemax = 0,
@@ -132,11 +180,103 @@ export class ProductIni implements Product {
       this.peritaje = 0,
       this.registroSimit = 0,
       this.gmfCuatroxMil = 0,
+      this.auditorObra = 0,
       this.comisionAdminHipo = 0,
       this.excedenteComisionAdminHipo = 0,
       this.registroHipoteca = 0,
       this.step = 0,
       this.interesesAnticipados = 0
   }
+}
 
+export class ProductIniCreate implements ProductCreate {
+  regInmueble: boolean;
+  regPersonales: boolean;
+  regVehiculo: boolean;
+  regTrabajo: boolean;
+  regReferencias: boolean;
+  regReferenciasCom: boolean;
+  regCedula: boolean;
+  regPasaporte: boolean;
+  regTarjetav: boolean;
+  regMatricula: boolean;
+  regExtracto: boolean;
+  regCamaraCom: boolean;
+  regRut: boolean;
+  regEstudioObra: boolean;
+  regProgramaObra: boolean;
+  regCuraduria: boolean;
+  regLicenciaConst: boolean;
+  name: string;
+  activo: boolean;
+  valuemin: number;
+  valuemax: number;
+  imin: number;
+  imax: number;
+  termmin: number;
+  termmax: number;
+  imageUrl: string;
+  iEfectivoAnual: number;
+  iEfectivoAnualMax: number;
+  iMoraEfectivoAnual: number;
+  administracion: number;
+  iva: number;
+  aval: number;
+  parqueadero: number;
+  peritaje: number;
+  registroSimit: number;
+  gmfCuatroxMil: number;
+  auditorObra: number;
+  comisionAdminHipo: number;
+  excedenteComisionAdminHipo: number;
+  registroHipoteca: number;
+  step: number;
+  interesesAnticipados: number;
+
+  constructor() {
+    this.regInmueble = false,
+      this.regPersonales = false,
+      this.regVehiculo = false,
+      this.regTrabajo = false,
+      this.regReferencias = false,
+      this.regReferenciasCom = false,
+      this.regCedula = false,
+      this.regPasaporte = false,
+      this.regTarjetav = false,
+      this.regMatricula = false,
+      this.regExtracto = false,
+      this.regCamaraCom = false,
+      this.regRut = false,
+      this.regEstudioObra = false,
+      this.regProgramaObra = false,
+      this.regCuraduria = false,
+      this.regLicenciaConst = false,
+
+      this.activo = true,
+      this.name = '',
+      this.valuemin = 0,
+      this.valuemax = 0,
+      this.imin = 0,
+      this.imax = 0,
+      this.termmin = 0,
+      this.termmax = 0,
+      this.imageUrl = '',
+
+      this.iEfectivoAnual = 0,
+      this.iEfectivoAnualMax = 0,
+      this.iMoraEfectivoAnual = 0,
+      this.administracion = 0,
+      this.iva = 0,
+      this.aval = 0,
+      this.parqueadero = 0,
+      this.peritaje = 0,
+      this.registroSimit = 0,
+      this.gmfCuatroxMil = 0,
+      this.auditorObra = 0,
+      this.comisionAdminHipo = 0,
+      this.excedenteComisionAdminHipo = 0,
+      this.registroHipoteca = 0,
+      this.step = 0,
+      this.interesesAnticipados = 0
+  }
 }

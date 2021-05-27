@@ -8,7 +8,9 @@ export interface Usuario {
   roles?:     string[];
   _id?:       string;
   name?:      string;
+  secondname?: string;
   surname?:   string;
+  secondsurname?: string;
   email?:     string;
   createdAt?: Date;
   updatedAt?: Date;

@@ -5,7 +5,9 @@ export interface User {
   _id: string;
   solicitud: string;
   name: string;
+  secondname: string;
   surname: string;
+  secondsurname: string;
   email: string;
   avatarPath: string;
   cedulaPath: string;
@@ -40,7 +42,9 @@ export class UsuarioIni implements User {
   _id: string;
   solicitud: string;
   name: string;
+  secondname: string;
   surname: string;
+  secondsurname: string;
   email: string;
   avatarPath: string;
   cedulaPath: string;
@@ -71,7 +75,9 @@ export class UsuarioIni implements User {
     this._id = '';
     this.solicitud = '',
       this.name = '',
+      this.secondname = '',
       this.surname = '',
+      this.secondsurname = '',
       this.email = '',
       this.avatarPath = '',
       this.cedulaPath = '',

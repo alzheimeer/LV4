@@ -38,16 +38,31 @@
                         <div class="row">
                             <div class="col-md-6 pl-1">
                                 <div class="form-group">
-                                    <label>Nombre</label>
+                                    <label>Primer Nombre</label>
                                     <input [(ngModel)]="nombre" name="name" type="text" class="form-control" required>
                                 </div>
                             </div>
                             <div class="col-md-6 pl-1">
                                 <div class="form-group">
-                                    <label>Apellido</label>
+                                    <label>Segundo Nombre</label>
+                                    <input [(ngModel)]="secondname" name="secondname" type="text" class="form-control">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+
+                            <div class="col-md-6 pl-1">
+                                <div class="form-group">
+                                    <label>Primer Apellido</label>
                                     <input [(ngModel)]="apellido" name="surname" type="text" class="form-control" required>
                                 </div>
                             </div>
+                            <div class="col-md-6 pl-1">
+                              <div class="form-group">
+                                  <label>Segundo Apellido</label>
+                                  <input [(ngModel)]="secondsurname" name="secondsurname" type="text" class="form-control" required>
+                              </div>
+                          </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6 pr-1">

@@ -11,6 +11,7 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Listado De Todos Los Productos</h4>
+
                 </div>
                 <div class="card-body">
                     <div class="row">
@@ -20,7 +21,7 @@
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">Editar</th>
-                                        <!-- <th scope="col">id Producto</th> -->
+                                        <th scope="col">Activo</th>
                                         <th scope="col">Nombre</th>
                                         <th scope="col">Valor Minimo</th>
                                         <th scope="col">Valor Maximo</th>
@@ -44,6 +45,7 @@
                                         <th scope="col">Peritaje</th>
                                         <th scope="col">Registro Simit</th>
                                         <th scope="col">GMF ?xMil</th>
+                                        <th scope="col">%Auditor Obra</th>
 
                                         <th scope="col">Editar</th>
                                         <!-- <th *ngIf="!element" scope="col">Fecha Creacion</th>
@@ -56,6 +58,7 @@
                                         <td (click)="element = !element"><span class="material-icons">edit</span></td>
                                         <!-- <td><button [routerLink]="['/dashboard/solicitud']" type="button">{{i+1}}</button></td> -->
                                         <!-- <td>{{producto._id}}</td> -->
+                                        <td  *ngIf="!element"><span *ngIf="producto.activo === true">Si</span><span *ngIf="producto.activo === false">No</span></td>
                                         <td  *ngIf="!element">{{producto.name}}</td>
                                         <td  *ngIf="!element">${{producto.valuemin | number:'1.0-0'}}</td>
                                         <td  *ngIf="!element">${{producto.valuemax | number:'1.0-0'}}</td>
@@ -79,12 +82,23 @@
                                         <td  *ngIf="!element">${{producto.peritaje| number:'1.0-0'}}</td>
                                         <td  *ngIf="!element">${{producto.registroSimit| number:'1.0-0'}}</td>
                                         <td  *ngIf="!element">${{producto.gmfCuatroxMil}}</td>
+                                        <td  *ngIf="!element">%{{producto.auditorObra}}</td>
 
 
 
                                         <!-- <td  *ngIf="!element">{{producto.createdAt | date:'d/M/y'}}</td>
                                         <td  *ngIf="!element">{{producto.updatedAt | date:'d/M/y'}}</td> -->
 
+                                        <!-- campo de producto activo o desactivo -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="input-width">
+                                          <mat-select #activo (selectionChange)="save(producto, activo.value, 'activo')" placeholder="Activar / Desactivar" >
+                                            <mat-option [value]="true">Si</mat-option>
+                                            <mat-option [value]="false">No</mat-option>
+                                          </mat-select>
+                                        </mat-form-field>
+
+                                        </td>
                                         <!-- campo de nombre del producto -->
                                         <td *ngIf="element">
                                         <mat-form-field class="example-full-width">
@@ -199,6 +213,12 @@
                                         <input type="number" #gmfCuatroxMil (change)="save(producto, gmfCuatroxMil.value, 'gmfCuatroxMil')" (keyup)="save(producto, gmfCuatroxMil.value, 'gmfCuatroxMil')" matInput value={{producto.gmfCuatroxMil}}>
                                         </mat-form-field>
                                         </td>
+                                        <!-- campo auditorObra -->
+                                        <td *ngIf="element">
+                                        <mat-form-field class="example-full-width">
+                                        <input type="number" #auditorObra (change)="save(producto, auditorObra.value, 'auditorObra')" (keyup)="save(producto, auditorObra.value, 'auditorObra')" matInput value={{producto.auditorObra}}>
+                                        </mat-form-field>
+                                        </td>
 
                                         <td (click)="element = !element"><span class="material-icons">edit</span></td>
                                     </tr>
@@ -207,6 +227,8 @@
                         </div>
                     </div>
                 </div>
+                <!-- <button routerLink="dashboard/crearproducto" class="btn btn-elegant">Crear Producto</button> -->
+                <button (click)="crearP()" class="btn btn-elegant">Crear Producto</button>
             </div>
         </div>
 

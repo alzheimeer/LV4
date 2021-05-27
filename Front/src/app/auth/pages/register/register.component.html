@@ -9,9 +9,21 @@
     <span class="focus-input100"></span>
   </div>
   <div class="wrap-input100 m-b-23">
+    <span class="label-input100">Segundo Nombre</span>
+    <input class="input100" type="text" formControlName="secondname" placeholder="Ingrese su segundo nombre">
+    <span class="form-text text-danger" *ngIf="campoEsValido('secondname')">campo obligatorio</span>
+    <span class="focus-input100"></span>
+  </div>
+  <div class="wrap-input100 m-b-23">
     <span class="label-input100">Primer Apellido</span>
     <input class="input100" type="text" formControlName="surname" placeholder="Ingrese su apellido">
     <span class="form-text text-danger" *ngIf="campoEsValido('surname')">campo obligatorio</span>
+    <span class="focus-input100"></span>
+  </div>
+  <div class="wrap-input100 m-b-23">
+    <span class="label-input100">Segundo Apellido</span>
+    <input class="input100" type="text" formControlName="secondsurname" placeholder="Ingrese su segundo apellido">
+    <span class="form-text text-danger" *ngIf="campoEsValido('secondsurname')">campo obligatorio</span>
     <span class="focus-input100"></span>
   </div>
   <div class="wrap-input100 m-b-23">

@@ -24,10 +24,10 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  register(name: string, surname: string, email: string, password: string) {
+  register(name: string, secondname: string, surname: string, secondsurname: string, email: string, password: string) {
 
     const url = `${ this.baseUrl }/auth/new`;
-    const body = { name, surname, email, password};
+    const body = { name, secondname, surname, secondsurname, email, password };
     // return the observable
     return this.http.post<AuthResponse>(url, body).pipe(
       tap(({ok, token}) => {
@@ -103,7 +103,9 @@ export class AuthService {
         this._usuario = {
           uid: resp.uid!,
           name: resp.name!,
+          secondname: resp.secondname!,
           surname: resp.surname!,
+          secondsurname: resp.secondsurname!,
           email: resp.email!,
           roles: resp.roles!,
           solicitud: resp.solicitud!,

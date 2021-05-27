@@ -17,7 +17,9 @@ export class RegisterComponent implements OnInit {
 
   miFormulario: FormGroup = this.fb.group({
     name: ['', [Validators.required]],
+    secondname: '',
     surname: ['', [Validators.required]],
+    secondsurname: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
     terminos: [false, Validators.requiredTrue],
@@ -38,14 +40,14 @@ export class RegisterComponent implements OnInit {
 
   register() {
 
-    const { name, surname, email, password } = this.miFormulario.value;
+    const { name, secondname, surname, secondsurname, email, password } = this.miFormulario.value;
     Swal.fire({
       title: 'Espere',
-      text: 'Registrando',
+      text: 'Registrando Espere Porfavor ...',
       allowOutsideClick: false
     });
     Swal.showLoading();
-    this.authService.register(name, surname, email, password).subscribe((resp) => {
+    this.authService.register(name, secondname, surname, secondsurname, email, password).subscribe((resp) => {
 
       Swal.close();
       // console.log(ok);

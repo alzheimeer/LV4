@@ -7,7 +7,8 @@
     <img mat-card-sm-image *ngIf="usuario.avatarPath !== undefined"
       [src]="baseUrlN+usuario.avatarPath" alt="Foto usuario">
     <div mat-card-avatar class="example-header-image"></div>
-    <mat-card-title>{{usuario.name | uppercase}} {{usuario.surname | uppercase}}</mat-card-title>
+    <mat-card-title>{{usuario.name | uppercase}} {{usuario.secondname | uppercase}} </mat-card-title>
+    <mat-card-title>{{usuario.surname | uppercase}} {{usuario.secondsurname | uppercase}}</mat-card-title>
     <mat-card-subtitle>{{usuario.email}}</mat-card-subtitle>
     <mat-card-title>Plazo: {{solicitud.time}} meses</mat-card-title>
     <mat-card-subtitle>Solicitud: {{usuario.solicitud}}</mat-card-subtitle>
@@ -181,14 +182,14 @@
           </div>
         </div>
       </div>
-      <!-- Card Referencias Familiares -->
+      <!-- Card Referencias -->
       <div class="card" *ngIf="solicitud.regReferenciasOk">
         <div class="card-header" id="headingTwo">
           <h2 class="mb-0">
             <button class="btn btn-link btn-block text-left collapsed"
               type="button" data-toggle="collapse" data-target="#collapseTwo"
               aria-expanded="false" aria-controls="collapseTwo">
-              Referencias Familiares
+              Referencias P/F
             </button>
           </h2>
         </div>
@@ -196,7 +197,7 @@
           data-parent="#accordionExample">
           <div class="card-body">
             <div class="borderx" *ngIf="solicitud.refFamiliar1">
-              <p><span class="mb-4">Referencias Familiares:</span></p>
+              <p><span class="mb-4">Referencia Familiar:</span></p>
               <p><span class="mb-4">Referencia 1:</span></p>
               <p><span class="m-2">Nombre:
                   {{solicitud.refFamiliar1.nombre}}</span></p>
@@ -206,6 +207,7 @@
                   {{solicitud.refFamiliar1.celular}}</span></p>
               <p><span class="m-2">Direccion:
                   {{solicitud.refFamiliar1.direccion}}</span></p>
+              <p><span class="mb-4">Referencia Personal:</span></p>
               <p><span class="mb-4">Referencia 2:</span></p>
               <p><span class="m-2">Nombre:
                   {{solicitud.refFamiliar2.nombre}}</span></p>
@@ -215,7 +217,7 @@
                   {{solicitud.refFamiliar2.celular}}</span></p>
               <p><span class="m-2">Direccion:
                   {{solicitud.refFamiliar2.direccion}}</span></p>
-              <p><span class="mb-4">Referencia 3:</span></p>
+              <!-- <p><span class="mb-4">Referencia 3:</span></p>
               <p><span class="m-2">Nombre:
                   {{solicitud.refFamiliar3.nombre}}</span></p>
               <p> <span class="m-2">Parentezco:
@@ -223,7 +225,7 @@
               <p><span class="m-2">Celular:
                   {{solicitud.refFamiliar3.celular}}</span></p>
               <p><span class="m-2">Direccion:
-                  {{solicitud.refFamiliar3.direccion}}</span></p>
+                  {{solicitud.refFamiliar3.direccion}}</span></p> -->
             </div>
           </div>
         </div>
@@ -387,6 +389,8 @@
                   Simit: -${{solicitud.rregistroSimit | number:'0.0-0'}}</span></p>
               <p><span *ngIf="solicitud.rgmf> 0" class="m-2">4 x Mil:
                   -${{solicitud.rgmf | number:'0.0-0'}}</span></p>
+              <p><span *ngIf="solicitud.auditorObra> 0" class="m-2">auditorObra:
+                  -${{solicitud.auditorObra| number:'0.0-0'}}</span></p>
               <p><span *ngIf="solicitud.aval> 0" class="m-2">Aval:
                   -${{solicitud.aval | number:'0.0-0'}}</span></p>
 

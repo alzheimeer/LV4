@@ -1,8 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth/services/auth.service';
 import Swal from 'sweetalert2';
+
+import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
   selector: 'app-modal',
@@ -58,9 +59,9 @@ export class ModalComponent implements OnInit {
   register() {
 
     // Extract email and password the miFormulario
-    const { name, surname, email, password } = this.miFormulario1.value;
+    const { name, secondname, surname, secondsurname, email, password } = this.miFormulario1.value;
 
-    this.authService.register(name, surname, email, password).subscribe((ok) => {
+    this.authService.register(name, secondname, surname, secondsurname, email, password).subscribe((ok) => {
       console.log(ok);
       if ( ok === true ){
         this.router.navigateByUrl('/dashboard/solicitud')

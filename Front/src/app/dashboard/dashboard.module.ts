@@ -28,6 +28,7 @@ import { AprobadosComponent } from './aprobados/aprobados.component';
 import { RechazadosComponent } from './rechazados/rechazados.component';
 import { CarteraComponent } from './cartera/cartera.component';
 import { ConfcomprobanteComponent } from './confcomprobante/confcomprobante.component';
+import { CrearproductoComponent } from './crearproducto/crearproducto.component';
 
 
 
@@ -56,6 +57,7 @@ import { ConfcomprobanteComponent } from './confcomprobante/confcomprobante.comp
     RechazadosComponent,
     CarteraComponent,
     ConfcomprobanteComponent,
+    CrearproductoComponent,
   ],
   imports: [
     CommonModule,

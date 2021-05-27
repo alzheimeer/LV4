@@ -41,7 +41,9 @@ export class SolicitudComponent implements OnInit {
   peritaje = 0;
   registroSimit = 0;
   gmfCuatroxMil = 0;
+  auditorObra = 0;
   valorgmf = 0;
+  valorauditorObra = 0;
   step = 0;
   comisionAdminHipo = 0;
   comisionAdminHipo1 = 0;
@@ -94,6 +96,7 @@ export class SolicitudComponent implements OnInit {
     rperitaje: [this.peritaje],
     rregistroSimit: [this.registroSimit],
     rgmf: [this.valorgmf],
+    auditorObra: [this.valorauditorObra],
     valorConsignar: [this.valorConsignar],
     valorCuotaBase: [this.valorCuotaBase],
     administracion: [this.administracion],
@@ -143,7 +146,6 @@ export class SolicitudComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
     this.formularioSolicitud.get('idProduct')?.valueChanges.subscribe((id) => {
       this.productService.getProductById(id).subscribe((producto) => {
         // Reset Valores
@@ -151,6 +153,7 @@ export class SolicitudComponent implements OnInit {
         this.peritaje = 0;
         this.registroSimit = 0;
         this.gmfCuatroxMil = 0;
+        this.auditorObra = 0;
         this.totalPersonal = 0;
         this.comisionAdminHipo = 0;
         this.comisionAdminHipo1 = 0;
@@ -166,6 +169,7 @@ export class SolicitudComponent implements OnInit {
         this.soloInteres = 0;
         this.valorCuotaTotal = 0;
         this.valorgmf = 0;
+        this.valorauditorObra = 0;
         // Fin Reset Valores
 
         this.producto = producto;
@@ -196,7 +200,10 @@ export class SolicitudComponent implements OnInit {
           this.gmfCuatroxMil = producto.gmfCuatroxMil;
           this.valorgmf = (this.valorSolicitado / 1000) * this.gmfCuatroxMil;
         }
-
+        if (producto.auditorObra) {
+          this.auditorObra = producto.auditorObra;
+          this.valorauditorObra = (this.valorSolicitado / 1000) * this.auditorObra;
+        }
         if (producto.comisionAdminHipo) { this.comisionAdminHipo = producto.comisionAdminHipo; }
         if (producto.excedenteComisionAdminHipo) { this.excedenteComisionAdminHipo = producto.excedenteComisionAdminHipo; }
         if (producto.registroHipoteca) { this.registroHipoteca = producto.registroHipoteca; }
@@ -221,6 +228,7 @@ export class SolicitudComponent implements OnInit {
         this.valorConsignar =
           this.valorSolicitado -
           (this.valorgmf +
+          this.valorauditorObra +
             this.registroSimit +
             this.peritaje +
             this.comisionAdminHipo1 +
@@ -247,12 +255,14 @@ export class SolicitudComponent implements OnInit {
       }
       this.aval = (this.valorSolicitado / 100) * this.avalp;
       this.interesesAnticipados = (this.valorSolicitado / 100) * this.interesesAnticipadosp;
+      this.valorauditorObra = (this.valorSolicitado / 100) * this.auditorObra;
+      this.valorgmf = (this.valorSolicitado / 1000) * this.gmfCuatroxMil;
       if (this.nombre === 'Prestamo Personal') {
         this.totalPersonal = ((this.aval + this.administracion + this.iva) / this.plazo);
         this.soloInteres = (this.valorCuotaBase as number * this.plazo) - this.valorSolicitado;
         this.valorCuotaTotal = this.valorCuotaBase as number + this.totalPersonal;
         this.totalCredito = this.valorSolicitado + this.soloInteres + this.administracion + this.iva + this.aval;
-        this.valorgmf = (this.valorSolicitado / 1000) * this.gmfCuatroxMil;
+
       } else {
         this.soloInteres = 0;
         this.totalCredito = 0;
@@ -264,6 +274,7 @@ export class SolicitudComponent implements OnInit {
         (this.registroSimit +
           this.peritaje +
           this.valorgmf +
+        this.auditorObra +
           this.comisionAdminHipo1 +
           this.registroHipoteca +
           this.interesesAnticipados);
@@ -361,6 +372,7 @@ export class SolicitudComponent implements OnInit {
       this.formularioSolicitud.controls.rperitaje.setValue(this.peritaje);
       this.formularioSolicitud.controls.rregistroSimit.setValue(this.registroSimit);
       this.formularioSolicitud.controls.rgmf.setValue(this.valorgmf);
+      this.formularioSolicitud.controls.auditorObra.setValue(this.valorauditorObra);
       this.formularioSolicitud.controls.valorConsignar.setValue(this.valorConsignar);
       this.formularioSolicitud.controls.valorCuotaBase.setValue(this.valorCuotaBase);
       this.formularioSolicitud.controls.administracion.setValue(this.administracion);
