@@ -6,11 +6,12 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-register-quickloan',
+  templateUrl: './register-quickloan.component.html',
+  styleUrls: ['./register-quickloan.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterQuickloanComponent implements OnInit {
+
 
   @Output()
   value = new EventEmitter<number>();
@@ -22,10 +23,10 @@ export class RegisterComponent implements OnInit {
     secondsurname: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    typeloan: '',
     terminos: [false, Validators.requiredTrue],
-    politicas: [false, Validators.requiredTrue],
-    habeas: [false, Validators.requiredTrue],
+    typeloan: '',
+    // politicas: [false, Validators.requiredTrue],
+    // habeas: [false, Validators.requiredTrue],
   });
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { }
@@ -38,9 +39,11 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-
+  login() {
+    this.value.emit(2);
+  }
   register() {
-
+    this.miFormulario.controls['typeloan'].setValue('quickloan');
     const { name, secondname, surname, secondsurname, email, password, typeloan } = this.miFormulario.value;
     Swal.fire({
       title: 'Espere',
@@ -48,6 +51,8 @@ export class RegisterComponent implements OnInit {
       allowOutsideClick: false
     });
     Swal.showLoading();
+
+
     this.authService.register(name, secondname, surname, secondsurname, email, password, typeloan).subscribe((resp) => {
 
       Swal.close();
@@ -73,20 +78,27 @@ export class RegisterComponent implements OnInit {
           text: email,
           icon: 'success',
         });
+      } else if (resp === 'user200') {
+        this.router.navigateByUrl('/landing/quickforms');
+        // Swal.fire({
+        //   title: 'Bienvenido',
+        //   text: email,
+        //   icon: 'success',
+        // });
       } else {
         Swal.fire('Error', resp, 'error');
       }
     });
   }
 
-  campoEsValido( campo: string ) {
+  campoEsValido(campo: string) {
 
     return this.miFormulario.controls[campo].errors
-            && this.miFormulario.controls[campo].touched;
+      && this.miFormulario.controls[campo].touched;
   }
 
 
-  calc(valor: number){
-    this.value.emit(valor);
+  calc(valor: number) {
+    this.value.emit(4);
   }
 }

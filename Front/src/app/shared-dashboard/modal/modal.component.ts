@@ -25,6 +25,7 @@ export class ModalComponent implements OnInit {
     surname: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
+    typeloan: '',
   });
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { }
@@ -59,9 +60,9 @@ export class ModalComponent implements OnInit {
   register() {
 
     // Extract email and password the miFormulario
-    const { name, secondname, surname, secondsurname, email, password } = this.miFormulario1.value;
+    const { name, secondname, surname, secondsurname, email, password, typeloan } = this.miFormulario1.value;
 
-    this.authService.register(name, secondname, surname, secondsurname, email, password).subscribe((ok) => {
+    this.authService.register(name, secondname, surname, secondsurname, email, password, typeloan).subscribe((ok) => {
       console.log(ok);
       if ( ok === true ){
         this.router.navigateByUrl('/dashboard/solicitud')

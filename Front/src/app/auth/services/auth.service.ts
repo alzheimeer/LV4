@@ -24,16 +24,17 @@ export class AuthService {
 
   constructor(private http: HttpClient) { }
 
-  register(name: string, secondname: string, surname: string, secondsurname: string, email: string, password: string) {
+  register(name: string, secondname: string, surname: string, secondsurname: string, email: string, password: string, typeloan: string) {
 
     const url = `${ this.baseUrl }/auth/new`;
-    const body = { name, secondname, surname, secondsurname, email, password };
+    const body = { name, secondname, surname, secondsurname, email, password, typeloan };
     // return the observable
     return this.http.post<AuthResponse>(url, body).pipe(
-      tap(({ok, token}) => {
+      tap(({ ok, token, uid }) => {
         // If resp is Correct ok: true
         if (ok === true) {
           localStorage.setItem('token', token!);
+          localStorage.setItem('id', uid!);
         }
       }),
       map((resp) => {
@@ -51,6 +52,9 @@ export class AuthService {
 
         }
         sessionStorage.setItem('a', '0');
+
+        if (resp.typeloan === 'quickloan')
+          return 'user200';
         return 'user';
       }),
       catchError((err) => of(err.error.msg))
@@ -69,6 +73,7 @@ export class AuthService {
         if (resp.ok === true) {
           // tslint:disable-next-line: no-non-null-assertion
           localStorage.setItem('token', resp.token!);
+          localStorage.setItem('id', resp.uid!);
         }
       }),
       map((resp) => {
@@ -86,6 +91,8 @@ export class AuthService {
 
         }
         sessionStorage.setItem('a', '0');
+        if (resp.typeloan === 'quickloan')
+          return 'user200';
         return 'user';
       }),
       catchError((err) => of(err.error.msg))

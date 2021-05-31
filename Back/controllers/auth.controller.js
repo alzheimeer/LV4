@@ -65,6 +65,7 @@ const crearUsuario = async function(req, res) {
             email: newUser.email,
             roles: newUser.roles,
             solicitud: newUser.solicitud,
+            typeloan: newUser.typeloan,
             token
         });
     } catch (error) {
@@ -78,6 +79,7 @@ const loginUsuario = async function(req, res) {
     try {
         // We check if the email exists and we bring the user to newUser
         const userfound = await User.findOne({ email }).populate("roles").populate("roles");
+        //console.log(userfound.typeloan)
         if (!userfound) { return res.status(400).json({ ok: false, msg: 'El correo no existe' }); }
         // Confirm if the password does math 
         const validPassword = bcrypt.compareSync(password, userfound.password);
@@ -95,6 +97,7 @@ const loginUsuario = async function(req, res) {
             secondsurname: userfound.surname,
             email: userfound.email,
             solicitud: userfound.solicitud,
+            typeloan: userfound.typeloan,
             token
         });
     } catch (error) {

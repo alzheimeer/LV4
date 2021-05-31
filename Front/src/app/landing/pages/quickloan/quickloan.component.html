@@ -1,0 +1,89 @@
+<!-- Full Page Intro -->
+<div class="view full-page-intro "
+  style="background-image: url('../../../../assets/images/quickloan-unsplash.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+  <!-- Mask & flexbox options-->
+  <div class="mask rgba-black-light d-flex justify-content-center align-items-center ">
+
+    <!-- Content -->
+    <div class="container ">
+
+      <!--Grid row-->
+      <div class="row wow fadeIn ">
+
+        <!--Grid column-->
+        <div class="col-md-6 col-xl-5 white-text text-center text-md-left mtx">
+
+          <h1 class="display-4 font-weight-bold "> Prestamos Ultra Rapidos</h1>
+          <!-- <button  type="button" (click)="login()" class="btn btn-indigo btn-sm">Ya eres Cliente? -->
+            <!-- <i class="fas fa-wallet"></i> -->
+          <!-- </button> -->
+          <hr class="hr-light">
+
+          <p><strong>Una prestamo pensado para ti, fácil de usar.</strong></p>
+          <p><strong>Desembolsamos en menos de 24 horas</strong></p>
+          <p><strong>Solicitud en minutos y aprobación en segundos</strong></p>
+          <p><strong>Sin papeleos ni traslados</strong></p>
+
+
+          <p class="mb-4 d-none d-md-block">
+            <strong>Podrás realizar pagos anticipados</strong>
+            <strong>de cuotas o saldos de forma total o parcial.</strong>
+
+          </p>
+
+          <!-- <i class="fas fa-list-ol"></i> -->
+          <a type="button" (click)="requisitos()" class="btn btn-indigo btn-lg">      Requisitos
+
+          </a>
+
+          <a  type="button" (click)="register()" class="btn btn-indigo btn-lg">Solicita Tu Prestamo
+            <!-- <i class="fas fa-wallet"></i> -->
+          </a>
+
+
+          <hr>
+
+          <p class="lead mb0">Solicite de<strong>$200.000 hasta $750.000</strong></p>
+          <!-- <span>(Si ya eres cliente nuevo te prestamos solo $200.000 )</span> -->
+          <p>(Plazo De 1 Mes) Extendible Hasta 6 Meses</p>
+
+
+          <!-- <div>
+            <hr>
+            <p>Ya Tienes Cuenta?</p>
+            <button class="btn btn-indigo btn-md" type="button" (click)="print()">INGRESA</button>
+          </div> -->
+        </div>
+
+
+
+
+        <!--Grid column-->
+        <div class="col-md-6 col-xl-5  mt-5">
+
+          <div [ngSwitch]="value">
+          <!--Card-->
+          <app-calc-quickloan     *ngSwitchCase="0"></app-calc-quickloan>
+          <app-card     *ngSwitchCase="1"></app-card>
+          <app-login    *ngSwitchCase="2"></app-login>
+          <app-register-quickloan *ngSwitchCase="3" (value)="valuethesoon($event)"></app-register-quickloan>
+          <app-requisito-quickloan      *ngSwitchCase="4" (value)="valuethesoon($event)" ></app-requisito-quickloan>
+
+          </div>
+          <!--/.Card-->
+
+        </div>
+        <!--Grid column-->
+
+      </div>
+      <!--Grid row-->
+
+    </div>
+    <!-- Content -->
+
+  </div>
+  <!-- Mask & flexbox options-->
+
+</div>
+<!-- Full Page Intro -->

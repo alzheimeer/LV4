@@ -1,0 +1,26 @@
+.x{
+  background-color: rgba(7, 6, 6, 0.404);
+
+}
+
+
+button {
+  border: 1px solid #07090a;
+  background-color: #3F51B5;
+  color: #ffffff;
+  padding: 5px 10px;
+}
+
+button:hover {
+  border: 1px solid #c0370d;
+  background-color: #4f5daa;
+  color: #ffffff;
+  padding: 5px 10px;
+}
+
+button:disabled,
+button[disabled]{
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+}

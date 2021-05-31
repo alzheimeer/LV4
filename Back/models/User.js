@@ -22,6 +22,10 @@ var UserSchema = Schema({
         required: true,
         unique: true,
     },
+    typeloan: {
+        type: String,
+        required: false,
+    },
     solicitud: {
         type: Schema.Types.ObjectId,
         required: false,

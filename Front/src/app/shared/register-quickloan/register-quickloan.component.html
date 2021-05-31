@@ -1,0 +1,86 @@
+<!--Card-->
+<div class="card x">
+
+  <!--Card content-->
+  <div class="card-body ">
+
+    <!-- Form -->
+    <form autocomplete="off" [formGroup]="miFormulario" (ngSubmit)="register()" class=" text-white text-center">
+      <h1>Ingresa tus datos como aparecen en tu cédula</h1>
+      <button (click)="login()">Ya Eres Cliente?</button>
+      <div class="row">
+        <div class="col-md-6">
+          <p>Primer Nombre:</p>
+          <input  type="text" formControlName="name" placeholder="Primer nombre">
+        </div>
+
+        <div class="col-md-6">
+          <p>Segundo Nombre:</p>
+          <input  type="text" formControlName="secondname" placeholder="Segundo nombre">
+        </div>
+      </div>
+
+      <hr>
+
+      <div class="row">
+        <div class="col-md-6">
+          <p>Primer Apellido:</p>
+        <input type="text" formControlName="surname" placeholder="Primer apellido">
+        </div>
+
+        <div class="col-md-6">
+          <p>Segundo Apellido:</p>
+          <input type="text" formControlName="secondsurname" placeholder="Segundo apellido">
+        </div>
+      </div>
+
+        <hr>
+
+        <div class="row">
+          <div class="col-md-6">
+            <p>Email: </p>
+            <input type="email" formControlName="email" placeholder="Ingrese su email">
+          </div>
+
+          <div class="col-md-6">
+            <p>Contraseña: </p>
+            <input type="password" formControlName="password" placeholder="Ingrese su contraseña">
+          </div>
+          <!-- <div class="col-md-12">
+            <p>Tipo Prestamo: </p>
+            <input type="text" formControlName="typeloan" placeholder="Ingrese su contraseña">
+          </div> -->
+        </div>
+
+        <hr>
+
+      <p> </p>
+      <fieldset class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="checkbox1" formControlName="terminos">
+
+        <a href="../../../assets/pdf/Terminos Y Condiciones - Lendiup.pdf" for="checkbox1" class="form-check-label text-white">Acepto Terminos Y Condiciones</a>
+      </fieldset>
+      <!-- <fieldset class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="checkbox2" formControlName="politicas">
+
+        <a href="../../../assets/pdf/Politica-de-privacidad.pdf" for="checkbox2" class="form-check-label text-white">Acepta Politicas De Privacidad</a>
+      </fieldset>
+      <fieldset class="form-check mb-3">
+        <input type="checkbox" class="form-check-input" id="checkbox3" formControlName="habeas">
+
+        <a href="../../../assets/pdf/Habeas-Data.pdf" for="checkbox3" class="form-check-label text-white">Acepta Habeas Data</a>
+      </fieldset> -->
+     <div>
+      <button type="button"  (click)="calc(0)" class="mx-3">Atras  <i class="far fa-hand-point-left"></i></button>
+        <button type="submit"  [disabled]="miFormulario.invalid"><i class="fa fa-save"></i> Continuar</button>
+
+      </div>
+
+
+    </form>
+    <!-- Form -->
+
+  </div>
+
+</div>
+<!--/.Card-->

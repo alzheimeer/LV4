@@ -70,6 +70,7 @@ export class UserService {
         numcuenta,
       }
     };
+    console.log('yupi')
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, body, { headers }).pipe(
       tap(() => {

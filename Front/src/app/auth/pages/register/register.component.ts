@@ -19,6 +19,7 @@ export class RegisterComponent implements OnInit {
     secondsurname: ['', [Validators.required]],
     email:    ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
+    typeloan: '',
   });
 
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { }
@@ -26,9 +27,9 @@ export class RegisterComponent implements OnInit {
   register() {
 
     // Extract email and password the miFormulario
-    const { name, secondname, surname, secondsurname, email, password } = this.miFormulario.value;
+    const { name, secondname, surname, secondsurname, email, password, typeloan } = this.miFormulario.value;
 
-    this.authService.register(name, secondname, surname, secondsurname, email, password).subscribe((ok) => {
+    this.authService.register(name, secondname, surname, secondsurname, email, password, typeloan).subscribe((ok) => {
       Swal.fire({
         title: 'Espere',
         text: 'Registrando',

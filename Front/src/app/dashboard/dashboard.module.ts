@@ -5,6 +5,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from '../material/material.module';
 import { SharedDashboardModule } from '../shared-dashboard/shared-dashboard.module';
 import { AboutComponent } from './about/about.component';
+import { AprobadosComponent } from './aprobados/aprobados.component';
+import { CarteraComponent } from './cartera/cartera.component';
+import { ConfcomprobanteComponent } from './confcomprobante/confcomprobante.component';
+import { CrearproductoComponent } from './crearproducto/crearproducto.component';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { DatosconstruccionComponent } from './datosconstruccion/datosconstruccion.component';
@@ -21,14 +25,10 @@ import { MisolicitudComponent } from './misolicitud/misolicitud.component';
 import { FilterforamountPipe } from './pipes/filterforamount.pipe';
 import { SearchnameproductPipe } from './pipes/searchnameproduct.pipe';
 import { ProductoComponent } from './producto/producto.component';
+import { RechazadosComponent } from './rechazados/rechazados.component';
 import { SolicitudComponent } from './solicitud/solicitud.component';
 import { SolicitudesComponent } from './solicitudes/solicitudes.component';
 import { UsuariosComponent } from './usuarios/usuarios.component';
-import { AprobadosComponent } from './aprobados/aprobados.component';
-import { RechazadosComponent } from './rechazados/rechazados.component';
-import { CarteraComponent } from './cartera/cartera.component';
-import { ConfcomprobanteComponent } from './confcomprobante/confcomprobante.component';
-import { CrearproductoComponent } from './crearproducto/crearproducto.component';
 
 
 
@@ -65,7 +65,6 @@ import { CrearproductoComponent } from './crearproducto/crearproducto.component'
     MaterialModule,
     SharedDashboardModule,
     FormsModule,
-
     ReactiveFormsModule
 
   ],

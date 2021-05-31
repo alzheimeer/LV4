@@ -6,6 +6,7 @@ export interface AuthResponse {
   surname?: string;
   secondsurname?: string;
   email?: string;
+  typeloan?: string;
   token?: string;
   msg?: string;
   roles?: [];
@@ -19,6 +20,7 @@ export interface Usuario {
   surname?: string;
   secondsurname?: string;
   email?: string;
+  typeloan?: string;
   roles?: [];
   solicitud?: string;
   avatarPath?: string;

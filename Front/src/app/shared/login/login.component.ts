@@ -60,6 +60,13 @@ export class LoginComponent implements OnInit {
           text: email,
           icon: 'success',
         });
+      } else if (resp === 'user200') {
+        this.router.navigateByUrl('/landing/quickforms');
+        Swal.fire({
+          title: 'Continua Ingresando Los Siguientes Datos',
+          text: email,
+          icon: 'success',
+        });
       } else {
         Swal.fire('Error', resp, 'error');
       }
