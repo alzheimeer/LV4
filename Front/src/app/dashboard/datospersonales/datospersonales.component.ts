@@ -172,6 +172,10 @@ export class DatospersonalesComponent implements OnInit {
     this.favoritosArr.removeAt(i);
   }
 
+  segundaparte() {
+    console.log('usuario', this.usuarioauth)
+  }
+
   guardar() {
     if (this.miFormulario.invalid) {
       this.miFormulario.markAllAsTouched();

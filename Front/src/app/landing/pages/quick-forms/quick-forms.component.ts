@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -16,6 +16,11 @@ import { User } from '../../../models/user.models';
   styleUrls: ['./quick-forms.component.scss']
 })
 export class QuickFormsComponent implements OnInit {
+
+  get usuarioauth() {
+    return this.authService.usuario;
+  }
+
   public tiposIdentificacion = [
     'Cedula De Ciudadania',
     'Cedula De Extranjeria',
@@ -39,13 +44,8 @@ export class QuickFormsComponent implements OnInit {
     'Scotiabank',
   ];
 
-
   public usuarios: User[] = [];
   public usuario: any = [];
-
-  get usuarioauth() {
-    return this.authService.usuario;
-  }
 
   hayerror = false;
   ids = '';
@@ -53,14 +53,16 @@ export class QuickFormsComponent implements OnInit {
   segundoform = false;
   tercerform = false;
 
+  numdoc = 0;
+
   miFormulario = this.fb.group({
     tipodoc: ['', [Validators.required, Validators.minLength(3)]],
     fechaNac: ['', Validators.required],
     fechaExp: ['', Validators.required],
     pais: [''],
     departamento: [''],
-    ciudad: ['', [Validators.required, Validators.minLength(5)]],
     barrio: [''],
+    ciudad: ['', [Validators.required, Validators.minLength(5)]],
     direccion: ['', [Validators.required, Validators.minLength(3)]],
     numdoc: ['', [Validators.required, Validators.minLength(5)]],
     celular1: [
@@ -77,10 +79,6 @@ export class QuickFormsComponent implements OnInit {
     numcuenta: ['', [Validators.required, Validators.minLength(5)]],
   });
 
-  nuevoFavorito: FormControl = this.fb.control('', Validators.required);
-  get favoritosArr() {
-    return this.miFormulario.get('favoritos') as FormArray;
-  }
 
   constructor(
     private fb: FormBuilder,
@@ -90,7 +88,16 @@ export class QuickFormsComponent implements OnInit {
     private userService: UserService
   ) { }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {
+    this.authService.validarToken().subscribe((resp) => {
+      this.userService.getUserById(this.usuarioauth.uid).subscribe((res) => {
+        this.usuario = res;
+        this.numdoc = this.usuario.personal.numdoc;
+
+      });
+    });
+
+  }
 
   getError(campo: string): string {
     let message = '';
@@ -116,28 +123,20 @@ export class QuickFormsComponent implements OnInit {
     );
   }
 
-  agregarFavorito() {
-    if (this.nuevoFavorito.invalid) {
-      return;
-    }
-    this.favoritosArr.push(
-      this.fb.control(this.nuevoFavorito.value, Validators.required)
-    );
-    this.nuevoFavorito.reset();
+
+
+
+
+  segundaparte(): void {
+    console.log(this.usuarioauth)
+    //this.primerform = false;
+    //this.segundoform = true;
   }
 
-  borrar(i: number) {
-    this.favoritosArr.removeAt(i);
-  }
-
-  segundaparte() {
-    this.primerform = false;
-    this.segundoform = true;
-  }
-
-  guardar() {
-    if (!this.usuarioauth.uid)
+  guardar(): void {
+    if (!this.usuarioauth.uid) {
       this.ids = localStorage.getItem('id') as string;
+    }
     if (this.miFormulario.invalid) {
       this.miFormulario.markAllAsTouched();
       console.log('Formulario no válido');
@@ -170,17 +169,17 @@ export class QuickFormsComponent implements OnInit {
       tipocuenta,
       numcuenta,
     } = this.miFormulario.value;
-    console.log(this.ids);
-    if (localStorage.getItem('id')) {
+
+    if (this.usuarioauth.uid) {
       this.userService.updateUserByIdX(
-        this.ids,
+        this.usuarioauth.uid,
         tipodoc,
         fechaNac,
         fechaExp,
-        pais,
-        departamento,
+        'Colombia',
+        '',
         ciudad,
-        barrio,
+        '',
         direccion,
         numdoc,
         celular1,
@@ -198,7 +197,8 @@ export class QuickFormsComponent implements OnInit {
             });
             this.primerform = false;
             this.segundoform = true;
-            // this.requestService.updateRequestsByIdNumdoc(this.usuarioauth.solicitud as string, numdoc as string).subscribe(x => console.log('ok'));
+            // this.requestService.updateRequestsByIdNumdoc(this.usuarioauth.solicitud as string, numdoc as string)
+            // .subscribe(x => console.log('ok'));
             // this.router.navigateByUrl('/dashboard/misolicitud');
           },
           (err) => {

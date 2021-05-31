@@ -22,7 +22,6 @@ export class RegisterComponent implements OnInit {
     secondsurname: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
-    typeloan: '',
     terminos: [false, Validators.requiredTrue],
     politicas: [false, Validators.requiredTrue],
     habeas: [false, Validators.requiredTrue],
@@ -41,14 +40,14 @@ export class RegisterComponent implements OnInit {
 
   register() {
 
-    const { name, secondname, surname, secondsurname, email, password, typeloan } = this.miFormulario.value;
+    const { name, secondname, surname, secondsurname, email, password } = this.miFormulario.value;
     Swal.fire({
       title: 'Espere',
       text: 'Registrando Espere Porfavor ...',
       allowOutsideClick: false
     });
     Swal.showLoading();
-    this.authService.register(name, secondname, surname, secondsurname, email, password, typeloan).subscribe((resp) => {
+    this.authService.register(name, secondname, surname, secondsurname, email, password, '').subscribe((resp) => {
 
       Swal.close();
       // console.log(ok);

@@ -66,7 +66,6 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     SharedDashboardModule,
     FormsModule,
     ReactiveFormsModule
-
   ],
 })
 export class DashboardModule {}

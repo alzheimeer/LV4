@@ -119,6 +119,7 @@ const revalidarToken = async function(req, res) {
         email = dbUser.email;
         roles = dbUser.roles;
         solicitud = dbUser.solicitud;
+        typeloan = dbUser.typeloan;
     } else {
         name = '';
         email = '';
@@ -136,6 +137,7 @@ const revalidarToken = async function(req, res) {
         email,
         roles,
         solicitud,
+        typeloan,
         token
     });
 }

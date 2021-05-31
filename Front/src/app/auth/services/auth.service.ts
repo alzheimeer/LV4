@@ -53,8 +53,9 @@ export class AuthService {
         }
         sessionStorage.setItem('a', '0');
 
-        if (resp.typeloan === 'quickloan')
+        if (resp.typeloan === 'quickloan') {
           return 'user200';
+        }
         return 'user';
       }),
       catchError((err) => of(err.error.msg))
@@ -105,7 +106,7 @@ export class AuthService {
     // return this observable
     return this.http.get<AuthResponse>(url, {headers}).pipe(
       map(resp => {
-        // console.log(resp);
+        // console.log('Respuesta:', resp);
         localStorage.setItem('token', resp.token!);
         this._usuario = {
           uid: resp.uid!,
@@ -116,6 +117,7 @@ export class AuthService {
           email: resp.email!,
           roles: resp.roles!,
           solicitud: resp.solicitud!,
+          typeloan: resp.typeloan!
         };
 
         return resp.ok;
