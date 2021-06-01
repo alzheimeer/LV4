@@ -70,7 +70,35 @@ export class UserService {
         numcuenta,
       }
     };
-    console.log('id:', id);
+    // console.log('id:', id);
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return this.http.put(`${url}/${id}`, body, { headers }).pipe(
+      tap(() => {
+        this._refresh$.next();
+      })
+    );
+  }
+  public updateUserByIdX2(id: string, ingresos: number, egresos: number, genero: string, estadocivil: string,
+    personasacargo: number, numhijos: number, niveldeestudios: string, estadodeestudios: string,
+    tipovivienda: string, tiempoenvivienda: number) {
+    const url = `${this.baseUrl}/users`;
+    const body = {
+      personal: {
+        genero,
+        estadocivil,
+        personasacargo,
+        numhijos,
+        niveldeestudios,
+        estadodeestudios,
+        tipovivienda,
+        tiempoenvivienda,
+      },
+      banca: {
+        ingresos,
+        egresos,
+      }
+    };
+    // console.log('id:', id);
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, body, { headers }).pipe(
       tap(() => {

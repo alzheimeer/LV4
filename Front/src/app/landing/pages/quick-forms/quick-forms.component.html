@@ -8,212 +8,627 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Informacion Basica</h5>
+          <h5 class="title">Informacion Personal Y Laboral</h5>
         </div>
         <div class="card-body">
 
-
-          <form autocomplete="off" [formGroup]="miFormulario"
-            (ngSubmit)="guardar()">
-
           <div *ngIf="primerform">
-            <!-- Primera 1 Fila -->
-            <div class="row">
+            <form autocomplete="off" [formGroup]="miFormulario"
+              (ngSubmit)="guardar()">
 
-              <!-- Tipo de Documento -->
-              <mat-form-field appearance="fill" class="form-group col-md-6">
-                <mat-select formControlName="tipodoc">
-                  <mat-option selected disabled value="">Escoge...</mat-option>
-                  <mat-option [value]="item" *ngFor="let item of tiposIdentificacion">{{item}}</mat-option>
 
-                </mat-select>
-                <mat-label><mat-icon>description</mat-icon> <b> Tipo de Documento </b></mat-label>
-              </mat-form-field>
 
-              <!-- Numero De Documento -->
-              <mat-form-field class="form-group col-md-6 pl-1">
-                <mat-label>Numero De Documento</mat-label>
-                <input matInput formControlName="numdoc" type="number"
-                  class="form-control" >
-                <mat-error *ngIf="campoEsValido('numdoc')">
-                  {{getError('numdoc')}}
-                </mat-error>
-              </mat-form-field>
-            </div>
+              <!-- Primera 1 Fila -->
+              <div class="row">
 
-             <!-- Primera 2 Fila -->
-            <div class="row">
+                <!-- Tipo de Documento -->
+                <mat-form-field appearance="fill" class="form-group col-md-6">
+                  <mat-select formControlName="tipodoc">
+                    <mat-option selected disabled value="">Escoge...</mat-option>
+                    <mat-option [value]="item" *ngFor="let item of
+                      tiposIdentificacion">{{item}}</mat-option>
 
-              <!-- Fecha Nacimiento -->
-              <mat-form-field class="form-group col-md-4 pl-1">
+                  </mat-select>
+                  <mat-label><mat-icon>description</mat-icon> <b> Tipo de
+                      Documento </b></mat-label>
+                </mat-form-field>
+
+                <!-- Numero De Documento -->
+                <mat-form-field class="form-group col-md-6 pl-1">
+                  <mat-label>Numero De Documento</mat-label>
+                  <input matInput formControlName="numdoc" type="number"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('numdoc')">
+                    {{getError('numdoc')}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+              <!-- Primera 2 Fila -->
+              <div class="row">
+
+                <!-- Fecha Nacimiento -->
+                <mat-form-field class="form-group col-md-4 pl-1">
                   <mat-label>Fecha De Nacimiento</mat-label>
                   <input matInput formControlName="fechaNac" type="date"
-                  class="form-control" >
-                <mat-error *ngIf="campoEsValido('fechaNac')">
-                  {{getError('fechaNac')}}
-                </mat-error>
-              </mat-form-field>
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('fechaNac')">
+                    {{getError('fechaNac')}}
+                  </mat-error>
+                </mat-form-field>
 
-              <!-- Fehcas Expedicion Cedula -->
-              <mat-form-field class="form-group col-md-4 pl-1">
-                <mat-label>Fecha De Expedicion De La Cedula</mat-label>
-                <input matInput formControlName="fechaExp" type="date"
-                class="form-control" >
-              <mat-error *ngIf="campoEsValido('fechaExp')">
-                {{getError('fechaExp')}}
-              </mat-error>
-              </mat-form-field>
-            <!-- </div> -->
+                <!-- Fehcas Expedicion Cedula -->
+                <mat-form-field class="form-group col-md-4 pl-1">
+                  <mat-label>Fecha De Expedicion De La Cedula</mat-label>
+                  <input matInput formControlName="fechaExp" type="date"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('fechaExp')">
+                    {{getError('fechaExp')}}
+                  </mat-error>
+                </mat-form-field>
 
-            <!-- Segunda Fila -->
-            <!-- <div class="row"> -->
+                <!-- Ciudad -->
+                <mat-form-field class="form-group col-md-4 pl-1">
+                  <mat-label>Ciudad</mat-label>
+                  <input matInput formControlName="ciudad" type="text"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('ciudad')">
+                    {{getError('ciudad')}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
 
-              <!-- Pais -->
-              <!-- <mat-form-field appearance="fill" class="form-group col-md-3">
-                <mat-select formControlName="pais">
-                  <mat-option selected disabled value="">Escoge...</mat-option>
-                  <mat-option [value]="item" *ngFor="let item of paises">{{item}}</mat-option>
-
-                </mat-select>
-                <mat-label><mat-icon>flag</mat-icon> <b> Pais</b></mat-label>
-              </mat-form-field> -->
-
-              <!-- Departamento -->
-              <!-- <mat-form-field appearance="fill" class="form-group col-md-3">
-                <mat-select formControlName="departamento">
-                  <mat-option selected disabled value="">Escoge...</mat-option>
-                  <mat-option [value]="item" *ngFor="let item of departamentos">{{item}}</mat-option>
-
-                </mat-select>
-                <mat-label><mat-icon>flag</mat-icon> <b> Departamento</b></mat-label>
-              </mat-form-field> -->
-
-              <!-- Ciudad -->
-              <mat-form-field class="form-group col-md-4 pl-1">
-                <mat-label>Ciudad</mat-label>
-                <input matInput formControlName="ciudad" type="text"
-                  class="form-control" >
-                <mat-error *ngIf="campoEsValido('ciudad')">
-                  {{getError('ciudad')}}
-                </mat-error>
-              </mat-form-field>
-
-               <!-- Barrio -->
-               <!-- <mat-form-field class="form-group col-md-3 pl-1">
-                <mat-label>Barrio</mat-label>
-                <input matInput formControlName="barrio" type="text"
-                  class="form-control" >
-                <mat-error *ngIf="campoEsValido('barrio')">
-                  {{getError('barrio')}}
-                </mat-error>
-              </mat-form-field> -->
-
-            </div>
-            <!-- Tercera Fila -->
-            <div class="row">
-
-              <!-- Direccion -->
-              <mat-form-field class="form-group col-md-4 pl-1">
-                <mat-label>Direccion</mat-label>
-                <input matInput formControlName="direccion" type="text"
-                  class="form-control" >
-                <mat-error *ngIf="campoEsValido('direccion')">
-                  {{getError('direccion')}}
-                </mat-error>
-              </mat-form-field>
+              <!-- Tercera Fila -->
+              <div class="row">
+                <!-- Direccion -->
+                <mat-form-field class="form-group col-md-4 pl-1">
+                  <mat-label>Direccion</mat-label>
+                  <input matInput formControlName="direccion" type="text"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('direccion')">
+                    {{getError('direccion')}}
+                  </mat-error>
+                </mat-form-field>
 
                 <!-- </div> -->
 
-            <!-- Cuarta Fila -->
-            <!-- <div class="row"> -->
+                <!-- Cuarta Fila -->
+                <!-- <div class="row"> -->
 
-              <!-- Celular -->
-              <mat-form-field class="form-group col-md-4">
-                <mat-label>Celular  <small>(10-Digitos)</small></mat-label>
-                <input matInput formControlName="celular1" type="number"
-                  class="form-control">
-                <mat-error *ngIf="campoEsValido('celular1')">
-                  {{getError('celular1')}}
-                </mat-error>
-              </mat-form-field>
+                <!-- Celular -->
+                <mat-form-field class="form-group col-md-4">
+                  <mat-label>Celular <small>(10-Digitos)</small></mat-label>
+                  <input matInput formControlName="celular1" type="number"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('celular1')">
+                    {{getError('celular1')}}
+                  </mat-error>
+                </mat-form-field>
 
-              <!-- Celular 2 -->
-              <mat-form-field class="form-group col-md-4">
-                <mat-label>Celular Alternativo "Opcional"</mat-label>
-                <input matInput formControlName="celular2" type="number"
-                  class="form-control" >
-                <mat-error *ngIf="campoEsValido('celular2')">
-                  {{getError('celular2')}}
-                </mat-error>
-              </mat-form-field>
+                <!-- Celular 2 -->
+                <mat-form-field class="form-group col-md-4">
+                  <mat-label>Celular Alternativo "Opcional"</mat-label>
+                  <input matInput formControlName="celular2" type="number"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('celular2')">
+                    {{getError('celular2')}}
+                  </mat-error>
+                </mat-form-field>
 
-            </div>
-
-            <!-- Quinta Fila -->
-            <div class="row">
-
-               <!-- Banco -->
-               <mat-form-field appearance="fill" class="form-group col-md-4">
-                <mat-select formControlName="banco">
-                  <mat-option selected disabled value="">Escoge...</mat-option>
-                  <mat-option [value]="item" *ngFor="let item of bancos">{{item}}</mat-option>
-
-                </mat-select>
-                <mat-label><mat-icon>account_balance</mat-icon> <b> Banco</b></mat-label>
-              </mat-form-field>
-               <!-- Tipo Cuenta -->
-               <mat-form-field appearance="fill" class="form-group col-md-4">
-                <mat-select formControlName="tipocuenta">
-                  <mat-option selected disabled value="">Escoge...</mat-option>
-                  <mat-option [value]="item" *ngFor="let item of tipocuenta">{{item}}</mat-option>
-
-                </mat-select>
-                <mat-label><mat-icon>account_balance</mat-icon> <b> Tipo De Cuenta</b></mat-label>
-              </mat-form-field>
-
-              <!-- Numero de Cuenta -->
-              <mat-form-field class="form-group col-md-4">
-                <mat-label>Numero De Cuenta</mat-label>
-                <input matInput formControlName="numcuenta" type="number"
-                  class="form-control">
-                <mat-error *ngIf="campoEsValido('numcuenta')">
-                  {{getError('numcuenta')}}
-                </mat-error>
-              </mat-form-field>
-
-            </div>
-
-            <a (click)="segundaparte()">Siguiente</a>
-          </div>
-          <div *ngIf="segundoform">
-
-            <h1>Hola mundo</h1>
-          </div>
-            <!-- Boton De Enviar Formulario -->
-            <div class="form-group d-flex h-100">
-              <div class="align-self-end ml-auto">
-                <button type="submit" class="btn btn-primary btn-block"
-                  [disabled]="miFormulario.invalid">
-                  <i class="fa fa-save"></i>
-                  Siguiente
-                </button>
               </div>
-            </div>
-          </form>
+
+              <!-- Quinta Fila -->
+              <div class="row">
+
+                <!-- Banco -->
+                <mat-form-field appearance="fill" class="form-group col-md-4">
+                  <mat-select formControlName="banco">
+                    <mat-option selected disabled value="">Escoge...</mat-option>
+                    <mat-option [value]="item" *ngFor="let item of bancos">{{item}}</mat-option>
+                  </mat-select>
+                  <mat-label><mat-icon>account_balance</mat-icon> <b> Banco</b></mat-label>
+                </mat-form-field>
+                <!-- Tipo Cuenta -->
+                <mat-form-field appearance="fill" class="form-group col-md-4">
+                  <mat-select formControlName="tipocuenta">
+                    <mat-option selected disabled value="">Escoge...</mat-option>
+                    <mat-option [value]="item" *ngFor="let item of tipocuenta">{{item}}</mat-option>
+                  </mat-select>
+                  <mat-label><mat-icon>account_balance</mat-icon> <b> Tipo De
+                      Cuenta</b></mat-label>
+                </mat-form-field>
+
+                <!-- Numero de Cuenta -->
+                <mat-form-field class="form-group col-md-4">
+                  <mat-label>Numero De Cuenta</mat-label>
+                  <input matInput formControlName="numcuenta" type="number"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('numcuenta')">
+                    {{getError('numcuenta')}}
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+
+              <a (click)="segundaparte()">Siguiente</a>
+
+
+              <!-- Boton De Enviar Formulario -->
+              <div class="form-group d-flex h-100">
+                <div class="align-self-end ml-auto">
+                  <button type="submit" class="btn btn-primary btn-block"
+                    [disabled]="miFormulario.invalid">
+                    <i class="fa fa-save"></i>
+                    Siguiente
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div *ngIf="segundoform">
+            <form autocomplete="off" [formGroup]="miFormulario2"
+              (ngSubmit)="guardar2()">
+
+
+
+              <!-- Primera 1 Fila -->
+              <div class="row">
+
+                <!-- Genero -->
+                <mat-form-field appearance="fill" class="form-group col-md-6">
+                  <mat-select formControlName="genero">
+                    <mat-option selected disabled value="">Escoge...</mat-option>
+                    <mat-option value="Masculino">Masculino</mat-option>
+                    <mat-option value="Femenino">Femenino</mat-option>
+                  </mat-select>
+                  <mat-label><mat-icon>description</mat-icon> <b> Genero</b></mat-label>
+                </mat-form-field>
+
+                <!-- EstadoCivil -->
+                <mat-form-field appearance="fill" class="form-group col-md-6">
+                  <mat-select formControlName="estadocivil">
+                    <mat-option selected disabled value="">Escoge...</mat-option>
+                    <mat-option value="UnionLibre">Union Libre</mat-option>
+                    <mat-option value="Soltero">Soltero</mat-option>
+                    <mat-option value="Casado">Casado</mat-option>
+                    <mat-option value="Casado">Separado</mat-option>
+                    <mat-option value="Viudo">Viudo</mat-option>
+                  </mat-select>
+                  <mat-label><mat-icon>description</mat-icon> <b> Estado Civil</b></mat-label>
+                </mat-form-field>
+              </div>
+
+              <!-- Primera 2 Fila -->
+              <div class="row">
+
+                <!-- Personas A Cargo -->
+                <mat-form-field appearance="fill" class="form-group col-md-3">
+                  <mat-select formControlName="personasacargo">
+                    <mat-option selected disabled value="">Escoge...</mat-option>
+                    <mat-option value="0">Ninguna</mat-option>
+                    <mat-option value="1">1 Persona</mat-option>
+                    <mat-option value="2">2 Personas</mat-option>
+                    <mat-option value="3">3 Personas</mat-option>
+                    <mat-option value="Mas De 3">Mas De 3 Personas</mat-option>
+                  </mat-select>
+                  <mat-label><mat-icon>description</mat-icon> <b>Personas A
+                      Cargo</b></mat-label>
+                </mat-form-field>
+
+                <!-- Numero De Hijos -->
+                <mat-form-field appearance="fill" class="form-group col-md-3">
+                  <mat-select formControlName="numhijos">
+                    <mat-option selected disabled value="">Escoge...</mat-option>
+                    <mat-option value="0">Sin Hijos</mat-option>
+                    <mat-option value="1">Un Hijo</mat-option>
+                    <mat-option value="2">Dos Hijos</mat-option>
+                    <mat-option value="3">Tres Hijos</mat-option>
+                    <mat-option value="Mas De 3">Mas De 3 Hijos</mat-option>
+                  </mat-select>
+                  <mat-label><mat-icon>description</mat-icon> <b> Numero De
+                      Hijos</b></mat-label>
+                </mat-form-field>
+
+
+                <!-- Nivel De Estudios -->
+                <mat-form-field appearance="fill" class="form-group col-md-3">
+                  <mat-select formControlName="niveldeestudios">
+                    <mat-option selected disabled value="">Escoge...</mat-option>
+                    <mat-option value="Ninguno">Ninguno</mat-option>
+                    <mat-option value="Basico">Basico</mat-option>
+                    <mat-option value="Bachiller">Bachiller</mat-option>
+                    <mat-option value="Tecnico">Tecnico</mat-option>
+                    <mat-option value="Tecnologo">Tecnologo</mat-option>
+                    <mat-option value="Pregrado">Pregrado</mat-option>
+                    <mat-option value="Postgrado">Postgrado</mat-option>
+                  </mat-select>
+                  <mat-label><mat-icon>description</mat-icon><b>Nivel De
+                      Estudios</b></mat-label>
+                </mat-form-field>
+
+
+
+                <!-- Estado De Estudios -->
+                <mat-form-field appearance="fill" class="form-group col-md-3">
+                  <mat-select formControlName="estadodeestudios">
+                    <mat-option selected disabled value="">Escoge...</mat-option>
+                    <mat-option value="EnCurso">En Curso</mat-option>
+                    <mat-option value="Finalizados">Finalizados</mat-option>
+                  </mat-select>
+                  <mat-label><mat-icon>description</mat-icon><b>Estado De
+                      Estudios</b></mat-label>
+                </mat-form-field>
+
+              </div>
+
+              <!-- Tercera Fila -->
+              <div class="row">
+
+
+                <!-- Tipo De Vivienda -->
+                <mat-form-field appearance="fill" class="form-group col-md-6">
+                  <mat-select formControlName="tipovivienda">
+                    <mat-option selected disabled value="">Escoge...</mat-option>
+                    <mat-option value="Propia">Propia</mat-option>
+                    <mat-option value="Arriendo">Arriendo</mat-option>
+                    <mat-option value="Familiar">Familiar</mat-option>
+                  </mat-select>
+                  <mat-label><mat-icon>description</mat-icon><b>Tipo De Vivienda</b></mat-label>
+                </mat-form-field>
+
+                <!-- Tiempo En Vivienda-->
+                <mat-form-field appearance="fill" class="form-group col-md-6">
+                  <mat-select formControlName="tiempoenvivienda">
+                    <mat-option selected disabled value="">Escoge...</mat-option>
+                    <mat-option value="0-1">Menos De 1 año</mat-option>
+                    <mat-option value="1-2">Entre 1 y 2 años</mat-option>
+                    <mat-option value="2-3">Entre 2 y 3 años</mat-option>
+                    <mat-option value="Masde3">Mas De 3 años</mat-option>
+                  </mat-select>
+                  <mat-label><mat-icon>description</mat-icon><b>Tiempo En
+                      Vivienda</b></mat-label>
+                </mat-form-field>
+              </div>
+
+              <a (click)="terceraparte()">Siguiente</a>
+
+              <!-- Boton De Enviar Formulario -->
+              <div class="form-group d-flex h-100">
+                <div class="align-self-end ml-auto">
+                  <button type="submit" class="btn btn-primary btn-block"
+                    [disabled]="miFormulario2.invalid">
+                    <i class="fa fa-save"></i>Siguiente</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+
+          <div *ngIf="tercerform">
+            <form autocomplete="off" [formGroup]="miFormulario3"
+              (ngSubmit)="guardar3()">
+
+              <!-- Primera 1 Fila -->
+
+              <div class="row">
+                <h2 class="col-md-12 text-center">REFERENCIA PERSONAL</h2>
+                <!-- Nombre -->
+                <mat-form-field class="form-group col-md-6">
+                  <mat-label>Nombre</mat-label>
+                  <input matInput formControlName="refpnombre" type="text"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('refpnombre')">
+                    {{getError('refpnombre')}}
+                  </mat-error>
+                </mat-form-field>
+
+                <!-- Apellido -->
+                <mat-form-field class="form-group col-md-6">
+                  <mat-label>Apellido</mat-label>
+                  <input matInput formControlName="refpapellido" type="text"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('refpapellido')">
+                    {{getError('refpapellido')}}
+                  </mat-error>
+                </mat-form-field>
+
+                <!-- Ciudad -->
+                <mat-form-field class="form-group col-md-6">
+                  <mat-label>Ciudad</mat-label>
+                  <input matInput formControlName="refpciudad" type="text"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('refpciudad')">
+                    {{getError('refpciudad')}}
+                  </mat-error>
+                </mat-form-field>
+
+                <!-- Celular -->
+                <mat-form-field class="form-group col-md-6">
+                  <mat-label>Celular</mat-label>
+                  <input matInput formControlName="refpcelular" type="number"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('refpcelular')">
+                    {{getError('refpcelular')}}
+                  </mat-error>
+                </mat-form-field>
+
+              </div>
+
+              <!-- Primera 2 Fila -->
+              <div class="row">
+                <h2 class="col-md-12 text-center">REFERENCIA FAMILIAR</h2>
+                <!-- Nombre -->
+                <mat-form-field class="form-group col-md-6">
+                  <mat-label>Nombre</mat-label>
+                  <input matInput formControlName="reffnombre" type="text"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('reffnombre')">
+                    {{getError('reffnombre')}}
+                  </mat-error>
+                </mat-form-field>
+
+                <!-- Apellido -->
+                <mat-form-field class="form-group col-md-6">
+                  <mat-label>Apellido</mat-label>
+                  <input matInput formControlName="reffapellido" type="text"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('reffapellido')">
+                    {{getError('reffapellido')}}
+                  </mat-error>
+                </mat-form-field>
+
+                <!-- Ciudad -->
+                <mat-form-field class="form-group col-md-6">
+                  <mat-label>Ciudad</mat-label>
+                  <input matInput formControlName="reffciudad" type="text"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('reffciudad')">
+                    {{getError('reffciudad')}}
+                  </mat-error>
+                </mat-form-field>
+
+                <!-- Celular -->
+                <mat-form-field class="form-group col-md-6">
+                  <mat-label>Celular</mat-label>
+                  <input matInput formControlName="reffcelular" type="number"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('reffcelular')">
+                    {{getError('reffcelular')}}
+                  </mat-error>
+                </mat-form-field>
+
+                <h2 class="col-md-12 text-center">Quien Te Refirio?</h2>
+
+                <!-- Recomendado -->
+                <mat-form-field class="form-group col-md-12">
+                  <mat-label>Quien Te Refirio?<small>Cedula(Opcional)</small></mat-label>
+                  <input matInput formControlName="referido" type="number"
+                    class="form-control">
+                  <mat-error *ngIf="campoEsValido('referido')">
+                    {{getError('referido')}}
+                  </mat-error>
+                </mat-form-field>
+              </div>
+
+
+              <a (click)="cuartaparte()">Siguiente</a>
+
+
+              <!-- Boton De Enviar Formulario -->
+              <div class="form-group d-flex h-100">
+                <div class="align-self-end ml-auto">
+                  <button type="submit" class="btn btn-primary btn-block"
+                    [disabled]="miFormulario2.invalid">
+                    <i class="fa fa-save"></i>Siguiente</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+
+
+          <div *ngIf="cuartaform">
+            <form autocomplete="off" [formGroup]="miFormulario4"
+              (ngSubmit)="guardar4()">
+
+            <!-- 1 Fila -->
+              <div class="row">
+                <!-- Situacion Laboral-->
+                <mat-form-field appearance="fill" class="form-group col-md-12">
+                  <mat-select formControlName="situacionlaboral">
+                    <mat-option selected disabled value="">Escoge...</mat-option>
+                    <mat-option value="Pensionado">Pensionado</mat-option>
+                    <mat-option value="Desempleado">Desempleado</mat-option>
+                    <mat-option value="Independiente">Independiente</mat-option>
+                    <mat-option value="Empleado">Empleado</mat-option>
+                  </mat-select>
+                  <mat-label><mat-icon>description</mat-icon><b>Estado Laboral</b></mat-label>
+                </mat-form-field>
+              </div>
+
+            <!-- 2 Fila -->
+              <div class="row" *ngIf="situacionlaboral === 'Independiente'">
+                <!-- Actividad De Independiente -->
+
+                  <mat-form-field appearance="fill" class="form-group
+                    col-md-12">
+                    <mat-select formControlName="actividad">
+                      <mat-option selected disabled value="">Escoge...</mat-option>
+                      <mat-option value="Abogado">Abogado</mat-option>
+                      <mat-option value="Actividades Agropecuarias">Actividades
+                        Agropecuarias</mat-option>
+                      <mat-option value="Ama De Casa">Ama De Casa</mat-option>
+                      <mat-option value="Artistas">Artistas</mat-option>
+                      <mat-option value="Cocineros">Cocineros</mat-option>
+                      <mat-option value="Contador/Revisor">Contador/Revisor</mat-option>
+                      <mat-option value="Ingeniero/Geologo/Arquitecto">Ingeniero/Geologo/Arquitecto</mat-option>
+                      <mat-option value="Medico/Profesional De La
+                        Salud/Estetica">Medico/Profesional De La Salud/Estetica</mat-option>
+                      <mat-option value="Mensajero">Mensajero</mat-option>
+                      <mat-option value="Microempresario">Microempresario</mat-option>
+                      <mat-option value="Operarios De Maquinaria">Operarios De
+                        Maquinaria</mat-option>
+                      <mat-option value="Peluquero">Peluquero</mat-option>
+                      <mat-option value="Plomero/Albañil">Plomero/Albañil</mat-option>
+                      <mat-option value="Profesional O Tecnico De La
+                        Informatica">Profesional O Tecnico De La Informatica</mat-option>
+                      <mat-option value="Profesores/Docentes">Profesores/Docentes</mat-option>
+                      <mat-option value="Secretarias">Secretarias</mat-option>
+                      <mat-option value="Servicios De
+                        Vigilancia/Policia/Militares">Servicios De
+                        Vigilancia/Policia/Militares</mat-option>
+                      <mat-option value="Taxista/Transportador/Conductor">Taxista/Transportador/Conductor</mat-option>
+                      <mat-option value="Tecnicos O Tecnologos En Otras Areas">Tecnicos
+                        O Tecnologos En Otras Areas</mat-option>
+                      <mat-option value="Vendedores/Visitadores">Vendedores/Visitadores</mat-option>
+                      <mat-option value="Otros">Otros</mat-option>
+                    </mat-select>
+                    <mat-label><mat-icon>description</mat-icon><b>Actividad</b></mat-label>
+                  </mat-form-field>
+
+              </div>
+
+              <!-- 3 Fila -->
+              <div class="row" *ngIf="situacionlaboral === 'Empleado'">
+                <!-- Actividades Empleo "Cargo" -->
+
+                  <mat-form-field appearance="fill" class="form-group col-md-6">
+                    <mat-select formControlName="actividadcargo">
+                      <mat-option selected disabled value="">Escoge...</mat-option>
+                      <mat-option value="Administrativas">Administrativas</mat-option>
+                      <mat-option value="Gerenciales">Gerenciales</mat-option>
+                      <mat-option value="Operativas Y De Servicio">Operativas Y
+                        De Servicio</mat-option>
+                      <mat-option value="Ventas Y Mercadeo">Ventas Y Mercadeo</mat-option>
+                      <mat-option value="Tecnicas">Tecnicas</mat-option>
+                      <mat-option value="Vigilancia y Seguridad">Vigilancia y
+                        Seguridad</mat-option>
+                      <mat-option value="Taxista">Taxista</mat-option>
+                      <mat-option value="Medico/Profesional De La
+                        Salud/Estetica">Medico/Profesional De La Salud/Estetica</mat-option>
+                      <mat-option value="Conductor/Trasportador">Conductor/Trasportador</mat-option>
+                      <mat-option value="Secretariales">Secretariales</mat-option>
+                      <mat-option value="Areas De Apoyo">Areas De Apoyo</mat-option>
+                      <mat-option value="Policia">Policia</mat-option>
+                      <mat-option value="Militar">Militar</mat-option>
+                      <mat-option value="Cajero">Cajero</mat-option>
+                      <mat-option value="Otros">Otros</mat-option>
+                    </mat-select>
+                    <mat-label><mat-icon>description</mat-icon><b>Actividad
+                        Cargo</b></mat-label>
+                  </mat-form-field>
+
+                <!-- Antiguedad En Empresa-->
+
+                  <mat-form-field appearance="fill" class="form-group col-md-6">
+                    <mat-select formControlName="antiguedadempresa">
+                      <mat-option selected disabled value="">Escoge...</mat-option>
+                      <mat-option value="0-1">Menos De 1 año</mat-option>
+                      <mat-option value="1-2">Entre 1 y 2 años</mat-option>
+                      <mat-option value="2-3">Entre 2 y 3 años</mat-option>
+                      <mat-option value="Masde3">Mas De 3 años</mat-option>
+                    </mat-select>
+                    <mat-label><mat-icon>description</mat-icon><b>Antiguedad</b></mat-label>
+                  </mat-form-field>
+
+              </div>
+
+              <!-- Fila 4 -->
+              <div class="row" *ngIf="situacionlaboral === 'Empleado'">
+                <!-- Nombre Empresa -->
+
+                  <mat-form-field class="form-group col-md-6">
+                    <mat-label>Nombre De la Empresa</mat-label>
+                    <input matInput formControlName="nombreempresa" type="text"
+                      class="form-control">
+                    <mat-error *ngIf="campoEsValido('nombreempresa')">
+                      {{getError('nombreempresa')}}
+                    </mat-error>
+                  </mat-form-field>
+
+
+                <!--Telefono Empresa -->
+
+                  <mat-form-field class="form-group col-md-6">
+                    <mat-label>Telefono De la Empresa</mat-label>
+                    <input matInput formControlName="telefonoempresa"
+                      type="number"
+                      class="form-control">
+                    <mat-error *ngIf="campoEsValido('telefonoempresa')">
+                      {{getError('telefonoempresa')}}
+                    </mat-error>
+                  </mat-form-field>
+
+              </div>
+
+              <div class="row" *ngIf="situacionlaboral !== ''">
+                <!-- En que usaras el credito -->
+
+                  <mat-form-field appearance="fill" class="form-group
+                    col-md-12">
+                    <mat-select formControlName="uso">
+                      <mat-option selected disabled value="">Escoge...</mat-option>
+                      <mat-option value="Viaje">Viaje</mat-option>
+                      <mat-option value="Utiles Escolares">Utiles Escolares</mat-option>
+                      <mat-option value="Matricula de Mis Hijos">Matricula de
+                        Mis Hijos</mat-option>
+                      <mat-option value="Matricula Universidad">Matricula
+                        Universidad</mat-option>
+                      <mat-option value="Negocio">Negocio</mat-option>
+                      <mat-option value="Compra De Medicamentos">Compra De
+                        Medicamentos</mat-option>
+                      <mat-option value="Urgencias Medicas">Urgencias Medicas</mat-option>
+                      <mat-option value="Pago de Deudas">Pago de Deudas</mat-option>
+                      <mat-option value="Pago De Servicios Publicos">Pago De
+                        Servicios Publicos</mat-option>
+                      <mat-option value="Pago Arriendo">Pago Arriendo</mat-option>
+                      <mat-option value="Reparacion Vehiculo/Moto">Reparacion
+                        Vehiculo/Moto</mat-option>
+                      <mat-option value="Seguros Vehiculo/Moto">Seguros
+                        Vehiculo/Moto</mat-option>
+                      <mat-option value="Mercado">Mercado</mat-option>
+                      <mat-option value="Diversion">Diversion</mat-option>
+                      <mat-option value="Pago Impuestos">Pago Impuestos</mat-option>
+                      <mat-option value="Tecnologia">Tecnologia</mat-option>
+                      <mat-option value="Otros">Otros</mat-option>
+                    </mat-select>
+                    <mat-label><mat-icon>description</mat-icon><b>En Que
+                        Usaras El Credito?</b></mat-label>
+                  </mat-form-field>
+
+              </div>
+
+              <!-- Boton De Enviar Formulario -->
+              <div class="form-group d-flex h-100">
+                <div class="align-self-end ml-auto">
+                  <button type="submit" class="btn btn-primary btn-block"
+                    [disabled]="miFormulario2.invalid">
+                    <i class="fa fa-save"></i>Siguiente</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+
+
+
+
 
 
         </div>
       </div>
+
+
     </div>
 
 
-  </div>
 
 
 
-
-
-<!-- <span>Valid</span>
+    <!-- <span>Valid</span>
 <pre>{{ miFormulario.valid }}</pre>
 <br>
 

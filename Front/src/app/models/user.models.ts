@@ -21,6 +21,8 @@ export interface Banca {
   banco: string;
   tipocuenta?: string;
   numcuenta?: number;
+  ingresos: number;
+  egresos: number;
 }
 
 export interface Personal {
@@ -35,6 +37,14 @@ export interface Personal {
   numdoc?: number;
   celular1?: number;
   celular2?: number;
+  genero: string;
+  estadocivil: string;
+  personasacargo: number;
+  numhijos: number;
+  niveldeestudios: string;
+  estadodeestudios: string;
+  tipovivienda: string;
+  tiempoenvivienda: number;
 }
 export class UsuarioIni implements User {
   personal: Personal;
@@ -60,6 +70,8 @@ export class UsuarioIni implements User {
         banco: '',
         tipocuenta: '',
         numcuenta: 0,
+      ingresos: 0,
+      egresos: 0,
       },
       this.personal = {
         tipodoc: '',
@@ -73,6 +85,14 @@ export class UsuarioIni implements User {
         numdoc: 0,
         celular1: 0,
         celular2: 0,
+      genero: '',
+      estadocivil: '',
+      personasacargo: 0,
+      numhijos: 0,
+      niveldeestudios: '',
+      estadodeestudios: '',
+      tipovivienda: '',
+      tiempoenvivienda: 0,
       };
     this._id = '';
     this.solicitud = '',

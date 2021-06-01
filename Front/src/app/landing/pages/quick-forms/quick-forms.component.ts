@@ -52,7 +52,8 @@ export class QuickFormsComponent implements OnInit {
   primerform = true;
   segundoform = false;
   tercerform = false;
-
+  cuartaform = false;
+  situacionlaboral = '';
   numdoc = 0;
 
   miFormulario = this.fb.group({
@@ -79,6 +80,45 @@ export class QuickFormsComponent implements OnInit {
     numcuenta: ['', [Validators.required, Validators.minLength(5)]],
   });
 
+  miFormulario2 = this.fb.group({
+    genero: ['', Validators.required],
+    estadocivil: ['', Validators.required],
+    personasacargo: ['', Validators.required],
+    ingresos: ['', Validators.required],
+    egresos: ['', Validators.required],
+    numhijos: ['', Validators.required],
+    niveldeestudios: ['', Validators.required],
+    estadodeestudios: ['', Validators.required],
+    tipovivienda: ['', Validators.required],
+    tiempoenvivienda: ['', Validators.required]
+  });
+
+  miFormulario3 = this.fb.group({
+    refpnombre: ['', Validators.required],
+    refpapellido: ['', Validators.required],
+    refpciudad: ['', Validators.required],
+    refpcelular: ['', Validators.required],
+    reffnombre: ['', Validators.required],
+    reffapellido: ['', Validators.required],
+    reffciudad: ['', Validators.required],
+    reffcelular: ['', Validators.required],
+    referido: ['', Validators.required],
+  });
+
+  miFormulario4 = this.fb.group({
+    situacionlaboral: ['', Validators.required],
+    actividad: '',
+    actividadcargo: '',
+    antiguedadempresa: '',
+    nombreempresa: '',
+    telefonoempresa: '',
+    uso: ['', Validators.required],
+  });
+
+
+
+
+
 
   constructor(
     private fb: FormBuilder,
@@ -93,9 +133,14 @@ export class QuickFormsComponent implements OnInit {
       this.userService.getUserById(this.usuarioauth.uid).subscribe((res) => {
         this.usuario = res;
         this.numdoc = this.usuario.personal.numdoc;
-
       });
     });
+
+    this.miFormulario4.get('situacionlaboral')?.valueChanges.subscribe((value) => {
+      this.situacionlaboral = value;
+    });
+
+
 
   }
 
@@ -128,9 +173,19 @@ export class QuickFormsComponent implements OnInit {
 
 
   segundaparte(): void {
-    console.log(this.usuarioauth)
-    //this.primerform = false;
-    //this.segundoform = true;
+    //console.log(this.usuarioauth)
+    this.primerform = false;
+    this.segundoform = true;
+  }
+  terceraparte(): void {
+    //console.log(this.usuarioauth)
+    this.segundoform = false;
+    this.tercerform = true;
+  }
+  cuartaparte(): void {
+    //console.log(this.usuarioauth)
+    this.cuartaform = true;
+    this.tercerform = false;
   }
 
   guardar(): void {
@@ -157,10 +212,7 @@ export class QuickFormsComponent implements OnInit {
       tipodoc,
       fechaNac,
       fechaExp,
-      pais,
-      departamento,
       ciudad,
-      barrio,
       direccion,
       numdoc,
       celular1,
@@ -211,4 +263,216 @@ export class QuickFormsComponent implements OnInit {
         );
     }
   }
+
+
+
+  guardar2(): void {
+    if (!this.usuarioauth.uid) {
+      this.ids = localStorage.getItem('id') as string;
+    }
+    if (this.miFormulario.invalid) {
+      this.miFormulario.markAllAsTouched();
+      console.log('Formulario no válido');
+      Swal.fire({
+        title: 'Error',
+        text: 'Formulario no válido',
+        icon: 'error',
+      });
+      return;
+    }
+    Swal.fire({
+      title: 'Espere',
+      text: 'Guardando Informacion',
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
+    const {
+      ingresos,
+      egresos,
+      genero,
+      estadocivil,
+      personasacargo,
+      numhijos,
+      niveldeestudios,
+      estadodeestudios,
+      tipovivienda,
+      tiempoenvivienda,
+    } = this.miFormulario2.value;
+
+    if (this.usuarioauth.uid) {
+      this.userService.updateUserByIdX2(
+        this.usuarioauth.uid,
+        ingresos,
+        egresos,
+        genero,
+        estadocivil,
+        personasacargo,
+        numhijos,
+        niveldeestudios,
+        estadodeestudios,
+        tipovivienda,
+        tiempoenvivienda,
+      )
+        .subscribe(
+          (resp) => {
+            Swal.fire({
+              title: 'OK',
+              text: 'Datos Enviados',
+              icon: 'success',
+            });
+            this.segundoform = false;
+            this.tercerform = true;
+            // this.requestService.updateRequestsByIdNumdoc(this.usuarioauth.solicitud as string, numdoc as string)
+            // .subscribe(x => console.log('ok'));
+            // this.router.navigateByUrl('/dashboard/misolicitud');
+          },
+          (err) => {
+            Swal.fire({
+              title: 'Error',
+              text: 'Formulario no válido',
+              icon: 'error',
+            });
+          }
+        );
+    }
+  }
+
+
+  guardar3(): void {
+    if (!this.usuarioauth.uid) {
+      this.ids = localStorage.getItem('id') as string;
+    }
+    if (this.miFormulario.invalid) {
+      this.miFormulario.markAllAsTouched();
+      console.log('Formulario no válido');
+      Swal.fire({
+        title: 'Error',
+        text: 'Formulario no válido',
+        icon: 'error',
+      });
+      return;
+    }
+    Swal.fire({
+      title: 'Espere',
+      text: 'Guardando Informacion',
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
+    const {
+      refpnombre,
+      refpapellido,
+      refpciudad,
+      refpcelular,
+      reffnombre,
+      reffapellido,
+      reffciudad,
+      reffcelular,
+      referido,
+    } = this.miFormulario2.value;
+
+    // if (this.usuarioauth.uid) {
+    //   this.userService.updateUserByIdX3(
+    //     this.usuarioauth.uid,
+    //     refpnombre,
+    //     refpapellido,
+    //     refpciudad,
+    //     refpcelular,
+    //     reffnombre,
+    //     reffapellido,
+    //     reffciudad,
+    //     reffcelular,
+    //     referido,
+    //   )
+    //     .subscribe(
+    //       (resp) => {
+    //         Swal.fire({
+    //           title: 'OK',
+    //           text: 'Datos Enviados',
+    //           icon: 'success',
+    //         });
+    //         this.segundoform = false;
+    //         this.tercerform = true;
+    //         // this.requestService.updateRequestsByIdNumdoc(this.usuarioauth.solicitud as string, numdoc as string)
+    //         // .subscribe(x => console.log('ok'));
+    //         // this.router.navigateByUrl('/dashboard/misolicitud');
+    //       },
+    //       (err) => {
+    //         Swal.fire({
+    //           title: 'Error',
+    //           text: 'Formulario no válido',
+    //           icon: 'error',
+    //         });
+    //       }
+    //     );
+    // }
+  }
+
+
+
+  guardar4(): void {
+    if (!this.usuarioauth.uid) {
+      this.ids = localStorage.getItem('id') as string;
+    }
+    if (this.miFormulario.invalid) {
+      this.miFormulario.markAllAsTouched();
+      console.log('Formulario no válido');
+      Swal.fire({
+        title: 'Error',
+        text: 'Formulario no válido',
+        icon: 'error',
+      });
+      return;
+    }
+    Swal.fire({
+      title: 'Espere',
+      text: 'Guardando Informacion',
+      allowOutsideClick: false,
+    });
+    Swal.showLoading();
+    const {
+      situacionlaboral,
+      actividad,
+      actividadcargo,
+      antiguedadempresa,
+      nombreempresa,
+      telefonoempresa,
+      uso,
+    } = this.miFormulario2.value;
+
+    // if (this.usuarioauth.uid) {
+    //   this.userService.updateUserByIdX4(
+    //     this.usuarioauth.uid,
+    //     situacionlaboral,
+    //     actividad,
+    //     actividadcargo,
+    //     antiguedadempresa,
+    //     nombreempresa,
+    //     telefonoempresa,
+    //     uso,
+    //   )
+    //     .subscribe(
+    //       (resp) => {
+    //         Swal.fire({
+    //           title: 'OK',
+    //           text: 'Datos Enviados',
+    //           icon: 'success',
+    //         });
+    //         this.segundoform = false;
+    //         this.tercerform = true;
+    //         // this.requestService.updateRequestsByIdNumdoc(this.usuarioauth.solicitud as string, numdoc as string)
+    //         // .subscribe(x => console.log('ok'));
+    //         // this.router.navigateByUrl('/dashboard/misolicitud');
+    //       },
+    //       (err) => {
+    //         Swal.fire({
+    //           title: 'Error',
+    //           text: 'Formulario no válido',
+    //           icon: 'error',
+    //         });
+    //       }
+    //     );
+    // }
+  }
+
+
 }
