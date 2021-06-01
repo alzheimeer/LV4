@@ -102,7 +102,7 @@ export class QuickFormsComponent implements OnInit {
     reffapellido: ['', Validators.required],
     reffciudad: ['', Validators.required],
     reffcelular: ['', Validators.required],
-    referido: ['', Validators.required],
+    referido: '',
   });
 
   miFormulario4 = this.fb.group({
