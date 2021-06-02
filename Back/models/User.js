@@ -5,26 +5,14 @@ var UserSchema = Schema({
         type: String,
         required: true,
     },
-    secondname: {
-        type: String,
-        required: false,
-    },
     surname: {
         type: String,
         required: true,
-    },
-    secondsurname: {
-        type: String,
-        required: false,
     },
     email: {
         type: String,
         required: true,
         unique: true,
-    },
-    typeloan: {
-        type: String,
-        required: false,
     },
     solicitud: {
         type: Schema.Types.ObjectId,
@@ -77,38 +65,6 @@ var UserSchema = Schema({
             required: false,
             default: "",
         },
-        genero: {
-            type: String,
-            required: false,
-        },
-        estadocivil: {
-            type: String,
-            required: false,
-        },
-        personasacargo: {
-            type: Number,
-            required: false,
-        },
-        numhijos: {
-            type: Number,
-            required: false,
-        },
-        niveldeestudios: {
-            type: String,
-            required: false,
-        },
-        estadodeestudios: {
-            type: String,
-            required: false,
-        },
-        tipovivienda: {
-            type: String,
-            required: false,
-        },
-        tiempoenvivienda: {
-            type: Number,
-            required: false,
-        },
         departamento: {
             type: String,
             required: false,
@@ -152,14 +108,6 @@ var UserSchema = Schema({
             type: Number,
             required: false,
         },
-        ingresos: {
-            type: Number,
-            required: false,
-        },
-        egresos: {
-            type: Number,
-            required: false,
-        }
     },
 }, {
     timestamps: true,

@@ -29,9 +29,7 @@ const createAdmin = async function() {
         // Create user with model
         const newUser = new User({
             name: 'Administrador',
-            secondname: '',
-            surname: '-',
-            secondsurname: '',
+            surname: 'Administrador',
             email: 'admin@admin.com',
         });
         // hashear the password and assign it to the password of the new user
@@ -58,9 +56,7 @@ const createModerator = async function () {
         // Create user with model
         const newUser = new User({
             name: 'Moderator',
-            secondname: '',
-            surname: '-',
-            secondsurname: '',
+            surname: 'Moderator',
             email: 'moderator@admin.com',
         });
         // hashear the password and assign it to the password of the new user
@@ -87,7 +83,6 @@ const createProducts = async function() {
 
         await Promise.all([
             new Product({
-                activo: true,
                 name: "Prestamo Personal",
                 valuemin: "100000",
                 valuemax: "2000000",
@@ -117,51 +112,12 @@ const createProducts = async function() {
                 iEfectivoAnualMax: "25.83",
                 iMoraEfectivoAnual: "23.83",
                 administracion: "20000",
-                gmfCuatroxMil: "4",
                 iva: "19",
                 aval: "9.9",
                 step: "50000"
 
             }).save(),
             new Product({
-                activo: true,
-                name: "Prestamo UltraRapido",
-                valuemin: "200000",
-                valuemax: "200000",
-                imin: "1.5",
-                imax: "1.8",
-                termmin: "1",
-                termmax: "1",
-                imageUrl: "",
-                regInmueble: false,
-                regPersonales: true,
-                regVehiculo: false,
-                regTrabajo: true,
-                regReferencias: true,
-                regReferenciasCom: false,
-                regCedula: false,
-                regPasaporte: false,
-                regTarjetav: false,
-                regMatricula: false,
-                regExtracto: false,
-                regCamaraCom: false,
-                regRut: false,
-                regEstudioObra: false,
-                regProgramaObra: false,
-                regCuraduria: false,
-                regLicenciaConst: false,
-                iEfectivoAnual: "25",
-                iEfectivoAnualMax: "25.83",
-                iMoraEfectivoAnual: "23.83",
-                administracion: "20000",
-                gmfCuatroxMil: "4",
-                iva: "19",
-                aval: "9.9",
-                step: "200000"
-
-            }).save(),
-            new Product({
-                activo: true,
                 name: "Prestamo Sobre Hipoteca",
                 valuemin: "20000000",
                 valuemax: "500000000",
@@ -196,12 +152,10 @@ const createProducts = async function() {
                 excedenteComisionAdminHipo: "40000",
                 registroHipoteca: "650000",
                 interesesAnticipados: "1.3",
-                gmfCuatroxMil: "4",
                 step: "1000000"
 
             }).save(),
             new Product({
-                activo: true,
                 name: "Prestamo Sobre Vehiculo",
                 valuemin: "4000000",
                 valuemax: "100000000",
@@ -240,7 +194,6 @@ const createProducts = async function() {
 
             }).save(),
             new Product({
-                activo: true,
                 name: "Prestamo Para Construcción",
                 valuemin: "100000000",
                 valuemax: "700000000",
@@ -275,13 +228,11 @@ const createProducts = async function() {
                 excedenteComisionAdminHipo: "40000",
                 registroHipoteca: "650000",
                 interesesAnticipados: "1.3",
-                gmfCuatroxMil: "4",
-                auditorObra: "7",
                 step: "1000000"
 
             }).save()
         ]);
-        console.log('Creados 5 Productos Base');
+        console.log('Creados 4 Productos Base');
     } catch (error) {
         console.log(error);
         throw new Error('Error Creando Administrador');

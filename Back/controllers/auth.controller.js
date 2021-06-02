@@ -48,7 +48,7 @@ const crearUsuario = async function(req, res) {
 
             html: `<b>Bienvenido A Lendiup</b>
             <h3> Nombre:</h3>
-            <p >${name} ${surname}</p>
+            <p >${name} </p>
             <h3> Email:</h3>
             <p >${email} </p>
             <p>Solo Escoge El Valor De Tu Prestamo, Completa Los Requisitos Y Te Consignaremos A Tu Cuenta Bancaria En Poco Tiempo</p>`
@@ -59,13 +59,10 @@ const crearUsuario = async function(req, res) {
             ok: true,
             uid: newUser._id,
             name: newUser.name,
-            secondname: newUser.secondname,
             surname: newUser.surname,
-            secondsurname: newUser.secondsurname,
             email: newUser.email,
             roles: newUser.roles,
             solicitud: newUser.solicitud,
-            typeloan: newUser.typeloan,
             token
         });
     } catch (error) {
@@ -79,7 +76,6 @@ const loginUsuario = async function(req, res) {
     try {
         // We check if the email exists and we bring the user to newUser
         const userfound = await User.findOne({ email }).populate("roles").populate("roles");
-        //console.log(userfound.typeloan)
         if (!userfound) { return res.status(400).json({ ok: false, msg: 'El correo no existe' }); }
         // Confirm if the password does math 
         const validPassword = bcrypt.compareSync(password, userfound.password);
@@ -92,12 +88,9 @@ const loginUsuario = async function(req, res) {
             uid: userfound._id,
             roles: userfound.roles,
             name: userfound.name,
-            secondname: userfound.name,
             surname: userfound.surname,
-            secondsurname: userfound.surname,
             email: userfound.email,
             solicitud: userfound.solicitud,
-            typeloan: userfound.typeloan,
             token
         });
     } catch (error) {
@@ -113,13 +106,10 @@ const revalidarToken = async function(req, res) {
     const dbUser = await User.findById(uid);
     if (dbUser) {
         name = dbUser.name;
-        secondname = dbUser.secondname;
         surname = dbUser.surname;
-        secondsurname = dbUser.secondsurname;
         email = dbUser.email;
         roles = dbUser.roles;
         solicitud = dbUser.solicitud;
-        typeloan = dbUser.typeloan;
     } else {
         name = '';
         email = '';
@@ -131,13 +121,10 @@ const revalidarToken = async function(req, res) {
         ok: true,
         uid,
         name,
-        secondname,
         surname,
-        secondsurname,
         email,
         roles,
         solicitud,
-        typeloan,
         token
     });
 }
