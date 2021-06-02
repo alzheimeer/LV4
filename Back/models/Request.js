@@ -22,6 +22,10 @@ var RequestSchema = Schema({
         type: Number,
         required: false
     },
+    auditorObra: {
+        type: Number,
+        required: false
+    },
     fechasFacturacion: {
         type: [{
             estado: String,
