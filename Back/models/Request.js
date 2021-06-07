@@ -158,6 +158,16 @@ var RequestSchema = Schema({
         required: false,
         default: false
     },
+    regReferenciasQuick: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regReferenciasQuickOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
     regReferencias: {
         type: Boolean,
         required: false,
@@ -482,6 +492,36 @@ var RequestSchema = Schema({
             required: false,
         },
     },
+    trabajoQuick: {
+        situacionLaboral: {
+            type: String,
+            required: false,
+        },
+        actividad: {
+            type: String,
+            required: false,
+        },
+        actividadcargo: {
+            type: String,
+            required: false,
+        },
+        antiguedaddeempresa: {
+            type: String,
+            required: false,
+        },
+        nombreempresa: {
+            type: String,
+            required: false,
+        },
+        telefonoempresa: {
+            type: Number,
+            required: false,
+        },
+        uso: {
+            type: String,
+            required: false,
+        },
+    },
     trabajoEmpleado: {
         tiempoTrabajando: {
             type: Number,
@@ -557,6 +597,43 @@ var RequestSchema = Schema({
         },
     },
 
+    refPersonalQuick: {
+        nombre: {
+            type: String,
+            required: false,
+        },
+        apellido: {
+            type: String,
+            required: false,
+        },
+        ciudad: {
+            type: String,
+            required: false,
+        },
+        celular: {
+            type: Number,
+            required: false,
+        }
+    },
+
+    refFamiliarQuick: {
+        nombre: {
+            type: String,
+            required: false,
+        },
+        apellido: {
+            type: String,
+            required: false,
+        },
+        ciudad: {
+            type: String,
+            required: false,
+        },
+        celular: {
+            type: Number,
+            required: false,
+        }
+    },
     refFamiliar1: {
         nombre: {
             type: String,

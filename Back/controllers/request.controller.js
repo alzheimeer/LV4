@@ -2,9 +2,11 @@ const Request = require('../models/Request');
 
 const createRequest = async(req, res) => {
     try {
+        // console.log('0', req.body)
         const newrequest = new Request(req.body);
+        // console.log('1', newrequest)
         const requestSave = await newrequest.save();
-        res.status(201).json(requestSave);
+        return res.status(201).json(requestSave);
     } catch (error) {
         return res.status(500).json({ msg: 'Por favor hable con el administrador' });
     }
@@ -39,7 +41,8 @@ const getRequestByIdUser = async(req, res) => {
 }
 const updateRequestById = async(req, res) => {
     try {
-        // console.log('ID:', req.params, 'BODY:', req.body);
+        // console.log('ID:', req.params);
+        console.log('BODY:', req.body);
         const upRequest = await Request.findByIdAndUpdate(req.params.requestId, req.body, { new: true });
         // console.log('rta', upRequest)
         return res.status(200).json(upRequest);

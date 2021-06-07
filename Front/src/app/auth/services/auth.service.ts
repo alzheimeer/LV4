@@ -54,7 +54,11 @@ export class AuthService {
         sessionStorage.setItem('a', '0');
 
         if (resp.typeloan === 'quickloan') {
-          return 'user200';
+          const rta = {
+            user: 'user200',
+            iduser: resp.uid
+          }
+          return rta;
         }
         return 'user';
       }),

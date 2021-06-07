@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 import { AuthService } from '../../../auth/services/auth.service';
 import { RequestService } from '../../../dashboard/services/request.service';
 import { UserService } from '../../../dashboard/services/user.service';
+import { RequestIni, Requestx } from '../../../models/request.models';
 import { User } from '../../../models/user.models';
 
 
@@ -47,12 +48,15 @@ export class QuickFormsComponent implements OnInit {
   public usuarios: User[] = [];
   public usuario: any = [];
 
+  solicitud: Requestx = new RequestIni();
+
   hayerror = false;
   ids = '';
   primerform = true;
   segundoform = false;
   tercerform = false;
   cuartaform = false;
+  quintaform = false;
   situacionlaboral = '';
   numdoc = 0;
 
@@ -139,7 +143,6 @@ export class QuickFormsComponent implements OnInit {
     this.miFormulario4.get('situacionlaboral')?.valueChanges.subscribe((value) => {
       this.situacionlaboral = value;
     });
-
 
 
   }
@@ -368,45 +371,32 @@ export class QuickFormsComponent implements OnInit {
       reffciudad,
       reffcelular,
       referido,
-    } = this.miFormulario2.value;
+    } = this.miFormulario3.value;
 
-    // if (this.usuarioauth.uid) {
-    //   this.userService.updateUserByIdX3(
-    //     this.usuarioauth.uid,
-    //     refpnombre,
-    //     refpapellido,
-    //     refpciudad,
-    //     refpcelular,
-    //     reffnombre,
-    //     reffapellido,
-    //     reffciudad,
-    //     reffcelular,
-    //     referido,
-    //   )
-    //     .subscribe(
-    //       (resp) => {
-    //         Swal.fire({
-    //           title: 'OK',
-    //           text: 'Datos Enviados',
-    //           icon: 'success',
-    //         });
-    //         this.segundoform = false;
-    //         this.tercerform = true;
-    //         // this.requestService.updateRequestsByIdNumdoc(this.usuarioauth.solicitud as string, numdoc as string)
-    //         // .subscribe(x => console.log('ok'));
-    //         // this.router.navigateByUrl('/dashboard/misolicitud');
-    //       },
-    //       (err) => {
-    //         Swal.fire({
-    //           title: 'Error',
-    //           text: 'Formulario no válido',
-    //           icon: 'error',
-    //         });
-    //       }
-    //     );
-    // }
+    /* if (referido) {
+      this.
+    } */
+    this.requestService.updateRequestsByIdRefQuick(
+      this.usuario.solicitud,
+      refpnombre,
+      refpapellido,
+      refpciudad,
+      refpcelular,
+      reffnombre,
+      reffapellido,
+      reffciudad,
+      reffcelular
+    )
+      .subscribe((res) => {
+        Swal.fire({
+          title: 'OK',
+          text: 'Datos Enviados',
+          icon: 'success',
+        });
+        this.cuartaform = true;
+        this.tercerform = false;
+      });
   }
-
 
 
   guardar4(): void {
@@ -437,41 +427,27 @@ export class QuickFormsComponent implements OnInit {
       nombreempresa,
       telefonoempresa,
       uso,
-    } = this.miFormulario2.value;
+    } = this.miFormulario4.value;
 
-    // if (this.usuarioauth.uid) {
-    //   this.userService.updateUserByIdX4(
-    //     this.usuarioauth.uid,
-    //     situacionlaboral,
-    //     actividad,
-    //     actividadcargo,
-    //     antiguedadempresa,
-    //     nombreempresa,
-    //     telefonoempresa,
-    //     uso,
-    //   )
-    //     .subscribe(
-    //       (resp) => {
-    //         Swal.fire({
-    //           title: 'OK',
-    //           text: 'Datos Enviados',
-    //           icon: 'success',
-    //         });
-    //         this.segundoform = false;
-    //         this.tercerform = true;
-    //         // this.requestService.updateRequestsByIdNumdoc(this.usuarioauth.solicitud as string, numdoc as string)
-    //         // .subscribe(x => console.log('ok'));
-    //         // this.router.navigateByUrl('/dashboard/misolicitud');
-    //       },
-    //       (err) => {
-    //         Swal.fire({
-    //           title: 'Error',
-    //           text: 'Formulario no válido',
-    //           icon: 'error',
-    //         });
-    //       }
-    //     );
-    // }
+    this.requestService.updateRequestsByIdLaboralQuick(
+      this.usuario.solicitud,
+      situacionlaboral,
+      actividad,
+      actividadcargo,
+      antiguedadempresa,
+      nombreempresa,
+      telefonoempresa,
+      uso,
+    )
+      .subscribe((res) => {
+        Swal.fire({
+          title: 'OK',
+          text: 'Datos Enviados',
+          icon: 'success',
+        });
+        this.quintaform = true;
+        this.cuartaform = false;
+      });
   }
 
 

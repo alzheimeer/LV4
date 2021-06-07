@@ -44,7 +44,7 @@ export interface Personal {
   niveldeestudios: string;
   estadodeestudios: string;
   tipovivienda: string;
-  tiempoenvivienda: number;
+  tiempoenvivienda: string;
 }
 export class UsuarioIni implements User {
   personal: Personal;
@@ -92,7 +92,7 @@ export class UsuarioIni implements User {
       niveldeestudios: '',
       estadodeestudios: '',
       tipovivienda: '',
-      tiempoenvivienda: 0,
+      tiempoenvivienda: '',
       };
     this._id = '';
     this.solicitud = '',

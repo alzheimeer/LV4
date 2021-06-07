@@ -16,12 +16,15 @@ export interface Requestx {
   trabajoIndependiente: TrabajoIndependiente;
   trabajoEmpresa: TrabajoEmpresa;
   __v: number;
+  refFamiliarQuick: RefFamiliarQuick;
+  refPersonalQuick: RefPersonalQuick;
   refFamiliar1: RefFamiliar1;
   refFamiliar2: RefFamiliar2;
   refFamiliar3: RefFamiliar3;
   refComercial1: RefComercial1;
   refComercial2: RefComercial2;
   refComercial3: RefComercial3;
+  trabajoQuick: TrabajoQuick;
   regInmueble: boolean;
   regInmuebleOk: boolean;
   regPersonales: boolean;
@@ -30,6 +33,8 @@ export interface Requestx {
   regVehiculoOk: boolean;
   regTrabajo: boolean;
   regTrabajoOk: boolean;
+  regReferenciasQuick: boolean;
+  regReferenciasQuickOk: boolean;
   regReferencias: boolean;
   regReferenciasOk: boolean;
   regReferenciasCom: boolean;
@@ -118,6 +123,19 @@ export interface Inmueble {
   valorComercial: number;
 }
 
+export interface RefPersonalQuick {
+  nombre: string;
+  apellido: string;
+  ciudad: string;
+  celular: number;
+}
+
+export interface RefFamiliarQuick {
+  nombre: string;
+  celular: number;
+  apellido: string;
+  ciudad: string;
+}
 export interface RefFamiliar1 {
   nombre: string;
   direccion: string;
@@ -155,6 +173,15 @@ export interface RefComercial3 {
   empresa: string;
 }
 
+export interface TrabajoQuick {
+  situacionLaboral: string;
+  actividad: string;
+  actividadcargo: string;
+  antiguedaddeempresa: string;
+  nombreempresa: string;
+  telefonoempresa: number;
+  uso: string;
+}
 export interface TrabajoEmpleado {
   tiempoTrabajando: number;
   ingresoMensual: number;
@@ -201,7 +228,6 @@ export interface CreateRequest {
   time: number;
   description: string;
   estate: string;
-  _id: string;
   nombreProducto: string;
   tasaEfectivaMes: number;
   tasaEfectivaAnual: number;
@@ -235,7 +261,6 @@ export class CreateIniReq implements CreateRequest {
   time: number;
   description: string;
   estate: string;
-  _id: string;
   nombreProducto: string;
   tasaEfectivaMes: number;
   tasaEfectivaAnual: number;
@@ -268,7 +293,6 @@ export class CreateIniReq implements CreateRequest {
       this.time = 0,
       this.description = '',
       this.estate = '',
-      this._id = '',
       this.nombreProducto = '',
       this.tasaEfectivaMes = 0,
       this.tasaEfectivaAnual = 0,
@@ -302,12 +326,15 @@ export class RequestIni implements Requestx {
   trabajoEmpleado: TrabajoEmpleado;
   trabajoIndependiente: TrabajoIndependiente;
   trabajoEmpresa: TrabajoEmpresa;
+  refPersonalQuick: RefPersonalQuick;
+  refFamiliarQuick: RefFamiliarQuick;
   refFamiliar1: RefFamiliar1;
   refFamiliar2: RefFamiliar2;
   refFamiliar3: RefFamiliar3;
   refComercial1: RefComercial1;
   refComercial2: RefComercial2;
   refComercial3: RefComercial3;
+  trabajoQuick: TrabajoQuick;
   _id: string;
   __v: number;
   numdoc: string;
@@ -351,6 +378,8 @@ export class RequestIni implements Requestx {
   regVehiculoOk: boolean;
   regTrabajo: boolean;
   regTrabajoOk: boolean;
+  regReferenciasQuick: boolean;
+  regReferenciasQuickOk: boolean;
   regReferencias: boolean;
   regReferenciasOk: boolean;
   regReferenciasCom: boolean;
@@ -440,6 +469,8 @@ export class RequestIni implements Requestx {
       this.regOk = false,
       this.regPasaporte = false,
       this.regPasaporteOk = false,
+      this.regReferenciasQuick = false,
+      this.regReferenciasQuickOk = false,
       this.regPersonales = false,
       this.regPersonalesOk = false,
       this.regReferencias = false,
@@ -522,6 +553,16 @@ export class RequestIni implements Requestx {
         valorComercial: 0,
       },
 
+      this.trabajoQuick = {
+        situacionLaboral: '',
+        actividad: '',
+        actividadcargo: '',
+        antiguedaddeempresa: '',
+        nombreempresa: '',
+        telefonoempresa: 0,
+        uso: ''
+      },
+
       this.trabajoIndependiente = {
         tiempoTrabajando: 0,
         ingresoMensual: 0,
@@ -545,6 +586,18 @@ export class RequestIni implements Requestx {
         direccion: '',
         telefono: 0,
         actividadComercial: '',
+      },
+      this.refPersonalQuick = {
+        nombre: '',
+        apellido: '',
+        celular: 0,
+        ciudad: '',
+      },
+      this.refFamiliarQuick = {
+        nombre: '',
+        apellido: '',
+        celular: 0,
+        ciudad: '',
       },
       this.refFamiliar1 = {
         nombre: '',
@@ -604,12 +657,15 @@ export class RequestMao implements Requestx {
   trabajoIndependiente: TrabajoIndependiente;
   trabajoEmpresa: TrabajoEmpresa;
   __v: number;
+  refPersonalQuick: RefPersonalQuick;
+  refFamiliarQuick: RefFamiliarQuick;
   refFamiliar1: RefFamiliar1;
   refFamiliar2: RefFamiliar2;
   refFamiliar3: RefFamiliar3;
   refComercial1: RefComercial1;
   refComercial2: RefComercial2;
   refComercial3: RefComercial3;
+  trabajoQuick: TrabajoQuick;
   regInmueble: boolean;
   regInmuebleOk: boolean;
   regPersonales: boolean;
@@ -618,6 +674,8 @@ export class RequestMao implements Requestx {
   regVehiculoOk: boolean;
   regTrabajo: boolean;
   regTrabajoOk: boolean;
+  regReferenciasQuick: boolean;
+  regReferenciasQuickOk: boolean;
   regReferencias: boolean;
   regReferenciasOk: boolean;
   regReferenciasCom: boolean;
@@ -723,6 +781,8 @@ export class RequestMao implements Requestx {
       this.regPasaporteOk = false,
       this.regPersonales = false,
       this.regPersonalesOk = false,
+      this.regReferenciasQuick = false,
+      this.regReferenciasQuickOk = false,
       this.regReferencias = false,
       this.regReferenciasOk = false,
       this.regReferenciasCom = false,
@@ -838,6 +898,29 @@ export class RequestMao implements Requestx {
         direccion: '',
         telefono: 0,
         actividadComercial: '',
+      },
+
+      this.trabajoQuick = {
+        situacionLaboral: '',
+        actividad: '',
+        actividadcargo: '',
+        antiguedaddeempresa: '',
+        nombreempresa: '',
+        telefonoempresa: 0,
+        uso: ''
+      },
+
+      this.refPersonalQuick = {
+        nombre: '',
+        apellido: '',
+        celular: 0,
+        ciudad: '',
+      },
+      this.refFamiliarQuick = {
+        nombre: '',
+        apellido: '',
+        celular: 0,
+        ciudad: '',
       },
       this.refFamiliar1 = {
         nombre: '',

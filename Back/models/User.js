@@ -106,7 +106,7 @@ var UserSchema = Schema({
             required: false,
         },
         tiempoenvivienda: {
-            type: Number,
+            type: String,
             required: false,
         },
         departamento: {

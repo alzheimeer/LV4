@@ -80,7 +80,7 @@ export class UserService {
   }
   public updateUserByIdX2(id: string, ingresos: number, egresos: number, genero: string, estadocivil: string,
     personasacargo: number, numhijos: number, niveldeestudios: string, estadodeestudios: string,
-    tipovivienda: string, tiempoenvivienda: number) {
+    tipovivienda: string, tiempoenvivienda: string) {
     const url = `${this.baseUrl}/users`;
     const body = {
       personal: {

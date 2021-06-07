@@ -28,7 +28,7 @@ export class RequestService {
       'x-token',
       localStorage.getItem('token') || ''
     );
-    return this.http.post<CreateRequest>(url, solicitud, { headers });
+    return this.http.post<Requestx>(url, solicitud, { headers });
   }
 
   public getRequests(): Observable<Requestx[]> {
@@ -248,6 +248,75 @@ export class RequestService {
     );
     return this.http.put(`${url}/${id}`, body, { headers });
   }
+
+  public updateRequestsByIdLaboralQuick(
+    id: string,
+    situacionlaboral: string,
+    actividad: string,
+    actividadcargo: string,
+    antiguedadempresa: number,
+    nombreempresa: string,
+    telefonoempresa: string,
+    uso: string,
+  ) {
+    const url = `${this.baseUrl}/request`;
+    const body = {
+      regReferenciasQuickOk: true,
+
+      trabajoQuick: {
+        situacionlaboral,
+        actividad,
+        actividadcargo,
+        antiguedadempresa,
+        nombreempresa,
+        telefonoempresa,
+        uso,
+      },
+    };
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+    return this.http.put(`${url}/${id}`, body, { headers });
+  }
+
+
+  public updateRequestsByIdRefQuick(
+    id: string,
+    nombre1: string,
+    apellido1: string,
+    ciudad1: string,
+    celular1: number,
+    nombre2: string,
+    apellido2: string,
+    ciudad2: string,
+    celular2: number,
+  ) {
+    console.log(id, nombre1, apellido1, ciudad1, celular1)
+    const url = `${this.baseUrl}/request`;
+    const body = {
+      regReferenciasQuickOk: true,
+
+      refPersonalQuick: {
+        nombre: nombre1,
+        apellido: apellido1,
+        ciudad: ciudad1,
+        celular: celular1,
+      },
+      refFamiliarQuick: {
+        nombre: nombre2,
+        apellido: apellido2,
+        ciudad: ciudad2,
+        celular: celular2,
+      },
+    };
+    const headers = new HttpHeaders().set(
+      'x-token',
+      localStorage.getItem('token') || ''
+    );
+    return this.http.put(`${url}/${id}`, body, { headers });
+  }
+
 
   public updateRequestsByIdRefFam(
     id: string,
