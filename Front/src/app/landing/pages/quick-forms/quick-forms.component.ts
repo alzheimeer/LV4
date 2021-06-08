@@ -57,7 +57,7 @@ export class QuickFormsComponent implements OnInit {
   tercerform = false;
   cuartaform = false;
   quintaform = false;
-  situacionlaboral = '';
+  situacionLaboral = '';
   numdoc = 0;
 
   miFormulario = this.fb.group({
@@ -110,12 +110,12 @@ export class QuickFormsComponent implements OnInit {
   });
 
   miFormulario4 = this.fb.group({
-    situacionlaboral: ['', Validators.required],
+    situacionLaboral: ['', Validators.required],
     actividad: '',
     actividadcargo: '',
-    antiguedadempresa: '',
+    antiguedaddeempresa: '',
     nombreempresa: '',
-    telefonoempresa: '',
+    telefonoempresa: 0,
     uso: ['', Validators.required],
   });
 
@@ -140,8 +140,8 @@ export class QuickFormsComponent implements OnInit {
       });
     });
 
-    this.miFormulario4.get('situacionlaboral')?.valueChanges.subscribe((value) => {
-      this.situacionlaboral = value;
+    this.miFormulario4.get('situacionLaboral')?.valueChanges.subscribe((value) => {
+      this.situacionLaboral = value;
     });
 
 
@@ -193,7 +193,12 @@ export class QuickFormsComponent implements OnInit {
 
   guardar(): void {
     if (!this.usuarioauth.uid) {
-      this.ids = localStorage.getItem('id') as string;
+      if (localStorage.getItem('id')) {
+        this.ids = localStorage.getItem('id') as string;
+        this.usuarioauth.uid = localStorage.getItem('id') as string;
+      } else {
+        this.router.navigateByUrl('/dashboard/quickloan');
+      }
     }
     if (this.miFormulario.invalid) {
       this.miFormulario.markAllAsTouched();
@@ -224,25 +229,22 @@ export class QuickFormsComponent implements OnInit {
       tipocuenta,
       numcuenta,
     } = this.miFormulario.value;
-
-    if (this.usuarioauth.uid) {
-      this.userService.updateUserByIdX(
-        this.usuarioauth.uid,
-        tipodoc,
-        fechaNac,
-        fechaExp,
-        'Colombia',
-        '',
-        ciudad,
-        '',
-        direccion,
-        numdoc,
-        celular1,
-        celular2,
-        banco,
-        tipocuenta,
-        numcuenta
-      )
+    // console.log('antes', this.miFormulario.value);
+    this.userService.getUserById(this.usuarioauth.uid).subscribe((rt) => {
+      this.usuario = rt;
+      this.usuario.personal.tipodoc = tipodoc;
+      this.usuario.personal.fechaNac = fechaNac;
+      this.usuario.personal.fechaExp = fechaExp;
+      this.usuario.personal.pais = 'Colombia';
+      this.usuario.personal.ciudad = ciudad;
+      this.usuario.personal.direccion = direccion;
+      this.usuario.personal.numdoc = numdoc;
+      this.usuario.personal.celular1 = celular1;
+      this.usuario.personal.celular2 = celular2;
+      this.usuario.banca.banco = banco;
+      this.usuario.banca.tipocuenta = tipocuenta;
+      this.usuario.banca.numcuenta = numcuenta;
+      this.userService.updateUserById(this.usuario)
         .subscribe(
           (resp) => {
             Swal.fire({
@@ -250,11 +252,11 @@ export class QuickFormsComponent implements OnInit {
               text: 'Datos Enviados',
               icon: 'success',
             });
+            this.requestService.updateRequestsByIdNumdoc(this.usuarioauth.solicitud as string, numdoc as string)
+              .subscribe(x => console.log('ok'));
             this.primerform = false;
             this.segundoform = true;
-            // this.requestService.updateRequestsByIdNumdoc(this.usuarioauth.solicitud as string, numdoc as string)
-            // .subscribe(x => console.log('ok'));
-            // this.router.navigateByUrl('/dashboard/misolicitud');
+
           },
           (err) => {
             Swal.fire({
@@ -264,17 +266,22 @@ export class QuickFormsComponent implements OnInit {
             });
           }
         );
-    }
+    });
   }
 
 
 
   guardar2(): void {
     if (!this.usuarioauth.uid) {
-      this.ids = localStorage.getItem('id') as string;
+      if (localStorage.getItem('id')) {
+        this.ids = localStorage.getItem('id') as string;
+        this.usuarioauth.uid = localStorage.getItem('id') as string;
+      } else {
+        this.router.navigateByUrl('/dashboard/quickloan');
+      }
     }
-    if (this.miFormulario.invalid) {
-      this.miFormulario.markAllAsTouched();
+    if (this.miFormulario2.invalid) {
+      this.miFormulario2.markAllAsTouched();
       console.log('Formulario no válido');
       Swal.fire({
         title: 'Error',
@@ -301,21 +308,19 @@ export class QuickFormsComponent implements OnInit {
       tipovivienda,
       tiempoenvivienda,
     } = this.miFormulario2.value;
-
-    if (this.usuarioauth.uid) {
-      this.userService.updateUserByIdX2(
-        this.usuarioauth.uid,
-        ingresos,
-        egresos,
-        genero,
-        estadocivil,
-        personasacargo,
-        numhijos,
-        niveldeestudios,
-        estadodeestudios,
-        tipovivienda,
-        tiempoenvivienda,
-      )
+    this.userService.getUserById(this.usuarioauth.uid).subscribe((rt) => {
+      this.usuario = rt;
+      this.usuario.banca.ingresos = ingresos;
+      this.usuario.banca.egresos = egresos;
+      this.usuario.personal.genero = genero;
+      this.usuario.personal.estadocivil = estadocivil;
+      this.usuario.personal.personasacargo = personasacargo;
+      this.usuario.personal.numhijos = numhijos;
+      this.usuario.personal.niveldeestudios = niveldeestudios;
+      this.usuario.personal.estadodeestudios = estadodeestudios;
+      this.usuario.personal.tipovivienda = tipovivienda;
+      this.usuario.personal.tiempoenvivienda = tiempoenvivienda;
+      this.userService.updateUserById(this.usuario)
         .subscribe(
           (resp) => {
             Swal.fire({
@@ -325,8 +330,6 @@ export class QuickFormsComponent implements OnInit {
             });
             this.segundoform = false;
             this.tercerform = true;
-            // this.requestService.updateRequestsByIdNumdoc(this.usuarioauth.solicitud as string, numdoc as string)
-            // .subscribe(x => console.log('ok'));
             // this.router.navigateByUrl('/dashboard/misolicitud');
           },
           (err) => {
@@ -337,16 +340,21 @@ export class QuickFormsComponent implements OnInit {
             });
           }
         );
-    }
+    });
   }
 
 
   guardar3(): void {
     if (!this.usuarioauth.uid) {
-      this.ids = localStorage.getItem('id') as string;
+      if (localStorage.getItem('id')) {
+        this.ids = localStorage.getItem('id') as string;
+        this.usuarioauth.uid = localStorage.getItem('id') as string;
+      } else {
+        this.router.navigateByUrl('/dashboard/quickloan');
+      }
     }
-    if (this.miFormulario.invalid) {
-      this.miFormulario.markAllAsTouched();
+    if (this.miFormulario3.invalid) {
+      this.miFormulario3.markAllAsTouched();
       console.log('Formulario no válido');
       Swal.fire({
         title: 'Error',
@@ -372,22 +380,20 @@ export class QuickFormsComponent implements OnInit {
       reffcelular,
       referido,
     } = this.miFormulario3.value;
+   // console.log('Formulario 3', this.miFormulario3.value);
 
-    /* if (referido) {
-      this.
-    } */
-    this.requestService.updateRequestsByIdRefQuick(
-      this.usuario.solicitud,
-      refpnombre,
-      refpapellido,
-      refpciudad,
-      refpcelular,
-      reffnombre,
-      reffapellido,
-      reffciudad,
-      reffcelular
-    )
-      .subscribe((res) => {
+
+    this.requestService.getRequestById(this.usuario.solicitud).subscribe((r) => {
+      this.solicitud = r;
+      this.solicitud.refPersonalQuick.nombre = refpnombre;
+      this.solicitud.refPersonalQuick.apellido = refpapellido;
+      this.solicitud.refPersonalQuick.ciudad = refpciudad;
+      this.solicitud.refPersonalQuick.celular = refpcelular;
+      this.solicitud.refFamiliarQuick.nombre = reffnombre;
+      this.solicitud.refFamiliarQuick.apellido = reffapellido;
+      this.solicitud.refFamiliarQuick.ciudad = reffciudad;
+      this.solicitud.refFamiliarQuick.celular = reffcelular;
+      this.requestService.updateRequestsById(this.solicitud).subscribe((res) => {
         Swal.fire({
           title: 'OK',
           text: 'Datos Enviados',
@@ -396,15 +402,21 @@ export class QuickFormsComponent implements OnInit {
         this.cuartaform = true;
         this.tercerform = false;
       });
+    });
   }
 
 
   guardar4(): void {
     if (!this.usuarioauth.uid) {
-      this.ids = localStorage.getItem('id') as string;
+      if (localStorage.getItem('id')) {
+        this.ids = localStorage.getItem('id') as string;
+        this.usuarioauth.uid = localStorage.getItem('id') as string;
+      } else {
+        this.router.navigateByUrl('/dashboard/quickloan');
+      }
     }
-    if (this.miFormulario.invalid) {
-      this.miFormulario.markAllAsTouched();
+    if (this.miFormulario4.invalid) {
+      this.miFormulario4.markAllAsTouched();
       console.log('Formulario no válido');
       Swal.fire({
         title: 'Error',
@@ -420,25 +432,24 @@ export class QuickFormsComponent implements OnInit {
     });
     Swal.showLoading();
     const {
-      situacionlaboral,
+      situacionLaboral,
       actividad,
       actividadcargo,
-      antiguedadempresa,
+      antiguedaddeempresa,
       nombreempresa,
       telefonoempresa,
       uso,
     } = this.miFormulario4.value;
-
-    this.requestService.updateRequestsByIdLaboralQuick(
-      this.usuario.solicitud,
-      situacionlaboral,
-      actividad,
-      actividadcargo,
-      antiguedadempresa,
-      nombreempresa,
-      telefonoempresa,
-      uso,
-    )
+    this.requestService.getRequestById(this.usuario.solicitud).subscribe((r) => {
+      this.solicitud = r;
+      this.solicitud.trabajoQuick.situacionLaboral = situacionLaboral;
+      this.solicitud.trabajoQuick.actividad = actividad;
+      this.solicitud.trabajoQuick.actividadcargo = actividadcargo;
+      this.solicitud.trabajoQuick.antiguedaddeempresa = antiguedaddeempresa;
+      this.solicitud.trabajoQuick.nombreempresa = nombreempresa;
+      this.solicitud.trabajoQuick.telefonoempresa = telefonoempresa;
+      this.solicitud.trabajoQuick.uso = uso;
+      this.requestService.updateRequestsById(this.solicitud)
       .subscribe((res) => {
         Swal.fire({
           title: 'OK',
@@ -447,8 +458,9 @@ export class QuickFormsComponent implements OnInit {
         });
         this.quintaform = true;
         this.cuartaform = false;
+        this.router.navigateByUrl('/landing/quickverify');
       });
+    });
+
   }
-
-
 }

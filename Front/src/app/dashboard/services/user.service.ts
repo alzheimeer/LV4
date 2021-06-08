@@ -43,7 +43,8 @@ export class UserService {
 
   public updateUserById( usuario: User ){
     const url = `${this.baseUrl}/users`;
-    return this.http.put(`${ url }/${ usuario._id }`, usuario);
+    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
+    return this.http.put(`${url}/${usuario._id}`, usuario, { headers });
   }
 
   public updateUserByIdX(id: string, tipodoc: string, fechaNac: Date, fechaExp: Date, pais: string,
@@ -70,7 +71,7 @@ export class UserService {
         numcuenta,
       }
     };
-    // console.log('id:', id);
+    // console.log('despues', body);
     const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
     return this.http.put(`${url}/${id}`, body, { headers }).pipe(
       tap(() => {
@@ -78,34 +79,7 @@ export class UserService {
       })
     );
   }
-  public updateUserByIdX2(id: string, ingresos: number, egresos: number, genero: string, estadocivil: string,
-    personasacargo: number, numhijos: number, niveldeestudios: string, estadodeestudios: string,
-    tipovivienda: string, tiempoenvivienda: string) {
-    const url = `${this.baseUrl}/users`;
-    const body = {
-      personal: {
-        genero,
-        estadocivil,
-        personasacargo,
-        numhijos,
-        niveldeestudios,
-        estadodeestudios,
-        tipovivienda,
-        tiempoenvivienda,
-      },
-      banca: {
-        ingresos,
-        egresos,
-      }
-    };
-    // console.log('id:', id);
-    const headers = new HttpHeaders().set('x-token', localStorage.getItem('token') || '');
-    return this.http.put(`${url}/${id}`, body, { headers }).pipe(
-      tap(() => {
-        this._refresh$.next();
-      })
-    );
-  }
+
   public updateUserByIdPhoto(id: string, photo: File) {
     const url = `${this.baseUrl}/users/avatar`;
     const fd = new FormData();

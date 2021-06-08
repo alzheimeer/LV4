@@ -158,6 +158,21 @@ var RequestSchema = Schema({
         required: false,
         default: false
     },
+    regLaboralQuick: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    regLaboralQuickOk: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
+    estadoPrestamo: {
+        type: Boolean,
+        required: false,
+        default: false
+    },
     regReferenciasQuick: {
         type: Boolean,
         required: false,
@@ -496,30 +511,37 @@ var RequestSchema = Schema({
         situacionLaboral: {
             type: String,
             required: false,
+            default: ''
         },
         actividad: {
             type: String,
             required: false,
+            default: ''
         },
         actividadcargo: {
             type: String,
             required: false,
+            default: ''
         },
         antiguedaddeempresa: {
             type: String,
             required: false,
+            default: ''
         },
         nombreempresa: {
             type: String,
             required: false,
+            default: ''
         },
         telefonoempresa: {
             type: Number,
             required: false,
+            default: 0
         },
         uso: {
             type: String,
             required: false,
+            default: '',
         },
     },
     trabajoEmpleado: {
@@ -601,18 +623,22 @@ var RequestSchema = Schema({
         nombre: {
             type: String,
             required: false,
+            default: ''
         },
         apellido: {
             type: String,
             required: false,
+            default: ''
         },
         ciudad: {
             type: String,
             required: false,
+            default: ''
         },
         celular: {
             type: Number,
             required: false,
+            default: 0
         }
     },
 
@@ -620,18 +646,22 @@ var RequestSchema = Schema({
         nombre: {
             type: String,
             required: false,
+            default: ''
         },
         apellido: {
             type: String,
             required: false,
+            default: ''
         },
         ciudad: {
             type: String,
             required: false,
+            default: ''
         },
         celular: {
             type: Number,
             required: false,
+            default: 0
         }
     },
     refFamiliar1: {

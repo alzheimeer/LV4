@@ -92,21 +92,34 @@ export class RegisterQuickloanComponent implements OnInit {
         // console.log('yupio', this.producto._id, this.producto.name)
         if (resp.user === 'user200') {
           // console.log('usuario Creado', resp)
-          this.request.idUser = resp.iduser,
-            this.request.idProduct = this.producto._id,
-            this.request.value = 200000,
-            this.request.time = 1,
-            this.request.description = 'pepe',
-            this.request.estate = 'Sin Asignar',
-            this.request.tasaEfectivaAnual = this.producto.iEfectivoAnual,
-            this.request.tasaEfectivaAnualMax = this.producto.iEfectivoAnualMax,
-            this.request.rgmf = this.producto.gmfCuatroxMil,
-            this.request.iva = this.producto.iva,
-            this.request.aval = this.producto.aval,
-            this.request.valorConsignar = 200000,
-            this.request.tasaMoraEA = this.producto.iMoraEfectivoAnual,
+          this.request.idUser = resp.iduser;
+          this.request.idProduct = this.producto._id;
+          this.request.value = 200000;
+          this.request.time = 1;
+          this.request.description = 'Ninguno';
+          this.request.nombreProducto = this.producto.name;
+          this.request.estadoPrestamo = false;
+          this.request.estate = 'Sin Asignar';
+          this.request.tasaEfectivaAnual = this.producto.iEfectivoAnual;
+          this.request.tasaEfectivaAnualMax = this.producto.iEfectivoAnualMax;
+          this.request.tasaMoraEA = this.producto.iMoraEfectivoAnual;
+          this.request.tasaEfectivaMes = ((((Math.pow((1 + (this.producto.iEfectivoAnual / 100)), (1 / 12))) - 1) * 12) * 100) / 12;
+          const im = this.request.tasaEfectivaMes / 100;
+          const im2 = Math.pow((1 + im), -(this.request.time));
+          const a = (this.request.value * im) / (1 - im2);
+          this.request.valorCuotaBase = a;
+          this.request.rgmf = (this.request.value / 1000) * this.producto.gmfCuatroxMil;
+          this.request.administracion = this.producto.administracion;
+          this.request.iva = (this.producto.administracion / 100) * this.producto.iva;
+          this.request.aval = (this.request.value / 100) * this.producto.aval;
+          this.request.soloInteres = (this.request.valorCuotaBase as number * this.request.time) - this.request.value;
+          const totalExtrasCredito = ((this.request.aval + this.request.administracion + this.request.iva) / this.request.time);
+          this.request.totalCredito = this.request.value + this.request.soloInteres + this.request.administracion + this.request.iva + this.request.aval;
+          this.request.valorCuotaTotal = this.request.valorCuotaBase as number + totalExtrasCredito;
+          this.request.valorConsignar = this.request.value - (this.request.rgmf);
 
-            this.requestService.createRequest(this.request).subscribe((req) => {
+
+          this.requestService.createRequest(this.request).subscribe((req) => {
               // console.log('id User', resp.iduser);
               // console.log('id request', req._id);
               this.authService.updateSolicitudUserById(resp.iduser, req._id).subscribe(() => {

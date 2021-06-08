@@ -4,14 +4,15 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
 import { AuthService } from '../../auth/services/auth.service';
+import { RequestService } from '../../dashboard/services/request.service';
+import { UserService } from '../../dashboard/services/user.service';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.scss']
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   @Output()
   value = new EventEmitter<number>();
 
@@ -21,11 +22,15 @@ export class LoginComponent implements OnInit {
   });
 
   flaq = 0;
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) { }
+  constructor(
+    private requestService: RequestService,
+    private userService: UserService,
+    private fb: FormBuilder,
+    private router: Router,
+    private authService: AuthService
+  ) { }
 
-  ngOnInit(): void {
-  }
-
+  ngOnInit(): void { }
 
   login() {
     // Extract email and password the miFormulario
@@ -35,7 +40,7 @@ export class LoginComponent implements OnInit {
       Swal.fire({
         title: 'Espere',
         text: 'Verificando',
-        allowOutsideClick: false
+        allowOutsideClick: false,
       });
       Swal.showLoading();
       // console.log('login:', resp);
@@ -61,12 +66,39 @@ export class LoginComponent implements OnInit {
           icon: 'success',
         });
       } else if (resp === 'user200') {
-        this.router.navigateByUrl('/landing/quickforms');
-        Swal.fire({
-          title: 'Continua Ingresando Los Siguientes Datos',
-          text: email,
-          icon: 'success',
-        });
+        if (localStorage.getItem('id')) {
+          this.userService
+            .getUserById(localStorage.getItem('id'))
+            .subscribe((usuario) => {
+              if (usuario.solicitud !== '') {
+                this.requestService.getRequestById(usuario.solicitud).subscribe((solicitud) => {
+                  if (solicitud.estate === 'Completo') {
+                    this.router.navigateByUrl('/dashboard/misolicitud');
+                    Swal.fire({
+                      title: 'Bienvenido',
+                      text: usuario.name,
+                      icon: 'success',
+                    });
+                  } else {
+                    this.router.navigateByUrl('/landing/quickforms');
+                    Swal.fire({
+                      title: 'Continua Ingresando Los Siguientes Datos',
+                      text: email,
+                      icon: 'success',
+                    });
+                  }
+                });
+              } else {
+                this.router.navigateByUrl('/landing/quickforms');
+                Swal.fire({
+                  title: 'Continua Ingresando Los Siguientes Datos',
+                  text: email,
+                  icon: 'success',
+                });
+              }
+            });
+        }
+
       } else {
         Swal.fire('Error', resp, 'error');
       }

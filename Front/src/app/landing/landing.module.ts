@@ -23,6 +23,7 @@ import { Page4Component } from './pages/page4/page4.component';
 import { Page5Component } from './pages/page5/page5.component';
 import { QuickFormsComponent } from './pages/quick-forms/quick-forms.component';
 import { QuickloanComponent } from './pages/quickloan/quickloan.component';
+import { QuickVerifyComponent } from './pages/quick-verify/quick-verify.component';
 
 
 
@@ -45,6 +46,7 @@ import { QuickloanComponent } from './pages/quickloan/quickloan.component';
     One3Component,
     QuickloanComponent,
     QuickFormsComponent,
+    QuickVerifyComponent,
   ],
   imports: [
     CommonModule,

@@ -8,7 +8,7 @@
     <div class="col-md-12">
       <div class="card">
         <div class="card-header">
-          <h5 class="title">Informacion Personal Y Laboral</h5>
+          <h5 class="title">Información Personal Y Laboral</h5>
         </div>
         <div class="card-body">
 
@@ -57,9 +57,9 @@
                   </mat-error>
                 </mat-form-field>
 
-                <!-- Fehcas Expedicion Cedula -->
+                <!-- Fechas Expedición Cedula -->
                 <mat-form-field class="form-group col-md-4 pl-1">
-                  <mat-label>Fecha De Expedicion De La Cedula</mat-label>
+                  <mat-label>Fecha De Expedición De La Cedula</mat-label>
                   <input matInput formControlName="fechaExp" type="date"
                     class="form-control">
                   <mat-error *ngIf="campoEsValido('fechaExp')">
@@ -82,7 +82,7 @@
               <div class="row">
                 <!-- Direccion -->
                 <mat-form-field class="form-group col-md-4 pl-1">
-                  <mat-label>Direccion</mat-label>
+                  <mat-label>Dirección</mat-label>
                   <input matInput formControlName="direccion" type="text"
                     class="form-control">
                   <mat-error *ngIf="campoEsValido('direccion')">
@@ -97,7 +97,7 @@
 
                 <!-- Celular -->
                 <mat-form-field class="form-group col-md-4">
-                  <mat-label>Celular <small>(10-Digitos)</small></mat-label>
+                  <mat-label>Celular <small>(10-Dígitos)</small></mat-label>
                   <input matInput formControlName="celular1" type="number"
                     class="form-control">
                   <mat-error *ngIf="campoEsValido('celular1')">
@@ -150,7 +150,7 @@
 
               </div>
 
-              <a (click)="segundaparte()">Siguiente</a>
+              <!-- <a (click)="segundaparte()">Siguiente</a> -->
 
 
               <!-- Boton De Enviar Formulario -->
@@ -210,7 +210,7 @@
                     <mat-option value="1">Una Persona</mat-option>
                     <mat-option value="2">Dos Personas</mat-option>
                     <mat-option value="3">Tres Personas</mat-option>
-                    <mat-option value="Mas De 3">Mas De 3 Personas</mat-option>
+                    <mat-option value="4">Mas De 3 Personas</mat-option>
                   </mat-select>
                   <mat-label><mat-icon>description</mat-icon> <b>Personas A
                       Cargo</b></mat-label>
@@ -224,7 +224,7 @@
                     <mat-option value="1">Un Hijo</mat-option>
                     <mat-option value="2">Dos Hijos</mat-option>
                     <mat-option value="3">Tres Hijos</mat-option>
-                    <mat-option value="Mas De 3">Mas De 3 Hijos</mat-option>
+                    <mat-option value="4">Mas De 3 Hijos</mat-option>
                   </mat-select>
                   <mat-label><mat-icon>description</mat-icon> <b> Numero De
                       Hijos</b></mat-label>
@@ -315,7 +315,7 @@
 
               </div>
 
-              <a (click)="terceraparte()">Siguiente</a>
+              <!-- <a (click)="terceraparte()">Siguiente</a> -->
 
               <!-- Boton De Enviar Formulario -->
               <div class="form-group d-flex h-100">
@@ -437,7 +437,7 @@
               </div>
 
 
-              <a (click)="cuartaparte()">Siguiente</a>
+              <!-- <a (click)="cuartaparte()">Siguiente</a> -->
 
 
               <!-- Boton De Enviar Formulario -->
@@ -462,7 +462,7 @@
               <div class="row">
                 <!-- Situacion Laboral-->
                 <mat-form-field appearance="fill" class="form-group col-md-12">
-                  <mat-select formControlName="situacionlaboral">
+                  <mat-select formControlName="situacionLaboral">
                     <mat-option selected disabled value="">Escoge...</mat-option>
                     <mat-option value="Pensionado">Pensionado</mat-option>
                     <mat-option value="Desempleado">Desempleado</mat-option>
@@ -474,7 +474,7 @@
               </div>
 
             <!-- 2 Fila -->
-              <div class="row" *ngIf="situacionlaboral === 'Independiente'">
+              <div class="row" *ngIf="situacionLaboral === 'Independiente'">
                 <!-- Actividad De Independiente -->
 
                   <mat-form-field appearance="fill" class="form-group
@@ -490,23 +490,23 @@
                       <mat-option value="Contador/Revisor">Contador/Revisor</mat-option>
                       <mat-option value="Ingeniero/Geologo/Arquitecto">Ingeniero/Geologo/Arquitecto</mat-option>
                       <mat-option value="Medico/Profesional De La
-                        Salud/Estetica">Medico/Profesional De La Salud/Estetica</mat-option>
+                        Salud/Estética">Medico/Profesional De La Salud/Estética</mat-option>
                       <mat-option value="Mensajero">Mensajero</mat-option>
                       <mat-option value="Microempresario">Microempresario</mat-option>
                       <mat-option value="Operarios De Maquinaria">Operarios De
                         Maquinaria</mat-option>
                       <mat-option value="Peluquero">Peluquero</mat-option>
                       <mat-option value="Plomero/Albañil">Plomero/Albañil</mat-option>
-                      <mat-option value="Profesional O Tecnico De La
-                        Informatica">Profesional O Tecnico De La Informatica</mat-option>
+                      <mat-option value="Profesional O Técnico De La
+                        Informática">Profesional O Técnico De La Informática</mat-option>
                       <mat-option value="Profesores/Docentes">Profesores/Docentes</mat-option>
                       <mat-option value="Secretarias">Secretarias</mat-option>
                       <mat-option value="Servicios De
-                        Vigilancia/Policia/Militares">Servicios De
-                        Vigilancia/Policia/Militares</mat-option>
+                        Vigilancia/Policía/Militares">Servicios De
+                        Vigilancia/Policía/Militares</mat-option>
                       <mat-option value="Taxista/Transportador/Conductor">Taxista/Transportador/Conductor</mat-option>
-                      <mat-option value="Tecnicos O Tecnologos En Otras Areas">Tecnicos
-                        O Tecnologos En Otras Areas</mat-option>
+                      <mat-option value="Técnicos O Tecnológos En Otras Areas">Técnicos
+                        O Tecnológos En Otras Areas</mat-option>
                       <mat-option value="Vendedores/Visitadores">Vendedores/Visitadores</mat-option>
                       <mat-option value="Otros">Otros</mat-option>
                     </mat-select>
@@ -516,7 +516,7 @@
               </div>
 
               <!-- 3 Fila -->
-              <div class="row" *ngIf="situacionlaboral === 'Empleado'">
+              <div class="row" *ngIf="situacionLaboral === 'Empleado'">
                 <!-- Actividades Empleo "Cargo" -->
 
                   <mat-form-field appearance="fill" class="form-group col-md-6">
@@ -527,16 +527,16 @@
                       <mat-option value="Operativas Y De Servicio">Operativas Y
                         De Servicio</mat-option>
                       <mat-option value="Ventas Y Mercadeo">Ventas Y Mercadeo</mat-option>
-                      <mat-option value="Tecnicas">Tecnicas</mat-option>
+                      <mat-option value="Técnicas">Técnicas</mat-option>
                       <mat-option value="Vigilancia y Seguridad">Vigilancia y
                         Seguridad</mat-option>
                       <mat-option value="Taxista">Taxista</mat-option>
                       <mat-option value="Medico/Profesional De La
-                        Salud/Estetica">Medico/Profesional De La Salud/Estetica</mat-option>
-                      <mat-option value="Conductor/Trasportador">Conductor/Trasportador</mat-option>
+                        Salud/Estética">Medico/Profesional De La Salud/Estética</mat-option>
+                      <mat-option value="Conductor/Transportador">Conductor/Transportador</mat-option>
                       <mat-option value="Secretariales">Secretariales</mat-option>
                       <mat-option value="Areas De Apoyo">Areas De Apoyo</mat-option>
-                      <mat-option value="Policia">Policia</mat-option>
+                      <mat-option value="Policía">Policía</mat-option>
                       <mat-option value="Militar">Militar</mat-option>
                       <mat-option value="Cajero">Cajero</mat-option>
                       <mat-option value="Otros">Otros</mat-option>
@@ -548,20 +548,20 @@
                 <!-- Antiguedad En Empresa-->
 
                   <mat-form-field appearance="fill" class="form-group col-md-6">
-                    <mat-select formControlName="antiguedadempresa">
+                    <mat-select formControlName="antiguedaddeempresa">
                       <mat-option selected disabled value="">Escoge...</mat-option>
                       <mat-option value="0-1">Menos De 1 año</mat-option>
                       <mat-option value="1-2">Entre 1 y 2 años</mat-option>
                       <mat-option value="2-3">Entre 2 y 3 años</mat-option>
-                      <mat-option value="Masde3">Mas De 3 años</mat-option>
+                      <mat-option value="Mas de 3">Mas De 3 años</mat-option>
                     </mat-select>
-                    <mat-label><mat-icon>description</mat-icon><b>Antiguedad</b></mat-label>
+                    <mat-label><mat-icon>description</mat-icon><b>Antigüedad</b></mat-label>
                   </mat-form-field>
 
               </div>
 
               <!-- Fila 4 -->
-              <div class="row" *ngIf="situacionlaboral === 'Empleado'">
+              <div class="row" *ngIf="situacionLaboral=== 'Empleado'">
                 <!-- Nombre Empresa -->
 
                   <mat-form-field class="form-group col-md-6">
@@ -577,7 +577,7 @@
                 <!--Telefono Empresa -->
 
                   <mat-form-field class="form-group col-md-6">
-                    <mat-label>Telefono De la Empresa</mat-label>
+                    <mat-label>Teléfono De la Empresa</mat-label>
                     <input matInput formControlName="telefonoempresa"
                       type="number"
                       class="form-control">
@@ -588,7 +588,7 @@
 
               </div>
 
-              <div class="row" *ngIf="situacionlaboral !== ''">
+              <div class="row" *ngIf="situacionLaboral !== ''">
                 <!-- En que usaras el credito -->
 
                   <mat-form-field appearance="fill" class="form-group
@@ -596,7 +596,7 @@
                     <mat-select formControlName="uso">
                       <mat-option selected disabled value="">Escoge...</mat-option>
                       <mat-option value="Viaje">Viaje</mat-option>
-                      <mat-option value="Utiles Escolares">Utiles Escolares</mat-option>
+                      <mat-option value="Útiles Escolares">Útiles Escolares</mat-option>
                       <mat-option value="Matricula de Mis Hijos">Matricula de
                         Mis Hijos</mat-option>
                       <mat-option value="Matricula Universidad">Matricula
@@ -606,21 +606,21 @@
                         Medicamentos</mat-option>
                       <mat-option value="Urgencias Medicas">Urgencias Medicas</mat-option>
                       <mat-option value="Pago de Deudas">Pago de Deudas</mat-option>
-                      <mat-option value="Pago De Servicios Publicos">Pago De
-                        Servicios Publicos</mat-option>
+                      <mat-option value="Pago De Servicios Públicos">Pago De
+                        Servicios Públicos</mat-option>
                       <mat-option value="Pago Arriendo">Pago Arriendo</mat-option>
-                      <mat-option value="Reparacion Vehiculo/Moto">Reparacion
-                        Vehiculo/Moto</mat-option>
-                      <mat-option value="Seguros Vehiculo/Moto">Seguros
-                        Vehiculo/Moto</mat-option>
+                      <mat-option value="Reparación Vehículo/Moto">Reparación
+                        Vehículo/Moto</mat-option>
+                      <mat-option value="Seguros Vehículo/Moto">Seguros
+                        Vehículo/Moto</mat-option>
                       <mat-option value="Mercado">Mercado</mat-option>
-                      <mat-option value="Diversion">Diversion</mat-option>
+                      <mat-option value="Diversión">Diversión</mat-option>
                       <mat-option value="Pago Impuestos">Pago Impuestos</mat-option>
-                      <mat-option value="Tecnologia">Tecnologia</mat-option>
+                      <mat-option value="Tecnología">Tecnología</mat-option>
                       <mat-option value="Otros">Otros</mat-option>
                     </mat-select>
                     <mat-label><mat-icon>description</mat-icon><b>En Que
-                        Usaras El Credito?</b></mat-label>
+                        Usaras El Crédito?</b></mat-label>
                   </mat-form-field>
 
               </div>
@@ -650,12 +650,12 @@
 
 
 
-<!--
 
-    <span>Valid</span>
-<pre>{{ miFormulario2.valid }}</pre>
+
+    <!-- <span>Valid</span>
+<pre>{{ miFormulario3.valid }}</pre>
 <br>
 
 <span>Value</span>
-<pre>{{ miFormulario2.value | json }}</pre>
+<pre>{{ miFormulario3.value | json }}</pre>
 <br> -->

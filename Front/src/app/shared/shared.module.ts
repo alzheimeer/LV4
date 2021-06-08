@@ -8,6 +8,7 @@ import { CalcConstruccionComponent } from './calc-construccion/calc-construccion
 import { CalcHipotecaComponent } from './calc-hipoteca/calc-hipoteca.component';
 import { CalcInvierteComponent } from './calc-invierte/calc-invierte.component';
 import { CalcQuickloanComponent } from './calc-quickloan/calc-quickloan.component';
+import { CalcQuickloan2Component } from './calc-quickloan2/calc-quickloan2.component';
 import { CalcVehiculoComponent } from './calc-vehiculo/calc-vehiculo.component';
 import { CalcComponent } from './calc/calc.component';
 import { CardComponent } from './card/card.component';
@@ -41,8 +42,8 @@ import { RequisitoVehiculoComponent } from './requisito-vehiculo/requisito-vehic
     CalcConstruccionComponent,
     CalcInvierteComponent,
     CalcQuickloanComponent,
+    CalcQuickloan2Component,
     RegisterQuickloanComponent,
-
   ],
   imports: [
     CommonModule,
@@ -68,6 +69,7 @@ import { RequisitoVehiculoComponent } from './requisito-vehiculo/requisito-vehic
     RequisitoConstruccionComponent,
     RequisitoQuickloanComponent,
     CalcQuickloanComponent,
+    CalcQuickloan2Component,
     RegisterQuickloanComponent
   ]
 })

@@ -12,7 +12,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <h5 class="title">Aqui Puedes Actualizar Tus Datos</h5>
+                    <h5 class="title">Aquí Puedes Actualizar Tus Datos</h5>
                 </div>
                 <div class="card-body">
 
@@ -67,7 +67,7 @@
                         <div class="row">
                             <div class="col-md-6 pr-1">
                                 <div class="form-group">
-                                    <label>Tipo De Identificacion</label>
+                                    <label>Tipo De Identificación</label>
 
                                     <select [(ngModel)]="tipodoc" name="tipodoc" class="form-control custom-select" placeholder="Escoge Un Tipo" required>
                     <option [value]="item" *ngFor="let item of tiposIdentificacion">{{item}}</option>
@@ -77,7 +77,7 @@
                             </div>
                             <div class="col-md-6 pl-1">
                                 <div class="form-group">
-                                    <label>Numero</label>
+                                    <label>Número</label>
                                     <input [(ngModel)]="numdoc" name="numdoc" type="number" class="form-control" placeholder="# de documento" required>
                                 </div>
                             </div>
@@ -91,7 +91,7 @@
 
                           </div>
                           <div class="col-md-6">
-                            <label>Fecha De Expedicion - Actual: {{fechaExp | date: 'dd/MM/YYYY'}}</label>
+                            <label>Fecha De Expedición - Actual: {{fechaExp | date: 'dd/MM/YYYY'}}</label>
                             <input [(ngModel)]="fechaExp" type="date" name="fechaExp" class="form-control" required>
 
 
@@ -108,8 +108,8 @@
                         <div class="row">
                             <div class="col-md-3 pr-1">
                                 <div class="form-group">
-                                    <label>Pais</label>
-                                    <select [(ngModel)]="pais" name="pais" class="form-control custom-select" placeholder="Escoge Un Pais" required>
+                                    <label>País</label>
+                                    <select [(ngModel)]="pais" name="pais" class="form-control custom-select" placeholder="Escoge Un País" required>
                     <option [value]="item" *ngFor="let item of paises">{{item}}</option>
 
                   </select>
@@ -138,7 +138,7 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label>Dirección</label>
-                                    <input [(ngModel)]="direccion" name="direccion" type="text" class="form-control" placeholder="Digite Su Direccion" required>
+                                    <input [(ngModel)]="direccion" name="direccion" type="text" class="form-control" placeholder="Digite Su Dirección" required>
                                 </div>
                             </div>
                         </div>
@@ -146,7 +146,7 @@
                             <div class="col-md-6 px-1">
                                 <div class="form-group">
                                     <label>Celular</label>
-                                    <input [(ngModel)]="celular1" name="celular1" type="number" class="form-control" placeholder="Digite Su Numero Celular" required>
+                                    <input [(ngModel)]="celular1" name="celular1" type="number" class="form-control" placeholder="Digite Su Número Celular" required>
                                 </div>
                             </div>
                             <div class="col-md-6 pl-1">

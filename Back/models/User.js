@@ -29,6 +29,7 @@ var UserSchema = Schema({
     solicitud: {
         type: Schema.Types.ObjectId,
         required: false,
+        default: ''
     },
     // In roles we make an array to indicate that it can have many roles and we are going to save only the id of the role
     // and it is referenced to the Role model and we tell it that it is of this type so that it receives the ID

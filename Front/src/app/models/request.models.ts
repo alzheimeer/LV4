@@ -33,6 +33,9 @@ export interface Requestx {
   regVehiculoOk: boolean;
   regTrabajo: boolean;
   regTrabajoOk: boolean;
+  regLaboralQuick: boolean;
+  regLaboralQuickOk: boolean;
+  estadoPrestamo: boolean;
   regReferenciasQuick: boolean;
   regReferenciasQuickOk: boolean;
   regReferencias: boolean;
@@ -252,6 +255,7 @@ export interface CreateRequest {
   totalCredito: number;
   valorCuotaTotal: number;
   auditorObra: number;
+  estadoPrestamo: boolean;
 }
 
 export class CreateIniReq implements CreateRequest {
@@ -285,6 +289,7 @@ export class CreateIniReq implements CreateRequest {
   totalCredito: number;
   valorCuotaTotal: number;
   auditorObra: number;
+  estadoPrestamo: boolean;
 
   constructor() {
     this.idUser = '',
@@ -316,7 +321,8 @@ export class CreateIniReq implements CreateRequest {
       this.totalCredito = 0,
       this.valorCuotaTotal = 0,
       this.valorCuotaBase = 0,
-      this.auditorObra = 0
+      this.auditorObra = 0,
+      this.estadoPrestamo = false;
   }
 }
 
@@ -380,6 +386,9 @@ export class RequestIni implements Requestx {
   regTrabajoOk: boolean;
   regReferenciasQuick: boolean;
   regReferenciasQuickOk: boolean;
+  regLaboralQuick: boolean;
+  regLaboralQuickOk: boolean;
+  estadoPrestamo: boolean;
   regReferencias: boolean;
   regReferenciasOk: boolean;
   regReferenciasCom: boolean;
@@ -471,6 +480,9 @@ export class RequestIni implements Requestx {
       this.regPasaporteOk = false,
       this.regReferenciasQuick = false,
       this.regReferenciasQuickOk = false,
+      this.regLaboralQuick = false,
+      this.regLaboralQuickOk = false,
+      this.estadoPrestamo = false,
       this.regPersonales = false,
       this.regPersonalesOk = false,
       this.regReferencias = false,
@@ -676,6 +688,9 @@ export class RequestMao implements Requestx {
   regTrabajoOk: boolean;
   regReferenciasQuick: boolean;
   regReferenciasQuickOk: boolean;
+  regLaboralQuick: boolean;
+  regLaboralQuickOk: boolean;
+  estadoPrestamo: boolean;
   regReferencias: boolean;
   regReferenciasOk: boolean;
   regReferenciasCom: boolean;
@@ -783,6 +798,9 @@ export class RequestMao implements Requestx {
       this.regPersonalesOk = false,
       this.regReferenciasQuick = false,
       this.regReferenciasQuickOk = false,
+      this.regLaboralQuick = false,
+      this.regLaboralQuickOk = false,
+      this.estadoPrestamo = false,
       this.regReferencias = false,
       this.regReferenciasOk = false,
       this.regReferenciasCom = false,

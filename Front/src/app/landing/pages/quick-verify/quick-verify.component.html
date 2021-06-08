@@ -1,0 +1,198 @@
+<!-- Full Page Intro -->
+<div class="view full-page-intro "
+  style="background-image: url('/assets/images/quickloan-unsplash.jpg'); background-repeat: no-repeat; background-size: cover;">
+
+  <!-- Mask & flexbox options-->
+  <div class="mask rgba-black-light d-flex justify-content-center align-items-center ">
+
+    <!-- Content -->
+    <div class="container ">
+
+      <!--Grid row-->
+      <div class="row wow fadeIn ">
+
+        <div class="col-md-12 col-xl-12  mt-5 card" *ngIf="part1">
+          <form (ngSubmit)="guardar(f)" #f="ngForm">
+            <!-- <form  #f="ngForm"> -->
+            <div class="row m-2">
+
+              <div class="col-md-12 pl-1">
+                <div class="form-group">
+                  <a class="text-danger mt-5 mb-2">Por favor confirme los siguientes datos ya que son fundamentales para la aprobación y desembolso de su crédito,
+                    si algún dato esta incorrecto, por favor editarlo antes de continuar.
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="row m-2">
+              <div class="col-12 col-md-6 px-1">
+                <div class="form-group">
+                  <label>Tipo De Identificación</label>
+                  <select [(ngModel)]="tipodoc" name="tipodoc"
+                    class="form-control custom-select" placeholder="Escoge un
+                    tipo" required>
+                    <option [value]="item" *ngFor="let item of
+                      tiposIdentificacion">{{item}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12 col-md-6 px-1">
+                <div class="form-group">
+                  <label>Número</label>
+                  <input [(ngModel)]="numdoc" name="numdoc" type="number"
+                    class="form-control" placeholder="# de documento" required>
+                </div>
+              </div>
+            </div>
+            <div class="row m-2">
+              <div class="col-12 col-md-6 px-1">
+                <label>Fecha De Nacimiento - Actual: <span class="text-danger">{{fechaNac | date:
+                  'dd/MM/YYYY'}}</span></label>
+                <input [(ngModel)]="fechaNac" type="date" name="fechaNac"
+                  class="form-control" required>
+              </div>
+              <div class="col-12 col-md-6 px-1">
+                <label>Fecha De Expedición - Actual: <span class="text-danger">{{fechaExp | date:
+                  'dd/MM/YYYY'}}</span></label>
+                <input [(ngModel)]="fechaExp" type="date" name="fechaExp"
+                  class="form-control" required>
+              </div>
+            </div>
+            <hr>
+            <div class="row m-2">
+              <div class="col-12 col-md-4 px-1">
+                <div class="form-group">
+                  <label>Celular</label>
+                  <input [(ngModel)]="celular1" name="celular1" type="number"
+                    class="form-control" placeholder="Ingrese su número celular"
+                    required>
+                </div>
+              </div>
+              <div class="col-12 col-md-4 px-1">
+                <div class="form-group">
+                  <label>Ingresos</label>
+                  <input [(ngModel)]="ingresos" name="ingresos" type="number"
+                    class="form-control" placeholder="Digite sus ingresos"
+                    required>
+                </div>
+              </div>
+              <div class="col-12 col-md-4 pl-1">
+                <div class="form-group">
+                  <label>Egresos</label>
+                  <input [(ngModel)]="egresos" name="egresos" type="number"
+                    class="form-control" placeholder="Digite sus egresos">
+                </div>
+              </div>
+            </div>
+            <div class="row m-2">
+              <div class="col-12 col-md-4 px-1">
+                <div class="form-group">
+                  <label>Banco</label>
+                  <select [(ngModel)]="bbanco" name="banco"
+                    class="form-control custom-select" placeholder="Escoge un banco" required>
+                    <option [value]="item" *ngFor="let item of bancos">{{item}}</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-12 col-md-4 px-1">
+                <div class="form-group">
+                  <label>Tipo De Cuenta</label>
+                  <select [(ngModel)]="btipocuenta" name="tipocuenta"
+                    class="form-control custom-select" placeholder="Escoge un tipo" required>
+                    <option [value]="item" *ngFor="let item of tipocuenta">{{item}}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-12 col-md-4 pl-1">
+                <div class="form-group">
+                  <label>Número De Cuenta</label>
+                  <input [(ngModel)]="bnumcuenta" name="numcuenta" type="number"
+                    class="form-control" placeholder="# de cuenta" required>
+                </div>
+              </div>
+            </div>
+            <div class="row m-2">
+              <div class="col-md-12">
+                <button type="submit" class="btn btn-primary btn-block mb-2"
+                [disabled]="f.invalid"><i class="fa fa-save"></i>  Continuar</button>
+
+              </div>
+            </div>
+
+
+
+          </form>
+
+        </div>
+        <!--Card End-->
+        <div class="col-md-12 col-xl-12  mt-5 card bc" *ngIf="part2">
+          <div class="card bc">
+            <div class="row">
+              <div class="col-md-12">.
+                <h1 class="text-info text-md-center">¡Hemos revisado tu información!</h1>
+                <h2 class="text-info text-md-center">El monto máximo que puedes solicitar es: <span class="text-danger">$200.000</span></h2>
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="col-md-3"></div>
+              <div class="col-md-6 col-12">
+                <app-calc-quickloan2></app-calc-quickloan2>
+              </div>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-md-3"></div>
+
+            <div class="col-md-3 ">
+              <button type="button" class="btn btn-primary btn-block" (click)="adquirir()">Adquirir</button>
+
+            </div>
+            <div class="col-md-3 ">
+              <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#exampleModal">Cerrar</button>
+            </div>
+
+            <div class="col-md-3"></div>
+          </div>
+
+
+        </div>
+      </div>
+
+
+    </div>
+    <!-- Content -->
+
+  </div>
+  <!-- Mask & flexbox options-->
+
+</div>
+<!-- Full Page Intro -->
+
+
+
+
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Cancelar Solicitud</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Seguro que quieres volver a la página de inicio?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar esta ventana</button>
+        <button [routerLink]="['/landing/personal']" routerLinkActive="router-link-active"  type="button" class="btn btn-primary">Ir a la página de inicio</button>
+      </div>
+    </div>
+  </div>
+</div>

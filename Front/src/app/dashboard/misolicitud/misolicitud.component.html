@@ -11,7 +11,7 @@
       <mat-card class="example-card">
         <mat-card-header>
           <div mat-card-avatar class="example-header-image"></div>
-          <mat-card-title>Solicitudes De Prestamo</mat-card-title>
+          <mat-card-title>Solicitudes De Préstamo</mat-card-title>
           <mat-card-subtitle *ngIf="numrequests == 0">No tienes
             <hr>
             <button routerLink="/dashboard/solicitud">Solicitalo Ya</button>
@@ -41,19 +41,25 @@
               mat-raised-button>{{request.estate }}</button>
             <hr>
 
-            <div *ngIf="request.estate == 'Completo'">
-              <p>Ahora Pasaremos A Verificar Tus Documentos</p>
-              <p>Apenas Tengamos Respuesta Te Enviaremos Un Email Con La Respuesta A Tu Solicitud</p>
+            <div *ngIf="request.estate == 'Completo' && request.nombreProducto !== 'Prestamo UltraRapido'">
+              <p>Ahora pasaremos a verificar tus documentos</p>
+              <p>Apenas tengamos respuesta te enviaremos un email con la respuesta a tu solicitud</p>
+            </div>
+
+            <div *ngIf="request.estate == 'Completo' && request.nombreProducto === 'Prestamo UltraRapido'">
+              <p>Préstamo casi listo</p>
+              <p>Te estamos enviando algunos documentos a tu email por favor leelos detenidamente</p>
+              <p>En el menor tiempo posible te consignaremos el dinero a tu cuenta</p>
             </div>
 
             <div *ngIf="request.estate == 'Aprobada'">
-              <p>Felicidades Tu Solicitud A Sido Aprobada</p>
-              <p>Te Consignaremos En Tu Cuenta Lo Antes Posible</p>
+              <p>Felicidades tu préstamo a sido aprobado</p>
+              <p>Te consignaremos en tu cuenta lo antes posible</p>
             </div>
 
             <div *ngIf="request.estate == 'Facturacion'">
-              <p>Ya Consignamos El Dinero En Tu Cuenta El Dia: {{requests[0].fechaConsignacion | date: 'dd' }} de {{requests[0].fechaConsignacion | date: 'MM/yyyy' }}</p>
-              <p>En El Menu Escoge La Opcion "Mi Prestamo"</p>
+              <p>Ya consignamos el dinero en tu cuenta el dia: {{requests[0].fechaConsignacion | date: 'dd' }} de {{requests[0].fechaConsignacion | date: 'MM/yyyy' }}</p>
+              <p>En el menu selecciona la opción "Mi Préstamo"</p>
             </div>
 
 
@@ -174,7 +180,7 @@
                     (change)="onDocSelected($event, 'extracto')" #extractoInput>
                   <button *ngIf="buttonSelect4 == true" (click)="uploadExtracto('extracto')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
                     Documento</button>
-                  <p><small> Ultimos 3 Meses</small></p>
+                  <p><small> Últimos 3 Meses</small></p>
                 </div>
               </div>
               <hr *ngIf="regExtracto && !request.extractoPath">
@@ -212,7 +218,7 @@
                     (change)="onDocSelected($event, 'Rut')" #RutInput>
                   <button *ngIf="buttonSelect6 == true" (click)="uploadExtracto('Rut')" mat-mini-fab><mat-icon>backup</mat-icon>Subir
                     Documento</button>
-                  <p><small> Maximo De Hace 3 Meses</small></p>
+                  <p><small> Máximo De Hace 3 Meses</small></p>
                 </div>
               </div>
               <hr *ngIf="regRut && !request.RutPath">
@@ -277,7 +283,7 @@
               <!-- LicenciaConst -->
               <div class="row" *ngIf="regLicenciaConst && !request.LicenciaConstPath">
                 <div class="col-md-2">
-                  <p class="text-center">Licencia De Construccion</p>
+                  <p class="text-center">Licencia De Construcción</p>
                   <img [src]="'../../../assets/img/LicenciaConst.jpg'"
                     class="photo"
                     alt="Sin Imagen" (click)="LicenciaConstInput.click()">
