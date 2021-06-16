@@ -568,9 +568,14 @@ export class RequestService {
     this.http.get('https://api.ipify.org/?format=json').subscribe((rta) => {
       ipx = rta;
       body.ip = ipx.ip;
+      console.log('rta', rta);
+      console.log('body.ip', body.ip);
+
       return this.http.put(url, body);
   }, (err) => {
     body.ip = err.text;
+    console.log('err', err);
+    console.log('err body.ip', body.ip);
     return this.http.put(url, body);
   });
     return this.http.put(url, body);
