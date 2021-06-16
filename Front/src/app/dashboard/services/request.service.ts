@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 
 import { environment } from '../../../environments/environment';
 import { CreateRequest, Requestx } from '../../models/request.models';
@@ -542,5 +542,34 @@ export class RequestService {
     );
     return this.http.delete(url, { headers });
   }
-}
 
+  public createPdf(usuario: any, solicitud: any, ip: any) {
+    var date = new Date();
+    const dd = date.getDate();
+    const mm = date.getMonth() + 1;
+    const yyyy = date.getFullYear();
+    const hh = date.getHours();
+    const min = date.getMinutes();
+    const fecha = (dd + '/' + mm + '/' + yyyy + ' Hora: ' + hh + ':' + min);
+    const url = `${this.baseUrl}/pdf`;
+    // console.log('ip', ip);
+    // console.log('usuario', usuario, 'solicitud', solicitud);
+    const body = {
+      userId: usuario._id,
+      name: usuario.name,
+      surname: usuario.surname,
+      numdoc: usuario.personal.numdoc,
+      ip,
+      dataandtime: fecha,
+      codVerificacion: '658547',
+      value: solicitud.value,
+      email: usuario.email
+    };
+    return this.http.put(url, body);
+  }
+
+  public getIPAddress(): any {
+    return this.http.get('http://api.ipify.org/?format=json');
+  }
+
+}

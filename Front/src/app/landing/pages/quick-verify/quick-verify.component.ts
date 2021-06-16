@@ -59,6 +59,7 @@ export class QuickVerifyComponent implements OnInit {
   bnumcuenta!: any;
   ingresos!: number;
   egresos!: number;
+  ipAddress!: string;  
 
   part1 = true;
   part2 = false;
@@ -66,11 +67,13 @@ export class QuickVerifyComponent implements OnInit {
   get usuarioauth() {
     return this.authService.usuario;
   }
+  
   hayerror = false;
 
   constructor(private router: Router, private userService: UserService, private authService: AuthService, private requestService: RequestService) { }
 
   ngOnInit(): void {
+    this.getIP();
     this.authService.validarToken().subscribe(() => {
       this.userService.getUserById(this.authService.usuario.uid).subscribe(resp => {
         this.usuario = resp;
@@ -101,14 +104,35 @@ export class QuickVerifyComponent implements OnInit {
       });
     });
   }
+
+  getIP() {
+    this.requestService.getIPAddress().subscribe((res:any)=>{
+      this.ipAddress = res.ip;
+    });
+  }
+
   adquirir() {
     this.requestService.getRequestById(this.usuario.solicitud).subscribe((x) => {
+      Swal.fire({
+        title: 'Espere',
+        text: 'Enviando Informacion',
+        allowOutsideClick: false
+      });
+      Swal.showLoading();
       this.solicitud = x;
       this.solicitud.estadoPrestamo = true;
       this.solicitud.regOk = true;
       this.solicitud.estate = 'Completo';
-      this.requestService.updateRequestsById(this.solicitud).subscribe(() => {
-        this.router.navigateByUrl('/dashboard/misolicitud');
+      this.requestService.updateRequestsById(this.solicitud).subscribe((xx) => {
+        this.requestService.createPdf(this.usuario, this.solicitud, this.ipAddress).subscribe((xxx) => {
+          // console.log('PDF creado y enviado');
+          Swal.fire({
+            title: 'Revisa Tu Email',
+            text: 'Te Enviamos Algunos Documentos',
+            icon: 'success',
+          });
+          this.router.navigateByUrl('/dashboard/misolicitud');
+        });
       });
     })
   }
