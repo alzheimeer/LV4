@@ -553,32 +553,32 @@ export class RequestService {
     const fecha = (dd + '/' + mm + '/' + yyyy + ' Hora: ' + hh + ':' + min);
     const url = `${this.baseUrl}/pdf`;
     // console.log('usuario', usuario, 'solicitud', solicitud);
-    const body = {
-      userId: usuario._id,
-      name: usuario.name,
-      surname: usuario.surname,
-      numdoc: usuario.personal.numdoc,
-      ip,
-      dataandtime: fecha,
-      codVerificacion: '658547',
-      value: solicitud.value,
-      email: usuario.email
-    };
+    
     var ipx: any = {ip: ''};
     this.http.get('https://api.ipify.org/?format=json').subscribe((rta) => {
       ipx = rta;
-      body.ip = ipx.ip;
-      console.log('rta', rta);
-      console.log('body.ip', body.ip);
+      const body = {
+        userId: usuario._id,
+        name: usuario.name,
+        surname: usuario.surname,
+        numdoc: usuario.personal.numdoc,
+        ip: ipx.ip,
+        dataandtime: fecha,
+        codVerificacion: '658547',
+        value: solicitud.value,
+        email: usuario.email
+    };
 
+      console.log('body.ip', body);
       return this.http.put(url, body);
   }, (err) => {
-    body.ip = err.text;
     console.log('err', err);
-    console.log('err body.ip', body.ip);
-    return this.http.put(url, body);
   });
-    return this.http.put(url, body);
+    // console.log('body.ip', body);
+    const x = {
+      
+    }
+    return this.http.put(url, x);
   }
 
   public getIPAddress(): any {
