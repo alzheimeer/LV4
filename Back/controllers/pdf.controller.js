@@ -18,10 +18,10 @@ const createPoderPDF = async function (req, res) {
         var compiled = ejs.compile(templateHtml);
         var html = compiled({ title: 'EJS', value: value, userId: userId, name: name, surname: surname, numdoc: numdoc, ip: ip, dataandtime: dataandtime, codVerificacion: codVerificacion });
         var options = {
-            // format: 'Letter',
+            format: 'Letter',
             // paginationOffset: 1,       // Override the initial pagination number
-            "height": "10.5in",        // allowed units: mm, cm, in, px
-            "width": "8in",            // allowed units: mm, cm, in, px
+            // "height": "10.5in",        // allowed units: mm, cm, in, px
+            // "width": "8in",            // allowed units: mm, cm, in, px
             "quality": 100,
             //Page options
             //"border": "0",             // default is 0, units: mm, cm, in, px
