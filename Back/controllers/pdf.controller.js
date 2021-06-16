@@ -10,10 +10,7 @@ const fs = require("fs");
 
 const createPoderPDF = async function (req, res) {
     const { value, userId, name, surname, numdoc, ip, dataandtime, codVerificacion, email } = req.body;
-    console.log('IP back:', ip);
-    // if (ip === undefined){
-    //     ip = '0.0.0.0';
-    // }
+    // console.log('IP back:', ip);
     try {
         var templateHtml = fs.readFileSync('modelsdoc/poder.html', 'utf8');
         // var image = path.join( __dirname, 'ri_1.png')
@@ -26,7 +23,7 @@ const createPoderPDF = async function (req, res) {
           name: name,
           surname: surname,
           numdoc: numdoc,
-          ip: '0.0.0.0',
+          ip: ip,
           dataandtime: dataandtime,
           codVerificacion: codVerificacion,
         });
