@@ -106,14 +106,12 @@ export class QuickVerifyComponent implements OnInit {
   }
 
   getIP() {
-    this.requestService.getIPAddress().subscribe((res: any) => {
-      this.ipAddress = res;
-    }, (err: any) => {
-      this.ipAddress = err;
-    });
+    return this.requestService.getIPAddress();
   }
+
+  
   async adquirir() {
-    await this.getIP();
+    this.ipAddress =  await this.getIP();
     this.requestService.getRequestById(this.usuario.solicitud).subscribe((x) => {
       Swal.fire({
         title: 'Espere',
@@ -126,7 +124,7 @@ export class QuickVerifyComponent implements OnInit {
       this.solicitud.regOk = true;
       this.solicitud.estate = 'Completo';
       this.requestService.updateRequestsById(this.solicitud).subscribe((xx) => {
-        
+
         this.requestService.createPdf(this.usuario, this.solicitud, this.ipAddress).subscribe((xxx) => {
           // console.log('PDF creado y enviado');
           Swal.fire({
