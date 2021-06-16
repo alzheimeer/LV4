@@ -73,7 +73,7 @@ export class QuickVerifyComponent implements OnInit {
   constructor(private router: Router, private userService: UserService, private authService: AuthService, private requestService: RequestService) { }
 
   ngOnInit(): void {
-    this.getIP();
+    
     this.authService.validarToken().subscribe(() => {
       this.userService.getUserById(this.authService.usuario.uid).subscribe(resp => {
         this.usuario = resp;
@@ -109,10 +109,6 @@ export class QuickVerifyComponent implements OnInit {
     this.requestService.getIPAddress().subscribe((res: any) => {
       this.ipAddress = res.ip;
     });
-  }
-  ip(){
-    this.getIP();
-    console.log(this.ipAddress)
   }
   adquirir() {
     this.requestService.getRequestById(this.usuario.solicitud).subscribe((x) => {
