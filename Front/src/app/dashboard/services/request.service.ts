@@ -544,6 +544,9 @@ export class RequestService {
   }
 
   public createPdf(usuario: any, solicitud: any, ip: any) {
+    if (ip === ''){
+      ip = '0.0.0.0';
+    }
     var date = new Date();
     const dd = date.getDate();
     const mm = date.getMonth() + 1;
@@ -552,14 +555,14 @@ export class RequestService {
     const min = date.getMinutes();
     const fecha = (dd + '/' + mm + '/' + yyyy + ' Hora: ' + hh + ':' + min);
     const url = `${this.baseUrl}/pdf`;
-    // console.log('ip', ip);
+    console.log('ip', ip);
     // console.log('usuario', usuario, 'solicitud', solicitud);
     const body = {
       userId: usuario._id,
       name: usuario.name,
       surname: usuario.surname,
       numdoc: usuario.personal.numdoc,
-      ip,
+      ip: ip,
       dataandtime: fecha,
       codVerificacion: '658547',
       value: solicitud.value,

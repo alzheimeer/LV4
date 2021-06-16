@@ -106,7 +106,7 @@ export class QuickVerifyComponent implements OnInit {
   }
 
   getIP() {
-    this.requestService.getIPAddress().subscribe((res:any)=>{
+    this.requestService.getIPAddress().subscribe((res: any) => {
       this.ipAddress = res.ip;
     });
   }
@@ -118,6 +118,7 @@ export class QuickVerifyComponent implements OnInit {
         text: 'Enviando Informacion',
         allowOutsideClick: false
       });
+      this.getIP();
       Swal.showLoading();
       this.solicitud = x;
       this.solicitud.estadoPrestamo = true;
