@@ -110,8 +110,8 @@ export class QuickVerifyComponent implements OnInit {
   }
 
   
-  async adquirir() {
-    this.ipAddress =  await this.getIP();
+  adquirir() {
+    // this.ipAddress = this.getIP();
     this.requestService.getRequestById(this.usuario.solicitud).subscribe((x) => {
       Swal.fire({
         title: 'Espere',

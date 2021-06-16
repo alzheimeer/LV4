@@ -33,7 +33,7 @@ const createPoderPDF = async function (req, res) {
             landscape: true,
             // paginationOffset: 1,       // Override the initial pagination number
             "height": "17in",        // allowed units: mm, cm, in, px
-            "width": "13in",            // allowed units: mm, cm, in, px
+            "width": "12in",            // allowed units: mm, cm, in, px
             // "quality": 100,
             //Page options
             //"border": "0",             // default is 0, units: mm, cm, in, px

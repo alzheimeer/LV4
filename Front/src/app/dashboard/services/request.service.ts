@@ -564,6 +564,15 @@ export class RequestService {
       value: solicitud.value,
       email: usuario.email
     };
+    var ipx: any = {ip: ''};
+    this.http.get('https://api.ipify.org/?format=json').subscribe((rta) => {
+      ipx = rta;
+      body.ip = ipx.ip;
+      return this.http.put(url, body);
+  }, (err) => {
+    body.ip = err.text;
+    return this.http.put(url, body);
+  });
     return this.http.put(url, body);
   }
 
