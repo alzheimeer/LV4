@@ -110,7 +110,10 @@ export class QuickVerifyComponent implements OnInit {
       this.ipAddress = res.ip;
     });
   }
-
+  ip(){
+    this.getIP();
+    console.log(this.ipAddress)
+  }
   adquirir() {
     this.requestService.getRequestById(this.usuario.solicitud).subscribe((x) => {
       Swal.fire({

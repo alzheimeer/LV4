@@ -572,7 +572,12 @@ export class RequestService {
   }
 
   public getIPAddress(): any {
-    return this.http.get('http://api.ipify.org/?format=json');
+    var ip : any = {ip: ''};
+    this.http.get('http://api.ipify.org/?format=json').subscribe((rta) => {
+      ip = rta;
+      console.log('La Ip es: ', ip.ip);
+    });
+    return ip.ip;
   }
 
 }

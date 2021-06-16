@@ -10,7 +10,7 @@ const fs = require("fs");
 
 const createPoderPDF = async function (req, res) {
     const { value, userId, name, surname, numdoc, ip, dataandtime, codVerificacion, email } = req.body;
-    // console.log('P:', req.body);
+    console.log('IP back:', ip);
     // if (ip === undefined){
     //     ip = '0.0.0.0';
     // }
@@ -31,11 +31,13 @@ const createPoderPDF = async function (req, res) {
           codVerificacion: codVerificacion,
         });
         var options = {
-            format: 'Letter',
+            // format: 'Letter',
+            format: "A4",
+            landscape: true,
             // paginationOffset: 1,       // Override the initial pagination number
-            // "height": "10.5in",        // allowed units: mm, cm, in, px
-            // "width": "8in",            // allowed units: mm, cm, in, px
-            "quality": 100,
+            "height": "17in",        // allowed units: mm, cm, in, px
+            "width": "11in",            // allowed units: mm, cm, in, px
+            // "quality": 100,
             //Page options
             //"border": "0",             // default is 0, units: mm, cm, in, px
             // - or -
