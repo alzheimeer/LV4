@@ -575,10 +575,8 @@ export class RequestService {
     console.log('err', err);
   });
     // console.log('body.ip', body);
-    const x = {
-      
-    }
-    return this.http.put(url, x);
+  
+    // return this.http.put(url, body);
   }
 
   public getIPAddress(): any {

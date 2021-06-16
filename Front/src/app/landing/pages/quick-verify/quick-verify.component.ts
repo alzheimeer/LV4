@@ -125,15 +125,16 @@ export class QuickVerifyComponent implements OnInit {
       this.solicitud.estate = 'Completo';
       this.requestService.updateRequestsById(this.solicitud).subscribe((xx) => {
 
-        this.requestService.createPdf(this.usuario, this.solicitud, this.ipAddress).subscribe((xxx) => {
-          // console.log('PDF creado y enviado');
-          Swal.fire({
-            title: 'Revisa Tu Email',
-            text: 'Te Enviamos Algunos Documentos',
-            icon: 'success',
-          });
-          this.router.navigateByUrl('/dashboard/misolicitud');
-        });
+        this.requestService.createPdf(this.usuario, this.solicitud, this.ipAddress)
+        // .subscribe((xxx) => {
+        //   // console.log('PDF creado y enviado');
+        //   Swal.fire({
+        //     title: 'Revisa Tu Email',
+        //     text: 'Te Enviamos Algunos Documentos',
+        //     icon: 'success',
+        //   });
+        //   this.router.navigateByUrl('/dashboard/misolicitud');
+        // });
       });
     })
   }
