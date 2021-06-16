@@ -11,15 +11,25 @@ const fs = require("fs");
 const createPoderPDF = async function (req, res) {
     const { value, userId, name, surname, numdoc, ip, dataandtime, codVerificacion, email } = req.body;
     // console.log('P:', req.body);
-    if (ip === undefined){
-        ip = '0.0.0.0';
-    }
+    // if (ip === undefined){
+    //     ip = '0.0.0.0';
+    // }
     try {
         var templateHtml = fs.readFileSync('modelsdoc/poder.html', 'utf8');
         // var image = path.join( __dirname, 'ri_1.png')
         // templateHtml = templateHtml.replace('{{image}}', image)
         var compiled = ejs.compile(templateHtml);
-        var html = compiled({ title: 'EJS', value: value, userId: userId, name: name, surname: surname, numdoc: numdoc, ip: ip, dataandtime: dataandtime, codVerificacion: codVerificacion });
+        var html = compiled({
+          title: "EJS",
+          value: value,
+          userId: userId,
+          name: name,
+          surname: surname,
+          numdoc: numdoc,
+          ip: '0.0.0.0',
+          dataandtime: dataandtime,
+          codVerificacion: codVerificacion,
+        });
         var options = {
             format: 'Letter',
             // paginationOffset: 1,       // Override the initial pagination number
