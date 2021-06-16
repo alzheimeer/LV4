@@ -573,7 +573,7 @@ export class RequestService {
 
   public getIPAddress(): any {
     var ip : any = {ip: ''};
-    this.http.get('http://api.ipify.org/?format=json').subscribe((rta) => {
+    this.http.get('https://api.ipify.org/?format=json%27').subscribe((rta) => {
       ip = rta;
       console.log('La Ip es: ', ip.ip);
     });
