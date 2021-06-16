@@ -544,10 +544,7 @@ export class RequestService {
   }
 
   public createPdf(usuario: any, solicitud: any, ip: any) {
-    if (ip === ''){
-      ip = '0.0.0.0';
-    }
-    var date = new Date();
+    const date = new Date();
     const dd = date.getDate();
     const mm = date.getMonth() + 1;
     const yyyy = date.getFullYear();
@@ -555,14 +552,13 @@ export class RequestService {
     const min = date.getMinutes();
     const fecha = (dd + '/' + mm + '/' + yyyy + ' Hora: ' + hh + ':' + min);
     const url = `${this.baseUrl}/pdf`;
-    console.log('ip', ip);
     // console.log('usuario', usuario, 'solicitud', solicitud);
     const body = {
       userId: usuario._id,
       name: usuario.name,
       surname: usuario.surname,
       numdoc: usuario.personal.numdoc,
-      ip: ip,
+      ip,
       dataandtime: fecha,
       codVerificacion: '658547',
       value: solicitud.value,
@@ -572,7 +568,7 @@ export class RequestService {
   }
 
   public getIPAddress(): any {
-    var ip : any = {ip: ''};
+    var ip: any = {ip: ''};
     this.http.get('https://api.ipify.org/?format=json').subscribe((rta) => {
       ip = rta;
       console.log('La Ip es: ', ip.ip);
