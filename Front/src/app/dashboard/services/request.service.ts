@@ -543,7 +543,7 @@ export class RequestService {
     return this.http.delete(url, { headers });
   }
 
-  public createPdf(usuario: any, solicitud: any, ip: any) {
+  public createPoderPdf(usuario: any, solicitud: any, ip: any) {
     const date = new Date();
     const dd = date.getDate();
     const mm = date.getMonth() + 1;
@@ -551,9 +551,8 @@ export class RequestService {
     const hh = date.getHours();
     const min = date.getMinutes();
     const fecha = (dd + '/' + mm + '/' + yyyy + ' Hora: ' + hh + ':' + min);
-    const url = `${this.baseUrl}/pdf`;
+    const url = `${this.baseUrl}/pdf/poder`;
     // console.log('usuario', usuario, 'solicitud', solicitud);
-
     // console.log('body.ip', body);
     const body = {
       userId: usuario._id,
@@ -568,6 +567,32 @@ export class RequestService {
     };
     return this.http.put(url, body);
   }
+  public createContratoPdf(usuario: any, solicitud: any, ip: any) {
+    const date = new Date();
+    const dd = date.getDate();
+    const mm = date.getMonth() + 1;
+    const yyyy = date.getFullYear();
+    const hh = date.getHours();
+    const min = date.getMinutes();
+    const fecha = (dd + '/' + mm + '/' + yyyy + ' Hora: ' + hh + ':' + min);
+    const url = `${this.baseUrl}/pdf/contrato`;
+    // console.log('usuario', usuario, 'solicitud', solicitud);
+    // console.log('body.ip', body);
+    const body = {
+      userId: usuario._id,
+      name: usuario.name,
+      surname: usuario.surname,
+      numdoc: usuario.personal.numdoc,
+      ip: ip,
+      dataandtime: fecha,
+      codVerificacion: '658547',
+      value: solicitud.value,
+      email: usuario.email
+    };
+    return this.http.put(url, body);
+  }
+
+
 
   public getIPAddress(): Observable<{ip: ''}> {
     console.log('service')

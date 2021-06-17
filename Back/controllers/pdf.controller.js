@@ -9,6 +9,7 @@ const fs = require("fs");
 
 
 const createPoderPDF = async function (req, res) {
+    console.log('Poder creandose');
     const { value, userId, name, surname, numdoc, ip, dataandtime, codVerificacion, email } = req.body;
     console.log('IP back:', req.body);
     try {
@@ -17,15 +18,15 @@ const createPoderPDF = async function (req, res) {
         // templateHtml = templateHtml.replace('{{image}}', image)
         var compiled = ejs.compile(templateHtml);
         var html = compiled({
-          title: "EJS",
-          value: value,
-          userId: userId,
-          name: name,
-          surname: surname,
-          numdoc: numdoc,
-          ip: ip,
-          dataandtime: dataandtime,
-          codVerificacion: codVerificacion,
+            title: "EJS",
+            value: value,
+            userId: userId,
+            name: name,
+            surname: surname,
+            numdoc: numdoc,
+            ip: ip,
+            dataandtime: dataandtime,
+            codVerificacion: codVerificacion,
         });
         var options = {
             // format: 'Letter',
@@ -79,38 +80,105 @@ const createPoderPDF = async function (req, res) {
         // Guardar El Archivo En El Back
 
         // pdf.create(html, options).toFile("./uploads/" + 'Poder-Id-' + req.body.userId + '-' + 'date' + '-' + Date.now() + ".pdf", function (err, res1) {
-        pdf.create(html, options).toFile("./uploads/" + 'Poder-Id-' + userId + ".pdf", function (err, res1) {
+        pdf.create(html, options).toFile("./uploads/" + `Poder-Id-${userId}.pdf`, function (err, res1) {
             if (err) {
                 console.log(err);
                 res.end("Error creando PDF: " + error);
             } else {
-                // console.log(res1);
+
+                transporter.sendMail({
+                    from: '"Poder" <administrador@lendiup.com>',
+                    to: email,
+                    subject: 'De:' + name + ' Email:' + email,
+                    attachments: [
+                        {
+                            filename: 'Poder-Id-' + userId + ".pdf",
+                            path: 'http://localhost:3000/uploads/' + `Poder-Id-${userId}.pdf`
+                        },
+                    ],
+                    html: `<b>Envio Poder Lendiup</b>
+                            <h3> Nombre:</h3>
+                            <p >${name} ${surname}  </p>
+                            <h3> Email:</h3>
+                            <p >${email} </p>`
+                });
+
                 return res.status(201).json({ msg: 'OK', archivo: res1.filename });
             }
         });
-        try {
-            await transporter.sendMail({
-                from: '"Documentos" <administrador@lendiup.com>',
-                to: email,
-                subject: 'De:' + name + ' Email:' + email,
-                attachments: [
-                    {
-                        filename: 'Poder-Id-' + userId + ".pdf",
-                        path: 'http://localhost:3000/uploads/' + 'Poder-Id-' + userId + ".pdf"
-                    },
-                ],
-                html: `<b>Envio Poder Lendiup</b>
-                    <h3> Nombre:</h3>
-                    <p >${name} ${surname}  </p>
-                    <h3> Email:</h3>
-                    <p >${email} </p>`
-            });
 
-            
-        } catch (error) {
-            console.log(error);
-            
-        }
+    } catch (error) {
+        return res.status(500).json({ msn: 'ERROR AL CREAR PDF' });
+    }
+};
+
+
+
+const createContratoPDF = async function (req, res) {
+    console.log('contrato creandose');
+    const { value, userId, name, surname, numdoc, ip, dataandtime, codVerificacion, email } = req.body;
+    console.log('IP back:', req.body);
+    try {
+        var templateHtml = fs.readFileSync('modelsdoc/contrato.html', 'utf8');
+        var compiled = ejs.compile(templateHtml);
+        var html = compiled({
+            title: "EJS",
+            value: value,
+            userId: userId,
+            name: name,
+            surname: surname,
+            numdoc: numdoc,
+            ip: ip,
+            dataandtime: dataandtime,
+            codVerificacion: codVerificacion,
+        });
+        var options = {
+            format: "A4",
+            landscape: true,
+            "height": "17in",        // allowed units: mm, cm, in, px
+            "width": "12in",            // allowed units: mm, cm, in, px
+            "header": {
+                "height": '25mm',
+                "contents": `
+                <div style="text-align: center;">
+                  <img src="http://localhost:3000/uploads/ri_1.png" width="200" height"100"/>
+                </div>`,
+            },
+            "footer": {
+                "height": "28mm",
+                "contents": {
+                    default: '<span style="text-align: center; color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
+                }
+            },
+        };
+        pdf.create(html, options).toFile("./uploads/" + `Contrato-Id-${userId}.pdf`, function (err, res1) {
+            if (err) {
+                console.log(err);
+                res.end("Error creando PDF: " + error);
+            } else {
+                // return res.status(201).json({ msg: 'OK', archivo: res1.filename });
+
+                transporter.sendMail({
+                    from: '"Contrato" <administrador@lendiup.com>',
+                    to: email,
+                    subject: 'De:' + name + ' Email:' + email,
+                    attachments: [
+                        {
+                            filename: `Contrato-Id-${userId}.pdf`,
+                            path: 'http://localhost:3000/uploads/' + `Contrato-Id-${userId}.pdf`
+                        },
+                    ],
+                    html: `<b>Envio Contrato Lendiup</b>
+                            <h3> Nombre:</h3>
+                            <p >${name} ${surname}  </p>
+                            <h3> Email:</h3>
+                            <p >${email} </p>`
+                });
+
+                return res.status(201).json({ msg: 'OK', archivo: res1.filename });
+            }
+        });
+
     } catch (error) {
         return res.status(500).json({ msn: 'ERROR AL CREAR PDF' });
     }
@@ -119,4 +187,5 @@ const createPoderPDF = async function (req, res) {
 
 module.exports = {
     createPoderPDF,
+    createContratoPDF,
 };
