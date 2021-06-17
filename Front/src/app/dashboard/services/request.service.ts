@@ -553,41 +553,31 @@ export class RequestService {
     const fecha = (dd + '/' + mm + '/' + yyyy + ' Hora: ' + hh + ':' + min);
     const url = `${this.baseUrl}/pdf`;
     // console.log('usuario', usuario, 'solicitud', solicitud);
-    
-    var ipx: any = {ip: ''};
-    this.http.get('https://api.ipify.org/?format=json').subscribe((rta) => {
-      ipx = rta;
-      const body = {
-        userId: usuario._id,
-        name: usuario.name,
-        surname: usuario.surname,
-        numdoc: usuario.personal.numdoc,
-        ip: ipx.ip,
-        dataandtime: fecha,
-        codVerificacion: '658547',
-        value: solicitud.value,
-        email: usuario.email
-    };
 
-      console.log('body.ip', body);
-      return this.http.put(url, body);
-  }, (err) => {
-    console.log('err', err);
-  });
     // console.log('body.ip', body);
-  
-    // return this.http.put(url, body);
+    const body = {
+      userId: usuario._id,
+      name: usuario.name,
+      surname: usuario.surname,
+      numdoc: usuario.personal.numdoc,
+      ip: ip,
+      dataandtime: fecha,
+      codVerificacion: '658547',
+      value: solicitud.value,
+      email: usuario.email
+    };
+    return this.http.put(url, body);
   }
 
-  public getIPAddress(): any {
-    var ip: any = {ip: ''};
-    this.http.get('https://api.ipify.org/?format=json').subscribe((rta) => {
-      ip = rta;
-      console.log('La Ip es: ', ip.ip);
-    }, (err) => {
-      ip = err.text;
-    });
-    return ip.ip;
+  public getIPAddress(): Observable<{ip: ''}> {
+    console.log('service')
+    try {
+        return this.http.get<{ip: ''}>('https://api.ipify.org/?format=json');
+    }
+    catch (e) {
+        return (e);
+    }
+
   }
 
 }

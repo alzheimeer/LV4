@@ -33,7 +33,7 @@ export class QuickVerifyComponent implements OnInit {
     'Scotiabanck',
     'Banagrario',
     'AV Villas',
-    'Scotiabank',]
+    'Scotiabank', ]
   public usuarios: User[] = [];
   public usuario: any = [];
   solicitud: Requestx = new RequestIni();
@@ -59,7 +59,7 @@ export class QuickVerifyComponent implements OnInit {
   bnumcuenta!: any;
   ingresos!: number;
   egresos!: number;
-  ipAddress!: string;  
+  ipAddress = '';
 
   part1 = true;
   part2 = false;
@@ -103,13 +103,15 @@ export class QuickVerifyComponent implements OnInit {
         this.hayerror = true;
       });
     });
+    this.getIP();
   }
 
   getIP() {
-    return this.requestService.getIPAddress();
+    this.requestService.getIPAddress().subscribe((rta) => {
+      this.ipAddress = rta.ip;
+    });
   }
 
-  
   adquirir() {
     // this.ipAddress = this.getIP();
     this.requestService.getRequestById(this.usuario.solicitud).subscribe((x) => {
@@ -125,16 +127,15 @@ export class QuickVerifyComponent implements OnInit {
       this.solicitud.estate = 'Completo';
       this.requestService.updateRequestsById(this.solicitud).subscribe((xx) => {
 
-        this.requestService.createPdf(this.usuario, this.solicitud, this.ipAddress)
-        // .subscribe((xxx) => {
-        //   // console.log('PDF creado y enviado');
-        //   Swal.fire({
-        //     title: 'Revisa Tu Email',
-        //     text: 'Te Enviamos Algunos Documentos',
-        //     icon: 'success',
-        //   });
-        //   this.router.navigateByUrl('/dashboard/misolicitud');
-        // });
+        this.requestService.createPdf(this.usuario, this.solicitud, this.ipAddress).subscribe((xxx) => {
+          // console.log('PDF creado y enviado');
+          Swal.fire({
+            title: 'Revisa Tu Email',
+            text: 'Te Enviamos Algunos Documentos',
+            icon: 'success',
+          });
+          this.router.navigateByUrl('/dashboard/misolicitud');
+        });
       });
     })
   }
