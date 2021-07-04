@@ -34,7 +34,7 @@ export interface Personal {
   ciudad: string;
   barrio: string;
   direccion: string;
-  numdoc?: number;
+  numdoc: string;
   celular1?: number;
   celular2?: number;
   genero: string;
@@ -82,7 +82,7 @@ export class UsuarioIni implements User {
         ciudad: '',
         barrio: '',
         direccion: '',
-        numdoc: 0,
+        numdoc: '',
         celular1: 0,
         celular2: 0,
       genero: '',

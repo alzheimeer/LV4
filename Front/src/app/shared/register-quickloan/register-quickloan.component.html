@@ -11,12 +11,12 @@
       <div class="row">
         <div class="col-md-6">
           <p>Primer Nombre:</p>
-          <input  type="text" formControlName="name" placeholder="Primer nombre">
+          <input  type="text" formControlName="name" placeholder="Primer nombre" (keyup)="cambios('name')">
         </div>
 
         <div class="col-md-6">
           <p>Segundo Nombre:</p>
-          <input  type="text" formControlName="secondname" placeholder="Segundo nombre">
+          <input  type="text" formControlName="secondname" placeholder="Segundo nombre" (keyup)="cambios('secondname')">
         </div>
       </div>
 
@@ -25,12 +25,12 @@
       <div class="row">
         <div class="col-md-6">
           <p>Primer Apellido:</p>
-        <input type="text" formControlName="surname" placeholder="Primer apellido">
+        <input type="text" formControlName="surname" placeholder="Primer apellido" (keyup)="cambios('surname')">
         </div>
 
         <div class="col-md-6">
           <p>Segundo Apellido:</p>
-          <input type="text" formControlName="secondsurname" placeholder="Segundo apellido">
+          <input type="text" formControlName="secondsurname" placeholder="Segundo apellido" (keyup)="cambios('secondsurname')">
         </div>
       </div>
 

@@ -7,7 +7,7 @@ export interface Bill {
   name: string;
   surname: string;
   tipodoc: string;
-  numdoc: number;
+  numdoc: string;
   ciudad: string;
   direccion: string;
   telefono: number;
@@ -40,7 +40,7 @@ export class BillIni implements Bill {
   name!: string;
   surname!: string;
   tipodoc!: string;
-  numdoc!: number;
+  numdoc!: string;
   ciudad!: string;
   direccion!: string;
   telefono!: number;

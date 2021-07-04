@@ -46,7 +46,7 @@ export class QuickVerifyComponent implements OnInit {
   tipodoc!: string;
   fechaNac!: Date;
   fechaExp!: Date;
-  numdoc!: any;
+  numdoc!: string;
   pais!: string;
   departamento!: string;
   ciudad!: string;
@@ -129,14 +129,14 @@ export class QuickVerifyComponent implements OnInit {
 
         this.requestService.createPoderPdf(this.usuario, this.solicitud, this.ipAddress).subscribe((xxx) => {
           // console.log('PDF creado y enviado');
-          this.requestService.createContratoPdf(this.usuario, this.solicitud, this.ipAddress).subscribe((sss) => {
+          // this.requestService.createContratoPdf(this.usuario, this.solicitud, this.ipAddress).subscribe((sss) => {
             Swal.fire({
               title: 'Revisa Tu Email',
               text: 'Te Enviamos Algunos Documentos',
               icon: 'success',
             });
             this.router.navigateByUrl('/dashboard/misolicitud');
-          });
+          // });
         });
       });
     })

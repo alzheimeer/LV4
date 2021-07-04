@@ -42,7 +42,7 @@ export class MisdatosComponent implements OnInit {
   tipodoc!: string;
   fechaNac!: Date;
   fechaExp!: Date;
-  numdoc!: any;
+  numdoc!: string;
   pais!: string;
   departamento!: string;
   ciudad!: string;

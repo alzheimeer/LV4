@@ -6,9 +6,100 @@ var path = require('path')
 const pdf = require("html-pdf");
 const fs = require("fs");
 
+const createPoderPDF = async function (req, res, next) {
+    const { value, userId, name, surname, numdoc, ip, dataandtime, codVerificacion, email } = req.body;
+    try {
+        var templateHtml = fs.readFileSync('modelsdoc/poder.html', 'utf8');
+        var compiled = ejs.compile(templateHtml);
+        var html = compiled({ title: "EJS", value: value, userId: userId, name: name, surname: surname, numdoc: numdoc, ip: ip, dataandtime: dataandtime, codVerificacion: codVerificacion });
+        var options = { format: "A4",landscape: true, height: "17in", width: "12in",
+            header: { height: '25mm',
+                contents: `
+                <div style="text-align: center;">
+                  <img src="http://localhost:3000/uploads/ri_1.png" width="200" height"100"/>
+                </div>`,
+            },
+            footer: { height: "28mm",
+                contents: {
+                    default: '<span style="text-align: center; color: #444;">{{page}}</span>/<span>{{pages}}</span>',
+                }
+            },
+        };
+        pdf.create(html, options).toFile("./uploads/" + `Poder-Id-${userId}.pdf`, function (err, res1) {
+            if (err) { res.end("Error creando PDF: " + error);} 
+            else { next(); }
+        });
+    } catch (error) {
+        return res.status(500).json({ msn: 'ERROR AL CREAR PDF' });
+    }
+};
 
 
-const createPoderPDF = async function (req, res) {
+
+const createContratoPDF = async function (req, res) {
+    const { value, userId, name, surname, numdoc, ip, dataandtime, codVerificacion, email } = req.body;
+    try {
+        var templateHtml = fs.readFileSync('modelsdoc/contrato.html', 'utf8');
+        var compiled = ejs.compile(templateHtml);
+        var html = compiled({ title: "EJS", value: value, userId: userId, name: name, surname: surname, numdoc: numdoc, ip: ip, dataandtime: dataandtime, codVerificacion: codVerificacion, });
+        var options = { format: "A4", landscape: true, height: "17in", width: "12in",
+            header: { height: '25mm',
+                contents: `
+                <div style="text-align: center;">
+                  <img src="http://localhost:3000/uploads/ri_1.png" width="200" height"100"/>
+                </div>`,
+            },
+            footer: { height: "28mm",
+                contents: {
+                    default: '<span style="text-align: center; color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
+                }
+            },
+        };
+        pdf.create(html, options).toFile("./uploads/" + `Contrato-Id-${userId}.pdf`, function (err, res1) {
+            if (err) {
+                console.log(err);
+                res.end("Error creando PDF: " + error);
+            } else {
+                transporter.sendMail({
+                    from: '"Contrato" <administrador@lendiup.com>',
+                    to: email,
+                    subject: 'De:' + name + ' Email:' + email,
+                    attachments: [
+                        {
+                            filename: `Contrato-Id-${userId}.pdf`,
+                            path: 'http://localhost:3000/uploads/' + `Contrato-Id-${userId}.pdf`
+                        },
+                        {
+                            filename: `Poder-Id-${userId}.pdf`,
+                            path: 'http://localhost:3000/uploads/' + `Poder-Id-${userId}.pdf`
+                        },
+                    ],
+                    html: `<b>Contrato Y Poder Para Lendiup</b>
+                            <h3> Nombre:</h3>
+                            <p >${name} ${surname}  </p>
+                            <h3> Email:</h3>
+                            <p >${email} </p>`
+                });
+                return res.status(201).json({ msg: 'Poder Y Contrato Enviados', archivo: res1.filename });
+            }
+        });
+
+    } catch (error) {
+        return res.status(500).json({ msn: 'ERROR AL CREAR PDF' });
+    }
+};
+
+
+module.exports = {
+    createPoderPDF,
+    createContratoPDF,
+};
+
+
+
+
+
+const createPoderPDFTest = async function (req, res, next) {
     console.log('Poder creandose');
     const { value, userId, name, surname, numdoc, ip, dataandtime, codVerificacion, email } = req.body;
     console.log('IP back:', req.body);
@@ -86,106 +177,29 @@ const createPoderPDF = async function (req, res) {
                 res.end("Error creando PDF: " + error);
             } else {
 
-                transporter.sendMail({
-                    from: '"Poder" <administrador@lendiup.com>',
-                    to: email,
-                    subject: 'De:' + name + ' Email:' + email,
-                    attachments: [
-                        {
-                            filename: 'Poder-Id-' + userId + ".pdf",
-                            path: 'http://localhost:3000/uploads/' + `Poder-Id-${userId}.pdf`
-                        },
-                    ],
-                    html: `<b>Envio Poder Lendiup</b>
-                            <h3> Nombre:</h3>
-                            <p >${name} ${surname}  </p>
-                            <h3> Email:</h3>
-                            <p >${email} </p>`
-                });
+                // transporter.sendMail({
+                //     from: '"Poder" <administrador@lendiup.com>',
+                //     to: email,
+                //     subject: 'De:' + name + ' Email:' + email,
+                //     attachments: [
+                //         {
+                //             filename: 'Poder-Id-' + userId + ".pdf",
+                //             path: 'http://localhost:3000/uploads/' + `Poder-Id-${userId}.pdf`
+                //         },
+                //     ],
+                //     html: `<b>Envio Poder Lendiup</b>
+                //             <h3> Nombre:</h3>
+                //             <p >${name} ${surname}  </p>
+                //             <h3> Email:</h3>
+                //             <p >${email} </p>`
+                // });
 
-                return res.status(201).json({ msg: 'OK', archivo: res1.filename });
-            }
-        });
-
-    } catch (error) {
-        return res.status(500).json({ msn: 'ERROR AL CREAR PDF' });
-    }
-};
-
-
-
-const createContratoPDF = async function (req, res) {
-    console.log('contrato creandose');
-    const { value, userId, name, surname, numdoc, ip, dataandtime, codVerificacion, email } = req.body;
-    console.log('IP back:', req.body);
-    try {
-        var templateHtml = fs.readFileSync('modelsdoc/contrato.html', 'utf8');
-        var compiled = ejs.compile(templateHtml);
-        var html = compiled({
-            title: "EJS",
-            value: value,
-            userId: userId,
-            name: name,
-            surname: surname,
-            numdoc: numdoc,
-            ip: ip,
-            dataandtime: dataandtime,
-            codVerificacion: codVerificacion,
-        });
-        var options = {
-            format: "A4",
-            landscape: true,
-            "height": "17in",        // allowed units: mm, cm, in, px
-            "width": "12in",            // allowed units: mm, cm, in, px
-            "header": {
-                "height": '25mm',
-                "contents": `
-                <div style="text-align: center;">
-                  <img src="http://localhost:3000/uploads/ri_1.png" width="200" height"100"/>
-                </div>`,
-            },
-            "footer": {
-                "height": "28mm",
-                "contents": {
-                    default: '<span style="text-align: center; color: #444;">{{page}}</span>/<span>{{pages}}</span>', // fallback value
-                }
-            },
-        };
-        pdf.create(html, options).toFile("./uploads/" + `Contrato-Id-${userId}.pdf`, function (err, res1) {
-            if (err) {
-                console.log(err);
-                res.end("Error creando PDF: " + error);
-            } else {
+                next();
                 // return res.status(201).json({ msg: 'OK', archivo: res1.filename });
-
-                transporter.sendMail({
-                    from: '"Contrato" <administrador@lendiup.com>',
-                    to: email,
-                    subject: 'De:' + name + ' Email:' + email,
-                    attachments: [
-                        {
-                            filename: `Contrato-Id-${userId}.pdf`,
-                            path: 'http://localhost:3000/uploads/' + `Contrato-Id-${userId}.pdf`
-                        },
-                    ],
-                    html: `<b>Envio Contrato Lendiup</b>
-                            <h3> Nombre:</h3>
-                            <p >${name} ${surname}  </p>
-                            <h3> Email:</h3>
-                            <p >${email} </p>`
-                });
-
-                return res.status(201).json({ msg: 'OK', archivo: res1.filename });
             }
         });
 
     } catch (error) {
         return res.status(500).json({ msn: 'ERROR AL CREAR PDF' });
     }
-};
-
-
-module.exports = {
-    createPoderPDF,
-    createContratoPDF,
 };

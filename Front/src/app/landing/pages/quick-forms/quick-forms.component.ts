@@ -58,7 +58,7 @@ export class QuickFormsComponent implements OnInit {
   cuartaform = false;
   quintaform = false;
   situacionLaboral = '';
-  numdoc = 0;
+  numdoc = '';
 
   miFormulario = this.fb.group({
     tipodoc: ['', [Validators.required, Validators.minLength(3)]],
@@ -171,6 +171,11 @@ export class QuickFormsComponent implements OnInit {
     );
   }
 
+  cambios(field: string) {
+    let x = this.miFormulario.get(field)?.value;
+    x = x.toUpperCase();
+    this.miFormulario.controls[field].setValue(x);
+  }
 
 
 
@@ -235,7 +240,7 @@ export class QuickFormsComponent implements OnInit {
       this.usuario.personal.tipodoc = tipodoc;
       this.usuario.personal.fechaNac = fechaNac;
       this.usuario.personal.fechaExp = fechaExp;
-      this.usuario.personal.pais = 'Colombia';
+      this.usuario.personal.pais = 'COLOMBIA';
       this.usuario.personal.ciudad = ciudad;
       this.usuario.personal.direccion = direccion;
       this.usuario.personal.numdoc = numdoc;

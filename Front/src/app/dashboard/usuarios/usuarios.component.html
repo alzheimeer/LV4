@@ -11,20 +11,41 @@
             <div class="card">
                 <div class="card-header">
                     <h4 class="card-title">Listado De Todos Los Usuarios</h4>
+                    <div class="form-inline">
+
+                    <!-- Selecciona La Categoria A Buscar -->
+                    <select type="text" class="form-control mb-2" placeholder="Buscar
+                    ..." #txtSearch2 (change)="choose(txtSearch2.value)">
+                    <option selected disabled value="">   Buscar por ...</option>
+                    <option *ngFor="let producto of productos" [value]="producto.value">{{producto.name}}</option>
+                    </select>
+
+                    <label class="ml-2 mr-2">Ingrese Termino A Buscar:</label>
+                    <input type="text" placeholder="Digite aqui" class="form-control mb-2"
+                    #txtSearchNum2 (keyup)="searchSolicitud(txtSearchNum2.value, 2, 'num')"></div>
+
+                    <button (click)="prevPage(2)" mat-icon-button color="primary"><i
+                        class="far fa-arrow-alt-circle-left fa-2x"></i></button>
+                    <button (click)="nextPage(2)" mat-icon-button color="primary"><i
+                        class="far fa-arrow-alt-circle-right fa-2x"></i></button>
                 </div>
-                <div class="card-body">
+
+            <div class="card-body">
                     <div class="row">
                         <div class="col table-responsive">
                             <table class="table  table-write table-bordered table-hover">
-
                                 <thead class="thead-dark">
                                     <tr>
                                         <th scope="col"></th>
-                                        <th scope="col">Registro</th>
-                                        <th scope="col">Nombre</th>
-                                        <th scope="col">Apellido</th>
+                                        <th scope="col">Primer Registro</th>
+                                        <th scope="col">Ultima Actualizacion</th>
+                                        <th scope="col">Primer Nombre</th>
+                                        <th scope="col">Segundo Nombre</th>
+                                        <th scope="col">Primer Apellido</th>
+                                        <th scope="col">Segundo Apellido</th>
                                         <th scope="col">Email</th>
-                                        <th scope="col">Tipo</th>
+                                        <th scope="col">Tipo Prestamo</th>
+                                        <th scope="col">Tipo Documento</th>
                                         <th scope="col">Documento</th>
                                         <th scope="col">Pais</th>
                                         <th scope="col">Ciudad</th>
@@ -35,6 +56,7 @@
                                         <th scope="col">Banco</th>
                                         <th scope="col">Tipo</th>
                                         <th scope="col"># Cuenta</th>
+                                        <th scope="col"># ID Usuario</th>
                                         <th scope="col"># Solicitud</th>
                                         <th scope="col">Permisos</th>
                                         <th scope="col"></th>
@@ -42,14 +64,18 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr scope="row" *ngFor="let usuario of usuarios; index as i">
+                                    <tr scope="row" *ngFor="let usuario of usuarios | filterforamount2:page2:search2:tiposearch; index as i">
                                         <td (click)="element = !element"><span class="material-icons">edit</span></td>
                                         <!-- <td>{{i+1}}</td> -->
                                         <td>{{usuario.createdAt| date}}</td>
+                                        <td>{{usuario.updatedAt| date}}</td>
 
                                         <td *ngIf="!element">{{usuario.name}}</td>
+                                        <td *ngIf="!element">{{usuario.secondname}}</td>
                                         <td *ngIf="!element">{{usuario.surname}}</td>
+                                        <td *ngIf="!element">{{usuario.secondsurname}}</td>
                                         <td *ngIf="!element">{{usuario.email}}</td>
+                                        <td *ngIf="!element">{{usuario.typeloan}}</td>
                                         <td *ngIf="!element">{{usuario.personal.tipodoc}}</td>
                                         <td *ngIf="!element">{{usuario.personal.numdoc}}</td>
                                         <td *ngIf="!element">{{usuario.personal.pais}}</td>
@@ -61,10 +87,10 @@
                                         <td *ngIf="!element">{{usuario.banca.banco}}</td>
                                         <td *ngIf="!element">{{usuario.banca.tipocuenta}}</td>
                                         <td *ngIf="!element">{{usuario.banca.numcuenta}}</td>
+                                        <td *ngIf="!element">{{usuario._id}}</td>
                                         <td *ngIf="!element">{{usuario.solicitud}}</td>
                                         <td *ngIf="!element">
                                             <span *ngFor="let i of [0,1,2]">
-
                                             <mat-checkbox *ngIf="usuario.roles[i] == this.idUser" class="example-margin"      [(ngModel)]="usuario.roles[i] == this.idUser" [disabled]="true">Usuario</mat-checkbox>
                                             <mat-checkbox *ngIf="usuario.roles[i] == this.idModerator" class="example-margin" [(ngModel)]="usuario.roles[i] == this.idModerator" [disabled]="true">Moderador</mat-checkbox>
                                             <mat-checkbox *ngIf="usuario.roles[i] == this.idAdmin" class="example-margin"     [(ngModel)]="usuario.roles[i] == this.idAdmin" [disabled]="true">Administrador</mat-checkbox>
@@ -82,12 +108,27 @@
                                         </td>
                                         <td *ngIf="element">
                                             <mat-form-field class="example-full-width">
+                                                <input #secondname (keyup)="save(usuario, secondname.value, 'secondname')" matInput value={{usuario.secondname}}>
+                                            </mat-form-field>
+                                        </td>
+                                        <td *ngIf="element">
+                                            <mat-form-field class="example-full-width">
                                                 <input #surname (keyup)="save(usuario, surname.value, 'surname')" matInput value={{usuario.surname}}>
                                             </mat-form-field>
                                         </td>
                                         <td *ngIf="element">
                                             <mat-form-field class="example-full-width">
+                                                <input #secondsurname (keyup)="save(usuario, secondsurname.value, 'secondsurname')" matInput value={{usuario.secondsurname}}>
+                                            </mat-form-field>
+                                        </td>
+                                        <td *ngIf="element">
+                                            <mat-form-field class="example-full-width">
                                                 <input #email (keyup)="save(usuario, email.value, 'email')" matInput value={{usuario.email}}>
+                                            </mat-form-field>
+                                        </td>
+                                        <td *ngIf="element">
+                                            <mat-form-field class="example-full-width">
+                                                <input #typeloan (keyup)="save(usuario, typeloan.value, 'typeloan')" matInput value={{usuario.typeloan}}>
                                             </mat-form-field>
                                         </td>
                                         <td *ngIf="element">
@@ -144,6 +185,11 @@
                                         <td *ngIf="element">
                                             <mat-form-field class="example-full-width">
                                                 <input #numcuenta (keyup)="save(usuario, numcuenta.value, 'numcuenta')" matInput value={{usuario.banca.numcuenta}} type="number">
+                                            </mat-form-field>
+                                        </td>
+                                        <td *ngIf="element">
+                                            <mat-form-field class="example-full-width">
+                                                <input #id (keyup)="save(usuario, id.value, 'id')" matInput value={{usuario._id}} type="string">
                                             </mat-form-field>
                                         </td>
                                         <td *ngIf="element">

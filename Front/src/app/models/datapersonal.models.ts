@@ -1,7 +1,7 @@
  export class DataPersonalModel {
   id?: string;
   tipodoc?: string;
-  numdoc?: number;
+  numdoc?: string;
   pais?: string;
   departamento?: string;
   ciudad?: string;
@@ -20,7 +20,7 @@
   surname?: string;
   email?: string;
   tipodoc?: string;
-  numdoc?: number;
+  numdoc?: string;
   pais?: string;
   departamento?: string;
   ciudad?: string;

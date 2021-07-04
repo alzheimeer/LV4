@@ -3,8 +3,8 @@ const { createPoderPDF, createContratoPDF } = require('../controllers/pdf.contro
 const router = Router();
 
 //all users
-router.put('/poder', createPoderPDF);
-router.put('/contrato', createContratoPDF);
+router.put('/poder', [createPoderPDF, createContratoPDF]);
+// router.put('/contrato', createContratoPDF);
 
 
 

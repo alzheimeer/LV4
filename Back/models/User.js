@@ -8,6 +8,7 @@ var UserSchema = Schema({
     secondname: {
         type: String,
         required: false,
+        default: ""
     },
     surname: {
         type: String,
@@ -29,7 +30,7 @@ var UserSchema = Schema({
     solicitud: {
         type: Schema.Types.ObjectId,
         required: false,
-
+        default: ""
     },
     // In roles we make an array to indicate that it can have many roles and we are going to save only the id of the role
     // and it is referenced to the Role model and we tell it that it is of this type so that it receives the ID
@@ -60,8 +61,9 @@ var UserSchema = Schema({
             default: "",
         },
         numdoc: {
-            type: Number,
+            type: String,
             required: false,
+            default: ""
         },
         fechaNac: {
             type: Date,

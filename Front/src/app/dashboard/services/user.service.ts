@@ -48,7 +48,7 @@ export class UserService {
   }
 
   public updateUserByIdX(id: string, tipodoc: string, fechaNac: Date, fechaExp: Date, pais: string,
-    departamento: string, ciudad: string, barrio: string, direccion: string, numdoc: number,
+    departamento: string, ciudad: string, barrio: string, direccion: string, numdoc: string,
     celular1: number, celular2: number, banco: string, tipocuenta: string, numcuenta: number) {
     const url = `${this.baseUrl}/users`;
     const body = {

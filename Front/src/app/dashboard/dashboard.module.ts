@@ -22,8 +22,10 @@ import { EstadocuentaComponent } from './estadocuenta/estadocuenta.component';
 import { EstudioComponent } from './estudio/estudio.component';
 import { MisdatosComponent } from './misdatos/misdatos.component';
 import { MisolicitudComponent } from './misolicitud/misolicitud.component';
+import { FilterforamountPipe2 } from './pipes/filterforamount.pipe2';
 import { FilterforamountPipe } from './pipes/filterforamount.pipe';
 import { SearchnameproductPipe } from './pipes/searchnameproduct.pipe';
+import { SearchuserPipe2 } from './pipes/searchuser2.pipe';
 import { ProductoComponent } from './producto/producto.component';
 import { RechazadosComponent } from './rechazados/rechazados.component';
 import { SolicitudComponent } from './solicitud/solicitud.component';
@@ -58,6 +60,8 @@ import { UsuariosComponent } from './usuarios/usuarios.component';
     CarteraComponent,
     ConfcomprobanteComponent,
     CrearproductoComponent,
+    FilterforamountPipe2,
+    SearchuserPipe2
   ],
   imports: [
     CommonModule,

@@ -134,6 +134,12 @@ export class RegisterQuickloanComponent implements OnInit {
       });
   }
 
+  cambios(field: string) {
+    let x = this.miFormulario.get(field)?.value;
+    x = x.toUpperCase();
+    this.miFormulario.controls[field].setValue(x);
+  }
+
   campoEsValido(campo: string) {
     return (
       this.miFormulario.controls[campo].errors &&
