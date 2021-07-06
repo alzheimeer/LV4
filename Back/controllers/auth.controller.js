@@ -38,14 +38,10 @@ const crearUsuario = async function(req, res) {
         verificationLink = `https://www.lendiup.com/api/auth/forget/${token}`;
 
         await transporter.sendMail({
-            from: '"Bienvenido A Lendiup" <administrador@lendiup.com', // sender address
-            to: newUser.email, // list of receivers
-            subject: "Email De Verificacion", // Subject line
-            // text: "Hello world?", // plain text body
-
-            /* html: `<b>Bienvenido A Lendiup</b>
-            <a href="${verificationLink}">${verificationLink} </a>`, */
-
+            from: '"Bienvenido A Lendiup" <administrador@lendiup.com',
+            to: newUser.email,
+            subject: "Email De Verificacion", 
+            
             html: `<b>Bienvenido A Lendiup</b>
             <h3> Nombre:</h3>
             <p >${name} ${surname}</p>
@@ -54,7 +50,6 @@ const crearUsuario = async function(req, res) {
             <p>Solo Escoge El Valor De Tu Prestamo, Completa Los Requisitos Y Te Consignaremos A Tu Cuenta Bancaria En Poco Tiempo</p>`
         });
 
-        // Generate successful response
         return res.status(201).json({
             ok: true,
             uid: newUser._id,

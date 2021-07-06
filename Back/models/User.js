@@ -28,7 +28,7 @@ var UserSchema = Schema({
         required: false,
     },
     solicitud: {
-        type: Schema.Types.ObjectId,
+        type: String,
         required: false,
         default: ""
     },
