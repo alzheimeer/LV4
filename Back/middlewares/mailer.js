@@ -9,12 +9,21 @@ const transporter = nodemailer.createTransport({
     // port: 465,
     // port: 465,
     // secure: true, // true for 465, false for other ports
-    service: 'Godaddy',
+    // service: 'Godaddy',
+    // auth: {
+    //     user: 'administrador@lendiup.com', // generated ethereal user
+    //     pass: process.env.PASSGODADDYEMAIL, // generated ethereal password
+    // pass: process.env.PASSGMAIL, // generated ethereal password
+    // },
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
     auth: {
-        user: 'administrador@lendiup.com', // generated ethereal user
-        pass: process.env.PASSGODADDYEMAIL, // generated ethereal password
-        // pass: process.env.PASSGMAIL, // generated ethereal password
+        user: "lendiup@gmail.com",
+        pass: "Zpwjiexxn123*"
     },
+    logger: true,
+    transactionLog: true // include SMTP traffic in the logs
 });
 
 transporter.verify().then(() => {

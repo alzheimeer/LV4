@@ -1,7 +1,7 @@
 const transporter = require('../middlewares/mailer')
 
 // Create User
-const enviarEmail = async function (req, res) {
+const enviarEmail = async function(req, res) {
     const { nombre, email, celular, mensaje } = req.body;
 
     // send mail with defined transport object
@@ -10,7 +10,7 @@ const enviarEmail = async function (req, res) {
         await transporter.sendMail({
             from: '"Solicitud De Informacion" <administrador@lendiup.com>', // sender address
             to: email, // list of receivers
-            subject: 'De:' + nombre + ' Email:' + email,  // Subject line
+            subject: 'De:' + nombre + ' Email:' + email, // Subject line
             // text: "Hello world?", // plain text body
 
             /* html: `<b>Bienvenido A Lendiup</b>
