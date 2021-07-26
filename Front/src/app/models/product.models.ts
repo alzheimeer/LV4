@@ -35,6 +35,8 @@ export interface Product {
   administracion: number;
   iva: number;
   aval: number;
+  desAval: number;
+  desPlataforma: number;
   parqueadero: number;
   peritaje: number;
   registroSimit: number;
@@ -128,6 +130,8 @@ export class ProductIni implements Product {
   administracion: number;
   iva: number;
   aval: number;
+  desAval: number;
+  desPlataforma: number;
   parqueadero: number;
   peritaje: number;
   registroSimit: number;
@@ -176,6 +180,8 @@ export class ProductIni implements Product {
       this.administracion = 0,
       this.iva = 0,
       this.aval = 0,
+      this.desAval = 0;
+      this.desPlataforma = 0;
       this.parqueadero = 0,
       this.peritaje = 0,
       this.registroSimit = 0,
@@ -222,6 +228,8 @@ export class ProductIniCreate implements ProductCreate {
   administracion: number;
   iva: number;
   aval: number;
+  desAval: number;
+  desPlataforma: number;
   parqueadero: number;
   peritaje: number;
   registroSimit: number;
@@ -268,6 +276,8 @@ export class ProductIniCreate implements ProductCreate {
       this.administracion = 0,
       this.iva = 0,
       this.aval = 0,
+      this.desAval = 0;
+      this.desPlataforma = 0;
       this.parqueadero = 0,
       this.peritaje = 0,
       this.registroSimit = 0,

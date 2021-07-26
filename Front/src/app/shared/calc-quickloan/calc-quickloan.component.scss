@@ -1,36 +1,43 @@
-.x{
-  background-color: rgba(7, 6, 6, 0.404);
-
+.x {
+    background-color: rgba(7, 6, 6, 0.404);
 }
 
+.pepe {
+    width: 300px;
+    padding: 2px;
+    border: rgb(255, 255, 255);
+    border-radius: 3px;
+    border-style: dashed;
+    position: absolute;
+    left: 100px;
+    // overflow: hidden;
+}
 
 mat-slider {
-
-  background-color: rgba(187, 181, 181, 0.233);
-  width: 100%;
+    background-color: rgba(187, 181, 181, 0.233);
+    width: 100%;
 }
 
-
 :host ::ng-deep .min .mat-slider-thumb {
-  background-color: blue;
+    background-color: blue;
 }
 
 :host ::ng-deep .min .mat-slider-thumb-label {
-  background-color: blue;
+    background-color: blue;
 }
 
 :host ::ng-deep .min .mat-slider-track-fill {
-  background-color: blue;
+    background-color: blue;
 }
 
 :host ::ng-deep .max .mat-slider-thumb {
-  background-color: orange;
+    background-color: orange;
 }
 
 :host ::ng-deep .max .mat-slider-thumb-label {
-  background-color: orange;
+    background-color: orange;
 }
 
 :host ::ng-deep .max .mat-slider-track-fill {
-  background-color: orange;
+    background-color: orange;
 }

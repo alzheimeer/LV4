@@ -146,6 +146,14 @@ var ProductSchema = Schema({
         type: Number,
         required: false,
     },
+    desAval: {
+        type: Number,
+        required: false,
+    },
+    desPlataforma: {
+        type: Number,
+        required: false,
+    },
     parqueadero: {
         type: Number,
         required: false,

@@ -50,7 +50,7 @@ const createAdmin = async function() {
     }
 };
 
-const createModerator = async function () {
+const createModerator = async function() {
     try {
         const count = await User.estimatedDocumentCount();
 
@@ -70,7 +70,7 @@ const createModerator = async function () {
         const roles = ['user', 'moderator']
         const foundRoles = await Role.find({ name: { $in: roles } })
         newUser.roles = foundRoles.map(role => role._id)
-        // Save user in Database
+            // Save user in Database
         await newUser.save();
         console.log('Analista creado');
     } catch (error) {
@@ -127,11 +127,11 @@ const createProducts = async function() {
                 activo: true,
                 name: "Prestamo UltraRapido",
                 valuemin: "200000",
-                valuemax: "200000",
+                valuemax: "750000",
                 imin: "1.5",
                 imax: "1.8",
-                termmin: "1",
-                termmax: "1",
+                termmin: "5",
+                termmax: "30",
                 imageUrl: "",
                 regInmueble: false,
                 regPersonales: true,
@@ -153,11 +153,13 @@ const createProducts = async function() {
                 iEfectivoAnual: "25",
                 iEfectivoAnualMax: "25.83",
                 iMoraEfectivoAnual: "23.83",
-                administracion: "20000",
+                administracion: "112500",
                 gmfCuatroxMil: "4",
                 iva: "19",
-                aval: "9.9",
-                step: "200000"
+                aval: "23.6",
+                step: "50000",
+                desAval: "238",
+                desPlataforma: "1250"
 
             }).save(),
             new Product({
