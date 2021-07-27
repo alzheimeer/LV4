@@ -41,13 +41,19 @@
 
                     <div class="row">
                         <div class="col-md-8">
+                            <h5 class="text-white lead-cal-small-text">Valor Solicitado</h5>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="text-white lead-cal-small-text">$ {{valorSolicitado | number: '1.0-0'}} <i (mouseover)="p('intereses')" (mouseout)="p('x')" class="fas fa-info-circle"></i></h5>
+                        </div>
+                        <div class="col-md-8">
                             <h5 class="text-white lead-cal-small-text">Interés</h5>
                         </div>
                         <div class="col-md-4">
                             <div *ngIf="pepe == 1" class="pepe">
                                 <p class="text-white lead-cal-small-text"><small>{{textinfo}}</small></p>
                             </div>
-                            <h5 class="text-white lead-cal-small-text">$ {{soloInteres | number: '1.0-0'}} <i (mouseover)="p('intereses')" (mouseout)="p('x')" class="fas fa-info-circle"></i></h5>
+                            <h5 class="text-white lead-cal-small-text">$ {{idia | number: '1.0-0'}} <i (mouseover)="p('intereses')" (mouseout)="p('x')" class="fas fa-info-circle"></i></h5>
                         </div>
                         <div class="col-md-8">
                             <h5 class="text-white lead-cal-small-text">Aval <small>(opcional)</small></h5>

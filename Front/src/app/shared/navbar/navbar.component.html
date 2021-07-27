@@ -1,71 +1,69 @@
 <!-- Navbar -->
-<nav  class="navbar controlFixed navbar-expand-lg navbar-dark scrolling-navbar">
-  <div class="container">
+<nav class="navbar controlFixed navbar-expand-lg navbar-dark scrolling-navbar">
+    <div class="container">
 
-    <!-- Brand -->
-    <a class="navbar-brand" routerLink="/landing/personal" >
-      <i class="fab fa-accusoft"></i>
-      <strong>     LENDIUP</strong>
-      <p>     Prestamos</p>
-    </a>
+        <!-- Brand -->
+        <a class="navbar-brand" routerLink="/landing/personal">
+            <i class="fab fa-accusoft"></i>
+            <strong>     LENDIUP</strong>
+            <p> Prestamos</p>
+        </a>
 
-    <!-- Collapse -->
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <!-- Collapse -->
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <!-- Links -->
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Links -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-      <!-- Left -->
-      <ul class="navbar-nav mr-auto" >
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/landing/quickloan" data-toggle="collapse" data-target="#navbarSupportedContent">UltraRápido
+            <!-- Left -->
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" routerLinkActive="active" *ngIf="PUltrarapido">
+                    <a class="nav-link" routerLink="/landing/quickloan" data-toggle="collapse" data-target="#navbarSupportedContent">UltraRápido
           </a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/landing/personal" data-toggle="collapse" data-target="#navbarSupportedContent">Personales
+                </li>
+                <li class="nav-item" routerLinkActive="active" *ngIf="PPersonales">
+                    <a class="nav-link" routerLink="/landing/personal" data-toggle="collapse" data-target="#navbarSupportedContent">Personales
           </a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/landing/hipoteca" data-toggle="collapse" data-target="#navbarSupportedContent">Sobre Hipoteca</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/landing/vehiculo" data-toggle="collapse" data-target="#navbarSupportedContent">Sobre Vehículo</a>
-        </li>
-        <li class="nav-item" routerLinkActive="active">
-          <a class="nav-link" routerLink="/landing/construccion" data-toggle="collapse" data-target="#navbarSupportedContent">Para Construcción</a>
-        </li>
+                </li>
+                <li class="nav-item" routerLinkActive="active" *ngIf="PHipoteca">
+                    <a class="nav-link" routerLink="/landing/hipoteca" data-toggle="collapse" data-target="#navbarSupportedContent">Sobre Hipoteca</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active" *ngIf="PVehiculo">
+                    <a class="nav-link" routerLink="/landing/vehiculo" data-toggle="collapse" data-target="#navbarSupportedContent">Sobre Vehículo</a>
+                </li>
+                <li class="nav-item" routerLinkActive="active" *ngIf="PConstruccion">
+                    <a class="nav-link" routerLink="/landing/construccion" data-toggle="collapse" data-target="#navbarSupportedContent">Para Construcción</a>
+                </li>
 
-      </ul>
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/landing/invierte" data-toggle="collapse" data-target="#navbarSupportedContent"><strong>QUIERES INVERTIR?</strong></a>
-        </li>
-      </ul>
-      <!-- Right -->
-      <ul class="navbar-nav nav-flex-icons">
-        <li class="nav-item">
-          <a href="https://www.facebook.com/lendiup/" class="nav-link" target="_blank">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="https://twitter.com/lendiup" class="nav-link" target="_blank" >
-            <i class="fab fa-twitter"></i>
-          </a>
-        </li>
-        <li class="nav-item">
-          <a (click)="dataService.viewLogin()"
-            class="nav-link border border-light rounded" target="_blank" data-toggle="collapse" data-target="#navbarSupportedContent">
-            <i class="fas fa-sign-in-alt"></i>INGRESAR
-          </a>
-        </li>
-      </ul>
+            </ul>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item" *ngIf="PInvierte">
+                    <a class="nav-link" routerLink="/landing/invierte" data-toggle="collapse" data-target="#navbarSupportedContent"><strong>QUIERES INVERTIR?</strong></a>
+                </li>
+            </ul>
+            <!-- Right -->
+            <ul class="navbar-nav nav-flex-icons">
+                <li class="nav-item">
+                    <a href="https://www.facebook.com/lendiup/" class="nav-link" target="_blank">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="https://twitter.com/lendiup" class="nav-link" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a (click)="dataService.viewLogin()" class="nav-link border border-light rounded" target="_blank" data-toggle="collapse" data-target="#navbarSupportedContent">
+                        <i class="fas fa-sign-in-alt"></i>INGRESAR
+                    </a>
+                </li>
+            </ul>
+
+        </div>
 
     </div>
-
-  </div>
 </nav>
 <!-- Navbar -->

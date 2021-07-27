@@ -9,6 +9,13 @@ import { DataService } from '../../services/data.service';
 })
 export class NavbarComponent implements OnInit {
 
+  PUltrarapido = true;
+  PPersonales = false;
+  PConstruccion = true;
+  PVehiculo = true;
+  PHipoteca = true;
+  PInvierte = true;
+
   constructor(private router: Router, public dataService: DataService) { }
 
   ngOnInit(): void {

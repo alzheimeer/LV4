@@ -168,8 +168,9 @@ export class CalcQuickloanComponent implements OnInit {
             this.nombre = producto.name;
             this.iEfectivoAnual = producto.iEfectivoAnual;
             this.iMesVencido = ((((Math.pow((1 + (producto.iEfectivoAnual / 100)), (1 / 12))) - 1) * 12) * 100) / 12;
-            this.iDiaVencido = (((Math.pow((1 + (producto.iEfectivoAnual / 100)), (1 / 360))) - 1) * 360) * 100;
-            console.log("Interes Mes Vencido Anual", this.iDiaVencido)
+            this.iDiaVencido = (((Math.pow((1 + (producto.iEfectivoAnual / 100)), (1 / 365))) - 1));
+            console.log("Interes Mes Vencido Anual", this.iMesVencido)
+            console.log("Intere Dia ", this.iDiaVencido)
 
             this.iEfectivoAnualMax = producto.iEfectivoAnualMax;
             this.iMoraEfectivoAnual = producto.iMoraEfectivoAnual;
@@ -214,8 +215,9 @@ export class CalcQuickloanComponent implements OnInit {
               this.totalPersonal = ((this.aval + this.administracion + this.iva) / this.plazo);
               // Aqui aparece en pantalla al cargar
               this.soloInteres = (this.valorCuotaBase as number * this.plazo) - this.valorSolicitado;
-              this.valorCuotaTotal = this.valorCuotaBase as number + this.totalPersonal + this.desAval + this.desPlataforma;
-              this.totalCredito = this.valorCuotaBase as number + this.administracion + this.iva + this.aval + this.desAval + this.desPlataforma;
+              // this.valorCuotaTotal = this.valorSolicitado + this.idia + this.aval + this.desAval + this.administracion + this.desPlataforma + this.iva;
+              this.totalCredito = this.valorSolicitado + this.idia + this.aval + this.desAval + this.administracion + this.desPlataforma + this.iva;
+              // this.totalCredito = this.valorCuotaBase as number + this.administracion + this.iva + this.aval + this.desAval + this.desPlataforma;
             } else {
               this.soloInteres = 0;
               this.valorCuotaTotal = this.valorCuotaBase as number + this.iva + this.aval + this.administracion + this.desAval + this.desPlataforma;
@@ -223,7 +225,7 @@ export class CalcQuickloanComponent implements OnInit {
             }
 
             // Prestamo UltraRapido
-            this.idia = this.iDiaVencido / 360;
+            this.idia = this.iDiaVencido *this.valorSolicitado * 5;
             this.valorCuotaBaseDia = ((this.idia / 100) * this.valorSolicitado) / (1 - Math.pow((1 + (this.idia / 100)), - this.plazo));
             this.valorInteresDia = ((this.valorCuotaBaseDia * this.plazo) - this.valorSolicitado) / this.plazo;
             //fin prestamo ultrarapido
@@ -265,11 +267,14 @@ export class CalcQuickloanComponent implements OnInit {
         this.totalPersonal = ((this.aval + this.administracion + this.iva) / this.plazo);
         this.soloInteres = (this.valorCuotaBase as number * this.plazo) - this.valorSolicitado;
 
+        this.idia = this.iDiaVencido *this.valorSolicitado * this.plazo;
+
         // this.valorCuotaBaseDia = ((this.idia / 100) * this.valorSolicitado) / (1 - Math.pow((1 + (this.idia / 100)), - this.plazo));
         // this.valorInteresDia = (this.valorCuotaBaseDia * this.plazo) - this.valorSolicitado;
 
         this.valorCuotaTotal = this.valorCuotaBase as number + this.totalPersonal;
-        this.totalCredito = this.valorSolicitado + this.soloInteres + this.administracion + this.iva + this.aval + this.desAval + this.desPlataforma;
+        this.totalCredito = this.valorSolicitado + this.idia + this.aval + this.desAval + this.administracion + this.desPlataforma + this.iva;
+        // this.totalCredito = this.valorSolicitado + this.soloInteres + this.administracion + this.iva + this.aval + this.desAval + this.desPlataforma;
         this.valorgmf = (this.valorSolicitado / 1000) * this.gmfCuatroxMil;
       } else {
         this.soloInteres = 0;
@@ -297,6 +302,7 @@ export class CalcQuickloanComponent implements OnInit {
         
         this.desPlataforma = -(this.administracion - (this.dayPlataforma * this.plazo));
         this.iva = ((this.administracion + this.desPlataforma) / 100) * this.ivap;
+        this.idia = this.iDiaVencido *this.valorSolicitado * this.plazo;
       }
       var im = this.iMesVencido / 100;
       //var im = this.idia / 100;
@@ -314,7 +320,8 @@ export class CalcQuickloanComponent implements OnInit {
 
         this.soloInteres = (this.valorCuotaBase as number * this.plazo) - this.valorSolicitado;
         this.valorCuotaTotal = this.valorCuotaBase as number + this.totalPersonal;
-        this.totalCredito = this.valorSolicitado + this.soloInteres + this.administracion + this.iva + this.aval + this.desAval + this.desPlataforma;
+        this.totalCredito = this.valorSolicitado + this.idia + this.aval + this.desAval + this.administracion + this.desPlataforma + this.iva
+        // this.totalCredito = this.valorSolicitado + this.soloInteres + this.administracion + this.iva + this.aval + this.desAval + this.desPlataforma;
       } else {
         this.valorCuotaTotal = this.valorCuotaBase as number + this.iva + this.aval + this.administracion + this.desAval + this.desPlataforma;
         this.soloInteres = 0;
