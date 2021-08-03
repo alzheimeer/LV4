@@ -114,17 +114,28 @@ export class QuickVerifyComponent implements OnInit {
 
   adquirir() {
     // this.ipAddress = this.getIP();
-    this.requestService.getRequestById(this.usuario.solicitud).subscribe((x) => {
+    this.requestService.getRequestById(this.usuario.solicitud).subscribe((solicitudUser) => {
       Swal.fire({
         title: 'Espere',
-        text: 'Enviando Informacion',
+        text: 'Enviando Solicitud De Prestamo',
         allowOutsideClick: false
       });
       Swal.showLoading();
-      this.solicitud = x;
+      this.solicitud = solicitudUser;
       this.solicitud.estadoPrestamo = true;
       this.solicitud.regOk = true;
-      this.solicitud.estate = 'Completo';
+      this.solicitud.estate = 'Aprobada';
+      this.solicitud.soloInteres = 612;
+      this.solicitud.aval = 47200;
+      this.solicitud.desAval = -16460;
+      this.solicitud.desAdministracion = -75000;
+      this.solicitud.administracion = 112500;
+      this.solicitud.iva = 7125;
+      this.solicitud.totalCredito = 279034;
+      this.solicitud.valorCuotaTotal = 279034;
+      this.solicitud.valorCuotaBase = 279034;
+      this.solicitud.valorConsignar = 199200;
+
       this.requestService.updateRequestsById(this.solicitud).subscribe((xx) => {
 
         this.requestService.createPoderPdf(this.usuario, this.solicitud, this.ipAddress).subscribe((xxx) => {

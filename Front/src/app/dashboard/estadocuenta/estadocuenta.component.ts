@@ -24,6 +24,7 @@ export class EstadocuentaComponent implements OnInit {
   buttonSelect0 = false;
   baseUrlN: string = environment.baseUrlN;
   pcomprobante = '';
+  expand = false;
 
   get usuario(): any {
     return this.authService.usuario;
@@ -39,7 +40,10 @@ export class EstadocuentaComponent implements OnInit {
   ngOnInit() {
     this.requestService.getRequestById(this.usuario.solicitud).subscribe((r) => {
       this.solicitud = r;
-      console.log(this.solicitud);
+      // console.log(this.solicitud);
+      if (r.nombreProducto === 'Prestamo UltraRapido') {
+        this.expand = true;
+      } else { this.expand = false; }
       r.fechasFacturacion.forEach(element => {
         this.billService.getBillById(element.idRecibo).subscribe((s) => {
           this.bills.push(s);

@@ -41,6 +41,12 @@ export class CalcQuickloan2Component implements OnInit {
   ivap = 0;
   aval = 0;
   avalp = 0;
+
+  desAval = 0;
+  dayAval = 0;
+  desPlataforma = 0;
+  dayPlataforma = 0;
+
   valuemin = 0;
   valuemax = 0;
   termmin = 0;
@@ -59,6 +65,9 @@ export class CalcQuickloan2Component implements OnInit {
   registroHipoteca = 0;
   interesesAnticipadosp = 0;
   interesesAnticipados = 0;
+  pepe = 0;
+  textinfo = '';
+
 
   valorConsignar = 0;
   valorCuotaTotal = 0;
@@ -112,6 +121,15 @@ export class CalcQuickloan2Component implements OnInit {
 
   }
 
+  p(type: string) {
+    if (type == 'intereses') { this.textinfo = 'El interés corriente aplicado a tu crédito es del 25%EA (Efectivo Anual) sobre el capital adeudado. Esta tasa es inferior a la tasa de usura establecida por las autoridades nacionales julio/2021: 25.77%. Este interés se calcula diariamente por el plazo que escojas para pagar tu crédito.'; this.pepe = 1 }
+    if (type == 'aval') { this.textinfo = 'Para el otorgamiento del crédito, debes cumplir con el requisito de constitución de un aval que garantice el cumplimiento del pago total o parcial de tu crédito. Si lo deseas, puedes contratarlo con nuestros proveedores aliados al momento de la solicitud del crédito.'; this.pepe = 2 }
+    if (type == 'descuentoaval') { this.textinfo = 'En caso que desees optar por el aval opcional ofrecido por lendiup, podras acceder a descuentos en su costo. Por tu buen comportamiento en el pago de tu crédito, podras hacer efectivo descuentos en el costo total del aval.'; this.pepe = 3 }
+    if (type == 'plataforma') { this.textinfo = 'El pago de la plataforma tecnológica es opcional y te permite instrumentar la firma electrónica del crédito 100% en línea, ahorrándote tiempo y dinero. Este costo es realizado únicamente al momento de utilizar nuestros servicios, a través de un cobro de $112.500, el cual podrá tener un descuento por inclusión financiera cuando realices un pago oportuno de tu crédito.'; this.pepe = 4 }
+    if (type == 'descuento') { this.textinfo = 'El uso de nuestra plataforma es completamente opcional, sin embargo, si deseas usarla, podrás generar descuentos por inclusión financiera por tu buen comportamiento en el pago de las obligaciones financieras con Lendiup. Así, Lendiup quiere promover el uso de herramientas tecnológicas que ofrezcan productos y servicios que promuevan la inclusión financiera y el acceso al crédito de las personas.'; this.pepe = 5 }
+
+    if (type == 'x') { this.pepe = 0 }
+  }
   ngOnInit(): void {
 
     this.productService.getProducts().subscribe((resp) => {
@@ -140,6 +158,8 @@ export class CalcQuickloan2Component implements OnInit {
             this.soloInteres = 0;
             this.valorCuotaTotal = 0;
             this.valorgmf = 0;
+            this.desAval = 0;
+            this.desPlataforma = 0;
 
             // Fin Reset Valores
 
@@ -147,25 +167,32 @@ export class CalcQuickloan2Component implements OnInit {
             this.nombre = producto.name;
             this.iEfectivoAnual = producto.iEfectivoAnual;
             this.iMesVencido = ((((Math.pow((1 + (producto.iEfectivoAnual / 100)), (1 / 12))) - 1) * 12) * 100) / 12;
-            this.iDiaVencido = (((Math.pow((1 + (producto.iEfectivoAnual / 100)), (1 / 360))) - 1) * 360) * 100;
-            console.log("Interes Mes Vencido Anual", this.iDiaVencido)
+            this.iDiaVencido = (((Math.pow((1 + (producto.iEfectivoAnual / 100)), (1 / 365))) - 1));
+            console.log("Interes Mes Vencido Anual", this.iMesVencido)
+            console.log("Intere Dia ", this.iDiaVencido)
 
             this.iEfectivoAnualMax = producto.iEfectivoAnualMax;
             this.iMoraEfectivoAnual = producto.iMoraEfectivoAnual;
-            this.valuemin = 200000;
+            this.valuemin = producto.valuemin;
+            // this.valuemax = producto.valuemax;
             this.valuemax = 200000;
-            this.termmin = 1;
-            this.termmax = 1;
-            this.valorSolicitado = 200000;
-            this.plazo = 1;
+            this.termmin = 30;
+            // this.termmin = 30;
+            this.termmax = producto.termmax;
+            this.valorSolicitado = producto.valuemin;
+            this.plazo = 30;
             this.step = producto.step;
             this.administracion = producto.administracion;
             this.administracionp = producto.administracion;
             this.ivap = producto.iva;
-            this.iva = (this.administracion / 100) * this.ivap;
+            this.iva = ((this.administracion + this.desPlataforma) / 100) * this.ivap;
             if (producto.aval) {
               this.avalp = producto.aval;
               this.aval = (this.valorSolicitado / 100) * this.avalp;
+              this.desAval = this.aval / 2;
+              this.dayAval = producto.desAval;
+              this.dayPlataforma = producto.desPlataforma;
+              this.iva = ((this.administracion + this.desPlataforma) / 100) * this.ivap;
             }
             if (producto.parqueadero) { this.parqueadero = producto.parqueadero; }
             if (producto.peritaje) { this.peritaje = producto.peritaje; }
@@ -183,23 +210,25 @@ export class CalcQuickloan2Component implements OnInit {
               this.interesesAnticipados = (this.valorSolicitado / 100) * this.interesesAnticipadosp;
             }
             this.formularioSolicitud.patchValue({ value: producto.valuemin });
-            this.formularioSolicitud.patchValue({ time: producto.termmin });
+            this.formularioSolicitud.patchValue({ time: 30 });
 
             if (this.nombre === 'Prestamo UltraRapido') {
               this.totalPersonal = ((this.aval + this.administracion + this.iva) / this.plazo);
+              // Aqui aparece en pantalla al cargar
               this.soloInteres = (this.valorCuotaBase as number * this.plazo) - this.valorSolicitado;
-              this.valorCuotaTotal = this.valorCuotaBase as number + this.totalPersonal;
-              this.totalCredito = this.valorCuotaBase as number + this.administracion + this.iva + this.aval;
+              // this.valorCuotaTotal = this.valorSolicitado + this.idia + this.aval + this.desAval + this.administracion + this.desPlataforma + this.iva;
+              this.totalCredito = this.valorSolicitado + this.idia + this.aval + this.desAval + this.administracion + this.desPlataforma + this.iva;
+              // this.totalCredito = this.valorCuotaBase as number + this.administracion + this.iva + this.aval + this.desAval + this.desPlataforma;
             } else {
               this.soloInteres = 0;
-              this.valorCuotaTotal = this.valorCuotaBase as number + this.iva + this.aval + this.administracion;
+              this.valorCuotaTotal = this.valorCuotaBase as number + this.iva + this.aval + this.administracion + this.desAval + this.desPlataforma;
               this.totalCredito = 0;
             }
 
             // Prestamo UltraRapido
-            this.idia = this.iDiaVencido / 360;
+            this.idia = this.iDiaVencido * this.valorSolicitado * 5;
             this.valorCuotaBaseDia = ((this.idia / 100) * this.valorSolicitado) / (1 - Math.pow((1 + (this.idia / 100)), - this.plazo));
-            this.valorInteresDia = ((this.valorCuotaBaseDia * this.plazo) - this.valorSolicitado) / this.plazo
+            this.valorInteresDia = ((this.valorCuotaBaseDia * this.plazo) - this.valorSolicitado) / this.plazo;
             //fin prestamo ultrarapido
 
 
@@ -233,21 +262,25 @@ export class CalcQuickloan2Component implements OnInit {
         this.comisionAdminHipo1 = 2000000;
       }
       this.aval = (this.valorSolicitado / 100) * this.avalp;
+
       this.interesesAnticipados = (this.valorSolicitado / 100) * this.interesesAnticipadosp;
       if (this.nombre === 'Prestamo UltraRapido') {
         this.totalPersonal = ((this.aval + this.administracion + this.iva) / this.plazo);
         this.soloInteres = (this.valorCuotaBase as number * this.plazo) - this.valorSolicitado;
 
+        this.idia = this.iDiaVencido * this.valorSolicitado * this.plazo;
+
         // this.valorCuotaBaseDia = ((this.idia / 100) * this.valorSolicitado) / (1 - Math.pow((1 + (this.idia / 100)), - this.plazo));
         // this.valorInteresDia = (this.valorCuotaBaseDia * this.plazo) - this.valorSolicitado;
 
         this.valorCuotaTotal = this.valorCuotaBase as number + this.totalPersonal;
-        this.totalCredito = this.valorSolicitado + this.soloInteres + this.administracion + this.iva + this.aval;
+        this.totalCredito = this.valorSolicitado + this.idia + this.aval + this.desAval + this.administracion + this.desPlataforma + this.iva;
+        // this.totalCredito = this.valorSolicitado + this.soloInteres + this.administracion + this.iva + this.aval + this.desAval + this.desPlataforma;
         this.valorgmf = (this.valorSolicitado / 1000) * this.gmfCuatroxMil;
       } else {
         this.soloInteres = 0;
         this.totalCredito = 0;
-        this.valorCuotaTotal = this.valorCuotaBase as number + this.iva + this.aval + this.administracion;
+        this.valorCuotaTotal = this.valorCuotaBase as number + this.iva + this.aval + this.administracion + this.desAval + this.desPlataforma;
       }
 
       this.valorConsignar =
@@ -265,9 +298,12 @@ export class CalcQuickloan2Component implements OnInit {
       this.plazo = time;
       this.administracion = this.administracionp;
       if (this.nombre === 'Prestamo UltraRapido') {
-        this.administracion = this.administracion * this.plazo;
-        this.iva = (this.administracion / 100) * this.ivap;
+        // this.administracion = this.administracion * this.plazo;
+        // this.iva = ((this.administracion + this.desPlataforma) / 100) * this.ivap;
 
+        this.desPlataforma = -(this.administracion - (this.dayPlataforma * this.plazo));
+        this.iva = ((this.administracion + this.desPlataforma) / 100) * this.ivap;
+        this.idia = this.iDiaVencido * this.valorSolicitado * this.plazo;
       }
       var im = this.iMesVencido / 100;
       //var im = this.idia / 100;
@@ -280,14 +316,15 @@ export class CalcQuickloan2Component implements OnInit {
 
 
         this.valorInteresDiaMostrar = this.valorInteresDia * this.plazo;
-
+        this.desAval = -((this.aval / 2) - (this.dayAval * this.plazo));
 
 
         this.soloInteres = (this.valorCuotaBase as number * this.plazo) - this.valorSolicitado;
         this.valorCuotaTotal = this.valorCuotaBase as number + this.totalPersonal;
-        this.totalCredito = this.valorSolicitado + this.soloInteres + this.administracion + this.iva + this.aval;
+        this.totalCredito = this.valorSolicitado + this.idia + this.aval + this.desAval + this.administracion + this.desPlataforma + this.iva
+        // this.totalCredito = this.valorSolicitado + this.soloInteres + this.administracion + this.iva + this.aval + this.desAval + this.desPlataforma;
       } else {
-        this.valorCuotaTotal = this.valorCuotaBase as number + this.iva + this.aval + this.administracion;
+        this.valorCuotaTotal = this.valorCuotaBase as number + this.iva + this.aval + this.administracion + this.desAval + this.desPlataforma;
         this.soloInteres = 0;
         this.totalCredito = 0;
       }

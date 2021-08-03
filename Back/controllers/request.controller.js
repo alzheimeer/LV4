@@ -23,7 +23,7 @@ const getRequestById = async(req, res) => {
     try {
         const request = await Request.findById(req.params.requestId);
         if (request === null)
-            return res.status(500).json({msg: 'No Existe Esa Solicitud'});
+            return res.status(202).json({msg: 'No Existe Esa Solicitud'});
         return res.status(200).json(request);
     } catch (error) {
         return res.status(500).json({ msg: 'Formato de Id Es Erroneo' });

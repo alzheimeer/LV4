@@ -1,106 +1,121 @@
-<!--Card-->
 <div class="card x">
-  <!--Card content-->
   <form class="form" [formGroup]="formularioSolicitud" #f="ngForm">
-  <div class="card-body">
-    <div class="row">
-      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb10">
-        <!-- <h2 class="text-white mb20">Obten Tu Prestamo Hoy</h2> -->
+    <div class="card-body">
+      <div class="row">
+        <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 mb10">
+          <div class="slider1">
+            <h4 class="text-white">Cuanto Dinero Necesitas?</h4>
 
-        <div class="slider1">
-          <h4 class="text-white">El calculo de tu prestamo es:</h4>
+            <div id="pricipal-slide1"></div>
+            <div>
+              <mat-slider class="min" thumbLabel [displayWith]="formatLabel1" tickInterval="5" [step]="step"
+                [min]=valuemin [max]=valuemax name="valorSolicitado" formControlName="value">
+              </mat-slider>
+              <p>
+                <span class="text-white" *ngIf="valorSolicitado > 1 && valorSolicitado < 750000">$ {{ valorSolicitado |
+                  number: "1.0-0" }} pesos</span>
+                <span class="text-white" *ngIf="valorSolicitado >= 750000">$ {{ valorSolicitado | number: "1.0-0" }}
+                  pesos</span>
+              </p>
+            </div>
+          </div>
+          <div class="slider">
+            <h4 class="text-white">Cuando Puedes Pagarlo?</h4>
+            <div id="totalyear-slide"></div>
+            <div>
+              <mat-slider formControlName="time" name="plazo" class="max" thumbLabel [displayWith]="formatLabel"
+                tickInterval="1" [min]=termmin [max]=termmax>
+              </mat-slider>
+              <p>
+                <span *ngIf="plazo > 1" class="text-white">{{plazo}} dias</span>
+                <span *ngIf="plazo <= 1" class="text-white">{{plazo}} dia</span>
+              </p>
+            </div>
+          </div>
 
-          <div id="pricipal-slide1"></div>
-          <div>
-            <mat-slider class="min" thumbLabel
-            [displayWith]="formatLabel1"
-            tickInterval="5"
-            [step]="step"
-            [min]=valuemin
-            [max]=valuemax
-            name="valorSolicitado"
-            formControlName="value" >
-            </mat-slider>
-            <p>
-              <span class="text-white" *ngIf="valorSolicitado > 1 && valorSolicitado < 750000" >$ {{ valorSolicitado | number: "1.0-0" }} pesos</span>
-              <span class="text-white" *ngIf="valorSolicitado >= 750000" >$ {{ valorSolicitado | number: "1.0-0" }} pesos</span>
-              <!-- <span *ngIf="valorSolicitado > 1" class="text-white">$  {{valorSolicitado | number: '1.0-0'}} pesos</span> -->
+        </div> -->
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
 
-            </p>
+          <div class="row">
+            <div class="col-md-8">
+              <h5 class="text-white lead-cal-small-text">Valor Solicitado</h5>
+            </div>
+            <div class="col-md-4">
+              <h5 class="text-white lead-cal-small-text">$ {{valorSolicitado | number: '1.0-0'}} <i
+                  (mouseover)="p('intereses')" (mouseout)="p('x')" class="fas fa-info-circle"></i></h5>
+            </div>
+            <div class="col-md-8">
+              <h5 class="text-white lead-cal-small-text">Interés</h5>
+            </div>
+            <div class="col-md-4">
+              <div *ngIf="pepe == 1" class="pepe">
+                <p class="text-white lead-cal-small-text"><small>{{textinfo}}</small></p>
+              </div>
+              <h5 class="text-white lead-cal-small-text">$ {{idia | number: '1.0-0'}} <i (mouseover)="p('intereses')"
+                  (mouseout)="p('x')" class="fas fa-info-circle"></i></h5>
+            </div>
+            <div class="col-md-8">
+              <h5 class="text-white lead-cal-small-text">Aval <small>(opcional)</small></h5>
+            </div>
+            <div class="col-md-4">
+              <div *ngIf="pepe == 2" class="pepe">
+                <p class="text-white lead-cal-small-text"><small>{{textinfo}}</small></p>
+              </div>
+              <h5 class="text-white lead-cal-small-text">$ {{aval | number: '1.0-0'}} <i (mouseover)="p('aval')"
+                  (mouseout)="p('x')" class="fas fa-info-circle"></i></h5>
+            </div>
 
+            <div class="col-md-8">
+              <h5 class="text-white lead-cal-small-text">Descuento Aval</h5>
+            </div>
+            <div class="col-md-4">
+              <div *ngIf="pepe == 3" class="pepe">
+                <p class="text-white lead-cal-small-text"><small>{{textinfo}}</small></p>
+              </div>
+              <span class="text-white" *ngIf="valorSolicitado >= 750000">$ {{ valorSolicitado | number: "1.0-0" }}
+                pesos</span>
+              <h5 class="text-white lead-cal-small-text">$ {{desAval | number: '1.0-0'}} <i
+                  (mouseover)="p('descuentoaval')" (mouseout)="p('x')" class="fas fa-info-circle"></i></h5>
+            </div>
+
+            <div class="col-md-8">
+              <h5 class="text-white lead-cal-small-text">Plataforma <small>(opcional)</small></h5>
+            </div>
+            <div class="col-md-4 pepepadre">
+              <div *ngIf="pepe == 4" class="pepe">
+                <p class="text-white lead-cal-small-text"><small>{{textinfo}}</small></p>
+              </div>
+              <h5 class="text-white lead-cal-small-text">$ {{administracion | number: '1.0-0'}} <i
+                  (mouseover)="p('plataforma')" (mouseout)="p('x')" class="fas fa-info-circle"></i></h5>
+            </div>
+
+            <div class="col-md-8">
+              <h5 class="text-white lead-cal-small-text">Descuento <small>(por inclusion financiera)</small></h5>
+            </div>
+            <div class="col-md-4">
+              <div *ngIf="pepe == 5" class="pepe">
+                <p class="text-white lead-cal-small-text"><small>{{textinfo}}</small></p>
+              </div>
+              <h5 class="text-white lead-cal-small-text">$ {{desPlataforma | number: '1.0-0'}} <i
+                  (mouseover)="p('descuento')" (mouseout)="p('x')" class="fas fa-info-circle"></i></h5>
+            </div>
+
+            <div class="col-md-8">
+              <h5 class="text-white lead-cal-small-text">Iva </h5>
+            </div>
+            <div class="col-md-4">
+              <h5 class="text-white lead-cal-small-text">$ {{iva | number: '1.0-0'}} </h5>
+            </div>
+
+            <div class="col-md-8">
+              <h3 class="text-white lead-cal-small-text">Total A Pagar: </h3>
+            </div>
+            <div class="col-md-4">
+              <h3 class="text-white lead-cal-small-text">$ {{totalCredito | number: '1.0-0'}}</h3>
+            </div>
           </div>
         </div>
-        <div class="slider">
-          <!-- <h4 class="text-white">Cuando Puedes Pagarlo?</h4> -->
-          <div id="totalyear-slide"></div>
-          <div>
-            <mat-slider
-            formControlName="time"
-            name="plazo"
-            class="max" thumbLabel
-            [displayWith]="formatLabel"
-            tickInterval="1"
-            [min]=termmin
-            [max]=termmax
-            >
-            </mat-slider>
-            <p>
-              <span *ngIf="plazo > 1" class="text-white">{{plazo}} meses</span>
-              <span *ngIf="plazo <= 1" class="text-white">{{plazo}} mes</span>
-            </p>
-          </div>
-        </div>
-
       </div>
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-        <div class="single-total">
-          <h4 class="text-white lead-cal-small-text">Interés </h4>
-          <h5  class="text-white emi-price" id="emi">$ {{soloInteres | number: '1.0-0'}}</h5>
-        </div>
-      </div>
-      <!-- <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-        <div class="single-total">
-          <h4 class="text-white lead-cal-small-text">Dia</h4>
-          <h5  class="text-white emi-price" id="emi">$ {{valorInteresDiaMostrar | number: '1.0-0'}}</h5>
-        </div>
-      </div> -->
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-        <div class="single-total">
-          <h4 class="text-white lead-cal-small-text">Admin </h4>
-          <h5 class="text-white" id="tbl_la">$ {{administracion | number: '1.0-0'}}</h5>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3 ">
-        <div class="single-total">
-          <h4 class="text-white lead-cal-small-text">Iva  </h4>
-          <h5 class="text-white" id="tbl_emi">$ {{iva | number: '1.0-0'}}</h5>
-        </div>
-      </div>
-      <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col-3">
-        <div class="single-total">
-          <h4 class="text-white lead-cal-small-text">Aval <i class="fas fa-info-circle"></i></h4>
-          <h5 class="text-white" id="tbl_la">$ {{aval | number: '1.0-0'}} </h5>
-        </div>
-      </div>
-
-      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-4">
-        <div class="single-total">
-          <h4 class="text-white lead-cal-small-text">Total:</h4>
-          <h5 class="text-white" id="tbl_la">$ {{totalCredito | number: '1.0-0'}}</h5>
-        </div>
-      </div>
-      <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 col-8">
-        <div class="single-total">
-          <h4 class="text-white lead-cal-small-text">Cuota Mensual: </h4>
-          <h5 class="text-white" id="tbl_la">$ {{valorCuotaTotal | number: '1.0-0'}} pesos</h5>
-        </div>
-      </div>
-      <!-- <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12 text-right">
-        <button type="button" (click)="calc(3)"  class="btn btn-indigo btn-sm">APLICA YA</button>
-      </div> -->
     </div>
-  </div>
-</form>
+  </form>
 </div>
-
-<!--/.Card-->

@@ -105,7 +105,7 @@
                         <button class="btSelectErr btn-block" mat-button (click)="cambiarEstado(solicitud, 'Mora')">Mora</button>
                       </div> -->
                       <div class="col-md-6" *ngIf="solicitud.fechaConsignacion">
-                        <p class="mt-2">Fecha De Consignacion:
+                        <p class="mt-2">Fecha De Consignacion Nuestra:
                         {{ solicitud.fechaConsignacion | date:'d/M/y'}} </p>
                       </div>
                       <div class="col-md-6" *ngIf="!solicitud.fechaConsignacion">
@@ -160,7 +160,7 @@
                       <input type="number" matInput formControlName="valorPagado" required>
                    </mat-form-field>
 
-                    <button matbutton class="btn  btn-cuenta" type="button" >Enviar</button>
+                    <button matbutton class="btn  btn-cuenta" type="submit" >Enviar</button>
                   </mat-action-row>
                 </form>
                 <p><small>Luego de comparar el recibo enviado contra el Banco, Ingrese la fecha y valor</small></p>

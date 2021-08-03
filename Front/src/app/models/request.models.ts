@@ -1,4 +1,5 @@
 export interface Requestx {
+  [x: string]: any;
   _id: string;
   numdoc: string;
   tarjetavPath: string;
@@ -105,6 +106,8 @@ export interface Requestx {
   rgmf: number;
   valorConsignar: number;
   administracion: number;
+  desAdministracion: number;
+  desAval: number;
   iva: number;
   soloInteres: number;
   aval: number;
@@ -256,6 +259,8 @@ export interface CreateRequest {
   valorCuotaTotal: number;
   auditorObra: number;
   estadoPrestamo: boolean;
+  desAdministracion: number;
+  desAval: number;
 }
 
 export class CreateIniReq implements CreateRequest {
@@ -290,6 +295,8 @@ export class CreateIniReq implements CreateRequest {
   valorCuotaTotal: number;
   auditorObra: number;
   estadoPrestamo: boolean;
+  desAdministracion: number;
+  desAval: number;
 
   constructor() {
     this.idUser = '',
@@ -323,6 +330,8 @@ export class CreateIniReq implements CreateRequest {
       this.valorCuotaBase = 0,
       this.auditorObra = 0,
       this.estadoPrestamo = false;
+      this.desAdministracion = 0;
+      this.desAval = 0;
   }
 }
 
@@ -438,6 +447,8 @@ export class RequestIni implements Requestx {
   aval: number;
   totalCredito: number;
   auditorObra: number;
+  desAdministracion: number;
+  desAval: number;
 
 
   constructor() {
@@ -539,6 +550,8 @@ export class RequestIni implements Requestx {
       this.valorCuotaTotal = 0,
       this.valorCuotaBase = 0,
       this.auditorObra = 0,
+      this.desAdministracion = 0;
+      this.desAval = 0;
 
       this.vehiculo = {
         tipo: '',
@@ -755,6 +768,8 @@ export class RequestMao implements Requestx {
   aval: number;
   totalCredito: number;
   auditorObra: number;
+  desAdministracion: number;
+  desAval: number;
 
   constructor() {
     this._id = '',
@@ -863,6 +878,8 @@ export class RequestMao implements Requestx {
       this.iva = 0,
       this.soloInteres = 0,
       this.aval = 0,
+      this.desAdministracion = 0;
+      this.desAval = 0;
       this.totalCredito = 0,
       this.valorCuotaTotal = 0,
       this.valorCuotaBase = 0,

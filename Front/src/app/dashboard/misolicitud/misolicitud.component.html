@@ -54,12 +54,14 @@
 
             <div *ngIf="request.estate == 'Aprobada'">
               <p>Felicidades tu préstamo a sido aprobado</p>
+              <p>Te acabamos de enviar algunos documentos a tu email por favor leelos detenidamente</p>
               <p>Te consignaremos en tu cuenta lo antes posible</p>
             </div>
 
             <div *ngIf="request.estate == 'Facturacion'">
               <p>Ya consignamos el dinero en tu cuenta el dia: {{requests[0].fechaConsignacion | date: 'dd' }} de {{requests[0].fechaConsignacion | date: 'MM/yyyy' }}</p>
-              <p>En el menu selecciona la opción "Mi Préstamo"</p>
+              <p>Si desea consultar sus pagos o quiere enviarnos su comprobante de pago</p>
+              <p><i class="fas fa-arrow-left"></i>  En el menu izquierdo selecciona la opción "Mi Préstamo"</p>
             </div>
 
 

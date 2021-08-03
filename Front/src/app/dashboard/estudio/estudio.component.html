@@ -294,7 +294,7 @@
         </div>
       </div>
       <!-- Card Fechas De Facturacion -->
-      <div class="card" *ngIf="solicitud.fechasFacturacion.length> 1">
+      <div class="card" *ngIf="solicitud.fechasFacturacion.length> 0">
         <div class="card-header" id="headingTwo">
           <h2 class="mb-0">
             <button class="btn btn-link btn-block text-left collapsed"
@@ -318,7 +318,7 @@
                 <th mat-header-cell *matHeaderCellDef> {{column | uppercase}} </th>
                 <div *ngIf="column === 'fecha'">
                   <td mat-cell *matCellDef="let element"> {{element[column] |
-                    date:'d/M/y'}} </td>
+                    date:'d/M/y'}} </td> 
                 </div>
                 <div *ngIf="column != 'fecha'">
                   <td mat-cell *matCellDef="let element"> {{element[column]}}
@@ -394,30 +394,35 @@
                   Anticipados: -${{solicitud.rinteresesAnticipados |
                   number:'0.0-0'}}</span></p>
               <p><span *ngIf="solicitud.rparqueadero> 0" class="m-2">Parqueadero:
-                  -${{solicitud.rparqueadero | number:'0.0-0'}}</span></p>
+                  ${{solicitud.rparqueadero | number:'0.0-0'}}</span></p>
               <p><span *ngIf="solicitud.rperitaje> 0" class="m-2">Peritaje:
-                  -${{solicitud.rperitaje | number:'0.0-0'}}</span></p>
+                  ${{solicitud.rperitaje | number:'0.0-0'}}</span></p>
               <p><span *ngIf="solicitud.rregistroSimit> 0" class="m-2">Registro
                   Simit: -${{solicitud.rregistroSimit | number:'0.0-0'}}</span></p>
               <p><span *ngIf="solicitud.rgmf> 0" class="m-2">4 x Mil:
-                  -${{solicitud.rgmf | number:'0.0-0'}}</span></p>
+                  ${{solicitud.rgmf | number:'0.0-0'}}</span></p>
               <p><span *ngIf="solicitud.auditorObra> 0" class="m-2">auditorObra:
-                  -${{solicitud.auditorObra| number:'0.0-0'}}</span></p>
+                  ${{solicitud.auditorObra| number:'0.0-0'}}</span></p>
               <p><span *ngIf="solicitud.aval> 0" class="m-2">Aval:
-                  -${{solicitud.aval | number:'0.0-0'}}</span></p>
+                  ${{solicitud.aval | number:'0.0-0'}}</span></p>
+              <p><span *ngIf="solicitud.desAval" class="m-2">Descuento Aval:
+                  ${{solicitud.desAval | number:'0.0-0'}}</span></p>
 
-              <p><span class="m-2">Valor A Consignar:
-                  ${{solicitud.valorConsignar | number:'0.0-0'}}</span></p>
+            
               <p><span class="m-2">Cuota(Capital+Interes):
                   ${{solicitud.valorCuotaBase | number:'0.0-0'}}</span></p>
 
-              <p><span class="m-2">Administracion: ${{solicitud.administracion |
+              <p><span *ngIf="solicitud.administracion" class="m-2">Administracion: ${{solicitud.administracion |
+                  number:'0.0-0'}}</span></p>
+              <p><span *ngIf="solicitud.desAdministracion" class="m-2">Descuento Admin: ${{solicitud.desAdministracion |
                   number:'0.0-0'}}</span></p>
               <p><span class="m-2">Iva: ${{solicitud.iva | number:'0.0-0'}}</span></p>
               <p><span *ngIf="solicitud.totalCredito> 0" class="m-2">Total
                   Crédito: ${{solicitud.totalCredito | number:'0.0-0'}}</span></p>
               <p><span class="m-2">Valor Cuota Total:
                   ${{solicitud.valorCuotaTotal | number:'0.0-0'}}</span></p>
+                <p><span class="m-2 text-danger">Valor A Consignar:
+                    ${{solicitud.valorConsignar | number:'0.0-0'}}</span></p>
             </div>
           </div>
         </div>

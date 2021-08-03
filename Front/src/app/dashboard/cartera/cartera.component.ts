@@ -254,6 +254,8 @@ export class CarteraComponent implements OnInit {
       }
     );
   }
+
+  
   enviarConfRecibo(reciboId: string) {
 
     this.formularioRecibo.controls.id.setValue(reciboId)

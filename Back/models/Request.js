@@ -389,6 +389,10 @@ var RequestSchema = Schema({
         type: Number,
         required: false
     },
+    desAdministracion: {
+        type: Number,
+        required: false
+    },
     iva: {
         type: Number,
         required: false
@@ -398,6 +402,10 @@ var RequestSchema = Schema({
         required: false
     },
     aval: {
+        type: Number,
+        required: false
+    },
+    desAval: {
         type: Number,
         required: false
     },
