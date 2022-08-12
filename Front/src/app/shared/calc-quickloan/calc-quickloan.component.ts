@@ -1,6 +1,5 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
-import Swal from 'sweetalert2';
 
 import { ProductService } from '../../dashboard/services/product.service';
 import { RequestService } from '../../dashboard/services/request.service';
@@ -45,7 +44,7 @@ export class CalcQuickloanComponent implements OnInit {
 
   desAval = 0;
   dayAval = 0;
-  desPlataforma = 0; 
+  desPlataforma = 0;
   dayPlataforma = 0;
 
   valuemin = 0;
@@ -121,14 +120,14 @@ export class CalcQuickloanComponent implements OnInit {
     private requestService: RequestService) {
 
   }
-  
+
   p(type: string) {
     if (type == 'intereses') { this.textinfo = 'El interés corriente aplicado a tu crédito es del 25%EA (Efectivo Anual) sobre el capital adeudado. Esta tasa es inferior a la tasa de usura establecida por las autoridades nacionales julio/2021: 25.77%. Este interés se calcula diariamente por el plazo que escojas para pagar tu crédito.'; this.pepe = 1 }
     if (type == 'aval') { this.textinfo = 'Para el otorgamiento del crédito, debes cumplir con el requisito de constitución de un aval que garantice el cumplimiento del pago total o parcial de tu crédito. Si lo deseas, puedes contratarlo con nuestros proveedores aliados al momento de la solicitud del crédito.'; this.pepe = 2 }
-    if (type == 'descuentoaval') { this.textinfo = 'En caso que desees optar por el aval opcional ofrecido por lendiup, podras acceder a descuentos en su costo. Por tu buen comportamiento en el pago de tu crédito, podras hacer efectivo descuentos en el costo total del aval.'; this.pepe = 3 }
+    if (type == 'descuentoaval') { this.textinfo = 'En caso que desees optar por el aval opcional ofrecido por lendillano, podras acceder a descuentos en su costo. Por tu buen comportamiento en el pago de tu crédito, podras hacer efectivo descuentos en el costo total del aval.'; this.pepe = 3 }
     if (type == 'plataforma') { this.textinfo = 'El pago de la plataforma tecnológica es opcional y te permite instrumentar la firma electrónica del crédito 100% en línea, ahorrándote tiempo y dinero. Este costo es realizado únicamente al momento de utilizar nuestros servicios, a través de un cobro de $112.500, el cual podrá tener un descuento por inclusión financiera cuando realices un pago oportuno de tu crédito.'; this.pepe = 4 }
-    if (type == 'descuento') { this.textinfo = 'El uso de nuestra plataforma es completamente opcional, sin embargo, si deseas usarla, podrás generar descuentos por inclusión financiera por tu buen comportamiento en el pago de las obligaciones financieras con Lendiup. Así, Lendiup quiere promover el uso de herramientas tecnológicas que ofrezcan productos y servicios que promuevan la inclusión financiera y el acceso al crédito de las personas.'; this.pepe = 5}
-    
+    if (type == 'descuento') { this.textinfo = 'El uso de nuestra plataforma es completamente opcional, sin embargo, si deseas usarla, podrás generar descuentos por inclusión financiera por tu buen comportamiento en el pago de las obligaciones financieras con Lendillano. Así, Lendillano quiere promover el uso de herramientas tecnológicas que ofrezcan productos y servicios que promuevan la inclusión financiera y el acceso al crédito de las personas.'; this.pepe = 5}
+
     if (type == 'x') {this.pepe = 0}
   }
   ngOnInit(): void {
@@ -261,7 +260,7 @@ export class CalcQuickloanComponent implements OnInit {
         this.comisionAdminHipo1 = 2000000;
       }
       this.aval = (this.valorSolicitado / 100) * this.avalp;
-      
+
       this.interesesAnticipados = (this.valorSolicitado / 100) * this.interesesAnticipadosp;
       if (this.nombre === 'Prestamo UltraRapido') {
         this.totalPersonal = ((this.aval + this.administracion + this.iva) / this.plazo);
@@ -299,7 +298,7 @@ export class CalcQuickloanComponent implements OnInit {
       if (this.nombre === 'Prestamo UltraRapido') {
         // this.administracion = this.administracion * this.plazo;
         // this.iva = ((this.administracion + this.desPlataforma) / 100) * this.ivap;
-        
+
         this.desPlataforma = -(this.administracion - (this.dayPlataforma * this.plazo));
         this.iva = ((this.administracion + this.desPlataforma) / 100) * this.ivap;
         this.idia = this.iDiaVencido *this.valorSolicitado * this.plazo;

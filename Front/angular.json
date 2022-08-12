@@ -6,7 +6,7 @@
     "version": 1,
     "newProjectRoot": "projects",
     "projects": {
-        "Lendiup": {
+        "Lendillano": {
             "projectType": "application",
             "schematics": {
                 "@schematics/angular:component": {
@@ -70,18 +70,18 @@
                 "serve": {
                     "builder": "@angular-devkit/build-angular:dev-server",
                     "options": {
-                        "browserTarget": "Lendiup:build"
+                        "browserTarget": "Lendillano:build"
                     },
                     "configurations": {
                         "production": {
-                            "browserTarget": "Lendiup:build:production"
+                            "browserTarget": "Lendillano:build:production"
                         }
                     }
                 },
                 "extract-i18n": {
                     "builder": "@angular-devkit/build-angular:extract-i18n",
                     "options": {
-                        "browserTarget": "Lendiup:build"
+                        "browserTarget": "Lendillano:build"
                     }
                 },
                 "test": {
@@ -119,16 +119,16 @@
                     "builder": "@angular-devkit/build-angular:protractor",
                     "options": {
                         "protractorConfig": "e2e/protractor.conf.js",
-                        "devServerTarget": "Lendiup:serve"
+                        "devServerTarget": "Lendillano:serve"
                     },
                     "configurations": {
                         "production": {
-                            "devServerTarget": "Lendiup:serve:production"
+                            "devServerTarget": "Lendillano:serve:production"
                         }
                     }
                 }
             }
         }
     },
-    "defaultProject": "Lendiup"
+    "defaultProject": "Lendillano"
 }

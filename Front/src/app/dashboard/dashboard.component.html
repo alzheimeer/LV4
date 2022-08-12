@@ -5,7 +5,7 @@
       <mat-icon>menu</mat-icon>
     </button>
         <a class="navbar-brand" (click)="snav.toggle()" matTooltip="Home">
-            <h1>Lendiup</h1>
+            <h1>Lendillano</h1>
         </a>
         <span class="navbar-spacer"></span>
 
@@ -36,7 +36,7 @@
             <mat-nav-list>
                 <h3 mat-subheader class="aa">Menu</h3>
                 <mat-list>
-                   
+
                     <mat-list-item *ngIf="role === 'user'" routerLinkActive="active" routerLink="/dashboard/misolicitud" class="x aa">
                         <mat-icon mat-list-icon>space_dashboard</mat-icon>
                         <p mat-line> Mi Solicitud </p>
@@ -73,7 +73,7 @@
                         <mat-icon mat-list-icon>person</mat-icon>
                         <p mat-line> Mi Cuenta </p>
                     </mat-list-item>
-                  
+
                 </mat-list>
                 <mat-divider></mat-divider>
 

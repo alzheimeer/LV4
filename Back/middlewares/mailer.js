@@ -1,7 +1,7 @@
-const nodemailer = require("nodemailer");
+// const nodemailer = require("nodemailer");
 
 // create reusable transporter object using the default SMTP transport
-const transporter = nodemailer.createTransport({
+// const transporter = nodemailer.createTransport({
     // host: "smtp.gmail.com",
     // host: "smtp.office365.com",
     //gmail no usa sucureconnection
@@ -15,20 +15,20 @@ const transporter = nodemailer.createTransport({
     //     pass: process.env.PASSGODADDYEMAIL, // generated ethereal password
     // pass: process.env.PASSGMAIL, // generated ethereal password
     // },
-    host: "smtp.gmail.com",
-    port: 465,
-    secure: true,
-    auth: {
-        user: "lendiup@gmail.com",
-        pass: "Zpwjiexxn123*"
-    },
-    logger: true,
-    transactionLog: true // include SMTP traffic in the logs
-});
+//     host: "smtp.gmail.com",
+//     port: 465,
+//     secure: true,
+//     auth: {
+//         user: "lendiup@gmail.com",
+//         pass: "Zpwjiexxn123*"
+//     },
+//     logger: true,
+//     transactionLog: true // include SMTP traffic in the logs
+// });
 
-transporter.verify().then(() => {
-    console.log('Ready for send emails')
-});
+// transporter.verify().then(() => {
+//     console.log('Ready for send emails')
+// });
 
 
-module.exports = transporter;
+// module.exports = transporter;

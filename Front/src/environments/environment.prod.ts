@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  baseUrl: 'https://www.lendiup.com/api',
-  baseUrlN: 'https://www.lendiup.com/'
+  baseUrl: 'http://139.144.62.245/api',
+  baseUrlN: 'http://139.144.62.245/',
 };
